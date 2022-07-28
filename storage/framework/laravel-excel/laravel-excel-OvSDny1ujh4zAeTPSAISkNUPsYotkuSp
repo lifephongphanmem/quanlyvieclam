@@ -1,0 +1,416 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 15">
+<link id=Main-File rel=Main-File href="../datnguoilaodong.xlxs.htm">
+<link rel=File-List href=filelist.xml>
+<title>Untitled Spreadsheet</title>
+<link rel=Stylesheet href=stylesheet.css>
+<style>
+<!--table
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{margin:.75in .7in .75in .7in;
+	mso-header-margin:.3in;
+	mso-footer-margin:.3in;}
+-->
+</style>
+<![if !supportTabStrip]><script language="JavaScript">
+<!--
+function fnUpdateTabs()
+ {
+  if (parent.window.g_iIEVer>=4) {
+   if (parent.document.readyState=="complete"
+    && parent.frames['frTabs'].document.readyState=="complete")
+   parent.fnSetActiveSheet(0);
+  else
+   window.setTimeout("fnUpdateTabs();",150);
+ }
+}
+
+if (window.name!="frSheet")
+ window.location.replace("../datnguoilaodong.xlxs.htm");
+else
+ fnUpdateTabs();
+//-->
+</script>
+<![endif]>
+</head>
+
+<body link=blue vlink=purple>
+
+<table border=0 cellpadding=0 cellspacing=0 width=2757 style='border-collapse:
+ collapse;table-layout:fixed;width:2070pt'>
+ <col width=186 style='mso-width-source:userset;mso-width-alt:6802;width:140pt'>
+ <col width=82 style='mso-width-source:userset;mso-width-alt:2998;width:62pt'>
+ <col width=75 style='mso-width-source:userset;mso-width-alt:2742;width:56pt'>
+ <col class=xl67 width=112 style='mso-width-source:userset;mso-width-alt:4096;
+ width:84pt'>
+ <col width=64 span=2 style='width:48pt'>
+ <col width=77 style='mso-width-source:userset;mso-width-alt:2816;width:58pt'>
+ <col width=64 span=3 style='width:48pt'>
+ <col width=77 style='mso-width-source:userset;mso-width-alt:2816;width:58pt'>
+ <col width=108 style='mso-width-source:userset;mso-width-alt:3949;width:81pt'>
+ <col width=107 style='mso-width-source:userset;mso-width-alt:3913;width:80pt'>
+ <col width=108 style='mso-width-source:userset;mso-width-alt:3949;width:81pt'>
+ <col width=64 style='width:48pt'>
+ <col width=158 style='mso-width-source:userset;mso-width-alt:5778;width:119pt'>
+ <col width=78 style='mso-width-source:userset;mso-width-alt:2852;width:59pt'>
+ <col width=64 style='width:48pt'>
+ <col class=xl66 width=93 style='mso-width-source:userset;mso-width-alt:3401;
+ width:70pt'>
+ <col width=64 span=9 style='width:48pt'>
+ <col class=xl66 width=88 style='mso-width-source:userset;mso-width-alt:3218;
+ width:66pt'>
+ <col class=xl66 width=64 span=2 style='width:48pt'>
+ <col width=64 span=4 style='width:48pt'>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 align=left width=186 style='height:15.0pt;width:140pt'>hoten</td>
+  <td align=left width=82 style='width:62pt'>gioitinh</td>
+  <td align=left width=75 style='width:56pt'>ngaysinh</td>
+  <td class=xl67 width=112 style='width:84pt'>cmnd</td>
+  <td align=left width=64 style='width:48pt'>dantoc</td>
+  <td align=left width=64 style='width:48pt'>nation</td>
+  <td align=left width=77 style='width:58pt'>tinh</td>
+  <td align=left width=64 style='width:48pt'>huyen</td>
+  <td align=left width=64 style='width:48pt'>xa</td>
+  <td align=left width=64 style='width:48pt'>address</td>
+  <td align=left width=77 style='width:58pt'>sobaohiem</td>
+  <td align=left width=108 style='width:81pt'>trinhdogiaoduc</td>
+  <td align=left width=107 style='width:80pt'>trinhdocmkt</td>
+  <td align=left width=108 style='width:81pt'>nghenghiep</td>
+  <td align=left width=64 style='width:48pt'>linhvucda<span style='display:
+  none'>otao</span></td>
+  <td align=left width=158 style='width:119pt'>loaihdld</td>
+  <td align=left width=78 style='width:59pt'>bdhopdong</td>
+  <td align=left width=64 style='width:48pt'>kthopdon<span style='display:none'>g</span></td>
+  <td class=xl66 align=left width=93 style='width:70pt'><span
+  style='mso-spacerun:yes'> </span>luong<span style='mso-spacerun:yes'> </span></td>
+  <td align=left width=64 style='width:48pt'>pcchucvu</td>
+  <td align=left width=64 style='width:48pt'>pcthamni<span style='display:none'>en</span></td>
+  <td align=left width=64 style='width:48pt'>pcthamni<span style='display:none'>ennghe</span></td>
+  <td align=left width=64 style='width:48pt'>pcluong</td>
+  <td align=left width=64 style='width:48pt'>pcbosung</td>
+  <td align=left width=64 style='width:48pt'>bddochai</td>
+  <td align=left width=64 style='width:48pt'>ktdochai</td>
+  <td align=left width=64 style='width:48pt'>vitri</td>
+  <td align=left width=64 style='width:48pt'>chucvu</td>
+  <td class=xl66 align=left width=88 style='width:66pt'><span
+  style='mso-spacerun:yes'> </span>bdbhxh<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl66 align=left width=64 style='width:48pt'><span
+  style='mso-spacerun:yes'> </span>ktbhxh<span
+  style='mso-spacerun:yes'> </span></td>
+  <td class=xl66 align=left width=64 style='width:48pt'><span
+  style='mso-spacerun:yes'> </span>luongbhxh<span
+  style='mso-spacerun:yes'> </span></td>
+  <td align=left width=64 style='width:48pt'>ghichu</td>
+  <td align=left width=64 style='width:48pt'>state</td>
+  <td colspan=2 align=left width=128 style='mso-ignore:colspan;width:96pt'>fromttdvvl</td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 align=left style='height:15.0pt'>Hoàng Minh Thành</td>
+  <td align=left>nam</td>
+  <td class=xl65 align=right>16/06/1985</td>
+  <td class=xl67>044085003776</td>
+  <td align=left>Kinh</td>
+  <td align=left>VN</td>
+  <td align=left>Qu&#7843;ng Bình</td>
+  <td align=left>&#272;&#7891;ng H&#7899;i</td>
+  <td colspan=2 align=left style='mso-ignore:colspan'>&#272;&#7913;c Ninh
+  &#272;ông</td>
+  <td align=right>4415002310</td>
+  <td align=left>T&#7889;t nghi&#7879;p THPT</td>
+  <td align=left>&#272;&#7841;i h&#7885;c tr&#7903; lên</td>
+  <td align=left>Nhà lãnh &#273;&#7841;o</td>
+  <td align=left>T&#7893;ng h&#7907;p</td>
+  <td align=left>Không xác &#273;&#7883;nh th&#7901;i h&#7841;n</td>
+  <td colspan=2 style='mso-ignore:colspan'></td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>        
+  </span>5,000,000 </td>
+  <td colspan=7 style='mso-ignore:colspan'></td>
+  <td align=left>Giám &#272;&#7889;c</td>
+  <td align=left>Giám &#273;&#7889;c</td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>      
+  </span>1,275,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>   </span>225,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>   </span>100,000 </td>
+  <td></td>
+  <td align=right>1</td>
+  <td align=right>0</td>
+  <td></td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 align=left style='height:15.0pt'>Tr&#7847;n Th&#7883; Nga</td>
+  <td align=left>n&#7919;</td>
+  <td class=xl65 align=right>02/11/1982</td>
+  <td class=xl67>066182000250</td>
+  <td align=left>Kinh</td>
+  <td align=left>VN</td>
+  <td align=left>Qu&#7843;ng Bình</td>
+  <td align=left>&#272;&#7891;ng H&#7899;i</td>
+  <td colspan=2 align=left style='mso-ignore:colspan'>&#272;&#7913;c Ninh
+  &#272;ông</td>
+  <td align=left>0206387807</td>
+  <td align=left>T&#7889;t nghi&#7879;p THPT</td>
+  <td align=left>&#272;&#7841;i h&#7885;c tr&#7903; lên</td>
+  <td align=left>Nhân viên</td>
+  <td align=left>T&#7893;ng h&#7907;p</td>
+  <td align=left>Không xác &#273;&#7883;nh th&#7901;i h&#7841;n</td>
+  <td colspan=2 style='mso-ignore:colspan'></td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>        
+  </span>5,000,000 </td>
+  <td colspan=7 style='mso-ignore:colspan'></td>
+  <td align=left>K&#7871; toán</td>
+  <td align=left>K&#7871; toán tr<span style='display:none'>&#432;&#7903;ng</span></td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>      
+  </span>1,275,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>   </span>225,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>   </span>100,000 </td>
+  <td></td>
+  <td align=right>1</td>
+  <td align=right>0</td>
+  <td></td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 align=left style='height:15.0pt'>&#272;&#7895; H&#7919;u Thanh</td>
+  <td align=left>Nam</td>
+  <td class=xl65 align=right>09/09/1992</td>
+  <td class=xl67>194410972</td>
+  <td align=left>Kinh</td>
+  <td align=left>VN</td>
+  <td align=left>Qu&#7843;ng Bình</td>
+  <td align=left>&#272;&#7891;ng H&#7899;i</td>
+  <td align=left>B&#7855;c Lý</td>
+  <td></td>
+  <td align=right>4420917095</td>
+  <td align=left>T&#7889;t nghi&#7879;p THPT</td>
+  <td align=left>&#272;&#7841;i h&#7885;c tr&#7903; lên</td>
+  <td align=left>Nhân viên</td>
+  <td align=left>T&#7893;ng h&#7907;p</td>
+  <td align=left>Không xác &#273;&#7883;nh th&#7901;i h&#7841;n</td>
+  <td colspan=2 style='mso-ignore:colspan'></td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>        
+  </span>4,200,000 </td>
+  <td colspan=7 style='mso-ignore:colspan'></td>
+  <td align=left>Ki&#7871;n trúc <span style='display:none'>s&#432;</span></td>
+  <td align=left>Ki&#7871;n trúc <span style='display:none'>s&#432;</span></td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>      
+  </span>1,071,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>   </span>189,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>     </span>84,000 </td>
+  <td></td>
+  <td align=right>1</td>
+  <td align=right>0</td>
+  <td></td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 align=left style='height:15.0pt'>Lê Th&#7883; Chi</td>
+  <td align=left>n&#7919;</td>
+  <td class=xl65 align=right>24/08/1994</td>
+  <td class=xl67>194492472</td>
+  <td align=left>Kinh</td>
+  <td align=left>VN</td>
+  <td align=left>Qu&#7843;ng Bình</td>
+  <td align=left>Qu&#7843;ng Ni<span style='display:none'>nh</span></td>
+  <td colspan=2 align=left style='mso-ignore:colspan'>L&#432;&#417;ng Ninh</td>
+  <td align=right>4420603843</td>
+  <td align=left>T&#7889;t nghi&#7879;p THPT</td>
+  <td align=left>&#272;&#7841;i h&#7885;c tr&#7903; lên</td>
+  <td align=left>Nhân viên</td>
+  <td align=left>T&#7893;ng h&#7907;p</td>
+  <td align=left>Không xác &#273;&#7883;nh th&#7901;i h&#7841;n</td>
+  <td colspan=2 style='mso-ignore:colspan'></td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>        
+  </span>4,200,000 </td>
+  <td colspan=7 style='mso-ignore:colspan'></td>
+  <td align=left>Thi&#7871;t k&#7871;</td>
+  <td align=left>Thi&#7871;t k&#7871;</td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>      
+  </span>1,071,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>   </span>189,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>     </span>84,000 </td>
+  <td></td>
+  <td align=right>1</td>
+  <td align=right>0</td>
+  <td></td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 align=left style='height:15.0pt'>Ph&#7841;m Thành
+  &#272;&#7841;t</td>
+  <td align=left>Nam</td>
+  <td class=xl65 align=right>04/11/1994</td>
+  <td class=xl67>46094000057</td>
+  <td align=left>Kinh</td>
+  <td align=left>VN</td>
+  <td align=left>Qu&#7843;ng Bình</td>
+  <td align=left>&#272;&#7891;ng H&#7899;i</td>
+  <td align=left>&#272;&#7891;ng H&#7843;i</td>
+  <td></td>
+  <td align=right>4420094881</td>
+  <td align=left>T&#7889;t nghi&#7879;p THPT</td>
+  <td align=left>&#272;&#7841;i h&#7885;c tr&#7903; lên</td>
+  <td align=left>Nhân viên</td>
+  <td align=left>T&#7893;ng h&#7907;p</td>
+  <td align=left>Không xác &#273;&#7883;nh th&#7901;i h&#7841;n</td>
+  <td colspan=2 style='mso-ignore:colspan'></td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>        
+  </span>4,200,000 </td>
+  <td colspan=7 style='mso-ignore:colspan'></td>
+  <td align=left>Ki&#7871;n trúc <span style='display:none'>s&#432;</span></td>
+  <td align=left>Ki&#7871;n trúc <span style='display:none'>s&#432;</span></td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>      
+  </span>1,071,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>   </span>189,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>     </span>84,000 </td>
+  <td></td>
+  <td align=right>1</td>
+  <td align=right>0</td>
+  <td></td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 align=left style='height:15.0pt'>Nguy&#7877;n Hoàng Nam</td>
+  <td align=left>Nam</td>
+  <td class=xl65 align=right>11/10/1995</td>
+  <td class=xl67>194513545</td>
+  <td align=left>Kinh</td>
+  <td align=left>VN</td>
+  <td align=left>Qu&#7843;ng Bình</td>
+  <td align=left>&#272;&#7891;ng H&#7899;i</td>
+  <td align=left>B&#7843;o Ninh</td>
+  <td></td>
+  <td align=right>4420053943</td>
+  <td align=left>T&#7889;t nghi&#7879;p THPT</td>
+  <td align=left>&#272;&#7841;i h&#7885;c tr&#7903; lên</td>
+  <td align=left>Nhân viên</td>
+  <td align=left>T&#7893;ng h&#7907;p</td>
+  <td align=left>Không xác &#273;&#7883;nh th&#7901;i h&#7841;n</td>
+  <td colspan=2 style='mso-ignore:colspan'></td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>        
+  </span>4,200,000 </td>
+  <td colspan=7 style='mso-ignore:colspan'></td>
+  <td align=left>Ki&#7871;n trúc <span style='display:none'>s&#432;</span></td>
+  <td align=left>Ki&#7871;n trúc <span style='display:none'>s&#432;</span></td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>      
+  </span>1,071,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>   </span>189,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>     </span>84,000 </td>
+  <td></td>
+  <td align=right>1</td>
+  <td align=right>0</td>
+  <td></td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 align=left style='height:15.0pt'>Ph&#7841;m Công Thành</td>
+  <td align=left>Nam</td>
+  <td class=xl65 align=right>08/02/1994</td>
+  <td class=xl67>044094001423</td>
+  <td align=left>Kinh</td>
+  <td align=left>VN</td>
+  <td align=left>Qu&#7843;ng Bình</td>
+  <td align=left>Qu&#7843;ng Ni<span style='display:none'>nh</span></td>
+  <td align=left>Võ Ninh</td>
+  <td></td>
+  <td align=right>4420554794</td>
+  <td align=left>T&#7889;t nghi&#7879;p THPT</td>
+  <td align=left>&#272;&#7841;i h&#7885;c tr&#7903; lên</td>
+  <td align=left>Nhân viên</td>
+  <td align=left>T&#7893;ng h&#7907;p</td>
+  <td align=left>Không xác &#273;&#7883;nh th&#7901;i h&#7841;n</td>
+  <td colspan=2 style='mso-ignore:colspan'></td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>        
+  </span>4,200,000 </td>
+  <td colspan=7 style='mso-ignore:colspan'></td>
+  <td align=left>K&#7929; thu&#7853;t</td>
+  <td align=left>K&#7929; thu&#7853;t</td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>      
+  </span>1,071,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>   </span>189,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>     </span>84,000 </td>
+  <td></td>
+  <td align=right>1</td>
+  <td align=right>0</td>
+  <td></td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td height=20 align=left style='height:15.0pt'>Ph&#7841;m V&#259;n Hòa</td>
+  <td align=left>Nam</td>
+  <td class=xl65 align=right>23/11/1984</td>
+  <td class=xl67>044084003984</td>
+  <td align=left>Kinh</td>
+  <td align=left>VN</td>
+  <td align=left>Qu&#7843;ng Bình</td>
+  <td align=left>&#272;&#7891;ng H&#7899;i</td>
+  <td colspan=2 align=left style='mso-ignore:colspan'>&#272;&#7913;c Ninh
+  &#272;ông</td>
+  <td align=right>4420079188</td>
+  <td align=left>T&#7889;t nghi&#7879;p THPT</td>
+  <td align=left>&#272;&#7841;i h&#7885;c tr&#7903; lên</td>
+  <td align=left>Nhân viên</td>
+  <td align=left>T&#7893;ng h&#7907;p</td>
+  <td align=left>Không xác &#273;&#7883;nh th&#7901;i h&#7841;n</td>
+  <td colspan=2 style='mso-ignore:colspan'></td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>        
+  </span>4,200,000 </td>
+  <td colspan=7 style='mso-ignore:colspan'></td>
+  <td align=left>K&#7929; s&#432;</td>
+  <td align=left>K&#7929; s&#432;</td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>      
+  </span>1,071,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>   </span>189,000 </td>
+  <td class=xl66 align=left><span style='mso-spacerun:yes'>     </span>84,000 </td>
+  <td></td>
+  <td align=right>1</td>
+  <td align=right>0</td>
+  <td></td>
+ </tr>
+ <![if supportMisalignedColumns]>
+ <tr height=0 style='display:none'>
+  <td width=186 style='width:140pt'></td>
+  <td width=82 style='width:62pt'></td>
+  <td width=75 style='width:56pt'></td>
+  <td width=112 style='width:84pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=77 style='width:58pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=77 style='width:58pt'></td>
+  <td width=108 style='width:81pt'></td>
+  <td width=107 style='width:80pt'></td>
+  <td width=108 style='width:81pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=158 style='width:119pt'></td>
+  <td width=78 style='width:59pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=93 style='width:70pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=88 style='width:66pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+  <td width=64 style='width:48pt'></td>
+ </tr>
+ <![endif]>
+</table>
+
+</body>
+
+</html>
