@@ -26,7 +26,8 @@ class UserController extends Controller
 		 
 		if (Auth::check()) {
 			if (Auth::user()->level==3)
-           return redirect('doanhnghieppanel');
+			return view('HeThong.main');
+          // return redirect('doanhnghieppanel');
         } 
 		
 		return view('pages.login');
