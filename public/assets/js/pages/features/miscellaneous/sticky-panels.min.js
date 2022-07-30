@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*********************************************************************!*\
-  !*** ../demo1/src/js/pages/features/miscellaneous/sticky-panels.js ***!
-  \*********************************************************************/
-
+"use strict";
 // Class definition
 // Based on:  https://github.com/rgalus/sticky-js
 
@@ -36,7 +30,3 @@ var KTStickyPanelsDemo = function () {
 jQuery(document).ready(function() {
     KTStickyPanelsDemo.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=sticky-panels.js.map

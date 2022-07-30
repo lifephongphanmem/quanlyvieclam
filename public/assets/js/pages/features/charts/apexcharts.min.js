@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!***********************************************************!*\
-  !*** ../demo1/src/js/pages/features/charts/apexcharts.js ***!
-  \***********************************************************/
-
+"use strict";
 
 // Shared Colors Definition
 const primary = '#6993FF';
@@ -1092,7 +1086,3 @@ var KTApexChartsDemo = function () {
 jQuery(document).ready(function () {
 	KTApexChartsDemo.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=apexcharts.js.map

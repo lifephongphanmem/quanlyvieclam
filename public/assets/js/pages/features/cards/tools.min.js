@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*****************************************************!*\
-  !*** ../demo1/src/js/pages/features/cards/tools.js ***!
-  \*****************************************************/
-
+"use strict";
 
 var KTCardTools = function () {
     // Toastr
@@ -277,7 +271,3 @@ var KTCardTools = function () {
 jQuery(document).ready(function() {
     KTCardTools.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=tools.js.map

@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!******************************************************!*\
-  !*** ../demo1/src/js/pages/crud/file-upload/uppy.js ***!
-  \******************************************************/
-
+"use strict";
 
 // Class definition
 var KTUppy = function () {
@@ -333,7 +327,3 @@ var KTUppy = function () {
 KTUtil.ready(function() {
 	KTUppy.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=uppy.js.map

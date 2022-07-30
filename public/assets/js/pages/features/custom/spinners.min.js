@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*********************************************************!*\
-  !*** ../demo1/src/js/pages/features/custom/spinners.js ***!
-  \*********************************************************/
-
+"use strict";
 
 // Class definition
 
@@ -78,7 +72,3 @@ var KTSpinnersDemo = function () {
 jQuery(document).ready(function() {
     KTSpinnersDemo.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=spinners.js.map

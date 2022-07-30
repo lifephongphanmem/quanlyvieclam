@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*************************************************************!*\
-  !*** ../demo1/src/js/pages/custom/contacts/list-columns.js ***!
-  \*************************************************************/
-
+"use strict";
 
 // Class definition
 var KTContactsListColumns = function () {
@@ -31,6 +25,3 @@ var KTContactsListColumns = function () {
 KTUtil.ready(function() {	
 	KTContactsListColumns.init();
 });
-/******/ })()
-;
-//# sourceMappingURL=list-columns.js.map

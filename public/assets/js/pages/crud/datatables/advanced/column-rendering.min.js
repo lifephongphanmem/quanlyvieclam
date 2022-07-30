@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!**************************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/datatables/advanced/column-rendering.js ***!
-  \**************************************************************************/
-
+"use strict";
 var KTDatatablesAdvancedColumnRendering = function() {
 
 	var init = function() {
@@ -157,7 +151,3 @@ var KTDatatablesAdvancedColumnRendering = function() {
 jQuery(document).ready(function() {
 	KTDatatablesAdvancedColumnRendering.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=column-rendering.js.map

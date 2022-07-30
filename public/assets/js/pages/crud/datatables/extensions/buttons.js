@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*******************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/datatables/extensions/buttons.js ***!
-  \*******************************************************************/
-
+"use strict";
 var KTDatatablesExtensionButtons = function() {
 
 	var initTable1 = function() {
@@ -180,7 +174,3 @@ var KTDatatablesExtensionButtons = function() {
 jQuery(document).ready(function() {
 	KTDatatablesExtensionButtons.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=buttons.js.map

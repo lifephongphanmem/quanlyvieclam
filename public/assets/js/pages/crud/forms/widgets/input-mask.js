@@ -1,8 +1,3 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!**************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/forms/widgets/input-mask.js ***!
-  \**************************************************************/
 // Class definition
 
 var KTInputmask = function () {
@@ -82,6 +77,3 @@ var KTInputmask = function () {
 jQuery(document).ready(function() {
     KTInputmask.init();
 });
-/******/ })()
-;
-//# sourceMappingURL=input-mask.js.map

@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*****************************************************!*\
-  !*** ../demo1/src/js/pages/custom/login/login-4.js ***!
-  \*****************************************************/
-
+"use strict";
 
 // Class Definition
 var KTLogin = function() {
@@ -377,7 +371,3 @@ var KTLogin = function() {
 jQuery(document).ready(function() {
     KTLogin.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=login-4.js.map

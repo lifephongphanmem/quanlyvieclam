@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!**********************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/datatables/advanced/row-callback.js ***!
-  \**********************************************************************/
-
+"use strict";
 var KTDatatablesAdvancedColumnVisibility = function() {
 
 	var init = function() {
@@ -40,7 +34,3 @@ var KTDatatablesAdvancedColumnVisibility = function() {
 jQuery(document).ready(function() {
 	KTDatatablesAdvancedColumnVisibility.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=row-callback.js.map

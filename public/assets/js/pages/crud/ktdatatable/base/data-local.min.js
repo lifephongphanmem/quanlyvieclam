@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*****************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/ktdatatable/base/data-local.js ***!
-  \*****************************************************************/
-
+'use strict';
 // Class definition
 
 var KTDatatableDataLocalDemo = function() {
@@ -333,7 +327,3 @@ var KTDatatableDataLocalDemo = function() {
 jQuery(document).ready(function() {
   KTDatatableDataLocalDemo.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=data-local.js.map

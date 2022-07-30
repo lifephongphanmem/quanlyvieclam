@@ -1,8 +1,3 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!*****************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/forms/widgets/form-repeater.js ***!
-  \*****************************************************************/
 // Class definition
 var KTFormRepeater = function() {
 
@@ -137,6 +132,3 @@ jQuery(document).ready(function() {
 });
 
     
-/******/ })()
-;
-//# sourceMappingURL=form-repeater.js.map

@@ -1,10 +1,20 @@
 .wizard.wizard-1 .wizard-nav .wizard-steps {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
 }
 .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   text-align: center;
 }
@@ -17,10 +27,12 @@
   font-size: 3.75rem;
 }
 .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step .wizard-label .wizard-icon svg g [fill] {
+  -webkit-transition: fill 0.3s ease;
   transition: fill 0.3s ease;
   fill: #B5B5C3;
 }
 .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step .wizard-label .wizard-icon svg:hover g [fill] {
+  -webkit-transition: fill 0.3s ease;
   transition: fill 0.3s ease;
 }
 .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step .wizard-label .wizard-title {
@@ -37,26 +49,30 @@
   display: none;
 }
 .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=done] .wizard-label .wizard-icon, .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=current] .wizard-label .wizard-icon {
-  color: #3699FF;
+  color: #6993FF;
 }
 .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=done] .wizard-label .wizard-icon svg g [fill], .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=current] .wizard-label .wizard-icon svg g [fill] {
+  -webkit-transition: fill 0.3s ease;
   transition: fill 0.3s ease;
-  fill: #3699FF;
+  fill: #6993FF;
 }
 .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=done] .wizard-label .wizard-icon svg:hover g [fill], .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=current] .wizard-label .wizard-icon svg:hover g [fill] {
+  -webkit-transition: fill 0.3s ease;
   transition: fill 0.3s ease;
 }
 .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=done] .wizard-label .wizard-title, .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=current] .wizard-label .wizard-title {
-  color: #3699FF;
+  color: #6993FF;
 }
 .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=done] .wizard-arrow, .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=current] .wizard-arrow {
-  color: #3699FF;
+  color: #6993FF;
 }
 .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=done] .wizard-arrow svg g [fill], .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=current] .wizard-arrow svg g [fill] {
+  -webkit-transition: fill 0.3s ease;
   transition: fill 0.3s ease;
-  fill: #3699FF;
+  fill: #6993FF;
 }
 .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=done] .wizard-arrow svg:hover g [fill], .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step[data-wizard-state=current] .wizard-arrow svg:hover g [fill] {
+  -webkit-transition: fill 0.3s ease;
   transition: fill 0.3s ease;
 }
 
@@ -77,18 +93,33 @@
 }
 @media (max-width: 767.98px) {
   .wizard.wizard-1 .wizard-nav .wizard-steps {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
   }
   .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step {
     width: 100%;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
   }
   .wizard.wizard-1 .wizard-nav .wizard-steps .wizard-step .wizard-label {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     margin-left: 0;
     margin-right: 0;
@@ -104,5 +135,3 @@
     display: block;
   }
 }
-
-/*# sourceMappingURL=wizard-1.css.map*/

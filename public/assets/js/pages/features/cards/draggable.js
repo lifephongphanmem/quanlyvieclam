@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*********************************************************!*\
-  !*** ../demo1/src/js/pages/features/cards/draggable.js ***!
-  \*********************************************************/
-
+"use strict";
 
 var KTCardDraggable = function() {
 
@@ -33,7 +27,3 @@ var KTCardDraggable = function() {
 jQuery(document).ready(function() {
     KTCardDraggable.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=draggable.js.map

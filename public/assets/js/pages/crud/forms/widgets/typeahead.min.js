@@ -1,8 +1,3 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!*************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/forms/widgets/typeahead.js ***!
-  \*************************************************************/
 // Class definition
 var KTTypeahead = function() {
     var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
@@ -155,7 +150,3 @@ var KTTypeahead = function() {
 jQuery(document).ready(function() {
     KTTypeahead.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=typeahead.js.map

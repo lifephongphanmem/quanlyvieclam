@@ -1,8 +1,3 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!********************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/forms/validation/form-controls.js ***!
-  \********************************************************************/
 // Class definition
 var KTFormControls = function () {
 	// Private functions
@@ -266,7 +261,3 @@ var KTFormControls = function () {
 jQuery(document).ready(function() {
 	KTFormControls.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=form-controls.js.map

@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!******************************************************************!*\
-  !*** ../demo1/src/js/pages/features/calendar/external-events.js ***!
-  \******************************************************************/
-
+"use strict";
 
 var KTCalendarExternalEvents = function() {
 
@@ -208,7 +202,3 @@ var KTCalendarExternalEvents = function() {
 jQuery(document).ready(function() {
     KTCalendarExternalEvents.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=external-events.js.map

@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/forms/widgets/clipboard.js ***!
-  \*************************************************************/
-
+"use strict";
 // Class definition
 
 var KTClipboardDemo = function () {
@@ -29,7 +23,3 @@ var KTClipboardDemo = function () {
 jQuery(document).ready(function() {
     KTClipboardDemo.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=clipboard.js.map

@@ -1,8 +1,3 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!********************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/forms/widgets/ion-range-slider.js ***!
-  \********************************************************************/
 // Class definition
 
 var KTIONRangeSlider = function () {
@@ -86,6 +81,3 @@ var KTIONRangeSlider = function () {
 jQuery(document).ready(function() {
     KTIONRangeSlider.init();
 });
-/******/ })()
-;
-//# sourceMappingURL=ion-range-slider.js.map

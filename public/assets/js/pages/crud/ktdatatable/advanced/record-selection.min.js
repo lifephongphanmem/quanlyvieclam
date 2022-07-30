@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!***************************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/ktdatatable/advanced/record-selection.js ***!
-  \***************************************************************************/
-
+"use strict";
 // Class definition
 
 var KTDatatableRecordSelectionDemo = function() {
@@ -302,7 +296,3 @@ var KTDatatableRecordSelectionDemo = function() {
 jQuery(document).ready(function() {
     KTDatatableRecordSelectionDemo.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=record-selection.js.map

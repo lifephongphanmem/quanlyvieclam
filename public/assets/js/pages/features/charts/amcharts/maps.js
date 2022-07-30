@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!**************************************************************!*\
-  !*** ../demo1/src/js/pages/features/charts/amcharts/maps.js ***!
-  \**************************************************************/
-
+"use strict";
 
 // Class definition
 var KTamChartsMapsDemo = function() {
@@ -1028,6 +1022,3 @@ var KTamChartsMapsDemo = function() {
 jQuery(document).ready(function() {
     KTamChartsMapsDemo.init();
 });
-/******/ })()
-;
-//# sourceMappingURL=maps.js.map

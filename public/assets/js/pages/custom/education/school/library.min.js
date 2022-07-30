@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!****************************************************************!*\
-  !*** ../demo1/src/js/pages/custom/education/school/library.js ***!
-  \****************************************************************/
-
+"use strict";
 // Class definition
 
 var KTAppsEducationSchoolLibrary = function() {
@@ -229,7 +223,3 @@ var KTAppsEducationSchoolLibrary = function() {
 jQuery(document).ready(function() {
 	KTAppsEducationSchoolLibrary.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=library.js.map

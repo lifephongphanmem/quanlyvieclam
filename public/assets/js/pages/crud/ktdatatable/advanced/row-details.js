@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!**********************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/ktdatatable/advanced/row-details.js ***!
-  \**********************************************************************/
-
+"use strict";
 // Class definition
 
 var KTDatatableAutoColumnHideDemo = function() {
@@ -215,7 +209,3 @@ var KTDatatableAutoColumnHideDemo = function() {
 jQuery(document).ready(function() {
 	KTDatatableAutoColumnHideDemo.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=row-details.js.map

@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*******************************************************!*\
-  !*** ../demo1/src/js/pages/custom/wizard/wizard-6.js ***!
-  \*******************************************************/
-
+"use strict";
 
 // Class definition
 var KTWizard6 = function () {
@@ -200,7 +194,3 @@ var KTWizard6 = function () {
 jQuery(document).ready(function () {
 	KTWizard6.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=wizard-6.js.map

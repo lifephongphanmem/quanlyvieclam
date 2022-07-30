@@ -1,8 +1,3 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!**********************************************************!*\
-  !*** ../demo1/src/js/pages/crud/forms/widgets/tagify.js ***!
-  \**********************************************************/
 // Class definition
 var KTTagifyDemos = function() {
     // Private functions
@@ -300,7 +295,3 @@ var KTTagifyDemos = function() {
 jQuery(document).ready(function() {
     KTTagifyDemos.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=tagify.js.map

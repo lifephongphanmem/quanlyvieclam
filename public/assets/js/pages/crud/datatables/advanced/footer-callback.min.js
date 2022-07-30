@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*************************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/datatables/advanced/footer-callback.js ***!
-  \*************************************************************************/
-
+"use strict";
 var KTDatatablesAdvancedFooterCalllback = function() {
 
 	var init = function() {
@@ -57,7 +51,3 @@ var KTDatatablesAdvancedFooterCalllback = function() {
 jQuery(document).ready(function() {
 	KTDatatablesAdvancedFooterCalllback.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=footer-callback.js.map

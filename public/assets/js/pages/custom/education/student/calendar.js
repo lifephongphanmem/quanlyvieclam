@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!******************************************************************!*\
-  !*** ../demo1/src/js/pages/custom/education/student/calendar.js ***!
-  \******************************************************************/
-
+"use strict";
 
 var KTAppsEducationStudentCalendar = function() {
 
@@ -173,7 +167,3 @@ var KTAppsEducationStudentCalendar = function() {
 jQuery(document).ready(function() {
     KTAppsEducationStudentCalendar.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=calendar.js.map

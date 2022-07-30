@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!***************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/forms/widgets/jquery-mask.js ***!
-  \***************************************************************/
-
+"use strict";
 // Class definition
 
 var KTMaskDemo = function () {
@@ -71,7 +65,3 @@ var KTMaskDemo = function () {
 jQuery(document).ready(function() {
     KTMaskDemo.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=jquery-mask.js.map

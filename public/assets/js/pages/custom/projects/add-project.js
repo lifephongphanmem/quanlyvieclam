@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!************************************************************!*\
-  !*** ../demo1/src/js/pages/custom/projects/add-project.js ***!
-  \************************************************************/
-
+"use strict";
 
 // Class definition
 var KTProjectsAdd = function () {
@@ -268,7 +262,3 @@ var KTProjectsAdd = function () {
 jQuery(document).ready(function () {
 	KTProjectsAdd.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=add-project.js.map

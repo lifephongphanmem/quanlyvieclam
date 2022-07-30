@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!***********************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/forms/widgets/bootstrap-touchspin.js ***!
-  \***********************************************************************/
-
+"use strict";
 // Class definition
 var KTKBootstrapTouchspin = function() {
 
@@ -113,7 +107,3 @@ var KTKBootstrapTouchspin = function() {
 jQuery(document).ready(function() {
     KTKBootstrapTouchspin.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=bootstrap-touchspin.js.map

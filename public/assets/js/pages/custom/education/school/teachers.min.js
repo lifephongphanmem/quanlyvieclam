@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*****************************************************************!*\
-  !*** ../demo1/src/js/pages/custom/education/school/teachers.js ***!
-  \*****************************************************************/
-
+"use strict";
 // Class definition
 
 var KTAppsEducationSchoolTeacher = function() {
@@ -220,7 +214,3 @@ var KTAppsEducationSchoolTeacher = function() {
 jQuery(document).ready(function() {
 	KTAppsEducationSchoolTeacher.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=teachers.js.map

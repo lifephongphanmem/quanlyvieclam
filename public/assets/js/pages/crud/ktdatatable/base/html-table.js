@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*****************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/ktdatatable/base/html-table.js ***!
-  \*****************************************************************/
-
+'use strict';
 // Class definition
 
 var KTDatatableHtmlTableDemo = function() {
@@ -121,7 +115,3 @@ var KTDatatableHtmlTableDemo = function() {
 jQuery(document).ready(function() {
   KTDatatableHtmlTableDemo.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=html-table.js.map

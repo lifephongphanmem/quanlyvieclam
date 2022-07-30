@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!***************************************************************!*\
-  !*** ../demo1/src/js/pages/custom/projects/list-datatable.js ***!
-  \***************************************************************/
-
+"use strict";
 // Class definition
 
 var KTAppsProjectsListDatatable = function() {
@@ -292,7 +286,3 @@ var KTAppsProjectsListDatatable = function() {
 jQuery(document).ready(function() {
     KTAppsProjectsListDatatable.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=list-datatable.js.map

@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!****************************************************************!*\
-  !*** ../demo1/src/js/pages/features/miscellaneous/treeview.js ***!
-  \****************************************************************/
-
+"use strict";
 
 var KTTreeview = function () {
 
@@ -285,7 +279,3 @@ var KTTreeview = function () {
 jQuery(document).ready(function() {
     KTTreeview.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=treeview.js.map

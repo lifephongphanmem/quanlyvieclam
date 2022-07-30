@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*****************************************************!*\
-  !*** ../demo1/src/js/pages/features/maps/jqvmap.js ***!
-  \*****************************************************/
-
+"use strict";
 
 // Class definition
 var KTjQVMapDemo = function() {
@@ -254,6 +248,3 @@ var KTjQVMapDemo = function() {
 jQuery(document).ready(function() {
     KTjQVMapDemo.init();
 });
-/******/ })()
-;
-//# sourceMappingURL=jqvmap.js.map

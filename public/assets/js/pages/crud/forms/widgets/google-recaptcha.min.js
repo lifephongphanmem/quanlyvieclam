@@ -1,8 +1,3 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!********************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/forms/widgets/google-recaptcha.js ***!
-  \********************************************************************/
 // Class definition
 
 var KTRecaptcha = function () {
@@ -24,6 +19,3 @@ var KTRecaptcha = function () {
 jQuery(document).ready(function() {
     KTRecaptcha.init();
 });
-/******/ })()
-;
-//# sourceMappingURL=google-recaptcha.js.map

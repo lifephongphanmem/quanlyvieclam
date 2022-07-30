@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!************************************************************!*\
-  !*** ../demo1/src/js/pages/features/calendar/list-view.js ***!
-  \************************************************************/
-
+"use strict";
 
 var KTCalendarListView = function() {
 
@@ -170,7 +164,3 @@ var KTCalendarListView = function() {
 jQuery(document).ready(function() {
     KTCalendarListView.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=list-view.js.map

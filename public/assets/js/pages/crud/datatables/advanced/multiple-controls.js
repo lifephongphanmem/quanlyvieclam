@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!***************************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/datatables/advanced/multiple-controls.js ***!
-  \***************************************************************************/
-
+"use strict";
 var KTDatatablesAdvancedMultipleControls = function() {
 
 	var init = function() {
@@ -99,7 +93,3 @@ var KTDatatablesAdvancedMultipleControls = function() {
 jQuery(document).ready(function() {
 	KTDatatablesAdvancedMultipleControls.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=multiple-controls.js.map

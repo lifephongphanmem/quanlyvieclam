@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!************************************************************!*\
-  !*** ../demo1/src/js/pages/custom/contacts/add-contact.js ***!
-  \************************************************************/
-
+"use strict";
 
 // Class definition
 var KTContactsAdd = function () {
@@ -275,7 +269,3 @@ var KTContactsAdd = function () {
 jQuery(document).ready(function () {
 	KTContactsAdd.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=add-contact.js.map

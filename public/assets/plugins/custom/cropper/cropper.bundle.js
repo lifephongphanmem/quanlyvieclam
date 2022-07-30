@@ -1,12 +1,3 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	var __webpack_modules__ = ({
-
-/***/ "./node_modules/cropperjs/dist/cropper.js":
-/*!************************************************!*\
-  !*** ./node_modules/cropperjs/dist/cropper.js ***!
-  \************************************************/
-/***/ (function(module) {
-
 /*!
  * Cropper.js v1.5.9
  * https://fengyuanchen.github.io/cropperjs
@@ -18,8 +9,9 @@
  */
 
 (function (global, factory) {
-   true ? module.exports = factory() :
-  0;
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Cropper = factory());
 }(this, (function () { 'use strict';
 
   function _typeof(obj) {
@@ -3630,76 +3622,3 @@
   return Cropper;
 
 })));
-
-
-/***/ }),
-
-/***/ "./webpack/plugins/custom/cropper/cropper.scss":
-/*!*****************************************************!*\
-  !*** ./webpack/plugins/custom/cropper/cropper.scss ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ })
-
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-(() => {
-/*!***************************************************!*\
-  !*** ./webpack/plugins/custom/cropper/cropper.js ***!
-  \***************************************************/
-// Cropper -  A simple jQuery image cropping plugin: https://fengyuanchen.github.io/cropper/
-
-window.Cropper = __webpack_require__(/*! cropperjs/dist/cropper.js */ "./node_modules/cropperjs/dist/cropper.js");
-
-__webpack_require__(/*! ./cropper.scss */ "./webpack/plugins/custom/cropper/cropper.scss");
-
-})();
-
-/******/ })()
-;
-//# sourceMappingURL=cropper.bundle.js.map

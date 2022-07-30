@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!********************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/datatables/extensions/keytable.js ***!
-  \********************************************************************/
-
+"use strict";
 var KTDatatablesExtensionsKeytable = function() {
 
 	var initTable1 = function() {
@@ -96,7 +90,3 @@ var KTDatatablesExtensionsKeytable = function() {
 jQuery(document).ready(function() {
 	KTDatatablesExtensionsKeytable.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=keytable.js.map

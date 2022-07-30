@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*****************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/ktdatatable/base/local-sort.js ***!
-  \*****************************************************************/
-
+"use strict";
 // Class definition
 
 var KTDatatableLocalSortDemo = function() {
@@ -262,7 +256,3 @@ var KTDatatableLocalSortDemo = function() {
 jQuery(document).ready(function() {
     KTDatatableLocalSortDemo.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=local-sort.js.map

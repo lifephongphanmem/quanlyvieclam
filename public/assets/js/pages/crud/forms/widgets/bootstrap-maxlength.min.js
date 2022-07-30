@@ -1,8 +1,3 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!***********************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/forms/widgets/bootstrap-maxlength.js ***!
-  \***********************************************************************/
 // Class definition
 
 var KTBootstrapMaxlength = function () {
@@ -131,7 +126,3 @@ var KTBootstrapMaxlength = function () {
 jQuery(document).ready(function() {
     KTBootstrapMaxlength.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=bootstrap-maxlength.js.map

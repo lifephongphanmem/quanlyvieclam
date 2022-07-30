@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*******************************************************!*\
-  !*** ../demo1/src/js/pages/custom/profile/profile.js ***!
-  \*******************************************************/
-
+"use strict";
 
 // Class definition
 var KTProfile = function () {
@@ -39,7 +33,3 @@ var KTProfile = function () {
 jQuery(document).ready(function() {
 	KTProfile.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=profile.js.map

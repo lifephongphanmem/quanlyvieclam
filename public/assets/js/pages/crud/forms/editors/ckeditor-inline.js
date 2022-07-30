@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*******************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/forms/editors/ckeditor-inline.js ***!
-  \*******************************************************************/
-
+"use strict";
 // Class definition
 
 var KTCkeditorInline = function () {    
@@ -68,6 +62,3 @@ var KTCkeditorInline = function () {
 jQuery(document).ready(function() {
     KTCkeditorInline.init();
 });
-/******/ })()
-;
-//# sourceMappingURL=ckeditor-inline.js.map

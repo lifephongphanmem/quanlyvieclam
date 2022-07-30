@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!******************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/ktdatatable/base/translation.js ***!
-  \******************************************************************/
-
+"use strict";
 // Class definition
 
 var KTDatatableTranslationDemo = function() {
@@ -262,7 +256,3 @@ var KTDatatableTranslationDemo = function() {
 jQuery(document).ready(function() {
     KTDatatableTranslationDemo.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=translation.js.map

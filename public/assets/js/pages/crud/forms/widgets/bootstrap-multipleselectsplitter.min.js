@@ -1,8 +1,3 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!************************************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/forms/widgets/bootstrap-multipleselectsplitter.js ***!
-  \************************************************************************************/
 // Class definition
 
 var KTBootstrapMultipleSelectsplitter = function () {
@@ -24,7 +19,3 @@ var KTBootstrapMultipleSelectsplitter = function () {
 jQuery(document).ready(function() {
     KTBootstrapMultipleSelectsplitter.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=bootstrap-multipleselectsplitter.js.map

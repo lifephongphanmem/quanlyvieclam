@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!***********************************************************************!*\
-  !*** ../demo1/src/js/pages/features/miscellaneous/session-timeout.js ***!
-  \***********************************************************************/
-
+"use strict";
 
 var KTSessionTimeoutDemo = function () {
     var initDemo = function () {
@@ -33,7 +27,3 @@ var KTSessionTimeoutDemo = function () {
 jQuery(document).ready(function() {
     KTSessionTimeoutDemo.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=session-timeout.js.map

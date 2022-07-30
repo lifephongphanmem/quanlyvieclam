@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!********************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/datatables/extensions/rowgroup.js ***!
-  \********************************************************************/
-
+"use strict";
 var KTDatatablesExtensionsRowgroup = function() {
 
 	var initTable1 = function() {
@@ -99,7 +93,3 @@ var KTDatatablesExtensionsRowgroup = function() {
 jQuery(document).ready(function() {
 	KTDatatablesExtensionsRowgroup.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=rowgroup.js.map

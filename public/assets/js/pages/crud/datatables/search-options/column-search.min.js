@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!*****************************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/datatables/search-options/column-search.js ***!
-  \*****************************************************************************/
-
+"use strict";
 var KTDatatablesSearchOptionsColumnSearch = function() {
 
     $.fn.dataTable.Api.register('column().title()', function() {
@@ -362,7 +356,3 @@ var KTDatatablesSearchOptionsColumnSearch = function() {
 jQuery(document).ready(function() {
     KTDatatablesSearchOptionsColumnSearch.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=column-search.js.map

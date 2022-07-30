@@ -1,10 +1,4 @@
-/******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
-var __webpack_exports__ = {};
-/*!************************************************************!*\
-  !*** ../demo1/src/js/pages/crud/datatables/basic/basic.js ***!
-  \************************************************************/
-
+"use strict";
 var KTDatatablesBasicBasic = function() {
 
 	var initTable1 = function() {
@@ -388,7 +382,3 @@ var KTDatatablesBasicBasic = function() {
 jQuery(document).ready(function() {
 	KTDatatablesBasicBasic.init();
 });
-
-/******/ })()
-;
-//# sourceMappingURL=basic.js.map
