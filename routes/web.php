@@ -54,7 +54,8 @@ Route::post('/user-fu',[UserController::class, 'update' ]);
 
 // Doanh nghiep
 
-Route::get('/doanhnghieppanel',[CompanyController::class,'show']);
+Route::get('/doanhnghiep/thongtin',[CompanyController::class,'show']);
+Route::get('/doanhnghiep/nguoilaodong',[CompanyController::class,'nguoilaodong']);
 Route::get('/companydownload',[CompanyController::class,'download']);
 Route::post('/doanhnghiep-fu',[CompanyController::class,'update']);
 

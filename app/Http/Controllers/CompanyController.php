@@ -75,7 +75,7 @@ class CompanyController extends Controller
 					->paginate(20);
 	
 		
-		return view('pages.doanhnghiep')
+		return view('pages.doanhnghiep.thongtin')
 				->with('info',$info)
 				->with('ctype',$ctype)
 				->with('kcn',$kcn)
@@ -96,6 +96,74 @@ class CompanyController extends Controller
 	
     }
 	
+	public function nguoilaodong($action=null)
+    {
+		// get filter
+		$request=request();
+		$search = $request->search;
+		switch($action){
+			case "tamdung": $state_filter = 1; break;
+			case "kethuctamdung": $state_filter = 2; break;
+			default: $state_filter = $request->input('state_filter',1);
+		}
+		// get Parrams
+		
+		$dmhc =$this->getdanhmuc();
+		$list_cmkt=$this->getParamsByNametype('Trình độ CMKT');
+		$list_tdgd=$this->getParamsByNametype('Trình độ học vấn');
+		$list_nghe=$this->getParamsByNametype('Nghề nghiệp người lao động');
+		$list_vithe=$this->getParamsByNametype('Vị thế việc làm');
+		$list_linhvuc=$this->getParamsByNametype('Lĩnh vực đào tạo');
+		$list_hdld=$this->getParamsByNametype('Loại hợp đồng lao động');
+		
+		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
+		$ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
+		$cfield = $this->getParamsByNametype("Ngành nghề doanh nghiệp");// lấy ngành nghề doanh nghiệp
+		
+		
+		// thông in công ty
+		
+		$uid= Auth::user()->id;
+		$info =$this->getInfo($uid);
+	
+		if(!$info->email ){
+			$info->email=Auth::user()->email;
+		};
+		
+		// Thông tin người lao động
+		$cid =$info->id;
+		// get Employers
+		$lds= DB::table('nguoilaodong')->where('company',$cid)
+					->when($search, function ($query, $search) {
+                    return $query->where('nguoilaodong.hoten', 'like', '%'.$search.'%')
+								->orwhere('nguoilaodong.cmnd', 'like', '%'.$search.'%');
+					})
+					->when($state_filter, function ($query, $state_filter) {
+                    return $query->where('nguoilaodong.state', $state_filter);
+					})
+					->paginate(20);
+	
+		
+		return view('pages.nguoilaodong.thongtin')
+				->with('info',$info)
+				->with('ctype',$ctype)
+				->with('kcn',$kcn)
+				->with('cfield',$cfield)
+				->with('lds',$lds)
+				->with('dmhc',$dmhc)
+				->with('company',$info)
+				->with('list_cmkt',$list_cmkt)
+				->with('list_tdgd',$list_tdgd)
+				->with('list_nghe',$list_nghe)
+				->with('list_vithe',$list_vithe)
+				->with('list_linhvuc',$list_linhvuc)
+				->with('list_hdld',$list_hdld)
+				->with('search',$search)
+				->with('state_filter',$state_filter)
+				->with('action',$action)
+				;
+	
+    }
 	
 	  public function getInfo($uid){
 		  
@@ -191,5 +259,3 @@ class CompanyController extends Controller
 	
 	
 }
-
-?>
