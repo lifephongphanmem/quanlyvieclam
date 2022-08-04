@@ -141,8 +141,7 @@ class CompanyController extends Controller
 					->when($state_filter, function ($query, $state_filter) {
                     return $query->where('nguoilaodong.state', $state_filter);
 					})
-					->paginate(20);
-	
+					->paginate(20);	
 		
 		return view('pages.nguoilaodong.thongtin')
 				->with('info',$info)

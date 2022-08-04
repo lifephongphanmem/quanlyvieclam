@@ -99,6 +99,14 @@
                                     <span class="menu-text font-weight-bold">Thay đổi</span>
                                 </a>
                             </li>
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{url('/report-fa')}}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text font-weight-bold">Lịch sử</span>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -120,30 +128,20 @@
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="/metronic/demo2/crud/file-upload/image-input.html" class="menu-link">
+                                <a href="{{url('/tuyendung-fn')}}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text">Image Input</span>
+                                    <span class="menu-text font-weight-bold">Đăng tin tuyển dụng</span>
                                 </a>
                             </li>
+                            
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="/metronic/demo2/crud/file-upload/dropzonejs.html" class="menu-link">
+                                <a href="{{url('/tuyendung-fa')}}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text">DropzoneJS</span>
-                                    <span class="menu-label">
-                                        <span class="label label-danger label-inline">new</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="/metronic/demo2/crud/file-upload/uppy.html" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Uppy</span>
+                                    <span class="menu-text font-weight-bold">Lịch sử tuyển dụng</span>
                                 </a>
                             </li>
                         </ul>

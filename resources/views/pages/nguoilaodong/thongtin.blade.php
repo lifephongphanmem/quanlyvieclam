@@ -17,21 +17,20 @@
                         <h3 class="card-label text-uppercase">Danh sách người lao động</h3>
                     </div>
                     <div class="card-toolbar">
-                        <a href="#" class="btn btn-xs btn-icon btn-danger mr-2">
-                            <i class="flaticon2-drop"></i><label>Nhập
-                                <form class="form-inline" method="POST"
-                                    action="{{ URL::to('laodong-fi') }} "
-                                    enctype='multipart/form-data'>
-                                    <input type="file" name="import_file"
-                                        onchange="this.form.submit()" style="display:none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </label>
-                        </a>
-                        <a href="#" class="btn btn-xs btn-icon btn-success mr-2">
+                        <button class="btn btn-xs btn-icon btn-danger mr-2" title="Nhận dữ liệu từ file Excel" data-target="#modal-nhanexcel"
+                            data-toggle="modal">
+                            <i class="flaticon2-drop"></i>
+                        </button>
+                        <a href="{{ URL::to('/') }}/huongdan.xlsx" title="Hướng dẫn điền dữ liệu"
+                            class="btn btn-xs btn-icon btn-success mr-2">
                             <i class="flaticon2-gear"></i>
                         </a>
-                        <a href="#" class="btn btn-xs btn-icon btn-primary">
+                        <a href="{{ URL::to('/') }}/maunhapnguoilaodong.xlsx" title="Tải mẫu nhập người lao động"
+                            class="btn btn-xs btn-icon btn-primary mr-2">
+                            <i class="flaticon2-bell-2"></i>
+                        </a>
+                        <a href="{{ URL::to('laodong-ex') }}" title="Tải danh sách NLĐ"
+                            class="btn btn-xs btn-icon btn-primary">
                             <i class="flaticon2-bell-2"></i>
                         </a>
                     </div>
@@ -39,34 +38,6 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="panel-body">
-
-                            <div class="row ">
-                                <div class="col-sm-12 col-sm-offset-0">
-
-                                    <div class="function-menu pull-right">
-                                        <ul class="nav navbar-nav">
-                                            <li><a href="#"><i class="fa fa-user"></i>
-                                                    </a>
-                                            </li>
-
-
-
-                                            <li><a href="{{ URL::to('/') }}/huongdan.xlsx" download><i
-                                                        class="fa fa-file"></i> <button class="  " type="button">Hướng
-                                                        dẫn điền dữ liệu</button></a></li>
-
-                                            <li><a href="{{ URL::to('/') }}/maunhapnguoilaodong.xlsx" download><i
-                                                        class="fa fa-file"></i> <button class="  " type="button">Tải
-                                                        mẫu</button></a></li>
-                                            <li><a href="{{ URL::to('laodong-ex') }}"><i class="fa fa-file"></i>
-                                                    <button class="  " type="button">Tải danh sách
-                                                        NLĐ</button></a></li>
-
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                             <form class="form-inline" id="formnld" method="GET" action="#collapsenld">
                                 <div class="row ">
                                     <div class="col-sm-6 col-sm-offset-0">
@@ -202,4 +173,33 @@
         </div>
     </div>
     <!--end::Row-->
+
+    <div id="modal-nhanexcel" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+        {!! Form::open([
+            'url' => '/laodong-fi',
+            'method' => 'post',
+            'id' => 'thoai_nhanexcel',
+            'class' => 'form-horizontal form-validate',
+        ]) !!}
+        <div class="modal-dialog modal-content">
+            <div class="modal-header modal-header-primary">
+                <h4 id="modal-header-primary-label" class="modal-title">Nhận danh sách cán bộ từ file Excel</h4>
+                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <input type="file" name="import_file" onchange="this.form.submit()" >
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                <button type="submit" name="submit" value="submit" class="btn btn-primary">Đồng ý</button>
+            </div>
+        </div>
+        {!! Form::close() !!}
+    </div>
 @endsection
