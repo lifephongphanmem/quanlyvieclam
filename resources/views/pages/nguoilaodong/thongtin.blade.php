@@ -19,7 +19,6 @@
                     <div class="card-toolbar">
                         <a href="#" class="btn btn-xs btn-icon btn-danger mr-2">
                             <i class="flaticon2-drop"></i><label>Nhập
-
                                 <form class="form-inline" method="POST"
                                     action="{{ URL::to('laodong-fi') }} "
                                     enctype='multipart/form-data'>
