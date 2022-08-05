@@ -165,32 +165,14 @@
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="/metronic/demo2/crud/file-upload/image-input.html" class="menu-link">
+                                <a href="{{url('/messages')}}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text">Image Input</span>
+                                    <span class="menu-text font-weight-bold">Danh sách văn bản</span>
                                 </a>
                             </li>
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="/metronic/demo2/crud/file-upload/dropzonejs.html" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">DropzoneJS</span>
-                                    <span class="menu-label">
-                                        <span class="label label-danger label-inline">new</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="/metronic/demo2/crud/file-upload/uppy.html" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Uppy</span>
-                                </a>
-                            </li>
+                            
                         </ul>
                     </div>
                 </li>              
@@ -255,7 +237,7 @@
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text">Người lao động</span>
+                                    <span class="menu-text">Đơn vị</span>
                                 </a>
                             </li>
                             
@@ -295,11 +277,11 @@
                                 <div class="menu-submenu menu-submenu-classic menu-submenu-right">
                                     <ul class="menu-subnav">
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="features/bootstrap/typography.html" class="menu-link">
+                                            <a href="{{url('/ptype-ba')}}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-dot">
                                                     <span></span>
                                                 </i>
-                                                <span class="menu-text">Typography</span>
+                                                <span class="menu-text font-weight-bold">Tham số</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -317,11 +299,27 @@
                                 <div class="menu-submenu menu-submenu-classic menu-submenu-right">
                                     <ul class="menu-subnav">
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="features/bootstrap/typography.html" class="menu-link">
+                                            <a href="{{url('/dmhc-ba')}}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-dot">
                                                     <span></span>
                                                 </i>
-                                                <span class="menu-text">Typography</span>
+                                                <span class="menu-text font-weight-bold">Địa bàn</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="{{url('/')}}" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text font-weight-bold">Đơn vị</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="{{url('/user-ba')}}" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text font-weight-bold">Tài khoản</span>
                                             </a>
                                         </li>
                                     </ul>

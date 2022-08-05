@@ -24,20 +24,18 @@ class UserController extends Controller
 
 	public function show_login()
 	{
-
-
 		if (Auth::check()) {
 			if (Auth::user()->level == 3)
 				return view('HeThong.dashboard');
 			// return redirect('doanhnghieppanel');
 		}
 
-		return view('pages.login');
+		//return view('pages.login');
+		return view('HeThong.dangnhap');
 	}
+
 	public function auth(Request $request)
 	{
-
-
 		$model = User::where('email', $request->email)->first();
 		//dd(!isset($model));
 		if (!isset($model)) {

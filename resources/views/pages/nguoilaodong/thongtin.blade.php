@@ -17,21 +17,21 @@
                         <h3 class="card-label text-uppercase">Danh sách người lao động</h3>
                     </div>
                     <div class="card-toolbar">
-                        <button class="btn btn-xs btn-icon btn-danger mr-2" title="Nhận dữ liệu từ file Excel" data-target="#modal-nhanexcel"
+                        <button class="btn btn-xs btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel" data-target="#modal-nhanexcel"
                             data-toggle="modal">
-                            <i class="flaticon2-drop"></i>
+                            <i class="fas fa-file-import"></i>
                         </button>
                         <a href="{{ URL::to('/') }}/huongdan.xlsx" title="Hướng dẫn điền dữ liệu"
                             class="btn btn-xs btn-icon btn-success mr-2">
-                            <i class="flaticon2-gear"></i>
+                            <i class="fas fa-download"></i>
                         </a>
                         <a href="{{ URL::to('/') }}/maunhapnguoilaodong.xlsx" title="Tải mẫu nhập người lao động"
                             class="btn btn-xs btn-icon btn-primary mr-2">
-                            <i class="flaticon2-bell-2"></i>
+                            <i class="fas fa-download"></i>
                         </a>
                         <a href="{{ URL::to('laodong-ex') }}" title="Tải danh sách NLĐ"
                             class="btn btn-xs btn-icon btn-primary">
-                            <i class="flaticon2-bell-2"></i>
+                            <i class="fas fa-download"></i>
                         </a>
                     </div>
                 </div>
