@@ -41,7 +41,7 @@
                             <form class="form-inline" id="formnld" method="GET" action="#collapsenld">
                                 <div class="row ">
                                     <div class="col-sm-6 col-sm-offset-0">
-                                        <label>Lọc theo tình trạng</label>
+                                        <label style="margin-left: -78px">Lọc theo tình trạng</label>
                                         <select class="input-sm form-control w-sm inline v-middle" name="state_filter"
                                             onchange="this.form.submit()">
                                             <option value="0">Tất cả</option>
@@ -57,13 +57,13 @@
 
                                         </select>
                                     </div>
-                                    <div class="col-sm-3 ">
+                                    <div class="col-sm-6 ">
                                         <div class="function-search pull-right">
 
-                                            <div class="input-group">
+                                            <div class="input-group mt-6">
                                                 <input type="text" name="search" class="input-sm form-control"
                                                     value="{{ $search }}" placeholder="Tìm theo Tên hoặc CCCD/CMND">
-                                                <span class="input-group-btn">
+                                                <span class="input-group-btn mt-1 ml-1">
                                                     <button class="btn btn-sm btn-default" type="submit">Tìm
                                                         kiếm</button>
                                                 </span>

@@ -101,8 +101,8 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </span>
                                 </div>
                                 <input class="form-control border-1 px-5 placeholder-dark-75" title="Tên tài khoản"
-                                    type="text" placeholder="Tên tài khoản truy cập" id="email" name="email"
-                                    value="{{ $input['email'] ?? '' }}" required autocomplete="off" />
+                                    type="text" placeholder="Tên tài khoản truy cập" id="username" name="username"
+                                    value="{{ $input['username'] ?? '' }}" required autocomplete="off" />
                             </div>
 
                             <div class="input-group form-group py-2 m-0">

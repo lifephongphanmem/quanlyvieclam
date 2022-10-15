@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\danhmuchanhchinh;
+use App\Models\dmdonvi;
 use Illuminate\Http\Request;
 use DB;
 use Session;
@@ -36,8 +38,9 @@ class UserController extends Controller
 
 	public function auth(Request $request)
 	{
-		$model = User::where('email', $request->email)->first();
-		//dd(!isset($model));
+		$model = User::where('username', $request->username)->first();
+		// dd(!isset($model));
+		// dd($model);
 		if (!isset($model)) {
 			return redirect('home')->withErrors(
 				[
@@ -45,21 +48,21 @@ class UserController extends Controller
 				]
 			);
 		}
-		if ($model->level == '3') {
+		if ($model->phanloaitk == 1) {
 			$data = [
-				'email' => $request->email,
+				'username' => $request->username,
 				'password' => $request->password,
-				'public' => 1,
-				'level' => 3,
+				// 'public' => 1,
+				'phanloaitk' => 1,
 			];
+			// dd($data);
 			$ret = Auth::attempt($data);
-
+			// dd($ret);
 			if ($ret) {
 				$request->session()->regenerate();
 				$request->session()->flash('message', 'Đăng nhập thành công');
-				return redirect('/doanhnghiep/thongtin');
+				return redirect('/dmdonvi/danh_sach');
 			} else {
-
 				return redirect('home')->withErrors(
 					[
 						'message' => 'Đăng nhập không thành công'
@@ -67,12 +70,13 @@ class UserController extends Controller
 				);
 			}
 		} else {
-
 			$data = [
-				'email' => $request->email,
+				'username' => $request->username,
 				'password' => $request->password,
 				'public' => 1,
-				'level' => [2, 1], // level 1 2 for backen user
+				// 'level' => [2, 1], // level 1 2 for backen user
+				'level'=>3,
+				'phanloaitk'=>2
 			];
 			Auth::logout();
 			$ret = Auth::attempt($data);
@@ -80,9 +84,8 @@ class UserController extends Controller
 			if ($ret) {
 				$request->session()->regenerate();
 				Session::put('message', "Đăng nhập thành công");
-				return redirect('dashboard');
+				return redirect('/doanhnghiep/thongtin');
 			} else {
-
 				return redirect('admin')->withErrors(
 					[
 						'email' => 'Đăng nhập không thành công'
@@ -90,6 +93,51 @@ class UserController extends Controller
 				);
 			}
 		}
+		// if ($model->level == '3') {
+		// 	$data = [
+		// 		'email' => $request->email,
+		// 		'password' => $request->password,
+		// 		'public' => 1,
+		// 		'level' => 3,
+		// 	];
+		// 	$ret = Auth::attempt($data);
+
+		// 	if ($ret) {
+		// 		$request->session()->regenerate();
+		// 		$request->session()->flash('message', 'Đăng nhập thành công');
+		// 		return redirect('/doanhnghiep/thongtin');
+		// 	} else {
+
+		// 		return redirect('home')->withErrors(
+		// 			[
+		// 				'message' => 'Đăng nhập không thành công'
+		// 			]
+		// 		);
+		// 	}
+		// } else {
+
+		// 	$data = [
+		// 		'email' => $request->email,
+		// 		'password' => $request->password,
+		// 		'public' => 1,
+		// 		'level' => [2, 1], // level 1 2 for backen user
+		// 	];
+		// 	Auth::logout();
+		// 	$ret = Auth::attempt($data);
+
+		// 	if ($ret) {
+		// 		$request->session()->regenerate();
+		// 		Session::put('message', "Đăng nhập thành công");
+		// 		return redirect('dashboard');
+		// 	} else {
+
+		// 		return redirect('admin')->withErrors(
+		// 			[
+		// 				'email' => 'Đăng nhập không thành công'
+		// 			]
+		// 		);
+		// 	}
+		// }
 	}
 
 	public function logout()
@@ -192,5 +240,71 @@ class UserController extends Controller
 		$rm->report('add', false, 'users', $user->id, 1);
 		$request->session()->flash('message', 'Đăng ký không thành công');
 		return redirect('home');
+	}
+
+	public function index_nn()
+	{
+		$model = User::where('phanloaitk', 1)->get();
+		$model_dv = dmdonvi::all();
+		$model_hc = danhmuchanhchinh::all();
+		return view('HeThong.manage.taikhoan.index')
+			->with('model', $model)
+			->with('model_dv', $model_dv)
+			->with('model_hc', $model_hc);
+	}
+
+	public function chitiet(Request $request)
+	{
+		$inputs = $request->all();
+		$model = dmdonvi::where('madv', $inputs['madv'])->first();
+		$model_tk = User::where('madv', $inputs['madv'])->get();
+		return view('HeThong.manage.taikhoan.chitiet')
+			->with('model', $model)
+			->with('model_tk', $model_tk);
+	}
+
+	public function create(Request $request)
+	{
+		$inputs['id'] = $request->id;
+		$model = dmdonvi::findOrFail($inputs['id']);
+		return view('HeThong.manage.taikhoan.create')
+			->with('model', $model);
+	}
+
+	public function store(Request $request)
+	{
+		$inputs = $request->all();
+		$inputs['password'] = Hash::make($inputs['password']);
+		User::create($inputs);
+		return redirect('/TaiKhoan/DanhSach/?madv=' . $inputs['madv']);
+	}
+
+	public function edit_tk($id)
+	{
+		$model = User::findOrFail($id);
+		$model_dv = dmdonvi::where('madv', $model->madv)->first();
+		return view('HeThong.manage.taikhoan.edit')
+			->with('model', $model)
+			->with('model_dv', $model_dv);
+	}
+
+	public function update_tk(Request $request, $id)
+	{
+		$inputs = $request->all();
+		$model = User::findOrFail($id);
+		if ($inputs['password'] == '') {
+			$inputs['password'] = $model->password;
+		} else {
+			$inputs['password'] = Hash::make($inputs['password']);
+		}
+		$model->update($inputs);
+		return redirect('/TaiKhoan/DanhSach?madv=' . $model->madv);
+	}
+
+	public function destroy($id)
+	{
+		$model = User::findOrFail($id);
+		$model->delete();
+		return redirect('/TaiKhoan/DanhSach?madv=' . $model->madv);
 	}
 }

@@ -107,7 +107,7 @@ class CompanyController extends Controller
 			default: $state_filter = $request->input('state_filter',1);
 		}
 		// get Parrams
-		
+
 		$dmhc =$this->getdanhmuc();
 		$list_cmkt=$this->getParamsByNametype('Trình độ CMKT');
 		$list_tdgd=$this->getParamsByNametype('Trình độ học vấn');
@@ -142,7 +142,7 @@ class CompanyController extends Controller
                     return $query->where('nguoilaodong.state', $state_filter);
 					})
 					->paginate(20);	
-		
+
 		return view('pages.nguoilaodong.thongtin')
 				->with('info',$info)
 				->with('ctype',$ctype)
