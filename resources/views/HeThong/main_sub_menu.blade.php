@@ -320,7 +320,7 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="{{url('/')}}" class="menu-link">
+                                            <a href="{{url('/dmdonvi/danh_sach')}}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-dot">
                                                     <span></span>
                                                 </i>
@@ -328,11 +328,19 @@
                                             </a>
                                         </li>
                                         <li class="menu-item" aria-haspopup="true">
-                                            <a href="{{url('/user-ba')}}" class="menu-link">
+                                            <a href="{{url('/TaiKhoan/ThongTin')}}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-dot">
                                                     <span></span>
                                                 </i>
                                                 <span class="menu-text font-weight-bold">Tài khoản</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="{{url('/Chuc_nang/Thong_tin')}}" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text font-weight-bold">Chức năng</span>
                                             </a>
                                         </li>
                                     </ul>
