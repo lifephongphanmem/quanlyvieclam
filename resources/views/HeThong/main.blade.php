@@ -13,14 +13,18 @@
     <link rel="canonical" href="https://phanmemcuocsong.com" />
 
     <!--begin::Fonts-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" /> --}}
+    <link href="{{ url('assets/global/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet"
+    type="text/css" />
     <!--end::Fonts-->
 
     <!--begin::Page Vendors Styles(used by this page)-->
     <link href="{{ url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet"
         type="text/css" />
+        {{-- <link href="{{ url('assets/global/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" /> --}}
     <!--end::Page Vendors Styles-->
-
+    <script src="{{ url('assets/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('assets/global/plugins/jquery-migrate.min.js') }}" type="text/javascript"></script>
     <!--begin::Global Theme Styles(used by all pages)-->
     <link href="{{ url('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ url('assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
@@ -29,7 +33,7 @@
 
     <!--begin::Layout Themes(used by all pages)-->
     <!--end::Layout Themes-->
-
+    @yield('custom-style')
     <link rel="shortcut icon" href="{{ url('assets/media/logos/Icon_Life.png') }}" />
 </head>
 
@@ -545,7 +549,7 @@
             "font-family": "Poppins"
         };
     </script>
-
+    @yield('custom-script')
     <!--end::Global Config-->
 
     <!--begin::Global Theme Bundle(used by all pages)-->
@@ -556,6 +560,8 @@
 
     <!--begin::Page Vendors(used by this page)-->
     <script src="{{ url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
+    <script src="{{ url('assets/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('assets/global/plugins/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script>
 
     <!--end::Page Vendors-->
 
