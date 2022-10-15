@@ -599,6 +599,7 @@ class ComposerStaticInitea9d6f1e56691f84e5f173248cbf2a42
         'App\\Models\\Tuyendung' => __DIR__ . '/../..' . '/app/Models/Tuyendung.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\Vitrituyendung' => __DIR__ . '/../..' . '/app/Models/Vitrituyendung.php',
+        'App\\Models\\dmdoituonguutien' => __DIR__ . '/../..' . '/app/Models/dmdoituonguutien.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

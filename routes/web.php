@@ -34,7 +34,9 @@ use App\Http\Controllers\AdminDichvu;
 use App\Http\Controllers\AdminEmployer; 
 
 
-use App\Http\Controllers\Controller; 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\dmdoituonguutienController;
+use App\Models\dmdoituonguutien;
 
 // Frontend SECTION
 
@@ -222,3 +224,18 @@ Route::post('/dichvu-bs/',[AdminDichvu::class,'save']);
 
 Route::post('/dichvu-bu/',[AdminDichvu::class,'update']);
 
+
+
+// Danh mục đối tượng ưu tiên
+
+
+
+
+Route::prefix('danh_muc')->group(function(){
+    Route::prefix('/dm_doi_tuong')->group(function(){
+        Route::get('',[dmdoituonguutienController::class,'index']);
+        Route::post('/store',[dmdoituonguutienController::class,'store']);
+        Route::get('/delete/{id}',[dmdoituonguutienController::class,'delete']);
+        Route::get('/edit/{id}',[dmdoituonguutienController::class,'edit']);
+    });
+});
