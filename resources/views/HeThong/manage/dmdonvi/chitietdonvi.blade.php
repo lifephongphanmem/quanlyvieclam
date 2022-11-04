@@ -28,7 +28,7 @@
                         <h3 class="card-label text-uppercase">Danh sách đơn vị - {{$donvi->name}}</h3>
                     </div>
                     <div class="card-toolbar">
-                        <a href="{{'/dmdonvi/create?madonvi='.$donvi->id.'&maquocgia='.$donvi->maquocgia}}" class="btn btn-xs btn-icon btn-success mr-2" title="Thêm mới đơn vị"><i class="fa fa-plus"></i></a>
+                        <a href="{{'/dmdonvi/create?madonvi='.$donvi->id.'&maquocgia='.$donvi->maquocgia.'&parent='.$donvi->parent}}" class="btn btn-xs btn-icon btn-success mr-2" title="Thêm mới đơn vị"><i class="fa fa-plus"></i></a>
                         <button class="btn btn-xs btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel"
                             data-target="#modal-nhanexcel" data-toggle="modal">
                             <i class="fas fa-file-import"></i>

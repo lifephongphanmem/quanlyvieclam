@@ -15,7 +15,6 @@
     <script>
         jQuery(document).ready(function() {
             TableManaged.init();
-            $('#sample_3').DataTable();
         });
     </script>
 @stop
@@ -33,8 +32,8 @@
                     <div class="card-toolbar">
                         <a href="{{ '/TaiKhoan/ThemMoi?id=' . $model->id }}" class="btn btn-sm btn-success mr-2"
                             title="Thêm mới tài khoản"><i class="fa fa-plus"></i></a>
-                        <a href="{{ '/TaiKhoan/ThongTin' }}" class="btn btn-sm btn-success mr-2"
-                            title="Quay lại"><i class="fa fa-arrow-left"></i></a>
+                        <a href="{{ '/TaiKhoan/ThongTin' }}" class="btn btn-sm btn-info mr-2"
+                            title="Quay lại"><i class="fa fa-reply"></i></a>
                         {{-- <button class="btn btn-sm btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel"
                             data-target="#modal-nhanexcel" data-toggle="modal">
                             <i class="fas fa-file-import"></i>

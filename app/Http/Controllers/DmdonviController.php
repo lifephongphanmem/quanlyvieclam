@@ -31,7 +31,9 @@ class DmdonviController extends Controller
     {   
         $inputs['madonvi']= $request->madonvi;
         $inputs['maquocgia']=$request->maquocgia;
-        $model_diaban=danhmuchanhchinh::where('maquocgia',$inputs['maquocgia'])->first();
+        $inputs['parent']=$request->parent;
+        // dd($inputs);
+        $model_diaban=danhmuchanhchinh::where('maquocgia',$inputs['parent'])->first();
         $model_donvi= dmdonvi::where('madiaban',$model_diaban->id)->get();
         return view('HeThong.manage.dmdonvi.create')
                     ->with('model_diaban',$model_diaban)

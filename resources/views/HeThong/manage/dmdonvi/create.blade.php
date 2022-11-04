@@ -93,7 +93,7 @@
                 </div>
             </div>
             <input type="hidden" name='madonvi' id=madonvi value="{{$inputs}}">
-            <input type="hidden" name='madiaban' id=madiaban value="{{$model_diaban->id}}">
+            <input type="hidden" name='madiaban' id=madiaban value="{{$inputs}}">
         </div>
         <div class="card-footer">
             <div class="row text-center">
