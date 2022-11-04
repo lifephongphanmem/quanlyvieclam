@@ -25,12 +25,17 @@
     <!--end::Page Vendors Styles-->
     <script src="{{ url('assets/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
     <script src="{{ url('assets/global/plugins/jquery-migrate.min.js') }}" type="text/javascript"></script>
+
+
+    
+    
     <!--begin::Global Theme Styles(used by all pages)-->
     <link href="{{ url('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ url('assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ url('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Theme Styles-->
-
+    <link href="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}"></script>
     <!--begin::Layout Themes(used by all pages)-->
     <!--end::Layout Themes-->
     @yield('custom-style')
@@ -549,7 +554,7 @@
             "font-family": "Poppins"
         };
     </script>
-    @yield('custom-script')
+  
     <!--end::Global Config-->
 
     <!--begin::Global Theme Bundle(used by all pages)-->
@@ -564,10 +569,10 @@
     <script src="{{ url('assets/global/plugins/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script>
 
     <!--end::Page Vendors-->
-
+    <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}"></script>
     <!--begin::Page Scripts(used by this page)-->
     <script src="{{ url('assets/js/pages/widgets.js') }}"></script>
-
+    @yield('custom-script')
     <!--end::Page Scripts-->
 </body>
 

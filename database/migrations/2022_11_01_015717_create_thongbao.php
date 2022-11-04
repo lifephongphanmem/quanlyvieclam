@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDmdoituonguutiensTable extends Migration
+class CreateThongbao extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateDmdoituonguutiensTable extends Migration
      */
     public function up()
     {
-        Schema::create('dmdoituonguutiens', function (Blueprint $table) {
+        Schema::create('thongbao', function (Blueprint $table) {
             $table->id();
-            $table->string('madmdt')->nullable();
-            $table->string('tendoituong')->nullable();
+            $table->string('manguoigui')->nullable();
+            $table->string('matttd')->nullable();
+            $table->string('matb')->nullable();
+            $table->string('noidung')->nullable();
+            $table->string('thoidiem')->nullable();
             $table->string('trangthai')->nullable();
-            $table->integer('stt')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateDmdoituonguutiensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dmdoituonguutiens');
+        Schema::dropIfExists('thongbao');
     }
 }

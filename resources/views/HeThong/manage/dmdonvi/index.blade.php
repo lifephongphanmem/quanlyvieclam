@@ -15,7 +15,6 @@
     <script>
         jQuery(document).ready(function() {
             TableManaged.init();
-            $('#sample_3').DataTable();
         });
     </script>
 @stop

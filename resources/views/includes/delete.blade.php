@@ -18,7 +18,7 @@
                             class="close">&times;</button>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-secondary">Hủy thao tác</button>
                     <button type="submit" onclick="subDel()" data-dismiss="modal" class="btn btn-primary">Đồng ý</button>
                 </div>
             </div>

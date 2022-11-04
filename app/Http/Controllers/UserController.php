@@ -59,6 +59,20 @@ class UserController extends Controller
 			$ret = Auth::attempt($data);
 			// dd($ret);
 			if ($ret) {
+				$donvi=dmdonvi::where('madv',$model->madv)->first();
+				$diaban=danhmuchanhchinh::where('id',$donvi->madiaban)->first();
+				$a_dv=[
+					'madv'=>$donvi->madv,
+					'tendv'=>$donvi->tendv,
+					'madvcq'=>$donvi->madvcq,
+					'madb'=>$diaban->madb,
+					'tendiaban'=>$diaban->name,
+					'level'=>$diaban->level,
+					'parent'=>$diaban->parent,
+					'maquocgia'=>$diaban->maquocgia,
+					'phanloaitaikhoan'=>$diaban->phanloaitaikhoan
+				];
+				Session::put('admin',$a_dv);
 				$request->session()->regenerate();
 				$request->session()->flash('message', 'Đăng nhập thành công');
 				return redirect('/dmdonvi/danh_sach');
