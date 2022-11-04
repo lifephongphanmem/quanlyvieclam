@@ -44,7 +44,28 @@ class ChucnangController extends Controller
     {
         $inputs=$request->all();
         $inputs['parent'] = isset($inputs['parent'])?$inputs['parent']:0;
-        Chucnang::create($inputs);
+        if($inputs['edit'] == null){
+            Chucnang::create($inputs);
+        }else{
+            $id=$inputs['edit'];
+            $model=Chucnang::findOrFail($id);
+                $model_cd2=Chucnang::where('parent',$model->id)->get();
+                if(isset($model_cd2)){
+                    foreach($model_cd2 as $value){
+                        $value->update(['trangthai'=>$inputs['trangthai']]);
+                    }
+                }
+                $a_id_cd2=array_column($model_cd2->toarray(),'id');
+                $model_cd3=Chucnang::wherein('parent',$a_id_cd2)->get();
+                if(isset($model_cd3)){
+                    foreach($model_cd3 as $value){   
+                        $value->update(['trangthai'=>$inputs['trangthai']]);
+                    }
+                }
+
+            $model->update($inputs);
+        }
+
         return redirect('/Chuc_nang/Thong_tin');
     }
 
@@ -67,7 +88,8 @@ class ChucnangController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model=Chucnang::findOrFail($id);
+        return response()->json($model);
     }
 
     /**
@@ -91,6 +113,12 @@ class ChucnangController extends Controller
     public function destroy($id)
     {
         $model=Chucnang::findOrFail($id);
+        $m_model=Chucnang::where('parent',$model->id)->get();
+        if(isset($m_model)){
+            foreach ($m_model as $value){
+                $value->delete();
+            }
+        }
         $model->delete();
         return redirect('/Chuc_nang/Thong_tin');
     }

@@ -8,7 +8,6 @@ use App\Models\dmdonvi;
 use Illuminate\Http\Request;
 use DB;
 use Session;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -65,12 +64,17 @@ class UserController extends Controller
 					'madv'=>$donvi->madv,
 					'tendv'=>$donvi->tendv,
 					'madvcq'=>$donvi->madvcq,
+
+					'madvbc'=>$donvi->madvbc,
+
 					'madb'=>$diaban->madb,
 					'tendiaban'=>$diaban->name,
 					'level'=>$diaban->level,
 					'parent'=>$diaban->parent,
 					'maquocgia'=>$diaban->maquocgia,
-					'phanloaitaikhoan'=>$diaban->phanloaitaikhoan
+
+					'phanloaitaikhoan'=>$donvi->phanloaitaikhoan
+
 				];
 				Session::put('admin',$a_dv);
 				$request->session()->regenerate();
@@ -222,6 +226,7 @@ class UserController extends Controller
 		$data['public'] = 1;
 		$data['email'] = $request->email;
 		$data['level'] = 3;
+		$data['phanloaitk'] = 2;
 		$data['password'] = Hash::make($request->password);
 
 		// creat user

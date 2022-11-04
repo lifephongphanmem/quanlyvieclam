@@ -19,8 +19,8 @@
     <!--end::Fonts-->
 
     <!--begin::Page Vendors Styles(used by this page)-->
-    <link href="{{ url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet"
-        type="text/css" />
+    {{-- <link href="{{ url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet"
+        type="text/css" /> --}}
         {{-- <link href="{{ url('assets/global/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" /> --}}
     <!--end::Page Vendors Styles-->
     <script src="{{ url('assets/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
@@ -33,6 +33,8 @@
     <link href="{{ url('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ url('assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ url('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}"></script>
+    <link href="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Theme Styles-->
     <link href="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}"></script>
@@ -262,7 +264,7 @@
                                         <span
                                             class="text-white opacity-70 font-weight-bold font-size-base d-none d-md-inline mr-1">Xin chào,</span>
                                         <span
-                                            class="text-white font-weight-bolder font-size-base d-none d-md-inline mr-4">{{Auth::user()->name}}</span>
+                                            class="text-white font-weight-bolder font-size-base d-none d-md-inline mr-4">{{Auth::check()?Auth::user()->name:''}}</span>
                                         <span class="symbol symbol-35">
                                             <span class="symbol-label bg-white-o-50">
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -554,7 +556,14 @@
             "font-family": "Poppins"
         };
     </script>
-  
+
+    @if(Session::has('success'))
+    <script>
+        toastr.success("{!! Session::get('success') !!}");
+    </script>
+    @endif
+   
+
     <!--end::Global Config-->
 
     <!--begin::Global Theme Bundle(used by all pages)-->
@@ -567,6 +576,7 @@
     <script src="{{ url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
     <script src="{{ url('assets/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="{{ url('assets/global/plugins/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}"></script>
 
     <!--end::Page Vendors-->
     <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}"></script>
@@ -574,6 +584,7 @@
     <script src="{{ url('assets/js/pages/widgets.js') }}"></script>
     @yield('custom-script')
     <!--end::Page Scripts-->
+    @yield('custom-script')
 </body>
 
 <!--end::Body-->
