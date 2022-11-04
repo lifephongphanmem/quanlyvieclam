@@ -1,21 +1,21 @@
 @extends('HeThong.main')
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
-        href="{{ url('global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('global/plugins/select2/select2.css') }}" />
+        href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
 @stop
 
 @section('custom-script')
-    <script type="text/javascript" src="{{ url('global/plugins/select2/select2.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
+    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
     </script>
 
     <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            TableManaged.init();
-            $('#sample_3').DataTable();
+            // TableManaged.init();
+            // $('#sample_3').DataTable();
         });
     </script>
 @stop

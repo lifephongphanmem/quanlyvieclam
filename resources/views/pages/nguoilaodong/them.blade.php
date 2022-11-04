@@ -14,17 +14,17 @@
             <div class="card card-custom">
                 <div class="card-header card-header-tabs-line">
                     <div class="card-title">
-                        <h3 class="card-label text-uppercase">Báo tăng lao động</h3>
+                        <h3 class="card-label text-uppercase">Thông tin người lao động</h3>
                     </div>
                     <div class="card-toolbar">
                         
                     </div>
                 </div>
                 <div class="card-body">
-                    <form role="form" method="POST" action="{{ URL::to('laodong-fs') }}" enctype='multipart/form-data'>
+                    <form role="form" method="POST" action="{{'/nguoilaodong/store'}}" enctype='multipart/form-data'>
                         {{ csrf_field() }}
 
-                        <div class="row ">
+                        {{-- <div class="row ">
                             <div class="col-sm-8">
                                 <div class="form-group">
                                     <label>Nội dung (*)</label>
@@ -49,30 +49,30 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div> --}}
 
                         <div class="panel-body" id='dynamicTable'>
 
                             <div class="row" id="1stld">
                                 <fieldset class="col-lg-12">
-                                    <legend class="w-auto px-3">
+                                    {{-- <legend class="w-auto px-3">
                                         <button type="button" class="btn btn-success">Người lao động</button>
-                                    </legend>
+                                    </legend> --}}
 
                                     <div class="form-group row">
                                         <div class="col-lg-3">
                                             <label>Họ và Tên (*)</label>
-                                            <input type="text" name="hoten[]" class="form-control" required>
+                                            <input type="text" name="hoten" class="form-control" required>
                                         </div>
                         
                                         <div class="col-lg-3">
                                             <label>Số CMND/CCCD (*)</label>
-                                            <input type="text" name="cmnd[]" class="form-control" required>
+                                            <input type="text" name="cmnd" class="form-control" required>
                                         </div>
 
                                         <div class="col-lg-3">
                                             <label> Giới tính (*) </label>
-                                            <select class="form-control input-sm m-bot5" name="gioitinh[]">
+                                            <select class="form-control input-sm m-bot5" name="gioitinh">
                                                 <option value='nam' selected>Nam</option>
                                                 <option value='nu'>Nữ</option>
                                             </select>
@@ -80,14 +80,14 @@
 
                                         <div class="col-lg-3">
                                             <label>Ngày tháng năm sinh (*)</label>
-                                            <input type="date" name="ngaysinh[]" class="form-control" required>
+                                            <input type="date" name="ngaysinh" class="form-control" required>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <div class="col-lg-3">
                                             <label>Quốc tịch (*)</label>
-                                            <select class="form-control input-sm m-bot5" name="nation[]">
+                                            <select class="form-control input-sm m-bot5" name="nation">
                                                 <?php foreach ( $countries_list as $key => $value){ ?>
                                                 <option value='{{ $key }}' <?php if ($key == 'VN') {
                                                     echo 'selected';
@@ -99,17 +99,17 @@
                         
                                         <div class="col-lg-3">
                                             <label>Dân tộc (*)</label>
-                                            <input type="text" name="dantoc[]" class="form-control" required>
+                                            <input type="text" name="dantoc" class="form-control" required>
                                         </div>
 
                                         <div class="col-lg-3">
                                             <label>Tỉnh (*)</label>
-                                            <input type="text" name="tinh[]" class="form-control" required>
+                                            <input type="text" name="tinh" class="form-control" required>
                                         </div>
 
                                         <div class="col-lg-3">
                                             <label>Huyện Thị (*)</label>
-                                            <input type="text" name="huyen[]" class="form-control">
+                                            <input type="text" name="huyen" class="form-control">
                                         </div>
                                     </div>
 
@@ -118,29 +118,29 @@
                                     <div class="form-group row">
                                         <div class="col-lg-3">
                                             <label>Phường xã (*)</label>
-                                            <input type="text" name="xa[]" class="form-control">
+                                            <input type="text" name="xa" class="form-control">
                                         </div>
                         
                                         <div class="col-lg-3">
                                             <label>Địa chỉ (*)</label>
-                                            <input type="text" name="address[]" class="form-control">
+                                            <input type="text" name="address" class="form-control">
                                         </div>
 
                                         <div class="col-lg-3">
                                             <label>Vị trí </label>
-                                            <input type="text" name="vitri[]" class="form-control">
+                                            <input type="text" name="vitri" class="form-control">
                                         </div>
 
                                         <div class="col-lg-3">
                                             <label>Chức vụ</label>
-                                            <input type="text" name="chucvu[]" class="form-control">
+                                            <input type="text" name="chucvu" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
                                         <div class="col-lg-3">
                                             <label>Trình độ Giáo dục</label>
-                                            <select class="form-control input-sm m-bot15" name="trinhdogiaoduc[]">
+                                            <select class="form-control input-sm m-bot15" name="trinhdogiaoduc">
                                                 <?php foreach ( $list_tdgd as $td){ ?>
                                                 <option value='{{ $td->name }}'>{{ $td->name }}</option>
                                                 <?php } ?>
@@ -149,7 +149,7 @@
                         
                                         <div class="col-lg-3">
                                             <label>Trình độ CMKT</label>
-                                            <select class="form-control input-sm m-bot15" name="trinhdocmkt[]">
+                                            <select class="form-control input-sm m-bot15" name="trinhdocmkt">
                                                 <?php foreach ( $list_cmkt as $td){ ?>
                                                 <option value='{{ $td->name }}'>{{ $td->name }}</option>
                                                 <?php } ?>
@@ -158,7 +158,7 @@
 
                                         <div class="col-lg-3">
                                             <label>Ngành nghề </label>
-                                            <select class="form-control input-sm m-bot15" name="nghenghiep[]">
+                                            <select class="form-control input-sm m-bot15" name="nghenghiep">
 
                                                 <?php foreach ( $list_nghe as $td){ ?>
                                                 <option value='{{ $td->name }}'>{{ $td->name }}</option>
@@ -168,7 +168,7 @@
 
                                         <div class="col-lg-3">
                                             <label>Lĩnh vực đào tạo </label>
-                                            <select class="form-control input-sm m-bot15" name="linhvucdaotao[]">
+                                            <select class="form-control input-sm m-bot15" name="linhvucdaotao">
 
                                                 <?php foreach ( $list_linhvuc as $td){ ?>
                                                 <option value='{{ $td->name }}'>{{ $td->name }}</option>
@@ -287,16 +287,17 @@
                         <input type="hidden" name="isnew" value='1'>
                         <input type="hidden" name="id[]" value='0'>
                         <div class="row ">
-                            <div class="col-sm-8 col-sm-offset-2">
-                                <button type="button" name="add" id="add" class="btn btn-success">
-                                    <h4> Thêm người lao động </h4>
+                            <div class="col-sm-12 col-sm-offset-2 text-center">
+                                <button type="button" name="add" id="add" class="btn btn-sm btn-success">
+                                     Hoàn thành 
                                 </button>
-                                <button type="button" class="btn btn-danger" id='remove'>
+                                <a href="{{'/nguoilaodong'}}" class="btn btn-sm btn-danger">Kết thúc</a>
+                                {{-- <button type="button" class="btn btn-danger" id='remove'>
                                     <h4> Giảm </h4>
                                 </button>
                                 <button type="submit" class="btn btn-info btn-lg pull-right">
                                     <h4>Khai báo</h4>
-                                </button>
+                                </button> --}}
 
 
 

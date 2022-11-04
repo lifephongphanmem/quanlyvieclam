@@ -44,11 +44,11 @@ class Participant extends Eloquent
     /**
      * Thread relationship.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      *
      * @codeCoverageIgnore
      */
-    public function thread(): BelongsTo
+    public function thread()
     {
         return $this->belongsTo(Models::classname(Thread::class), 'thread_id', 'id');
     }
@@ -56,11 +56,11 @@ class Participant extends Eloquent
     /**
      * User relationship.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      *
      * @codeCoverageIgnore
      */
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(Models::user(), 'user_id');
     }

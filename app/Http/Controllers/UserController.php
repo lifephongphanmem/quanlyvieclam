@@ -8,7 +8,6 @@ use App\Models\dmdonvi;
 use Illuminate\Http\Request;
 use DB;
 use Session;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -59,6 +58,21 @@ class UserController extends Controller
 			$ret = Auth::attempt($data);
 			// dd($ret);
 			if ($ret) {
+				$donvi=dmdonvi::where('madv',$model->madv)->first();
+				$diaban=danhmuchanhchinh::where('id',$donvi->madiaban)->first();
+				$a_dv=[
+					'madv'=>$donvi->madv,
+					'tendv'=>$donvi->tendv,
+					'madvcq'=>$donvi->madvcq,
+					'madvbc'=>$donvi->madvbc,
+					'madb'=>$diaban->madb,
+					'tendiaban'=>$diaban->name,
+					'level'=>$diaban->level,
+					'parent'=>$diaban->parent,
+					'maquocgia'=>$diaban->maquocgia,
+					'phanloaitaikhoan'=>$donvi->phanloaitaikhoan
+				];
+				Session::put('admin',$a_dv);
 				$request->session()->regenerate();
 				$request->session()->flash('message', 'Đăng nhập thành công');
 				return redirect('/dmdonvi/danh_sach');
@@ -208,6 +222,7 @@ class UserController extends Controller
 		$data['public'] = 1;
 		$data['email'] = $request->email;
 		$data['level'] = 3;
+		$data['phanloaitk'] = 2;
 		$data['password'] = Hash::make($request->password);
 
 		// creat user

@@ -1,4 +1,5 @@
 @extends('HeThong.main')
+
 @section('content')
     @if ($errors->has('import_file'))
         <div class="flash-message text-center">
@@ -21,7 +22,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row ">
+                    {{-- <div class="row ">
                         <div class="col-sm-8 col-sm-offset-2">
                             <div>
                                 <h3>
@@ -43,9 +44,9 @@
                                 </h3>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
-                    <form class="form-inline" method="GET">
+                    {{-- <form class="form-inline" method="GET">
                         <div class="row ">
                             <div class="col-sm-7 col-sm-offset-1">
                                 <label>Lọc theo tình trạng</label>
@@ -73,12 +74,12 @@
                             </div>
                         </div>
 
-                    </form>
+                    </form> --}}
                     <div class="row ">
                         <div class="col-sm-12">
                             <br>
                             <div class="table-responsive">
-                                <table class="table table-striped  table-bordered">
+                                <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                                     <thead>
                                         <td width="2%"> # </td>
                                         <td width="15%"> Họ và tên</td>
@@ -151,10 +152,10 @@
 
                                     </tfoot>
                                 </table>
-                                <div class="d-flex justify-content-center">
+                                {{-- <div class="d-flex justify-content-center">
                                     Tổng cộng {{ $lds->total() }} kết quả
                                     {!! $lds->links('pagination::bootstrap-4') !!}
-                                </div>
+                                </div> --}}
                             </div>
 
                         </div>
