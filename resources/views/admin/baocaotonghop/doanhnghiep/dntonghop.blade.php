@@ -1,4 +1,4 @@
-@extends('HeThong.main_report')
+@extends('main_baocao')
 @section('custom-style')
 @stop
 
@@ -12,14 +12,14 @@
         <tr>
             <td width="40%" style="vertical-align: top;">
                 <span style="text-transform: uppercase"></span><br>
-                <span style="text-transform: uppercase;font-weight: bold"></span>
+                <span style="text-transform: uppercase;font-weight: bold">{{$nguoidung->name}}</span>
                 <hr style="width: 10%;vertical-align: top;  margin-top: 2px">
 
             </td>
             <td style="vertical-align: top;">
                 <b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>
                     Độc lập - Tự do - Hạnh phúc</b>
-                <hr style="width: 15%;vertical-align: top; margin-top: 2px">
+                <hr style="color: black;;width: 15%;vertical-align: top; margin-top: 2px">
 
             </td>
         </tr>
@@ -78,22 +78,45 @@
         </thead>
         <tbody>
             <?php $i = 1; ?>
-            {{-- @foreach ($model as $key => $tt)
-            <tr>
-                <td style="text-align: center">{{$i++}}</td>
-                <td>{{$tt->dvthue}}</td>
-                <td style="text-align: center">{{dinhdangsothapphan($tt->dientichsd,2)}}</td>
-                <td style="text-align: center">{{$tt->soqdpd}}</td>
-                <td style="text-align: center">{{getDayVn($tt->thoigianpd,2)}}</td>
-                <td style="text-align: center">{{$tt->soqdgkd}}</td>
-                <td style="text-align: center">{{getDayVn($tt->thoigiangkd,2)}}</td>
-                <td style="text-align: center">{{dinhdangsothapphan($tt->giakhoidiem,2)}}</td>
-                <td style="text-align: right">{{dinhdangsothapphan($tt->giatri,2)}}</td>
-                <td></td>
+            @for ($i = 1 ; $i < 28 ; $i++)
+                <td style="text-align: center">{{$i}}</td>
+            @endfor
+                
+
+            @foreach ($model as $key => $item)
+            <tr>  
+                <td style="text-align: center">{{++$key}}</td>
+                <td>{{$item->hoten }}</td>
+                <td style="text-align: center">{{$item->bdbhxh }}</td>
+                <td style="text-align: center">{{$item->ngaysinh }}</td>
+                <td style="text-align: center">{{$item->gioitinh }}</td>
+                <td style="text-align: center">{{$item->cmnd }}</td>
+                <td style="text-align: center">{{$item->cvhientai }}</td>
+                <td style="text-align: center">{{$item->cvhientai }}</td> {{--sửa người có chức vụ cao--}}
+                <td style="text-align: center">{{$item->trinhdocmkt }}</td>
+                <td style="text-align: center">{{$item->trinhdocmkt }}</td>
+                <td style="text-align: center">{{$item->trinhdocmkt }}</td>
+                <td style="text-align: center">{{$item->luong }}</td>
+                <td style="text-align: center">{{$item->pcchucvu }}</td>
+                <td style="text-align: center">{{$item->pcthamnien }}</td>
+                <td style="text-align: center">{{$item->pcthamniennghe }}</td>
+                <td style="text-align: center">{{$item->pcluong }}</td>
+                <td style="text-align: center">{{$item->pcbosung }}</td>
+                <td style="text-align: center">{{$item->bddochai }}</td>
+                <td style="text-align: center">{{$item->ktdochai }}</td>
+                <td style="text-align: center">{{$item->bdhopdong }}</td> {{-- k thời hạn --}}
+                <td style="text-align: center">{{$item->bdhopdong }}</td>{{-- có thời hạn --}}
+                <td style="text-align: center">{{$item->kthopdong }}</td>
+                <td style="text-align: center">{{$item->bdhopdong }}</td> {{-- khác--}}
+                <td style="text-align: center">{{$item->kthopdong}}</td>
+                <td style="text-align: center">{{$item->bdbhxh }}</td>
+                <td style="text-align: center">{{$item->ktbhxh }}</td>
+                <td style="text-align: center">{{$item->ghichu }}</td>
+
             </tr>
-        @endforeach --}}
+        @endforeach
             <tr style="font-weight: bold" class="text-right;">
-                <td colspan="3">Tổng cộng</td>
+                <td colspan="3">Tổng</td>
                 <td style="text-align: center"></td>
                 <td></td>
                 <td></td>

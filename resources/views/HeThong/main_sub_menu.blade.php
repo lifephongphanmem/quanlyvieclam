@@ -153,7 +153,7 @@
                                     <span class="menu-text font-weight-bold">Thông tin tuyển dụng Tổng hợp</span>
                                 </a>
                             </li>
-
+{{-- 
                             <li class="menu-item" aria-haspopup="true">
                                 <a href="{{ url('/tuyendung-fn') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
@@ -170,7 +170,7 @@
                                     </i>
                                     <span class="menu-text font-weight-bold">Lịch sử tuyển dụng</span>
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </li>
@@ -211,14 +211,14 @@
                                     <span class="menu-text font-weight-bold">Nhận thông báo</span>
                                 </a>
                             </li>
-                            <li class="menu-item" aria-haspopup="true">
+                            {{-- <li class="menu-item" aria-haspopup="true">
                                 <a href="{{ url('/messages') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
                                     <span class="menu-text font-weight-bold">Danh sách văn bản</span>
                                 </a>
-                            </li>
+                            </li> --}}
 
                         </ul>
                     </div>

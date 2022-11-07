@@ -7,11 +7,11 @@ use App\Models\danhmuchanhchinh;
 use App\Models\dmdonvi;
 use Illuminate\Http\Request;
 use DB;
-use Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Report;
+
 use Validator;
 
 class UserController extends Controller
@@ -101,7 +101,7 @@ class UserController extends Controller
 
 			if ($ret) {
 				$request->session()->regenerate();
-				Session::put('message', "Đăng nhập thành công");
+				session::put('message', "Đăng nhập thành công");
 				return redirect('/doanhnghiep/thongtin');
 			} else {
 				return redirect('admin')->withErrors(

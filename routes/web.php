@@ -436,7 +436,7 @@ Route::prefix('thong_bao')->group(function () {
     Route::get('danhsach',[thongbaoController::class, 'danhsach']);
 });
 
-// báo cáo
+// báo cáo tổng hợp
 
 Route::prefix('bao_cao')->group(function () {
     Route::prefix('nguoi_su_dung_lao_dong')->group(function () {
