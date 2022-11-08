@@ -85,7 +85,6 @@
                     <input class="form-control" name="chucvukythay" type="text">
                 </div>                 --}}
             </div>
-
             <div class="form-group row">
                 <div class="col-lg-8">
                     <label>Thông tin liên hệ</label>

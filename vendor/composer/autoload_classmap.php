@@ -37,6 +37,20 @@ return array(
     'App\\Http\\Controllers\\ReportController' => $baseDir . '/app/Http/Controllers/ReportController.php',
     'App\\Http\\Controllers\\TuyendungController' => $baseDir . '/app/Http/Controllers/TuyendungController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
+
+    'App\\Http\\Controllers\\dmdoituonguutienController' => $baseDir . '/app/Http/Controllers/dmdoituonguutienController.php',
+    'App\\Http\\Controllers\\dmloaihieuluchdldController' => $baseDir . '/app/Http/Controllers/dmloaihieuluchdldController.php',
+    'App\\Http\\Controllers\\dmloaihinhhdktController' => $baseDir . '/app/Http/Controllers/dmloaihinhhdktController.php',
+    'App\\Http\\Controllers\\dmloailaodongController' => $baseDir . '/app/Http/Controllers/dmloailaodongController.php',
+    'App\\Http\\Controllers\\dmmanghetrinhdoController' => $baseDir . '/app/Http/Controllers/dmmanghetrinhdoController.php',
+    'App\\Http\\Controllers\\dmnganhsxkdController' => $baseDir . '/app/Http/Controllers/dmnganhsxkdController.php',
+    'App\\Http\\Controllers\\dmthoigianthatnghiepController' => $baseDir . '/app/Http/Controllers/dmthoigianthatnghiepController.php',
+    'App\\Http\\Controllers\\dmtinhtrangthamgiahdktController' => $baseDir . '/app/Http/Controllers/dmtinhtrangthamgiahdktController.php',
+    'App\\Http\\Controllers\\dmtrinhdogdptController' => $baseDir . '/app/Http/Controllers/dmtrinhdogdptController.php',
+    'App\\Http\\Controllers\\dmtrinhdokythuatController' => $baseDir . '/app/Http/Controllers/dmtrinhdokythuatController.php',
+    'App\\Http\\Controllers\\khaibaotuyendungController' => $baseDir . '/app/Http/Controllers/khaibaotuyendungController.php',
+    'App\\Http\\Controllers\\thongtintuyendungController' => $baseDir . '/app/Http/Controllers/thongtintuyendungController.php',
+
     'App\\Http\\Controllers\\cunglaodongController' => $baseDir . '/app/Http/Controllers/cunglaodongController.php',
     'App\\Http\\Controllers\\cunglaodong_huyenController' => $baseDir . '/app/Http/Controllers/cunglaodong_huyenController.php',
     'App\\Http\\Controllers\\cunglaodong_tinhController' => $baseDir . '/app/Http/Controllers/cunglaodong_tinhController.php',
@@ -46,6 +60,7 @@ return array(
     'App\\Http\\Controllers\\messageCotroller' => $baseDir . '/app/Http/Controllers/messageCotroller.php',
     'App\\Http\\Controllers\\nghecongviecController' => $baseDir . '/app/Http/Controllers/nghecongviecController.php',
     'App\\Http\\Controllers\\nguoilaodongController' => $baseDir . '/app/Http/Controllers/nguoilaodongController.php',
+
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
@@ -66,8 +81,29 @@ return array(
     'App\\Models\\Vitrituyendung' => $baseDir . '/app/Models/Vitrituyendung.php',
     'App\\Models\\cunglaodong' => $baseDir . '/app/Models/cunglaodong.php',
     'App\\Models\\danhmuchanhchinh' => $baseDir . '/app/Models/danhmuchanhchinh.php',
+<<<<<<< HEAD
     'App\\Models\\dmchuyenmondaotao' => $baseDir . '/app/Models/dmchuyenmondaotao.php',
+=======
+    'App\\Models\\dmdoituonguutien' => $baseDir . '/app/Models/dmdoituonguutien.php',
+>>>>>>> cb5ab54c5f6a898951d8d599a761ba51339d1152
     'App\\Models\\dmdonvi' => $baseDir . '/app/Models/dmdonvi.php',
+
+    'App\\Models\\dmloaihieuluchdld' => $baseDir . '/app/Models/dmloaihieuluchdld.php',
+    'App\\Models\\dmloaihinhhdkt' => $baseDir . '/app/Models/dmloaihinhhdkt.php',
+    'App\\Models\\dmloailaodong' => $baseDir . '/app/Models/dmloailaodong.php',
+    'App\\Models\\dmmanghetrinhdo' => $baseDir . '/app/Models/dmmanghetrinhdo.php',
+    'App\\Models\\dmnganhsxkd' => $baseDir . '/app/Models/dmnganhsxkd.php',
+    'App\\Models\\dmthoigianthatnghiep' => $baseDir . '/app/Models/dmthoigianthatnghiep.php',
+    'App\\Models\\dmtinhtrangthamgiahdkt' => $baseDir . '/app/Models/dmtinhtrangthamgiahdkt.php',
+    'App\\Models\\dmtinhtrangthamgiahdktct' => $baseDir . '/app/Models/dmtinhtrangthamgiahdktct.php',
+    'App\\Models\\dmtinhtrangthamgiahdktct2' => $baseDir . '/app/Models/dmtinhtrangthamgiahdktct2.php',
+    'App\\Models\\dmtrinhdogdpt' => $baseDir . '/app/Models/dmtrinhdogdpt.php',
+    'App\\Models\\dmtrinhdokythuat' => $baseDir . '/app/Models/dmtrinhdokythuat.php',
+    'App\\Models\\thongbao' => $baseDir . '/app/Models/thongbao.php',
+    'App\\Models\\thongbaoct' => $baseDir . '/app/Models/thongbaoct.php',
+    'App\\Models\\thongtintuyendung' => $baseDir . '/app/Models/thongtintuyendung.php',
+    'App\\Models\\thongtintuyendungct' => $baseDir . '/app/Models/thongtintuyendungct.php',
+
     'App\\Models\\dmdonvibaocao' => $baseDir . '/app/Models/dmdonvibaocao.php',
     'App\\Models\\dmhinhthuclamviec' => $baseDir . '/app/Models/dmhinhthuclamviec.php',
     'App\\Models\\messages' => $baseDir . '/app/Models/messages.php',
@@ -80,6 +116,7 @@ return array(
     'App\\Models\\tonghopcungld_tinh' => $baseDir . '/app/Models/tonghopcungld_tinh.php',
     'App\\Models\\tonghopdanhsachcungld' => $baseDir . '/app/Models/tonghopdanhsachcungld.php',
     'App\\Models\\tonghopdanhsachcungld_ct' => $baseDir . '/app/Models/tonghopdanhsachcungld_ct.php',
+
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

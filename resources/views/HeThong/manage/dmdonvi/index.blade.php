@@ -14,8 +14,12 @@
     <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
+<<<<<<< HEAD
+            TableManaged.init();
+=======
             // TableManaged.init();
             // $('#sample_3').DataTable();
+>>>>>>> c2d0ed3b36c9b445bd91811785ecca35b97c26ac
         });
     </script>
 @stop

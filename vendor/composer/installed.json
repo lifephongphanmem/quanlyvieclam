@@ -8438,6 +8438,9 @@
         },
         {
             "name": "vlucas/phpdotenv",
+
+
+
             "version": "v5.5.0",
             "version_normalized": "5.5.0.0",
             "source": {
@@ -8449,6 +8452,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/1a7ea2afc49c3ee6d87061f5a233e3a035d0eae7",
                 "reference": "1a7ea2afc49c3ee6d87061f5a233e3a035d0eae7",
+
                 "shasum": ""
             },
             "require": {
@@ -8463,12 +8467,16 @@
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.4.1",
                 "ext-filter": "*",
+
                 "phpunit/phpunit": "^7.5.20 || ^8.5.30 || ^9.5.25"
+
             },
             "suggest": {
                 "ext-filter": "Required to use the boolean validator."
             },
+
             "time": "2022-10-16T01:01:54+00:00",
+
             "type": "library",
             "extra": {
                 "bamarni-bin": {
@@ -8476,7 +8484,9 @@
                     "forward-command": true
                 },
                 "branch-alias": {
+
                     "dev-master": "5.5-dev"
+
                 }
             },
             "installation-source": "dist",
@@ -8509,7 +8519,9 @@
             ],
             "support": {
                 "issues": "https://github.com/vlucas/phpdotenv/issues",
+
                 "source": "https://github.com/vlucas/phpdotenv/tree/v5.5.0"
+
             },
             "funding": [
                 {
