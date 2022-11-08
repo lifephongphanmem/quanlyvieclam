@@ -20,7 +20,7 @@
         jQuery(document).ready(function() {
             FormWizard.init();
             TableManaged.init();
-            // $('.select2me').select2();
+            $('.select2me').select2();
         });
     </script>
     {{-- @include('includes.script.scripts') --}}
@@ -32,7 +32,7 @@
         <div class="portlet box blue" id="form_wizard_1" >
             <div class="portlet-title">
                 <div class="caption text-uppercase">
-                    CẬP NHẬT THÔNG TIN NGƯỜI LAO ĐỘNG
+                    THÊM MỚI THÔNG TIN NGƯỜI LAO ĐỘNG NƯỚC NGOÀI
                 </div>
                 <div class="tools hidden-xs">
                     <a href="javascript:;" class="collapse">
@@ -42,15 +42,15 @@
 
             <div class="portlet-body form" id="form_wizard">
                 {{-- {!! Form::open(['url'=>'/nghiep_vu/ho_so/store','method'=>'post' , 'files'=>true, 'id' => 'create_hscb','enctype'=>'multipart/form-data']) !!} --}}
-                <form action="{{'/nguoilaodong/update/'.$model->id}}" method="POST" enctype="multipart/form-data">
+                <form action="{{'/nguoilaodong/nuoc_ngoai/store'}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-body">
                         <ul class="nav nav-pills nav-justified steps">
                             <li><a href="#tab1" data-toggle="tab" class="step">
-                                    <p class="description"><i class="glyphicon glyphicon-user"></i> Thông tin cơ bản</p></a>
+                                    <p class="description"><i class="glyphicon glyphicon-user"></i> Thông tin chung</p></a>
                             </li>
                             <li><a href="#tab2" data-toggle="tab" class="step">
-                                    <p class="description"><i class="glyphicon glyphicon-paperclip"></i> Khác</p></a>
+                                    <p class="description"><i class="glyphicon glyphicon-paperclip"></i> Thông tin công việc</p></a>
                             </li>
                         </ul>
 
@@ -60,8 +60,8 @@
                         </div>
 
                         <div class="tab-content">
-                            @include('pages.nguoilaodong.include.coban')
-                            @include('pages.nguoilaodong.include.khac')
+                            @include('pages.nguoilaodong.include.coban_nuocngoai')
+                            @include('pages.nguoilaodong.include.khac_nuocngoai')
                         </div>
                     </div>
 
@@ -77,7 +77,7 @@
 
                                 <button type="submit" class="btn btn-success">Tạo hồ sơ</button>
 
-                                <a href="{{url('/nguoilaodong')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                                <a href="{{url('/nguoilaodong/nuoc_ngoai')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                             </div>
                         </div>
                     </div>

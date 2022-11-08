@@ -26,11 +26,11 @@ class cunglaodong_huyenController extends Controller
         $m_th=tonghop_huyen::where('madvbc',session('admin')['madvbc'])->get();
         foreach($model as $tb)
         {
-            $m_th=$m_th->where('matb',$tb->matb)->first();
-            if($m_th !=null){
-                $tb->mathh=$m_th->math;
-                $tb->madv=$m_th->madv;
-                $tb->trangthai=$m_th->trangthai;
+            $m_tonghop=$m_th->where('matb',$tb->matb)->first();
+            if($m_tonghop !=null){
+                $tb->mathh=$m_tonghop->math;
+                $tb->madv=$m_tonghop->madv;
+                $tb->trangthai=$m_tonghop->trangthai;
             }else{
                 $tb->mathh= null;
             }
@@ -115,6 +115,8 @@ class cunglaodong_huyenController extends Controller
                                     ->get();
                                             // dd($model);
         $m_dv=dmdonvi::where('madvbc',session('admin')['madvbc'])->where('phanloaitaikhoan','SD')->get();
+        $m_tonghop=tonghop_huyen::where('matb',$inputs['matb'])
+                                    ->where('madv',session('admin')['madv'])->first();
         foreach($m_dv as $dv)
         {
             $m_th=$model->where('madv',$dv->madv)->first();
@@ -128,6 +130,11 @@ class cunglaodong_huyenController extends Controller
                 $dv->dv=$model_h->madv;
             }else{
                 $dv->dv=null;
+            }
+            if(isset($m_tonghop)){
+                $dv->trangthai=$m_tonghop->trangthai;
+            }else{
+                $dv->trangthai=null;
             }
         }
         return view('pages.tonghopcungld.huyen.tonghop')
@@ -200,7 +207,15 @@ class cunglaodong_huyenController extends Controller
                                             ->first();
         $model_huyen->delete();
         $model_dv->update(['trangthai'=>'TRALAI','lydo'=>$inputs['tralai']]);
-        return redirect('/cungld/danh_sach/huyen/tong_hop')
+        $m_huyen_conlai=tonghopcungld_huyen::where('matb',$inputs['matb'])
+        ->where('madvbc',$inputs['madvbc'])
+        ->get();
+        if(count($m_huyen_conlai)== 0){
+            tonghop_huyen::where('matb',$inputs['matb'])
+                            ->where('madv',session('admin')['madv'])
+                            ->first()->delete();
+        }
+        return redirect('/cungld/danh_sach/huyen/tong_hop?matb='.$inputs['matb'])
                 ->with('success','Trả lại thành công');
     }
 

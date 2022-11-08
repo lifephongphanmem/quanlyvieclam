@@ -50,9 +50,9 @@
         @foreach ($model_dv as $k => $dv)
             <tr style="font-weight: bold">
                 <td>{{convert2Roman(++$k)}}</td>
-                <td colspan="3">{{ $dv->tendvbc }}</td>
+                <td colspan="3">{{ $dv->tendv }}</td>
             </tr>
-            <?php $m_th = $model->where('madvbc', $dv->madvbc); ?>
+            <?php $m_th = $model->where('madvbc_tinh', $dv->madvbc); ?>
             @foreach ($m_th as $key => $val)
                 <tr>
                     <td style="text-align:right">{{ ++$key }}</td>

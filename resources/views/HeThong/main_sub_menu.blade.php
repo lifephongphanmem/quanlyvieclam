@@ -265,6 +265,15 @@
                                     <span class="menu-text">Người lao động</span>
                                 </a>
                             </li>
+
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{url('/nguoilaodong/nuoc_ngoai')}}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Người lao động nước ngoài</span>
+                                </a>
+                            </li>
                             
                         </ul>
                     </div>
@@ -333,7 +342,7 @@
                                     <span class="menu-text font-weight-bold">Danh mục</span>
                                     <i class="menu-arrow"></i>
                                 </a>
-                                <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+                                {{-- <div class="menu-submenu menu-submenu-classic menu-submenu-right">
                                     <ul class="menu-subnav">
                                         <li class="menu-item" aria-haspopup="true">
                                             <a href="{{url('/ptype-ba')}}" class="menu-link">
@@ -341,6 +350,34 @@
                                                     <span></span>
                                                 </i>
                                                 <span class="menu-text font-weight-bold">Tham số</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div> --}}
+                                <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+                                    <ul class="menu-subnav">
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="{{url('/dm_chuyen_mon_dao_tao')}}" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text font-weight-bold">Chuyên môn đào tạo</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="{{url('/nghe_cong_viec')}}" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text font-weight-bold">Nghề công việc</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="{{url('/dm_hinh_thuc_cong_viec')}}" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text font-weight-bold">Hình thức làm việc</span>
                                             </a>
                                         </li>
                                     </ul>

@@ -113,7 +113,6 @@ class cunglaodong_tinhController extends Controller
             ->where('tonghopdanhsachcungld.matb', $inputs['matb'])
             ->where('tonghopdanhsachcungld.madvbc', $inputs['madvbc'])
             ->get();
-        // dd($model);
         $m_dv = dmdonvi::where('madv', $inputs['madv'])->first();
         $model_dv = dmdonvi::where('madvbc', $inputs['madvbc'])
             ->where('phanloaitaikhoan', 'SD')
@@ -133,12 +132,20 @@ class cunglaodong_tinhController extends Controller
             ->get();
         $m_dv = dmdonvi::where('madv', session('admin')['madv'])->first();
         $model_dv = dmdonvibaocao::where('level', 'H')->get();
-        
-// dd($model);
+        $model_tinh=tonghopcungld_tinh::where('matb',$inputs['matb'])->get();
+        foreach ($model as $th){
+            $m_tinh=$model_tinh->where('madvbc',$th->madvbc)->first();
+            if(isset($m_tinh)){
+                $th->madvbc_tinh=$m_tinh->madvbc;
+            }else{
+                $th->madvbc_tinh=null;
+            }
+        }
         return view('reports.cunglaodong.tinh.tonghop')
             ->with('model', $model)
             ->with('m_dv', $m_dv)
             ->with('model_dv', $model_dv)
+            ->with('model_tinh', $model_tinh)
             ->with('pageTitle', 'Tổng hợp danh sách');
     }
 

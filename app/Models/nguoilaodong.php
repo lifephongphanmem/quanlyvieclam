@@ -11,7 +11,7 @@ class nguoilaodong extends Model
     protected $table='nguoilaodong';
     protected $fillable=[
         'madb',
-        'ma_ngld',
+        'ma_nld',
         'hoten',
         'gioitinh',
         'ngaysinh',
@@ -38,7 +38,6 @@ class nguoilaodong extends Model
         'pcbosung',
         'bddochai',
         'ktdochai',
-        'vitri',
         'chucvu',
         'bdbhxh',
         'ktbhxh',
@@ -55,6 +54,21 @@ class nguoilaodong extends Model
         'thatnghiep',//0: có việc làm, 1: thất nghiệp,2:không tham gia
         'thoigianthatnghiep',
         'lydoktg',
-        'tingtrangvl'
+        'tingtrangvl',
+        //Dành cho người lao động nước ngoài
+        'sohc',
+        'ngaycapsohc',
+        'trinhdo',
+        'chuyenmondaotao',
+        'sogpld',//số giấy phép lao động
+        'ngaycapsogpld',
+        'vitri',
+        'nghecongviec',
+        'tendn',
+        'diachidn',//Địa chỉ dn
+        'loaidn',//Loại hình doanh nghiệp
+        'bdcv',
+        'ktcv'
+
     ];
 }
