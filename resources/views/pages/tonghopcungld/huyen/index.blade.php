@@ -15,7 +15,7 @@
     <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            TableManaged.init();
+            // TableManaged.init();
         });
     </script>
 @stop
@@ -64,7 +64,7 @@
                                             class="btn btn-sm btn-clean btn-icon">
                                             <i class="icon-lg la la-clipboard-list text-success icon-2x"></i>
                                         </a>
-                                        @if ($th->mathh == null)
+                                        @if ($th->trangthai == 'TRALAI' || $th->mathh ==  null)
                                         <button type="button" onclick="sendData({{ $th->matb }})"
                                             title="Gửi danh sách" data-target="#modify-modal-th" data-toggle="modal"
                                             class="btn btn-sm btn-clean btn-icon">

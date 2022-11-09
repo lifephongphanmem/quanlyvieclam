@@ -602,7 +602,10 @@ class ComposerStaticInitea9d6f1e56691f84e5f173248cbf2a42
         'App\\Http\\Controllers\\cunglaodong_huyenController' => __DIR__ . '/../..' . '/app/Http/Controllers/cunglaodong_huyenController.php',
         'App\\Http\\Controllers\\cunglaodong_tinhController' => __DIR__ . '/../..' . '/app/Http/Controllers/cunglaodong_tinhController.php',
         'App\\Http\\Controllers\\danhmuchanhchinhController' => __DIR__ . '/../..' . '/app/Http/Controllers/danhmuchanhchinhController.php',
+        'App\\Http\\Controllers\\dmchuyenmondaotaoController' => __DIR__ . '/../..' . '/app/Http/Controllers/dmchuyenmondaotaoController.php',
+        'App\\Http\\Controllers\\dmhinhthuclamviecController' => __DIR__ . '/../..' . '/app/Http/Controllers/dmhinhthuclamviecController.php',
         'App\\Http\\Controllers\\messageCotroller' => __DIR__ . '/../..' . '/app/Http/Controllers/messageCotroller.php',
+        'App\\Http\\Controllers\\nghecongviecController' => __DIR__ . '/../..' . '/app/Http/Controllers/nghecongviecController.php',
         'App\\Http\\Controllers\\nguoilaodongController' => __DIR__ . '/../..' . '/app/Http/Controllers/nguoilaodongController.php',
 
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -625,6 +628,8 @@ class ComposerStaticInitea9d6f1e56691f84e5f173248cbf2a42
         'App\\Models\\Vitrituyendung' => __DIR__ . '/../..' . '/app/Models/Vitrituyendung.php',
         'App\\Models\\cunglaodong' => __DIR__ . '/../..' . '/app/Models/cunglaodong.php',
         'App\\Models\\danhmuchanhchinh' => __DIR__ . '/../..' . '/app/Models/danhmuchanhchinh.php',
+
+        'App\\Models\\dmchuyenmondaotao' => __DIR__ . '/../..' . '/app/Models/dmchuyenmondaotao.php',
         'App\\Models\\dmdoituonguutien' => __DIR__ . '/../..' . '/app/Models/dmdoituonguutien.php',
         'App\\Models\\dmdonvi' => __DIR__ . '/../..' . '/app/Models/dmdonvi.php',
 
@@ -645,7 +650,9 @@ class ComposerStaticInitea9d6f1e56691f84e5f173248cbf2a42
         'App\\Models\\thongtintuyendungct' => __DIR__ . '/../..' . '/app/Models/thongtintuyendungct.php',
 
         'App\\Models\\dmdonvibaocao' => __DIR__ . '/../..' . '/app/Models/dmdonvibaocao.php',
+        'App\\Models\\dmhinhthuclamviec' => __DIR__ . '/../..' . '/app/Models/dmhinhthuclamviec.php',
         'App\\Models\\messages' => __DIR__ . '/../..' . '/app/Models/messages.php',
+        'App\\Models\\nghecongviec' => __DIR__ . '/../..' . '/app/Models/nghecongviec.php',
         'App\\Models\\nguoilaodong' => __DIR__ . '/../..' . '/app/Models/nguoilaodong.php',
         'App\\Models\\thongbao_congty' => __DIR__ . '/../..' . '/app/Models/thongbao_congty.php',
         'App\\Models\\thongbaocungld' => __DIR__ . '/../..' . '/app/Models/thongbaocungld.php',

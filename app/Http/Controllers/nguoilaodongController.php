@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\dmchuyenmondaotao;
+use App\Models\dmdonvi;
+use App\Models\dmhinhthuclamviec;
+use App\Models\nghecongviec;
 use App\Models\nguoilaodong;
 use App\Models\thongbaocungld;
 use Illuminate\Http\Request;
@@ -17,10 +21,31 @@ class nguoilaodongController extends Controller
   public function index()
   {
     // $model=nguoilaodong::paginate(20); 
-    $model = nguoilaodong::where('madb',session('admin')['madv'])
-                            ->OrderBy('id', 'DESC')->get();
+    $model = nguoilaodong::where('madb', session('admin')['madv'])
+      ->OrderBy('id', 'DESC')->get();
     return view('pages.nguoilaodong.index')
       ->with('model', $model);
+  }
+
+  public function index_nuocngoai()
+  {
+    $model = nguoilaodong::wherenotin('nation',['VN','Việt Nam'])                            
+                              ->OrderBy('id', 'DESC')->get();
+    return view('pages.nguoilaodong.nuocngoai.index')
+      ->with('model', $model);
+  }
+
+  public function create_nuocngoai()
+  {
+    $countries_list = $this->getCountries();
+    $dmchuyenmon=dmchuyenmondaotao::all();
+    $dmnghecongviec=nghecongviec::all();
+    $dmhinhthuccv=dmhinhthuclamviec::all();
+    return view('pages.nguoilaodong.nuocngoai.create')
+              ->with('countries_list',$countries_list)
+              ->with('dmchuyenmon',$dmchuyenmon)
+              ->with('dmnghecongviec',$dmnghecongviec)
+              ->with('dmhinhthuccv',$dmhinhthuccv);
   }
 
   /**
@@ -61,16 +86,33 @@ class nguoilaodongController extends Controller
   public function store(Request $request)
   {
     $inputs = $request->all();
-    $inputs['madb']=session('admin')['madv'];
-    $inputs['ma_nld']=getdate()[0];
-    $model=nguoilaodong::where('cmnd',$inputs['cmnd'])->first();
-    if($model != null){
+    $inputs['madb'] = session('admin')['madv'];
+    $inputs['ma_nld'] = getdate()[0];
+    $model = nguoilaodong::where('cmnd', $inputs['cmnd'])->first();
+    if ($model != null) {
       return view('errors.tontai_dulieu')
-            ->with('message','Người lao động đã có trong danh sách')
-            ->with('furl','/nguoilaodong');
+        ->with('message', 'Người lao động đã có trong danh sách')
+        ->with('furl', '/nguoilaodong');
     }
     nguoilaodong::create($inputs);
-    return redirect('/nguoilaodong');
+    return redirect('/nguoilaodong')
+            ->with('success','Thêm mới thành công');
+  }
+
+  public function store_nuocngoai(Request $request)
+  {
+    $inputs=$request->all();
+    $inputs['ma_nld']=getdate()[0];
+    $inputs['sohc']=$inputs['cmnd'];
+    $model=nguoilaodong::where('sohc',$inputs['sohc'])->first();
+    if ($model != null) {
+      return view('errors.tontai_dulieu')
+        ->with('message', 'Người lao động đã có trong danh sách')
+        ->with('furl', '/nguoilaodong/nuoc_ngoai');
+    }
+    nguoilaodong::create($inputs);
+    return redirect('/nguoilaodong/nuoc_ngoai')
+            ->with('success','Thêm mới thành công');
   }
 
   /**
@@ -114,6 +156,22 @@ class nguoilaodongController extends Controller
       ->with('model', $model);
   }
 
+  public function edit_nuocngoai($id)
+  {
+    $countries_list = $this->getCountries();
+    $dmchuyenmon=dmchuyenmondaotao::all();
+    $dmnghecongviec=nghecongviec::all();
+    $dmhinhthuccv=dmhinhthuclamviec::all();
+    $model = nguoilaodong::findOrFail($id);
+    return view('pages.nguoilaodong.nuocngoai.edit')
+              ->with('model',$model)
+              ->with('countries_list',$countries_list)
+              ->with('dmchuyenmon',$dmchuyenmon)
+              ->with('dmnghecongviec',$dmnghecongviec)
+              ->with('dmhinhthuccv',$dmhinhthuccv)
+              ->with('success','Cập nhật thành công');
+  }
+
   /**
    * Update the specified resource in storage.
    *
@@ -123,10 +181,21 @@ class nguoilaodongController extends Controller
    */
   public function update(Request $request, $id)
   {
+    $inputs = $request->all();
+    $model = nguoilaodong::findOrFail($id);
+    $model->update($inputs);
+    return redirect('/nguoilaodong')
+              ->with('success','Cập nhật thành công');
+  }
+
+  public function update_nuocngoai(Request $request,$id)
+  {
     $inputs=$request->all();
+    $inputs['sohc']=$inputs['cmnd'];
     $model=nguoilaodong::findOrFail($id);
     $model->update($inputs);
-    return redirect('/nguoilaodong');
+    return redirect('/nguoilaoding/nuoc_ngoai')
+            ->with('success','Cập nhật thành công');
   }
 
   /**
@@ -139,7 +208,26 @@ class nguoilaodongController extends Controller
   {
     $model = nguoilaodong::findOrFail($id);
     $model->delete();
-    return redirect('/nguoilaodong');
+    return redirect('/nguoilaodong')
+            ->with('success','Xóa thành công');
+  }
+
+  public function destroy_nuocngoai($id)
+  {
+    $model= nguoilaodong::findOrFail($id);
+    $model->delete();
+    return redirect('/nguoilaodong/nuoc_ngoai')
+              ->with('success','Xóa thành công');
+  }
+
+  public function danhsach_nuocngoai()
+  {
+    $model= nguoilaodong::wherenotin('nation',['VN','Việt Nam'])->get();
+    $m_dv=dmdonvi::where('madv',session('admin')['madv'])->first();
+    return view('reports.laodongnuocngoai.danhsach')
+              ->with('model',$model)
+              ->with('m_dv',$m_dv)
+              ->with('pageTitle','Danh sách lao động nước ngoài');
   }
 
   public function getCompany($uid)
@@ -424,5 +512,4 @@ class nguoilaodongController extends Controller
       "ZW" => "Zimbabwe"
     );
   }
-
 }

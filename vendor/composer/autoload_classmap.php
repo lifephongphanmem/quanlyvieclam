@@ -55,7 +55,10 @@ return array(
     'App\\Http\\Controllers\\cunglaodong_huyenController' => $baseDir . '/app/Http/Controllers/cunglaodong_huyenController.php',
     'App\\Http\\Controllers\\cunglaodong_tinhController' => $baseDir . '/app/Http/Controllers/cunglaodong_tinhController.php',
     'App\\Http\\Controllers\\danhmuchanhchinhController' => $baseDir . '/app/Http/Controllers/danhmuchanhchinhController.php',
+    'App\\Http\\Controllers\\dmchuyenmondaotaoController' => $baseDir . '/app/Http/Controllers/dmchuyenmondaotaoController.php',
+    'App\\Http\\Controllers\\dmhinhthuclamviecController' => $baseDir . '/app/Http/Controllers/dmhinhthuclamviecController.php',
     'App\\Http\\Controllers\\messageCotroller' => $baseDir . '/app/Http/Controllers/messageCotroller.php',
+    'App\\Http\\Controllers\\nghecongviecController' => $baseDir . '/app/Http/Controllers/nghecongviecController.php',
     'App\\Http\\Controllers\\nguoilaodongController' => $baseDir . '/app/Http/Controllers/nguoilaodongController.php',
 
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
@@ -78,7 +81,11 @@ return array(
     'App\\Models\\Vitrituyendung' => $baseDir . '/app/Models/Vitrituyendung.php',
     'App\\Models\\cunglaodong' => $baseDir . '/app/Models/cunglaodong.php',
     'App\\Models\\danhmuchanhchinh' => $baseDir . '/app/Models/danhmuchanhchinh.php',
+<<<<<<< HEAD
+    'App\\Models\\dmchuyenmondaotao' => $baseDir . '/app/Models/dmchuyenmondaotao.php',
+=======
     'App\\Models\\dmdoituonguutien' => $baseDir . '/app/Models/dmdoituonguutien.php',
+>>>>>>> cb5ab54c5f6a898951d8d599a761ba51339d1152
     'App\\Models\\dmdonvi' => $baseDir . '/app/Models/dmdonvi.php',
 
     'App\\Models\\dmloaihieuluchdld' => $baseDir . '/app/Models/dmloaihieuluchdld.php',
@@ -98,7 +105,9 @@ return array(
     'App\\Models\\thongtintuyendungct' => $baseDir . '/app/Models/thongtintuyendungct.php',
 
     'App\\Models\\dmdonvibaocao' => $baseDir . '/app/Models/dmdonvibaocao.php',
+    'App\\Models\\dmhinhthuclamviec' => $baseDir . '/app/Models/dmhinhthuclamviec.php',
     'App\\Models\\messages' => $baseDir . '/app/Models/messages.php',
+    'App\\Models\\nghecongviec' => $baseDir . '/app/Models/nghecongviec.php',
     'App\\Models\\nguoilaodong' => $baseDir . '/app/Models/nguoilaodong.php',
     'App\\Models\\thongbao_congty' => $baseDir . '/app/Models/thongbao_congty.php',
     'App\\Models\\thongbaocungld' => $baseDir . '/app/Models/thongbaocungld.php',

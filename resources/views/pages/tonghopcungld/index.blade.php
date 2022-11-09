@@ -15,7 +15,7 @@
     <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            TableManaged.init();
+            // TableManaged.init();
         });
     </script>
 @stop
@@ -77,11 +77,11 @@
                                             <i class="fas fa-share-square text-dark"></i>
                                         </button>
                                         @endif
-                                        <button type="button" onclick="tralai({{ $th->id }})"
+                                        {{-- <button type="button" onclick="tralai({{ $th->id }})"
                                             title="Trả lại" data-target="#modify-modal-tralai" data-toggle="modal"
                                             class="btn btn-sm btn-clean btn-icon">
                                             <i class="fas fa-share-square text-success"></i>
-                                        </button>
+                                        </button> --}}
                                         {{-- @if ($th->trangthai== 'TRALAI') --}}
                                         <button type="button" onclick="lydo({{ $th->id }})"
                                             title="Lý do trả lại" data-target="#lydo-modal" data-toggle="modal"

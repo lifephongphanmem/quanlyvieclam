@@ -26,8 +26,8 @@
                 <div class="form-group">
                     <label class="control-label">Giới tính</label>
                     <select class="form-control input-sm m-bot5" name="gioitinh">
-                        <option value='nam' selected>Nam</option>
-                        <option value='nu'>Nữ</option>
+                        <option value='Nam' selected>Nam</option>
+                        <option value='Nữ'>Nữ</option>
                     </select>
                 </div>
             </div>
@@ -55,45 +55,23 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label class="control-label">Vị trí</label>
-                    <input type="text" name="vitri" id="vitri" class="form-control" value="{{isset($model)?$model->vitri:''}}">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
                     <label class="control-label">Chức vụ </label>
                     <input type="text" name="chucvu" id="chucvu" class="form-control" value="{{isset($model)?$model->chucvu:''}}">
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Đối tượng ưu tiên </label>
+                    <select class="form-control input-sm m-bot15 select2me" name="doituonguutien">
+                        <option value=''>Chọn đối tượng</option>
+                        <option value='Khuyết tật'>Người khuyết tật</option>
+                        <option value='Hộ nghèo'>Thuộc hộ nghèo, cận nghèo</option>
+                        <option value='dtts'>Dân tộc thiểu số</option>
+                    </select>
+                </div>
+            </div>
 
         </div>
-
-        {{-- <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label">Tỉnh</label>
-                    <input type="text" name="tinh" id="tinh" class="form-control">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label">Thành phố/Huyện/Thị xã </label>
-                    <input type="text" name="huyen" id="huyen" class="form-control">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label">Phường/Xã </label>
-                    <input type="text" name="xa" id="xa" class="form-control">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label">Địa chỉ </label>
-                    <input type="text" name="address" id="address" class="form-control">
-                </div>
-            </div>
-        </div> --}}
 
         <div class="row">
             <div class="col-md-3">
@@ -123,17 +101,7 @@
                 </div>
             </div>
 
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label">Đối tượng ưu tiên </label>
-                    <select class="form-control input-sm m-bot15" name="doituonguutien">
-                        <option value=''>Chọn đối tượng</option>
-                        <option value='Khuyết tật'>Người khuyết tật</option>
-                        <option value='Hộ nghèo'>Thuộc hộ nghèo, cận nghèo</option>
-                        <option value='dtts'>Dân tộc thiểu số</option>
-                    </select>
-                </div>
-            </div>
+
         </div>
         <div class="row" id='intinhtrang'>
             <div class="col-md-3">

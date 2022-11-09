@@ -32,7 +32,7 @@
         <div class="portlet box blue" id="form_wizard_1" >
             <div class="portlet-title">
                 <div class="caption text-uppercase">
-                    THÊM MỚI THÔNG TIN NGƯỜI LAO ĐỘNG
+                    CẬP NHẬT THÔNG TIN NGƯỜI LAO ĐỘNG
                 </div>
                 <div class="tools hidden-xs">
                     <a href="javascript:;" class="collapse">

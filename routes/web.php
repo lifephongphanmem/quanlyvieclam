@@ -41,8 +41,10 @@ use App\Http\Controllers\cunglaodong_tinh;
 use App\Http\Controllers\cunglaodong_tinhController;
 use App\Http\Controllers\cunglaodongController;
 use App\Http\Controllers\danhmuchanhchinhController;
+use App\Http\Controllers\dmchuyenmondaotaoController;
 use App\Http\Controllers\DmdonviController;
 
+use App\Http\Controllers\dmhinhthuclamviecController;
 use App\Http\Controllers\dmkhongthamgiahdktController;
 use App\Http\Controllers\dmloaihieuluchdldController;
 use App\Http\Controllers\dmloaihinhhdktController;
@@ -64,6 +66,7 @@ use App\Models\dmdonvi;
 use App\Models\dmloailaodong;
 
 use App\Http\Controllers\messageCotroller;
+use App\Http\Controllers\nghecongviecController;
 use App\Http\Controllers\nguoilaodongController;
 
 use PHPUnit\TextUI\XmlConfiguration\Group;
@@ -256,6 +259,14 @@ Route::post('/dichvu-bs/', [AdminDichvu::class, 'save']);
 
 Route::post('/dichvu-bu/', [AdminDichvu::class, 'update']);
 
+Route::get('/dichvu-ba/{cid?}',[AdminDichvu::class,'show_all']);
+Route::get('/dichvudk-ba/{dvid}',[AdminDichvu::class,'show_dk']);
+Route::get('/dichvu-be/{uid}',[AdminDichvu::class,'edit']);
+Route::get('/dichvu-bd/{uid}',[AdminDichvu::class,'delete']);
+Route::get('/dichvu-bn/',[AdminDichvu::class,'new']);
+Route::post('/dichvu-bs/',[AdminDichvu::class,'save']);
+Route::post('/dichvu-bu/',[AdminDichvu::class,'update']);
+
 // Danh mục 
 Route::prefix('danh_muc')->group(function () {
     // đối tượng ưu tiên
@@ -345,17 +356,28 @@ Route::prefix('danh_muc')->group(function () {
         Route::get('/delete/{id}', [dmmanghetrinhdoController::class, 'delete']);
         Route::get('/edit/{id}', [dmmanghetrinhdoController::class, 'edit']);
     });
+    //Danh mục chuyên môn đào tạo
+Route::prefix('dm_chuyen_mon_dao_tao')->group(function(){
+    Route::get('/',[dmchuyenmondaotaoController::class,'index']);
+    Route::post('/store',[dmchuyenmondaotaoController::class,'store']);
+    Route::post('/update/{id}',[dmchuyenmondaotaoController::class,'update']);
+    Route::get('/delete/{id}',[dmchuyenmondaotaoController::class,'destroy']);
 });
 
-Route::get('/dichvu-ba/{cid?}',[AdminDichvu::class,'show_all']);
-Route::get('/dichvudk-ba/{dvid}',[AdminDichvu::class,'show_dk']);
-Route::get('/dichvu-be/{uid}',[AdminDichvu::class,'edit']);
-Route::get('/dichvu-bd/{uid}',[AdminDichvu::class,'delete']);
-Route::get('/dichvu-bn/',[AdminDichvu::class,'new']);
-Route::post('/dichvu-bs/',[AdminDichvu::class,'save']);
-Route::post('/dichvu-bu/',[AdminDichvu::class,'update']);
+Route::prefix('nghe_cong_viec')->group(function(){
+    Route::get('/',[nghecongviecController::class,'index']);
+    Route::post('/store',[nghecongviecController::class,'store']);
+    Route::post('/update/{id}',[nghecongviecController::class,'update']);
+    Route::get('/delete/{id}',[nghecongviecController::class,'destroy']);
+});
 
-
+Route::prefix('dm_hinh_thuc_cong_viec')->group(function(){
+    Route::get('/',[dmhinhthuclamviecController::class,'index']);
+    Route::post('/store',[dmhinhthuclamviecController::class,'store']);
+    Route::post('/update/{id}',[dmhinhthuclamviecController::class,'update']);
+    Route::get('/delete/{id}',[dmhinhthuclamviecController::class,'destroy']);
+});
+});
 //dmdonvi
 Route::prefix('dmdonvi')->group(function () {
     Route::get('/danh_sach', [DmdonviController::class, 'index']);
@@ -460,16 +482,27 @@ Route::prefix('dia_ban')->group(function(){
 
 //thông tin người lao động
 Route::prefix('nguoilaodong')->group(function(){
-    Route::get('',[nguoilaodongController::class,'index']);
+    Route::get('/',[nguoilaodongController::class,'index']);
+    Route::get('/nuoc_ngoai',[nguoilaodongController::class,'index_nuocngoai']);
     Route::get('/them_moi',[nguoilaodongController::class,'create']);
     Route::get('/edit/{id}',[nguoilaodongController::class,'edit']);
     Route::post('/store',[nguoilaodongController::class,'store']);
     Route::post('/update/{id}',[nguoilaodongController::class,'update']);
     Route::get('/delete/{id}',[nguoilaodongController::class,'destroy']);
+
+    Route::prefix('nuoc_ngoai')->group(function(){
+        Route::get('/',[nguoilaodongController::class,'index_nuocngoai']);
+        Route::get('/create',[nguoilaodongController::class,'create_nuocngoai']);
+        Route::get('/edit/{id}',[nguoilaodongController::class,'edit_nuocngoai']);
+        Route::post('/store',[nguoilaodongController::class,'store_nuocngoai']);
+        Route::post('/update/{id}',[nguoilaodongController::class,'update_nuocngoai']);
+        Route::get('/delete/{id}',[nguoilaodongController::class,'destroy_nuocngoai']);
+        Route::get('/in',[nguoilaodongController::class,'danhsach_nuocngoai']);
+    });
 });
 
 //Cung lao động
-Route::prefix('cungld')->group(function(){
+    Route::prefix('cungld')->group(function(){
     Route::prefix('thongbao')->group(function(){
         Route::get('/',[messageCotroller::class,'index']);
         Route::get('/create',[messageCotroller::class,'create']);

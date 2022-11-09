@@ -33,23 +33,25 @@
                     <h4 class="menu-text">DOANH NGHIỆP</h4>
                     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                 </li>
-                <li class="menu-item" aria-haspopup="true">
+                {{-- <li class="menu-item" aria-haspopup="true">
                     <a href="{{ url('/doanhnghiep/thongtin') }}" class="menu-link">
                         <i class="menu-bullet menu-bullet-dot">
                             <span></span>
                         </i>
                         <span class="menu-text font-weight-bold">Thông tin doanh nghiệp</span>
                     </a>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
+                </li> --}}
+                {{-- <li class="menu-item" aria-haspopup="true">
                     <a href="{{ url('/doanhnghiep/nguoilaodong') }}" class="menu-link">
                         <i class="menu-bullet menu-bullet-dot">
                             <span></span>
                         </i>
                         <span class="menu-text font-weight-bold">Thông tin người lao động</span>
                     </a>
-                </li>
-                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                </li> --}}
+
+                <!--Quản lý biến động -->
+                {{-- <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
                         <span class="svg-icon menu-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -113,7 +115,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
                         <span class="svg-icon menu-icon">
@@ -324,6 +326,16 @@
                                 </a>
                             </li>
 
+
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{url('/nguoilaodong/nuoc_ngoai')}}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text">Người lao động nước ngoài</span>
+                                </a>
+                            </li>
+                            
                         </ul>
                     </div>
                 </li>
@@ -416,14 +428,14 @@
                                 </a>
                                 <div class="menu-submenu menu-submenu-classic menu-submenu-right">
                                     <ul class="menu-subnav">
-                                        <li class="menu-item" aria-haspopup="true">
+                                        {{-- <li class="menu-item" aria-haspopup="true">
                                             <a href="{{ url('/ptype-ba') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-dot">
                                                     <span></span>
                                                 </i>
                                                 <span class="menu-text font-weight-bold">Tham số</span>
                                             </a>
-                                        </li>
+                                        </li> --}}
                                         <li class="menu-item" aria-haspopup="true">
                                             <a href="{{ url('/danh_muc/dm_doi_tuong') }}" class="menu-link">
                                                 <i class="menu-bullet menu-bullet-dot">
@@ -504,11 +516,33 @@
                                                 <span class="menu-text font-weight-bold">Tình trạng tham gia hoạt động kinh tế</span>
                                             </a>
                                         </li>
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="{{url('/danh_muc/dm_chuyen_mon_dao_tao')}}" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text font-weight-bold">Chuyên môn đào tạo</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="{{url('/danh_muc/nghe_cong_viec')}}" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text font-weight-bold">Nghề công việc</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item" aria-haspopup="true">
+                                            <a href="{{url('/danh_muc/dm_hinh_thuc_cong_viec')}}" class="menu-link">
+                                                <i class="menu-bullet menu-bullet-dot">
+                                                    <span></span>
+                                                </i>
+                                                <span class="menu-text font-weight-bold">Hình thức làm việc</span>
+                                            </a>
+                                        </li>
          
                                     </ul>
                                 </div>
-
-
 
                             <li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
                                 <a href="javascript:;" class="menu-link menu-toggle">

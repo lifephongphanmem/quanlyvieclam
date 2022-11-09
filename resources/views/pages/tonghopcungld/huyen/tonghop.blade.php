@@ -54,28 +54,30 @@
                         <tbody>
                             @foreach ($m_dv as $k => $dv)
                                 <tr style="font-weight: bold">
-                                    <td>{{++$k}}</td>
+                                    <td>{{ ++$k }}</td>
                                     <td>{{ $dv->tendv }}</td>
-                                    <td>{{$dv->noidung}}</td>
+                                    <td>{{ $dv->noidung }}</td>
                                     <td>
                                         @if ($dv->dv == null)
                                             <p class="text-danger">Đơn vị chưa gửi dữ liệu</p>
                                         @else
-                                        <a title="In danh sách"
-                                        href="{{'/cungld/danh_sach/huyen/in?matb='.$dv->matb.'&math='.$dv->math.'&madv='.$dv->madv}}"
-                                        class="btn btn-sm btn-clean btn-icon"  target="_blank">
-                                        <i class="icon-lg la flaticon2-print text-dark"></i>
-                                        </a>
-                                        <button type="button" onclick="tralai({{$dv->matb}},{{$dv->madv}})"
-                                            title="Trả lại" data-target="#modify-modal-tralai" data-toggle="modal"
-                                            class="btn btn-sm btn-clean btn-icon">
-                                            <i class="fas fa-undo text-success"></i>
-                                        </button>
+                                            <a title="In danh sách"
+                                                href="{{ '/cungld/danh_sach/huyen/in?matb=' . $dv->matb . '&math=' . $dv->math . '&madv=' . $dv->madv }}"
+                                                class="btn btn-sm btn-clean btn-icon" target="_blank">
+                                                <i class="icon-lg la flaticon2-print text-dark"></i>
+                                            </a>
+                                            @if ($dv->trangthai == null  || $dv->dv != null)
+                                                <button type="button"
+                                                    onclick="tralai({{ $dv->matb }},{{ $dv->madv }},{{ $dv->madvbc }})"
+                                                    title="Trả lại" data-target="#modify-modal-tralai" data-toggle="modal"
+                                                    class="btn btn-sm btn-clean btn-icon">
+                                                    <i class="fas fa-undo text-success"></i>
+                                                </button>
+                                            @endif
                                         @endif
 
                                     </td>
                                 </tr>
-                              
                             @endforeach
                         </tbody>
                     </table>
@@ -86,36 +88,35 @@
         </div>
     </div>
     <!--end::Row-->
-            <!-- modal trả lại -->
-            <form method="POST" action="" accept-charset="UTF-8" id="tralai">
-                @csrf
-                <div id="modify-modal-tralai" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-xs">
-                        <div class="modal-content">
-                            <div class="modal-header modal-header-primary">
-                                <h4 id="modal-header-primary-label" class="modal-title">Trả lại danh sách</h4>
-                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
-                            </div>
-                            <div class="modal-body">
-                                <label for="" class="control-label">Lý do trả lại</label>
-                                <textarea name="tralai" id="tralai" cols=""  rows="3" class="col-md-12"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                                <button type="submit" id="submit" name="submit" value="submit"
-                                    class="btn btn-primary">Đồng
-                                    ý</button>
-                            </div>
-                        </div>
+    <!-- modal trả lại -->
+    <form method="POST" action="" accept-charset="UTF-8" id="tralai">
+        @csrf
+        <div id="modify-modal-tralai" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xs">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-primary">
+                        <h4 id="modal-header-primary-label" class="modal-title">Trả lại danh sách</h4>
+                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="" class="control-label">Lý do trả lại</label>
+                        <textarea name="tralai" id="tralai" cols="" rows="3" class="col-md-12"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                        <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary">Đồng
+                            ý</button>
                     </div>
                 </div>
-            </form>
+            </div>
+        </div>
+    </form>
 
-            <script>
-                function tralai(matb,madv){
-                    var url='/cungld/danh_sach/huyen/tralai?matb='+ matb + '&madv='+ madv;
-                    $('#tralai').attr('action',url);
-                }
-            </script>
+    <script>
+        function tralai(matb, madv, madvbc) {
+            var url = '/cungld/danh_sach/huyen/tralai?matb=' + matb + '&madv=' + madv + '&madvbc=' + madvbc;
+            $('#tralai').attr('action', url);
+        }
+    </script>
 @endsection

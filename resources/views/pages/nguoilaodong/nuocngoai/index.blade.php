@@ -33,10 +33,15 @@
             <div class="card card-custom">
                 <div class="card-header card-header-tabs-line">
                     <div class="card-title">
-                        <h3 class="card-label text-uppercase">Danh sách người lao động</h3>
+                        <h3 class="card-label text-uppercase">Danh sách người lao động nước ngoài</h3>
                     </div>
                     <div class="card-toolbar">
-                        <a href="{{ '/nguoilaodong/them_moi' }}" class="btn btn-sm btn-success mr-2"
+                       
+                    </div>
+                    <div class="card-toolbar">
+                        <a href="{{ '/nguoilaodong/nuoc_ngoai/in' }}" class="btn btn-sm btn-clean btn-icon mr-2"
+                        title="In danh sách" target="_blank"><i class="icon-lg la flaticon2-print text-dark"></i></a>
+                        <a href="{{ '/nguoilaodong/nuoc_ngoai/create' }}" class="btn btn-sm btn-success mr-2"
                             title="Thêm mới tài khoản"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
@@ -46,9 +51,10 @@
                             <tr>
                                 <th width="2%"> STT </th>
                                 <th width="15%"> Họ và tên</th>
-                                <th width="13%"> Năm sinh</th>
-                                <th width="10%"> Giới tính</th>
-                                <th width="10%"> CMND/CCCD</th>
+                                <th width="5%"> Năm sinh</th>
+                                <th width="13%">Quốc tịch</th>
+                                <th width="5%"> Giới tính</th>
+                                <th width="10%"> Số hộ chiếu</th>
                                 <th width="30%"> Địa chỉ</th>
                                 <th width="10%"> Vị trí</th>
                                 <th width="10%">Thao tác</th>
@@ -60,16 +66,17 @@
                                     <td>{{ ++$key }}</td>
                                     <td> {{ $ld->hoten }}</td>
                                     <td> {{ \Carbon\Carbon::parse($ld->ngaysinh)->format('d/m/Y') }}</td>
+                                    <td> {{ $ld->nation}}</td>
                                     <td> {{ $ld->gioitinh == 'nam' || $ld->gioitinh == 'Nam' ? 'Nam' : 'Nữ' }}</td>
                                     <td> {{ $ld->cmnd }}</td>
                                     <td> {{ $ld->address }} {{ $ld->xa }} {{ $ld->huyen }}
                                         {{ $ld->tinh }}</td>
                                     <td> {{ $ld->vitri }}</td>
                                     <td>
-                                        <a title="Sửa thông tin" href="{{'/nguoilaodong/edit/'.$ld->id}}" class="btn btn-sm btn-clean btn-icon">
+                                        <a title="Sửa thông tin" href="{{'/nguoilaodong/nuoc_ngoai/edit/'.$ld->id}}" class="btn btn-sm btn-clean btn-icon">
                                             <i class="icon-lg la flaticon-edit-1 text-primary"></i>
                                         </a>
-                                        <button title="Xóa thông tin" type="button" onclick="cfDel('{{'/nguoilaodong/delete/'.$ld->id}}')" class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm" data-toggle="modal">
+                                        <button title="Xóa thông tin" type="button" onclick="cfDel('{{'/nguoilaodong/nuoc_ngoai/delete/'.$ld->id}}')" class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm" data-toggle="modal">
                                             <i class="icon-lg flaticon-delete text-danger"></i></button>
                                     </td>
                                 </tr>

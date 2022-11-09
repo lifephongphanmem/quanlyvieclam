@@ -31,7 +31,7 @@
 
         <tr>
             <td colspan="2" style="text-align: center; font-weight: bold; font-size: 20px;">
-                DANH SÁCH THÔNG TIN CUNG LAO ĐỘNG
+                DANH SÁCH NGƯỜI LAO ĐỘNG NƯỚC NGOÀI
             </td>
         </tr>
     </table>
@@ -42,26 +42,29 @@
             <tr style="padding-left: 2px;padding-right: 2px">
                 <th style="width: 5%;">S</br>T</br>T</th>
                 <th style="width: 20%;">Họ và tên</th>
-                <th>CCCD/CMND</th>
                 <th>Ngày sinh</th>
+                <th>Quốc tịch</th>
+                <th>Giới tính</th>
+                <th>Số hộ chiếu</th>
+                <th>Địa chỉ</th>
+                <th>Vị trí</th>
 
             </tr>
         </thead>
-        @foreach ($model_dv as $k => $dv)
-            <tr style="font-weight: bold">
-                <td>{{convert2Roman(++$k)}}</td>
-                <td colspan="3">{{ $dv->tendv }}</td>
+        @foreach ($model as $key=>$val )
+            <tr>
+                <td>{{++$key}}</td>
+                <td>{{$val->hoten}}</td>
+                <td>{{$val->ngaysinh}}</td>
+                <td>{{$val->nation}}</td>
+                <td>{{$val->gioitinh}}</td>
+                <td>{{$val->cmnd}}</td>
+                <td> {{ $val->address }} {{ $val->xa }} {{ $val->huyen }}
+                    {{ $val->tinh }}</td>
+                    <td>{{$val->vitri}}</td>
             </tr>
-            <?php $m_th = $model->where('madvbc_tinh', $dv->madvbc); ?>
-            @foreach ($m_th as $key => $val)
-                <tr>
-                    <td style="text-align:right">{{ ++$key }}</td>
-                    <td>{{ $val->hoten }}</td>
-                    <td>{{ $val->cmnd }}</td>
-                    <td>{{ $val->ngaysinh }}</td>
-                </tr>
-            @endforeach
         @endforeach
+       
 
     </table>
 
