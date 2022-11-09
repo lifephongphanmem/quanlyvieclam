@@ -15,7 +15,7 @@
     <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            TableManaged.init();
+            // TableManaged.init();
         });
     </script>
 @stop

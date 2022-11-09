@@ -497,6 +497,7 @@ Route::prefix('nguoilaodong')->group(function(){
         Route::post('/store',[nguoilaodongController::class,'store_nuocngoai']);
         Route::post('/update/{id}',[nguoilaodongController::class,'update_nuocngoai']);
         Route::get('/delete/{id}',[nguoilaodongController::class,'destroy_nuocngoai']);
+        Route::get('/in',[nguoilaodongController::class,'danhsach_nuocngoai']);
     });
 });
 

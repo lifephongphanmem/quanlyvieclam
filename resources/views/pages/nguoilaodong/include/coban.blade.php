@@ -62,7 +62,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Đối tượng ưu tiên </label>
-                    <select class="form-control input-sm m-bot15" name="doituonguutien">
+                    <select class="form-control input-sm m-bot15 select2me" name="doituonguutien">
                         <option value=''>Chọn đối tượng</option>
                         <option value='Khuyết tật'>Người khuyết tật</option>
                         <option value='Hộ nghèo'>Thuộc hộ nghèo, cận nghèo</option>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\dmchuyenmondaotao;
+use App\Models\dmdonvi;
 use App\Models\dmhinhthuclamviec;
 use App\Models\nghecongviec;
 use App\Models\nguoilaodong;
@@ -217,6 +218,16 @@ class nguoilaodongController extends Controller
     $model->delete();
     return redirect('/nguoilaodong/nuoc_ngoai')
               ->with('success','Xóa thành công');
+  }
+
+  public function danhsach_nuocngoai()
+  {
+    $model= nguoilaodong::wherenotin('nation',['VN','Việt Nam'])->get();
+    $m_dv=dmdonvi::where('madv',session('admin')['madv'])->first();
+    return view('reports.laodongnuocngoai.danhsach')
+              ->with('model',$model)
+              ->with('m_dv',$m_dv)
+              ->with('pageTitle','Danh sách lao động nước ngoài');
   }
 
   public function getCompany($uid)

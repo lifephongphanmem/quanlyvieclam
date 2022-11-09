@@ -33,23 +33,25 @@
                     <h4 class="menu-text">DOANH NGHIỆP</h4>
                     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                 </li>
-                <li class="menu-item" aria-haspopup="true">
+                {{-- <li class="menu-item" aria-haspopup="true">
                     <a href="{{ url('/doanhnghiep/thongtin') }}" class="menu-link">
                         <i class="menu-bullet menu-bullet-dot">
                             <span></span>
                         </i>
                         <span class="menu-text font-weight-bold">Thông tin doanh nghiệp</span>
                     </a>
-                </li>
-                <li class="menu-item" aria-haspopup="true">
+                </li> --}}
+                {{-- <li class="menu-item" aria-haspopup="true">
                     <a href="{{ url('/doanhnghiep/nguoilaodong') }}" class="menu-link">
                         <i class="menu-bullet menu-bullet-dot">
                             <span></span>
                         </i>
                         <span class="menu-text font-weight-bold">Thông tin người lao động</span>
                     </a>
-                </li>
-                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                </li> --}}
+
+                <!--Quản lý biến động -->
+                {{-- <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
                         <span class="svg-icon menu-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -113,7 +115,7 @@
                             </li>
                         </ul>
                     </div>
-                </li>
+                </li> --}}
                 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="javascript:;" class="menu-link menu-toggle">
                         <span class="svg-icon menu-icon">

@@ -15,7 +15,7 @@
     <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            TableManaged.init();
+            // TableManaged.init();
             $('.select2me').select2();
         });
     </script>
@@ -118,25 +118,9 @@
                     </div>
                     <div class="modal-body" data-select2-id="148">
                         <div class="form-horizontal">
-                            {{-- <table id="sample_5" class="table table-striped table-bordered table-hover dataTable no-footer">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th width="2%"> <input type="checkbox" name="send[]" id='choose_all'></th>
-                                        <th width="15%"> Tên công ty</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($model_cty as $key => $cty)
-                                        <tr class="text-center">
-                                            <td><input type="checkbox" name="send[]" value="{{$cty->id}}" class="choose" checked=true></td>
-                                            <td class="text-left"> {{ $cty->name}}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table> --}}
                             <div class="col-lg-8">
                                 <label class="control-label">Chọn công ty</label>
-                                <select id="" class="form-control select2me" name="user_id[]" multiple=true>
+                                <select id="" class=" select2me" name="user_id[]" multiple=true>
                                     <option value="all" selected>Chọn tất cả</option>
                                     @foreach ($model_cty as $ct)
                                         <option value="{{ $ct->id }}">{{ $ct->name }}</option>
@@ -155,11 +139,6 @@
             </div>
         </div>
     </form>
-    @if (Session::has('success'))
-        <script>
-            toastr.success("{!! Session::get('success') !!}");
-        </script>
-    @endif
     <script>
         $('#choose_all').on('click', function() {
             $('.choose').prop('checked', true);

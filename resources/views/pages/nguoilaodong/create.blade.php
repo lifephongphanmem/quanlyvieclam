@@ -7,7 +7,7 @@
 @stop
 @section('custom-script')
     <script type="text/javascript" src="{{url('assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js') }}"></script>
-    <script type="text/javascript" src="{{url('assets/global/plugins/select2/select2.min.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{url('assets/global/plugins/select2/select2.min.js') }}"></script> --}}
 
     <script type="text/javascript" src="{{url('assets/admin/pages/scripts/form-wizard.js')}}"></script>
 
@@ -19,8 +19,7 @@
     <script>
         jQuery(document).ready(function() {
             FormWizard.init();
-            TableManaged.init();
-            // $('.select2me').select2();
+            $('.select2me').select2();
         });
     </script>
     {{-- @include('includes.script.scripts') --}}

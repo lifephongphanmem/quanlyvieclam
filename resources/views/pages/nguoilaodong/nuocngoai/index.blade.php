@@ -14,7 +14,7 @@
     <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            TableManaged.init();
+            // TableManaged.init();
         });
     </script>
 @stop
@@ -36,6 +36,11 @@
                         <h3 class="card-label text-uppercase">Danh sách người lao động nước ngoài</h3>
                     </div>
                     <div class="card-toolbar">
+                       
+                    </div>
+                    <div class="card-toolbar">
+                        <a href="{{ '/nguoilaodong/nuoc_ngoai/in' }}" class="btn btn-sm btn-clean btn-icon mr-2"
+                        title="In danh sách" target="_blank"><i class="icon-lg la flaticon2-print text-dark"></i></a>
                         <a href="{{ '/nguoilaodong/nuoc_ngoai/create' }}" class="btn btn-sm btn-success mr-2"
                             title="Thêm mới tài khoản"><i class="fa fa-plus"></i></a>
                     </div>
