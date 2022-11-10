@@ -2,6 +2,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
+use App\Models\danhmuchanhchinh;
+use App\Models\dmdonvi;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Access\Response;
 use DB;
@@ -37,6 +40,7 @@ class CompanyController extends Controller
 			case "kethuctamdung": $state_filter = 2; break;
 			default: $state_filter = $request->input('state_filter',1);
 		}
+		// dd(session('admin'));
 		// get Parrams
 		
 		$dmhc =$this->getdanhmuc();
@@ -255,6 +259,136 @@ class CompanyController extends Controller
 			 return $code;
 		 }
 	}
+
+	public function danhsach()
+	{
+		$model=Company::orderBy('id','DESC')->get();
+		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
+		$ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
+		$cfield = $this->getParamsByNametype("Ngành nghề doanh nghiệp");
+		return view('admin.company.danhsach')
+					->with('model',$model)
+					->with('kcn',$kcn)
+					->with('loaihinh',$ctype)
+					->with('ngnahnghe',$cfield);
+	}
+
+	public function create()
+	{
+		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
+		$ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
+		$cfield = $this->getParamsByNametype("Ngành nghề doanh nghiệp");// lấy ngành nghề doanh nghiệp
+
+		$dmhanhchinh=danhmuchanhchinh::all();
+		return view('admin.company.create')
+					->with('kcn',$kcn)
+					->with('loaihinh',$ctype)
+					->with('dmhanhchinh',$dmhanhchinh)
+					->with('nganhnghe',$cfield);
+	}
 	
-	
+	public function store(Request $request)
+	{
+		$inputs=$request->all();
+
+		Company::create($inputs);
+		return redirect('/doanh_nghiep/danh_sach')
+						->with('success','Thêm mới thành công');
+	}
+
+	public function edit($id)
+	{
+		$model=Company::findOrFail($id);
+		$dmhanhchinh=danhmuchanhchinh::all();
+		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
+		$ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
+		$cfield = $this->getParamsByNametype("Ngành nghề doanh nghiệp");// lấy ngành nghề doanh nghiệp
+
+		return view('admin.company.capnhat')
+					->with('model',$model)
+					->with('kcn',$kcn)
+					->with('loaihinh',$ctype)
+					->with('dmhanhchinh',$dmhanhchinh)
+					->with('nganhnghe',$cfield);
+	}
+
+	public function update_dn(Request $request,$id)
+	{
+		$inputs=$request->all();
+		$model=Company::findOrFail($id);
+		$model->update($inputs);
+
+		return redirect('/doanh_nghiep/danh_sach')
+				->with('success','Cập nhật thành công');
+	}
+
+	public function destroy($id)
+	{
+		$model=Company::findOrFail($id);
+		$model->delete();
+		return redirect('/doanh_nghiep/danh_sach')
+				->with('success','Xóa thành công');
+	}
+	public function indanhsach($id)
+	{
+		$model=Company::findOrFail($id);
+		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
+		$ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
+		$cfield = $this->getParamsByNametype("Ngành nghề doanh nghiệp");// lấy ngành nghề doanh nghiệp
+		foreach($kcn as $cn)
+		{
+			if(isset($model)){
+				$cn->id==$model->khucn?$model->khucn=$cn->name:'';
+			}
+		}
+		foreach($ctype as $lh)
+		{
+			if(isset($model)){
+				$lh->id==$model->loaihinh?$model->loaihinh=$lh->name:'';
+			}
+		}
+		foreach($cfield as $nn)
+		{
+			if(isset($model)){
+				$nn->id==$model->nganhnghe?$model->nganhnghe=$nn->name:'';
+			}
+		}
+		return view('reports.doanhnghiep.thongtin')
+				->with('model',$model)
+				->with('loaihinh',$ctype)
+				->with('nganhnghe',$cfield)
+				->with('pageTitle','Thông tin doanh nghiệp');
+	}
+
+	public function intonghop()
+	{
+		$model=Company::all();
+		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
+		$ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
+		$cfield = $this->getParamsByNametype("Ngành nghề doanh nghiệp");// lấy ngành nghề doanh nghiệp
+		foreach($model as $ct)
+		{
+			foreach($kcn as $cn)
+		{
+			if(isset($model)){
+				$cn->id==$ct->khucn?$ct->khucn=$cn->name:'';
+			}
+		}
+		foreach($ctype as $lh)
+		{
+			if(isset($model)){
+				$lh->id==$ct->loaihinh?$ct->loaihinh=$lh->name:'';
+			}
+		}
+		foreach($cfield as $nn)
+		{
+			if(isset($model)){
+				$nn->id==$ct->nganhnghe?$ct->nganhnghe=$nn->name:'';
+			}
+		}
+		}
+		return view('reports.doanhnghiep.tonghop')
+				->with('model',$model)
+				->with('pageTitle','Danh sách doanh nghiệp');
+	}
 }

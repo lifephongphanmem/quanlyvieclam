@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\danhmuchanhchinh;
 use App\Models\dmdonvi;
 use Illuminate\Http\Request;
@@ -40,7 +41,6 @@ class UserController extends Controller
 	{
 		$model = User::where('username', $request->username)->first();
 		// dd(!isset($model));
-		// dd($model);
 		if (!isset($model)) {
 			return redirect('home')->withErrors(
 				[
@@ -102,6 +102,16 @@ class UserController extends Controller
 
 			if ($ret) {
 				$request->session()->regenerate();
+				// $donvi=dmdonvi::where('madv',$model->madv)->first();
+				// $diaban=danhmuchanhchinh::where('id',$donvi->madiaban)->first();
+				$doanhnghiep=Company::where('user',$model->id)->first();
+				$a_dv=[
+					'masodn'=>$doanhnghiep->masodn,
+					'tendn'=>$doanhnghiep->name,
+					'khuvuc'=>$doanhnghiep->khuvuc==1?'Thành thị':'Nông thôn'
+
+				];
+				Session::put('admin',$a_dv);
 				session::put('message', "Đăng nhập thành công");
 				return redirect('/doanhnghiep/thongtin');
 			} else {
