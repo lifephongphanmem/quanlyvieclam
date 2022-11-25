@@ -9,13 +9,12 @@
     <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
     </script>
-    <script type="text/javascript"
-        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
 
-    <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
+
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            // TableManaged.init();
+            TableManaged3.init();
         });
     </script>
 @stop
@@ -34,11 +33,7 @@
             <div class="card card-custom">
                 <div class="card-header card-header-tabs-line">
                     <div class="card-title">
-                        <h3 class="card-label text-uppercase">Tổng hợp cung lao động</h3>
-                    </div>
-                    <div class="card-toolbar">
-                        <button onclick="add()" class="btn btn-sm btn-success mr-2" title="Thêm mới tổng hợp"
-                            data-target="#modify-modal" data-toggle="modal"><i class="fa fa-plus"></i></button>
+                        <h3 class="card-label text-uppercase">Tổng hợp dữ liệu</h3>
                     </div>
                 </div>
                 <div class="card-body">
@@ -46,6 +41,7 @@
                         <thead>
                             <tr>
                                 <th width="2%"> STT </th>
+                                <th width="2%"> Năm thu thập </th>
                                 <th width="15%">Nội dung</th>
                                 <th width="10%">Thao tác</th>
                             </tr>
@@ -54,15 +50,16 @@
                             @foreach ($model as $key => $th)
                                 <tr>
                                     <td>{{ ++$key }}</td>
+                                    <td>{{ $th->nam }}</td>
                                     <td> {{ $th->tieude }}</td>
                                     <td>
-                                        <a title="In tổng hợp toàn tỉnh"
+                                        <a title="In tổng hợp"
                                         href="{{'/cungld/danh_sach/tinh/intonghop_tinh?matb='.$th->matb}}"
                                         class="btn btn-sm btn-clean btn-icon"  target="_blank">
                                         <i class="icon-lg la flaticon2-print text-dark"></i>
                                         </a>
                                         <a title="Tổng hợp danh sách"
-                                            href="{{ '/cungld/danh_sach/tinh/tong_hop?matb=' . $th->matb }}"
+                                            href="{{ '/cungld/danh_sach/tinh/tong_hop?matb=' . $th->matb .'&nam='.$th->nam}}"
                                             class="btn btn-sm btn-clean btn-icon">
                                             <i class="icon-lg la la-clipboard-list text-success icon-2x"></i>
                                         </a>

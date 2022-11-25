@@ -296,19 +296,28 @@ class CompanyController extends Controller
 						->with('success','Thêm mới thành công');
 	}
 
-	public function edit($id)
+	public function edit(Request $request,$id)
 	{
+		$inputs=$request->edit;
 		$model=Company::findOrFail($id);
 		$dmhanhchinh=danhmuchanhchinh::all();
 		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
 		$ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
 		$cfield = $this->getParamsByNametype("Ngành nghề doanh nghiệp");// lấy ngành nghề doanh nghiệp
-
+		if(isset($inputs)){
+			$inputs=$inputs;
+			$url='/doanh_nghiep/thongtin';
+		}else{
+			$inputs=0;
+			$url='/doanh_nghiep/danh_sach';
+		}
 		return view('admin.company.capnhat')
 					->with('model',$model)
 					->with('kcn',$kcn)
 					->with('loaihinh',$ctype)
 					->with('dmhanhchinh',$dmhanhchinh)
+					->with('input',$inputs)
+					->with('url',$url)
 					->with('nganhnghe',$cfield);
 	}
 
@@ -317,9 +326,14 @@ class CompanyController extends Controller
 		$inputs=$request->all();
 		$model=Company::findOrFail($id);
 		$model->update($inputs);
+		if($inputs['edit']==0){
+			return redirect('/doanh_nghiep/danh_sach')
+			->with('success','Cập nhật thành công');
+		}else{
+			return redirect('/doanh_nghiep/thongtin')
+			->with('success','Cập nhật thành công');
+		}
 
-		return redirect('/doanh_nghiep/danh_sach')
-				->with('success','Cập nhật thành công');
 	}
 
 	public function destroy($id)
@@ -329,6 +343,7 @@ class CompanyController extends Controller
 		return redirect('/doanh_nghiep/danh_sach')
 				->with('success','Xóa thành công');
 	}
+
 	public function indanhsach($id)
 	{
 		$model=Company::findOrFail($id);
@@ -390,5 +405,40 @@ class CompanyController extends Controller
 		return view('reports.doanhnghiep.tonghop')
 				->with('model',$model)
 				->with('pageTitle','Danh sách doanh nghiệp');
+	}
+
+	public function thongtin()
+	{
+		$model=Company::where('masodn',session('admin')['madv'])->first();
+		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
+		$ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
+		$cfield = $this->getParamsByNametype("Ngành nghề doanh nghiệp");// lấy ngành nghề doanh nghiệp
+		$dmhanhchinh=danhmuchanhchinh::all();
+		foreach($kcn as $cn)
+		{
+			if(isset($model)){
+				$cn->id==$model->khucn?$model->khucn=$cn->name:'';
+			}
+		}
+		foreach($ctype as $lh)
+		{
+			if(isset($model)){
+				$lh->id==$model->loaihinh?$model->loaihinh=$lh->name:'';
+			}
+		}
+		foreach($cfield as $nn)
+		{
+			if(isset($model)){
+				$nn->id==$model->nganhnghe?$model->nganhnghe=$nn->name:'';
+			}
+		}
+
+		return view('admin.company.thongtin')
+					->with('model',$model)
+					->with('dmhanhchinh',$dmhanhchinh)
+					->with('kcn',$kcn)
+					->with('loaihinh',$ctype)
+					->with('nganhnghe',$cfield);
+
 	}
 }

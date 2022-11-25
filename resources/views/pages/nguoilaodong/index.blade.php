@@ -1,5 +1,5 @@
 @extends('HeThong.main')
-@section('custom-style')
+{{-- @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
@@ -11,10 +11,27 @@
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
     </script>
 
-    <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            // TableManaged.init();
+            TableManaged3.init();
+        });
+    </script>
+@stop --}}
+@section('custom-style')
+    <link rel="stylesheet" type="text/css"
+        href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
+@stop
+
+@section('custom-script')
+    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
+    <script src="{{ url('assets/js/pages/select2.js') }}"></script>
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
+    <script>
+        jQuery(document).ready(function() {
+            TableManaged3.init();
         });
     </script>
 @stop
@@ -36,8 +53,12 @@
                         <h3 class="card-label text-uppercase">Danh sách người lao động</h3>
                     </div>
                     <div class="card-toolbar">
-                        <a href="{{ '/nguoilaodong/them_moi' }}" class="btn btn-sm btn-success mr-2"
+                        <a href="{{ '/nguoilaodong/them_moi' }}" class="btn btn-xs btn-icon  btn-success mr-2"
                             title="Thêm mới tài khoản"><i class="fa fa-plus"></i></a>
+                            <button class="btn btn-xs btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel" data-target="#modal-nhanexcel"
+                            data-toggle="modal">
+                            <i class="fas fa-file-import"></i>
+                        </button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -50,7 +71,7 @@
                                 <th width="10%"> Giới tính</th>
                                 <th width="10%"> CMND/CCCD</th>
                                 <th width="30%"> Địa chỉ</th>
-                                <th width="10%"> Vị trí</th>
+                                <th width="10%"> Chức vụ</th>
                                 <th width="10%">Thao tác</th>
                             </tr>
                         </thead>
@@ -62,9 +83,8 @@
                                     <td> {{ \Carbon\Carbon::parse($ld->ngaysinh)->format('d/m/Y') }}</td>
                                     <td> {{ $ld->gioitinh == 'nam' || $ld->gioitinh == 'Nam' ? 'Nam' : 'Nữ' }}</td>
                                     <td> {{ $ld->cmnd }}</td>
-                                    <td> {{ $ld->address }} {{ $ld->xa }} {{ $ld->huyen }}
-                                        {{ $ld->tinh }}</td>
-                                    <td> {{ $ld->vitri }}</td>
+                                    <td> {{ $ld->thuongtru}}</td>
+                                    <td> {{ isset($ld->chucvu)?$a_chucvu[$ld->chucvu]:'' }}</td>
                                     <td>
                                         <a title="Sửa thông tin" href="{{'/nguoilaodong/edit/'.$ld->id}}" class="btn btn-sm btn-clean btn-icon">
                                             <i class="icon-lg la flaticon-edit-1 text-primary"></i>
@@ -84,4 +104,29 @@
     </div>
     <!--end::Row-->
     @include('includes.delete')
+    
+    <div id="modal-nhanexcel" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+    <form action="{{'/nguoilaodong/import'}}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+    @csrf
+        <div class="modal-dialog modal-content">
+            <div class="modal-header modal-header-primary">
+                <h4 id="modal-header-primary-label" class="modal-title">Nhận danh sách người lao động từ file Excel</h4>
+                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <input type="file" name="import_file" class="form-control" >
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                <button type="submit" name="submit" value="submit" class="btn btn-primary">Đồng ý</button>
+            </div>
+        </div>
+    </form>
+    </div>
 @endsection

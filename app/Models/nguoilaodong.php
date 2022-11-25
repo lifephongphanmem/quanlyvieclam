@@ -16,6 +16,7 @@ class nguoilaodong extends Model
         'gioitinh',
         'ngaysinh',
         'cmnd',
+        'phone',
         'dantoc',
         'nation',
         'tinh',
@@ -50,11 +51,11 @@ class nguoilaodong extends Model
         'tamtru',
         'doituonguutien',
         'cvhientai',
-        'vithevl',
-        'thatnghiep',//0: có việc làm, 1: thất nghiệp,2:không tham gia
-        'thoigianthatnghiep',
+        'vithevl',//1: Chủ cơ sở SXKD, 2:Tự làm, 3:Lao động gia đình, 4:Làm công ăn lương
+        'thatnghiep',//0: chưa bao giờ làm việc, 1: đã từng làm việc
+        'thoigianthatnghiep',//0:dưới 3 tháng, 1:từ 3 tháng đến 1 năm, 2:Trên 1 năm
         'lydoktg',
-        'tingtrangvl',
+        'tinhtrangvl',//0: có việc làm, 1: thất nghiệp,2:không tham gia
         //Dành cho người lao động nước ngoài
         'sohc',
         'ngaycapsohc',

@@ -7,14 +7,15 @@
 
 @section('custom-script')
     <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
+    <script src="{{ url('assets/js/pages/select2.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
-    </script>
+    {{-- <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
+    </script> --}}
 
-    <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            // TableManaged.init();
+            TableManaged3.init();
         });
     </script>
 @stop
@@ -38,7 +39,7 @@
                     </div> --}}
                 </div>
                 <div class="card-body">
-                    <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer" style="background-color:rgba(27, 197, 189, 0.1)">
+                    <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer" >
                         <thead>
                             <tr class="text-center odd">
                                 <th style="width:10%">STT</th>
@@ -49,16 +50,18 @@
                         </thead>
                         <tbody>
                             <?php $i=0 ?>
-                            @foreach ($model_hc as $diaban)
+                         @foreach ($model_hc as $diaban)
                             <tr>
                                 <td class="text-center odd">{{convert2Roman(++$i)}}</td>
                                 <td>{{$diaban->name}}</td>
                                 <td></td>
                             </tr>
                             <?php $m_dv=$model_dv->where('madiaban',$diaban->id) ?>
-                            @foreach ( $m_dv as $key=>$dv )
+                            <?php $j=0 ?>
+                            @foreach ( $m_dv as $dv )
+                            
                             <tr>
-                                <td class="text-right">{{ ++$key }}</td>
+                                <td class="text-right">{{ ++$j }}</td>
                                 <td>{{ $dv->tendv }}</td>
                                     <td class="text-center">
                                         <a href="{{'/TaiKhoan/DanhSach?madv='.$dv->madv}}" class="btn btn-icon btn-clean btn-lg mb-1 position-relative" title="Danh sách tài khoản">

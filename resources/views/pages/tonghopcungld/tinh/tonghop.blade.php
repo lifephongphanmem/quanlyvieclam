@@ -9,13 +9,11 @@
     <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
     </script>
-    <script type="text/javascript"
-        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
 
-    <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            // TableManaged.init();
+            TableManaged3.init();
         });
     </script>
 @stop
@@ -34,11 +32,7 @@
             <div class="card card-custom">
                 <div class="card-header card-header-tabs-line">
                     <div class="card-title">
-                        <h3 class="card-label text-uppercase">Tổng hợp</h3>
-                    </div>
-                    <div class="card-toolbar">
-                        {{-- <a href="{{ '/nguoilaodong/them_moi' }}" class="btn btn-sm btn-success mr-2"
-                            title="Thêm mới tài khoản"><i class="fa fa-plus"></i></a> --}}
+                        <h3 class="card-label text-uppercase">Xem chi tiết dữ liệu</h3>
                     </div>
                 </div>
                 <div class="card-body">

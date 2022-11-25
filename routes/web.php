@@ -41,6 +41,7 @@ use App\Http\Controllers\cunglaodong_tinh;
 use App\Http\Controllers\cunglaodong_tinhController;
 use App\Http\Controllers\cunglaodongController;
 use App\Http\Controllers\danhmuchanhchinhController;
+use App\Http\Controllers\dmchucvuController;
 use App\Http\Controllers\dmchuyenmondaotaoController;
 use App\Http\Controllers\DmdonviController;
 
@@ -57,6 +58,7 @@ use App\Http\Controllers\dmthoigianthatnghiepController;
 use App\Http\Controllers\dmtinhtrangthamgiahdktController;
 use App\Http\Controllers\dmtrinhdogdptController;
 use App\Http\Controllers\dmtrinhdokythuatController;
+use App\Http\Controllers\dmvithevlController;
 use App\Http\Controllers\dmvitricongviecController;
 use App\Http\Controllers\dmvitrivieclamController;
 use App\Http\Controllers\khaibaotuyendungController;
@@ -68,7 +70,9 @@ use App\Models\dmloailaodong;
 use App\Http\Controllers\messageCotroller;
 use App\Http\Controllers\nghecongviecController;
 use App\Http\Controllers\nguoilaodongController;
-
+use App\Http\Controllers\thongbaotinhhinhsudungldController;
+use App\Http\Controllers\tinhhinhsudungldController;
+use App\Http\Controllers\tonghop_tinhhinhsudungldController;
 use PHPUnit\TextUI\XmlConfiguration\Group;
 
 
@@ -328,6 +332,24 @@ Route::prefix('danh_muc')->group(function () {
         Route::get('/edit/{id}', [dmloaihinhhdktController::class, 'edit']);
     });
 
+    Route::prefix('dm_chuc_vu')->group(function(){
+        Route::get('/',[dmchucvuController::class,'index']);
+        Route::post('/store',[dmchucvuController::class,'store']);
+        Route::post('/update/{id}',[dmchucvuController::class,'update']);
+        Route::get('/delete/{id}',[dmchucvuController::class,'destroy']);
+    });
+
+    // Route::prefix('dmnguoithatnghiep')->group(function(){
+    //     Route::get('/',[dmnguoithatnghiepController::class,'index']);
+    //     Route::post('/store',[dmnguoithatnghiepController::class,'store']);
+    //     Route::post('/update/{id}',[dmnguoithatnghiepController::class,'update']);
+    //     Route::get('/delete/{id}',[dmnguoithatnghiepController::class,'destroy']);
+    // });
+
+    // Route::prefix('vithevieclam')->group(function(){
+    //     Route::get('/',[dmvithevlController::class,'index']);
+    // });
+
     // thười gian thất nghiệp
     Route::prefix('/dm_thoi_gian_that_nghiep')->group(function () {
         Route::get('', [dmthoigianthatnghiepController::class, 'index']);
@@ -489,6 +511,7 @@ Route::prefix('nguoilaodong')->group(function(){
     Route::post('/store',[nguoilaodongController::class,'store']);
     Route::post('/update/{id}',[nguoilaodongController::class,'update']);
     Route::get('/delete/{id}',[nguoilaodongController::class,'destroy']);
+    Route::post('/import',[nguoilaodongController::class,'importFile']);
 
     Route::prefix('nuoc_ngoai')->group(function(){
         Route::get('/',[nguoilaodongController::class,'index_nuocngoai']);
@@ -548,7 +571,7 @@ Route::prefix('nguoilaodong')->group(function(){
        
     });
 });
-
+//Doanh nghiệp
 Route::prefix('doanh_nghiep')->group(function(){
     Route::get('/danh_sach',[CompanyController::class,'danhsach']);
     Route::get('/cap_nhat/{id}',[CompanyController::class,'edit']);
@@ -558,6 +581,32 @@ Route::prefix('doanh_nghiep')->group(function(){
     Route::get('/delete/{id}',[CompanyController::class,'destroy']);
     Route::get('/in',[CompanyController::class,'intonghop']);
     Route::get('/in/{id}',[CompanyController::class,'indanhsach']);
+    Route::get('/thongtin',[CompanyController::class,'thongtin']);
+});
+
+//Quản lý tình hình sử dụng lao động
+Route::prefix('tinhhinhsudungld')->group(function(){
+    Route::prefix('thongbao')->group(function(){
+        Route::get('/',[thongbaotinhhinhsudungldController::class,'index']);
+        Route::get('/edit/{id}',[thongbaotinhhinhsudungldController::class,'edit']);
+        Route::post('/store',[thongbaotinhhinhsudungldController::class,'store']);
+        Route::post('/update/{id}',[thongbaotinhhinhsudungldController::class,'update']);
+        Route::get('/delete/{id}',[thongbaotinhhinhsudungldController::class,'destroy']);
+        Route::post('/send/{id}',[thongbaotinhhinhsudungldController::class,'sendData']);
+    });
+    Route::prefix('don_vi')->group(function(){
+        Route::get('/thongbao',[tinhhinhsudungldController::class,'index']);
+        Route::get('/danhsach',[tinhhinhsudungldController::class,'danhsach']);
+        Route::post('/store',[tinhhinhsudungldController::class,'store']);
+        Route::get('/delete/{id}',[tinhhinhsudungldController::class,'destroy']);
+        Route::post('/send/{id}',[tinhhinhsudungldController::class,'sendData']);
+        Route::get('/lydo/{id}',[tinhhinhsudungldController::class,'lydo']);
+    });
+    Route::prefix('tinh')->group(function(){
+        Route::get('/tonghop',[tonghop_tinhhinhsudungldController::class,'index']);
+        Route::get('/xem_du_lieu',[tonghop_tinhhinhsudungldController::class,'show']);
+        Route::post('/tralai',[tonghop_tinhhinhsudungldController::class,'tralai']);
+    });
 });
 
 

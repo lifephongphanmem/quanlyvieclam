@@ -11,6 +11,7 @@ class tonghopdanhsachcungld extends Model
     protected $table='tonghopdanhsachcungld';
     protected $fillable=[
         'math',
+        'nam',
         'noidung',
         'matb',
         'trangthai',

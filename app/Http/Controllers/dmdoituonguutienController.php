@@ -24,7 +24,6 @@ class dmdoituonguutienController extends Controller
 
 	public function store_update(Request $request)
 	{		
-		dd($request->all());
 		$input = $request->all();
 		if ($input['id'] != null) {
 			dmdoituonguutien::FindOrFail($input['id'])->update($input);

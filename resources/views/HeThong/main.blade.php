@@ -13,14 +13,14 @@
     <link rel="canonical" href="https://phanmemcuocsong.com" />
 
     <!--begin::Fonts-->
-    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" /> --}}
-    <link href="{{ url('assets/global/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet"
-    type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    {{-- <link href="{{ url('assets/global/plugins/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet"
+    type="text/css" /> --}}
     <!--end::Fonts-->
 
     <!--begin::Page Vendors Styles(used by this page)-->
-    {{-- <link href="{{ url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet"
-        type="text/css" /> --}}
+    <link href="{{ url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet"
+        type="text/css" />
         {{-- <link href="{{ url('assets/global/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" /> --}}
     <!--end::Page Vendors Styles-->
     <script src="{{ url('assets/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
@@ -33,11 +33,12 @@
     <link href="{{ url('assets/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ url('assets/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ url('assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('assets/css/custom-style.css') }}" rel="stylesheet" type="text/css" />
     <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}"></script>
     <link href="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
     <!--end::Global Theme Styles-->
-    <link href="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
-    <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}"></script>
+    {{-- <link href="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
+    <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}"></script> --}}
     <!--begin::Layout Themes(used by all pages)-->
     <!--end::Layout Themes-->
     @yield('custom-style')
@@ -562,6 +563,12 @@
         toastr.success("{!! Session::get('success') !!}");
     </script>
     @endif
+
+    @if(Session::has('error'))
+    <script>
+        toastr.error("{!! Session::get('success') !!}");
+    </script>
+    @endif
    
 
     <!--end::Global Config-->
@@ -571,20 +578,22 @@
     <script src="{{ url('assets/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
     <script src="{{ url('assets/js/scripts.bundle.js') }}"></script>
     <!--end::Global Theme Bundle-->
-
-    <!--begin::Page Vendors(used by this page)-->
     <script src="{{ url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
-    <script src="{{ url('assets/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url('assets/global/plugins/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script>
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="{{ url('assets/js/pages/widgets.js') }}"></script>
+    <script src="{{ url('assets/js/pages/main.js') }}"></script>
+    {{-- <script src="{{ url('assets/js/pages/bootstrap.js') }}"></script> --}}
+    
+    {{-- <script src="{{ url('assets/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script> --}}
+    {{-- <script src="{{ url('assets/global/plugins/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script> --}}
     <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}"></script>
 
     <!--end::Page Vendors-->
-    <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}"></script>
+    {{-- <script src="{{ url('assets/global/plugins/bootstrap-toastr/toastr.min.js') }}"></script> --}}
     <!--begin::Page Scripts(used by this page)-->
-    <script src="{{ url('assets/js/pages/widgets.js') }}"></script>
+    
     @yield('custom-script')
     <!--end::Page Scripts-->
-    @yield('custom-script')
 </body>
 
 <!--end::Body-->

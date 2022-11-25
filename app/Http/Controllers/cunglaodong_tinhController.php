@@ -8,6 +8,13 @@ use App\Models\tonghopcungld_tinh;
 use App\Models\tonghopdanhsachcungld;
 use App\Models\dmdonvi;
 use App\Models\tonghop_huyen;
+use App\Models\dmdoituonguutien;
+use App\Models\dmtinhtrangthamgiahdkt;
+use App\Models\dmtinhtrangthamgiahdktct;
+use App\Models\dmtinhtrangthamgiahdktct2;
+use App\Models\dmtrinhdogdpt;
+use App\Models\dmtrinhdokythuat;
+use App\Models\dmchuyenmondaotao;
 use Illuminate\Http\Request;
 
 class cunglaodong_tinhController extends Controller
@@ -22,27 +29,6 @@ class cunglaodong_tinhController extends Controller
         $model = thongbaocungld::all();
         return view('pages.tonghopcungld.tinh.index')
             ->with('model', $model);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -71,40 +57,6 @@ class cunglaodong_tinhController extends Controller
             ->with('model', $m_dvbc);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function intonghop(Request $request)
     {
         $inputs = $request->all();
@@ -117,10 +69,24 @@ class cunglaodong_tinhController extends Controller
         $model_dv = dmdonvi::where('madvbc', $inputs['madvbc'])
             ->where('phanloaitaikhoan', 'SD')
             ->get();
+            $doituong_ut = dmdoituonguutien::all();
+            $gdpt = dmtrinhdogdpt::all();
+            $cmkt = dmtrinhdokythuat::all();
+            $tttghdkt = dmtinhtrangthamgiahdkt::all();
+            $tttghdkt1 = dmtinhtrangthamgiahdktct::all();
+            $tttghdkt2 = dmtinhtrangthamgiahdktct2::all();
+            $a_chuyennganh = array_column(dmchuyenmondaotao::all()->toarray(), 'tendm', 'id');
         return view('reports.cunglaodong.tonghop')
             ->with('model', $model)
             ->with('m_dv', $m_dv)
             ->with('model_dv', $model_dv)
+            ->with('doituong_ut', $doituong_ut)
+            ->with('gdpt', $gdpt)
+            ->with('cmkt', $cmkt)
+            ->with('a_chuyennganh', $a_chuyennganh)
+            ->with('tttghdkt', $tttghdkt)
+            ->with('tttghdkt1', $tttghdkt1)
+            ->with('tttghdkt2', $tttghdkt2)
             ->with('pageTitle', 'Tổng hợp danh sách');
     }
     public function intonghop_tinh(Request $request)
@@ -141,11 +107,25 @@ class cunglaodong_tinhController extends Controller
                 $th->madvbc_tinh=null;
             }
         }
+        $doituong_ut = dmdoituonguutien::all();
+        $gdpt = dmtrinhdogdpt::all();
+        $cmkt = dmtrinhdokythuat::all();
+        $tttghdkt = dmtinhtrangthamgiahdkt::all();
+        $tttghdkt1 = dmtinhtrangthamgiahdktct::all();
+        $tttghdkt2 = dmtinhtrangthamgiahdktct2::all();
+        $a_chuyennganh = array_column(dmchuyenmondaotao::all()->toarray(), 'tendm', 'id');
         return view('reports.cunglaodong.tinh.tonghop')
             ->with('model', $model)
             ->with('m_dv', $m_dv)
             ->with('model_dv', $model_dv)
             ->with('model_tinh', $model_tinh)
+            ->with('doituong_ut', $doituong_ut)
+            ->with('gdpt', $gdpt)
+            ->with('cmkt', $cmkt)
+            ->with('a_chuyennganh', $a_chuyennganh)
+            ->with('tttghdkt', $tttghdkt)
+            ->with('tttghdkt1', $tttghdkt1)
+            ->with('tttghdkt2', $tttghdkt2)
             ->with('pageTitle', 'Tổng hợp danh sách');
     }
 
@@ -160,7 +140,7 @@ class cunglaodong_tinhController extends Controller
                                     ->first();
         $model_dv=tonghopdanhsachcungld::where('matb',$inputs['matb'])
                                             ->where('madvbc',$inputs['madvbc'])
-                                            ->update(['matht'=>null]);;
+                                            ->update(['matht'=>null]);
         $model_huyen->update(['trangthai'=>'TRALAI','lydo'=>$inputs['lydo']]);
         $model_tinh->delete();
 

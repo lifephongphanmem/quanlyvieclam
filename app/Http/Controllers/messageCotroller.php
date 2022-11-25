@@ -19,10 +19,12 @@ class messageCotroller extends Controller
      */
     public function index()
     {
-        $model=thongbaocungld::all();
+        $model=thongbaocungld::orderBy('nam')->get();
         $model_cty=User::where('phanloaitk',2)->get();
+        $nam=date('Y');
         return view('admin.thongbaothuthap.index')
                 ->with('model',$model)
+                ->with('nam',$nam)
                 ->with('model_cty',$model_cty);
     }
 

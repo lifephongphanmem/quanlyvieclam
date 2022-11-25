@@ -292,3 +292,46 @@ function convert2Roman($num){
     "ZW" => "Zimbabwe"
   );
 }
+
+function getNam($all = false)
+{
+    $a_kq = array();
+    if ($all) {
+        $a_kq['ALL'] = '--Tất cả các năm--';
+    }
+    for ($i = date('Y') - 4; $i <= date('Y') + 2; $i++) {
+        $a_kq[$i] = $i;
+    }
+    return $a_kq;
+}
+
+function getTextStatus($status)
+{
+    //text-danger; text-warning; text-success; text-info
+    $a_trangthai = array(
+        'CHUATAO' => 'text-danger',
+        'CHUADL' => 'text-danger', //dùng cho đơn vị chủ quản - chưa có đơn vị cấp dưới nào gửi dữ liệu
+        'CHOGUI' => 'text-dark',
+        'DAGUI' => 'text-success',
+        'TRALAI' => 'text-danger',
+        'CHUADAYDU' => 'text-warning',
+        'CHUAGUI' => 'text-dark', //dùng cho đơn vị chủ quản - các đơn vị cấp dưới đã có dữ liệu nhưng chưa gửi đi
+        'GUILOI' => 'text-danger',
+    );
+    return isset($a_trangthai[$status]) ? $a_trangthai[$status] : '';
+}
+
+function getStatus()
+{
+    return array(
+        'CHONHAN' => 'Dữ liệu chờ nhận',
+        'CHUATAO' => 'Dữ liệu chưa khởi tạo',
+        'CHOGUI' => 'Dữ liệu chờ gửi',
+        'DAGUI' => 'Dữ liệu đã gửi',
+        'TRALAI' => 'Dữ liệu bị trả lại',
+        'CHUADAYDU' => 'Dữ liệu chưa đầy đủ',
+        'CHUAGUI' => 'Dữ liệu chờ gửi',
+        'CHUADL' => 'Dữ liệu chưa được gửi lên',
+        'GUILOI' => 'Dữ liệu bị lỗi',
+    );
+}

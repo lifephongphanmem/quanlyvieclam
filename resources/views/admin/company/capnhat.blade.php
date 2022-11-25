@@ -198,14 +198,14 @@
                             </div>                
                         </div>
                     </div>
-
+                    <input type="hidden" name='edit' value="{{$input}}">
                     <div class="form-actions">
                         <div class="row">
                             <div class="col-md-offset-4 col-md-12 text-center">
 
-                                <button type="submit" class="btn btn-success">Tạo hồ sơ</button>
+                                <button type="submit" class="btn btn-success">Hoàn thành</button>
 
-                                <a href="{{url('/doanh_nghiep/danh_sach')}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                                <a href="{{url($url)}}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
                             </div>
                         </div>
                     </div>

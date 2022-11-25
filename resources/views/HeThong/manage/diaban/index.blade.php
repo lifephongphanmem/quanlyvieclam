@@ -8,13 +8,13 @@
 @section('custom-script')
     <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
-    </script>
+    {{-- <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
+    </script> --}}
 
-    <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            // TableManaged.init();
+            TableManaged3.init();
         });
     </script>
 @stop
@@ -43,7 +43,7 @@
                 <div class="card-body">
                     <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th colspan="4">STT</th>
                                 <th rowspan="2">Mã địa bàn</th>
                                 <th rowspan="2">Tên địa bàn</th>
@@ -51,7 +51,7 @@
                                 <th rowspan="2">Thao tác</th>
 
                             </tr>
-                            <tr>
+                            <tr class="text-center">
                                 <th>T</th>
                                 <th>H</th>
                                 <th>X</th>
@@ -209,26 +209,26 @@
             if ($item->parent == $parent) {
                             echo '<tr>';
                                 if($item->level== 'Tỉnh'){
-                                    echo '<td>'.convert2Roman(++$key).'</td>';
+                                    echo '<td class="text-center">'.convert2Roman(++$key).'</td>';
                                 }else {
                                     echo '<td></td>';
                                 }
                                 if($item->level== 'Thành phố' || $item->level == 'Huyện' || $item->level == 'Thị xã'){
 
-                                    echo '<td>'.$i++.'</td>';
+                                    echo '<td class="text-center">'.$i++.'</td>';
                                 }else {
                                     echo '<td></td>';
                                 }
 
                                 if($item->level== 'Phường' || $item->level == 'Xã' || $item->level == 'Thị trấn'){
                                     // $key=0;
-                                    echo '<td>'.$j++.'</td>';
+                                    echo '<td class="text-center">'.$j++.'</td>';
                                 }else {
                                     echo '<td></td>';
                                 }
 
                                 if($item->level== 'Thôn'){
-                                    echo '<td>'.$y++.'</td>';
+                                    echo '<td class="text-center">'.$y++.'</td>';
                                 }else {
                                     echo '<td></td>';
                                 }
@@ -242,7 +242,7 @@
                             //    }
 
                                echo '<td>';
-                                echo '<button onclick="edit(`'.$item->id.'`,`'.$item->maquocgia.'`,`'.$item->parent.'`,`'.$item->name.'`,`'.$item->level.'`)" class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal" title="Thêm địa bàn trực thuộc" data-toggle="modal">
+                                echo '<button onclick="edit(`'.$item->id.'`,`'.$item->maquocgia.'`,`'.$item->parent.'`,`'.$item->name.'`,`'.$item->level.'`)" class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal" title="Chỉnh sửa" data-toggle="modal">
                                                 <i class="icon-lg la fa-edit text-primary icon-2x"></i>
                                             </button>';
                                     echo '<button onclick="setDiaBan(`'.$item->maquocgia.'`,`'.$item->level.'`)" class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal-th" title="Thêm địa bàn trực thuộc" data-toggle="modal">

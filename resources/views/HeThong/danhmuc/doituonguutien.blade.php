@@ -161,12 +161,13 @@
                     form.find("[name='stt']").val(data.stt);
                 },
                 error: function(message) {
-                    toastr.error(message."Lỗi")
+                    toastr.error(message,"Lỗi")
                 }
             });
         }
 
         function create() {
+            console.log(1);
             var form = $('#frm_create_edit');
             form.find("[name='id']").val(null);
             form.find("[name='tendoituong']").val('');

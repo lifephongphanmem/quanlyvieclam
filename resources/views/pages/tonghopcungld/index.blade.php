@@ -9,13 +9,13 @@
     <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
     </script>
-    <script type="text/javascript"
-        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
+    {{-- <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script> --}}
 
-    <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            // TableManaged.init();
+            TableManaged3.init();
         });
     </script>
 @stop
@@ -44,24 +44,26 @@
                 <div class="card-body">
                     <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th width="2%"> STT </th>
+                                <th width="2%"> Năm thu thập </th>
                                 <th width="15%">Nội dung</th>
                                 <th width="10%">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($model as $key => $th)
-                                <tr>
+                                <tr class="text-center">
                                     <td>{{ ++$key }}</td>
-                                    <td> {{ $th->noidung }}</td>
+                                    <td>{{ $th->nam }}</td>
+                                    <td class="text-left"> {{ $th->noidung }}</td>
                                     <td>
-                                        <a title="Sửa thông tin" href="" class="btn btn-sm btn-clean btn-icon">
+                                        {{-- <a title="Sửa thông tin" href="" class="btn btn-sm btn-clean btn-icon">
                                             <i class="icon-lg la flaticon-edit-1 text-primary"></i>
-                                        </a>
-                                        <a title="Danh sách người lao động"
+                                        </a> --}}
+                                        <a title="Tổng hợp danh sách"
                                             href="{{ '/cungld/danh_sach/don_vi/chi_tiet/' . $th->math }}"
-                                            class="btn btn-sm btn-clean btn-icon">
+                                            class="btn btn-sm btn-clean btn-icon" target="_blank">
                                             <i class="icon-lg la la-clipboard-list text-success icon-2x"></i>
                                         </a>
                                         @if ($th->trangthai == 'CHUAGUI' || $th->trangthai =='TRALAI')
@@ -82,13 +84,13 @@
                                             class="btn btn-sm btn-clean btn-icon">
                                             <i class="fas fa-share-square text-success"></i>
                                         </button> --}}
-                                        {{-- @if ($th->trangthai== 'TRALAI') --}}
+                                        @if ($th->trangthai== 'TRALAI')
                                         <button type="button" onclick="lydo({{ $th->id }})"
                                             title="Lý do trả lại" data-target="#lydo-modal" data-toggle="modal"
                                             class="btn btn-sm btn-clean btn-icon">
-                                            <i class="fas fa-question-circle text-info"></i>
+                                            <i class="fas fa-question-circle text-primary"></i>
                                         </button>
-                                        {{-- @endif --}}
+                                        @endif
 
                                         <button title="Xóa thông tin" type="button"
                                             onclick="cfDel('{{ '/cungld/danh_sach/don_vi/delete/' . $th->id }}')"
@@ -117,13 +119,12 @@
             <div class="modal-dialog modal-xs">
                 <div class="modal-content">
                     <div class="modal-header modal-header-primary">
-                        <h4 id="modal-header-primary-label" class="modal-title">Gửi danh sách</h4>
+                        <h4 id="modal-header-primary-label" class="modal-title">Đồng ý gửi dữ liệu</h4>
                         <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-horizontal">
-
-                            <input type="hidden" name="id_thongbao">
+                        <div class="form-group">
+                            <label><b>Số liệu tổng hợp khi gửi đi sẽ không thể chỉnh sửa. Bạn hãy kiểm tra kỹ số liệu trước khi gửi.</b></label>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -193,12 +194,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="row form-group">
-                            <label class="control-label">Thông báo thu thập</label>
-                            <select class="form-control select2me" name="matb" id="matb">
-                                @foreach ($model_cungld as $tb)
-                                    <option value="{{ $tb->matb }}">{{ $tb->tieude }}</option>
-                                @endforeach
-                            </select>
+                            <label class="control-label">Năm thu thập</label>
+                            {!! Form::select('nam',getNam(),$nam, array('id' => 'nam', 'class' => 'form-control'))!!}
                         </div>
                         <div class="modal-footer">
                             <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
@@ -221,6 +218,10 @@
             $('#frm_modify_th').attr('action', url);
         }
 
+        function intonghop(math){
+            var url='/cungld/danh_sach/don_vi/chi_tiet/'+math;
+            window.location.href=url;
+        }
         function lydo(id)
         {
             var url='/cungld/danh_sach/don_vi/lydo/'+id;

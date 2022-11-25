@@ -8,13 +8,13 @@
 @section('custom-script')
     <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
-    </script>
+    {{-- <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
+    </script> --}}
 
-    <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            TableManaged.init();
+            TableManaged3.init();
         });
     </script>
 @stop
@@ -30,19 +30,19 @@
                         <h3 class="card-label text-uppercase">Danh mục chức năng</h3>
                     </div>
                     <div class="card-toolbar">
-                        <button type="button" onclick="add()" class="btn btn-success btn-sm" data-target="#modify-modal"
+                        <button type="button" onclick="add()" class="btn btn-success btn-xs btn-icon" data-target="#modify-modal"
                             data-toggle="modal" title="Thêm mới">
                             <i class="fa fa-plus"></i></button>
-                        <button class="btn btn-sm btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel"
+                        {{-- <button class="btn btn-sm btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel"
                             data-target="#modal-nhanexcel" data-toggle="modal">
                             <i class="fas fa-file-import"></i>
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="#sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
+                    <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th>STT</th>
                                 <th>Mã số</th>
                                 <th>Tên chức năng</th>
@@ -57,7 +57,7 @@
                             @foreach ($model_cd1 as $key => $cd1)
                                 <tr>
                                     @if ($cd1->trangthai == 1)
-                                        <td>{{ convert2Roman($i++) }}</td>
+                                        <td >{{ convert2Roman($i++) }}</td>
                                         <td>{{ $cd1->maso }}</td>
                                         <td>{{ $cd1->tencn }}</td>
                                         @if ($cd1->capdo == 1)

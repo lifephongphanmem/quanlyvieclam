@@ -2,6 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\dmdoituonguutien;
+use App\Models\dmtinhtrangthamgiahdkt;
+use App\Models\dmtinhtrangthamgiahdktct;
+use App\Models\dmtinhtrangthamgiahdktct2;
+use App\Models\dmtrinhdogdpt;
+use App\Models\dmtrinhdokythuat;
+use App\Models\dmchuyenmondaotao;
+use App\Models\dmdonvi;
 use App\Models\nguoilaodong;
 use App\Models\thongbaocungld;
 use App\Models\tonghopcungld_huyen;
@@ -23,6 +31,7 @@ class cunglaodongController extends Controller
         $model_cungld = thongbaocungld::all();
         return view('pages.tonghopcungld.index')
             ->with('model', $model)
+            ->with('nam',date('Y'))
             ->with('model_cungld', $model_cungld);
     }
 
@@ -45,9 +54,16 @@ class cunglaodongController extends Controller
     public function store(Request $request)
     {
         $inputs = $request->all();
-        $inputs['math'] = $inputs['matb'] . '_' . getdate()[0];
-        $mes = thongbaocungld::where('matb', $inputs['matb'])->first()->tieude;
-        $inputs['noidung'] = 'Tổng hợp danh sách theo thông báo: "' . $mes . '"';
+        $model=tonghopdanhsachcungld::where('nam',$inputs['nam'])->where('madv',session('admin')['madv'])->first();
+        if(isset($model)){
+            return view('errors.tontai_dulieu')
+                    ->with('furl','/cungld/danh_sach/don_vi')
+                    ->with('message','Đã tạo tổng hợp');
+        }
+        $inputs['math'] = getdate()[0];
+        $thongbao = thongbaocungld::where('nam', $inputs['nam'])->first();
+        $inputs['matb']=$thongbao->matb;
+        $inputs['noidung'] = 'Tổng hợp danh sách theo thông báo: "' . $thongbao->tieude . '"';
         $inputs['trangthai'] = 'CHUAGUI';
         $inputs['madvbc'] = session('admin')['madvbc'];
         $inputs['madv'] = session('admin')['madv'];
@@ -61,6 +77,7 @@ class cunglaodongController extends Controller
                 'madb' => $val->madb,
                 'hoten' => $val->hoten,
                 'cmnd' => $val->cmnd,
+                'phone' => $val->phone,
                 'ngaysinh' => $val->ngaysinh,
                 'dantoc' => $val->dantoc,
                 'gioitinh' => $val->gioitinh,
@@ -72,7 +89,7 @@ class cunglaodongController extends Controller
                 'trinhdogiaoduc' => $val->trinhdogiaoduc,
                 'trinhdocmkt' => $val->trinhdocmkt,
                 'nghenghiep' => $val->nghenghiep,
-                'linhvucdaotao' => $val->linhvucdaotao,
+                'linhvucdaotao' => $val->chuyenmondaotao,
                 'loaihdld' => $val->loaihdld,
                 'bdhopdong' => $val->bdhopdong,
                 'kthopdong' => $val->kthopdong,
@@ -113,9 +130,27 @@ class cunglaodongController extends Controller
      */
     public function show($id)
     {
+        $m_dv=dmdonvi::where('madv',session('admin')['madv'])->first();
         $model = tonghopdanhsachcungld_ct::where('math', $id)->get();
+        $doituong_ut=dmdoituonguutien::all();
+        $gdpt=dmtrinhdogdpt::all();
+        $cmkt=dmtrinhdokythuat::all();
+        $tttghdkt=dmtinhtrangthamgiahdkt::all();
+        $tttghdkt1=dmtinhtrangthamgiahdktct::all();
+        $tttghdkt2=dmtinhtrangthamgiahdktct2::all();
+        $a_chuyennganh = array_column(dmchuyenmondaotao::all()->toarray(),'tendm','id');
+        // dd($a_chuyennganh);
         return view('pages.tonghopcungld.danhsach')
-            ->with('model', $model);
+            ->with('model', $model)
+            ->with('m_dv', $m_dv)
+            ->with('doituong_ut', $doituong_ut)
+            ->with('gdpt', $gdpt)
+            ->with('cmkt', $cmkt)
+            ->with('a_chuyennganh', $a_chuyennganh)
+            ->with('tttghdkt', $tttghdkt)
+            ->with('tttghdkt1', $tttghdkt1)
+            ->with('tttghdkt2', $tttghdkt2)
+            ->with('pageTitle', 'Thông tin cung lao động');
     }
 
     /**
@@ -168,12 +203,17 @@ class cunglaodongController extends Controller
         $data = [
             'madv' => session('admin')['madv'],
             'mathdv' => $math,
+            'nam'=>$model->nam,
             'matb' => $model->matb,
             'madvbc' => session('admin')['madvbc'],
             'trangthai' => 'CHUAGUI',
             'noidung' => 'Tổng hợp danh sách cung lao động đơn vị: ' . session('admin')['tendv']
         ];
-
+        //trường hợp trả lại dữ liệu
+        $m_huyen=tonghopcungld_huyen::where('nam',$model->nam)->where('matb',$model->matb)->where('madv',session('admin')['madv'])->first();
+        if(isset($m_huyen)){
+            $m_huyen->delete();
+        }
         tonghopcungld_huyen::create($data);
         $model->update(['ngaygui' => $ngaygui, 'trangthai' => 'DAGUI', 'mathh' => $math]);
         return redirect('/cungld/danh_sach/don_vi');

@@ -15,6 +15,7 @@ class tonghopdanhsachcungld_ct extends Model
         'madb',
         'hoten',
         'cmnd',
+        'phone',
         'ngaysinh',
         'dantoc',
         'gioitinh',

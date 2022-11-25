@@ -2,14 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\dmchucvu;
 use App\Models\dmchuyenmondaotao;
+use App\Models\dmdoituonguutien;
 use App\Models\dmdonvi;
 use App\Models\dmhinhthuclamviec;
+use App\Models\dmloaihieuluchdld;
+use App\Models\dmtinhtrangthamgiahdkt;
+use App\Models\dmtinhtrangthamgiahdktct;
+use App\Models\dmtinhtrangthamgiahdktct2;
+use App\Models\dmtrinhdogdpt;
+use App\Models\dmtrinhdokythuat;
 use App\Models\nghecongviec;
 use App\Models\nguoilaodong;
 use App\Models\thongbaocungld;
 use Illuminate\Http\Request;
 use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use stdClass;
+use App\Models\Report;
 
 class nguoilaodongController extends Controller
 {
@@ -23,14 +35,16 @@ class nguoilaodongController extends Controller
     // $model=nguoilaodong::paginate(20); 
     $model = nguoilaodong::where('madb', session('admin')['madv'])
       ->OrderBy('id', 'DESC')->get();
+      $a_chucvu=array_column(dmchucvu::all()->toarray(),'tencv','id');
     return view('pages.nguoilaodong.index')
-      ->with('model', $model);
+      ->with('model', $model)
+      ->with('a_chucvu', $a_chucvu);
   }
 
   public function index_nuocngoai()
   {
-    $model = nguoilaodong::wherenotin('nation',['VN','Việt Nam'])                            
-                              ->OrderBy('id', 'DESC')->get();
+    $model = nguoilaodong::wherenotin('nation', ['VN', 'Việt Nam'])
+      ->OrderBy('id', 'DESC')->get();
     return view('pages.nguoilaodong.nuocngoai.index')
       ->with('model', $model);
   }
@@ -38,14 +52,14 @@ class nguoilaodongController extends Controller
   public function create_nuocngoai()
   {
     $countries_list = $this->getCountries();
-    $dmchuyenmon=dmchuyenmondaotao::all();
-    $dmnghecongviec=nghecongviec::all();
-    $dmhinhthuccv=dmhinhthuclamviec::all();
+    $dmchuyenmon = dmchuyenmondaotao::all();
+    $dmnghecongviec = nghecongviec::all();
+    $dmhinhthuccv = dmhinhthuclamviec::all();
     return view('pages.nguoilaodong.nuocngoai.create')
-              ->with('countries_list',$countries_list)
-              ->with('dmchuyenmon',$dmchuyenmon)
-              ->with('dmnghecongviec',$dmnghecongviec)
-              ->with('dmhinhthuccv',$dmhinhthuccv);
+      ->with('countries_list', $countries_list)
+      ->with('dmchuyenmon', $dmchuyenmon)
+      ->with('dmnghecongviec', $dmnghecongviec)
+      ->with('dmhinhthuccv', $dmhinhthuccv);
   }
 
   /**
@@ -58,21 +72,82 @@ class nguoilaodongController extends Controller
     $countries_list = $this->getCountries();
     // get params
     $dmhc = $this->getdanhmuc();
-    $list_cmkt = $this->getParamsByNametype('Trình độ CMKT');
-    $list_tdgd = $this->getParamsByNametype('Trình độ học vấn');
+    // $list_cmkt = $this->getParamsByNametype('Trình độ CMKT');
+    // $list_tdgd = $this->getParamsByNametype('Trình độ học vấn');
+    // $list_nghe = $this->getParamsByNametype('Nghề nghiệp người lao động');
+    // $list_vithe = $this->getParamsByNametype('Vị thế việc làm');
+    // $list_linhvuc = $this->getParamsByNametype('Lĩnh vực đào tạo');
+    // $list_hdld = $this->getParamsByNametype('Loại hợp đồng lao động');
+    $list_cmkt = dmtrinhdokythuat::all();
+    $list_tdgd = dmtrinhdogdpt::all();
     $list_nghe = $this->getParamsByNametype('Nghề nghiệp người lao động');
-    $list_vithe = $this->getParamsByNametype('Vị thế việc làm');
-    $list_linhvuc = $this->getParamsByNametype('Lĩnh vực đào tạo');
-    $list_hdld = $this->getParamsByNametype('Loại hợp đồng lao động');
+    $list_linhvuc = dmchuyenmondaotao::all();
+    $list_hdld = dmloaihieuluchdld::all();
+    $doituong_ut = dmdoituonguutien::all();
+    $chucvu = dmchucvu::all();
+    $congty = Company::all();
 
+    $list_tinhtrangvl = dmtinhtrangthamgiahdkt::all();
+    $list_tinhtrangvl1 = dmtinhtrangthamgiahdktct::all();
+    $list_tinhtrangvl2 = dmtinhtrangthamgiahdktct2::all();
+
+    //lấy danh sách các trường có ở bảng ct2
+    $a_vithevl = array(
+      // array('madm'=>'','tendm'=>'')
+    );
+    $a_thoigianthatnghiep = array();
+    $a_nguoithatnghiep = array();
+    $a_lydo_khongthamgia_hdkt = array();
+    foreach ($list_tinhtrangvl1 as $item) {
+      $model = $list_tinhtrangvl2->where('manhom2', $item->madmtgktct);
+      if (count($model) > 0) {
+        foreach ($model as $key => $ct) {
+          if ($item->tentgktct == 'Vị thế việc làm') {
+            $a_vithevl[$key]['madm'] = $ct->madmtgktct2;
+            $a_vithevl[$key]['tendm'] = $ct->tentgktct2;
+          }
+          if ($item->tentgktct == 'Thời gian thất nghiệp') {
+            $a_thoigianthatnghiep[$key]['madm'] = $ct->madmtgktct2;
+            $a_thoigianthatnghiep[$key]['tendm'] = $ct->tentgktct2;
+          }
+        }
+      }
+    } 
+    
+    foreach($list_tinhtrangvl as $val){
+        $m=$list_tinhtrangvl1->where('manhom',$val->madmtgkt);
+        if(count($m)){
+            foreach($m as $k=>$ct){
+              if($val->tentgkt =='Người thất nghiệp' && $ct->tentgktct != 'Thời gian thất nghiệp')
+              {
+                $a_nguoithatnghiep[$k]['madm'] = $ct->madmtgktct;
+                $a_nguoithatnghiep[$k]['tendm'] = $ct->tentgktct;
+              }
+
+              if($val->tentgkt =='Không tham gia hoạt động kinh tế')
+              {
+                $a_lydo_khongthamgia_hdkt[$k]['madm'] = $ct->madmtgktct;
+                $a_lydo_khongthamgia_hdkt[$k]['tendm'] = $ct->tentgktct;
+              }
+            }
+        }
+    }
+    // dd($a_lydo_khongthamgia_hdkt);
     // return view ('pages.employer.new')
     return view('pages.nguoilaodong.create')
       ->with('countries_list', $countries_list)
       ->with('dmhc', $dmhc)
+      ->with('chucvu', $chucvu)
+      ->with('congty', $congty)
+      ->with('a_vithevl', $a_vithevl)
+      ->with('a_thoigianthatnghiep', $a_thoigianthatnghiep)
+      ->with('a_nguoithatnghiep', $a_nguoithatnghiep)
+      ->with('a_lydo_khongthamgia_hdkt', $a_lydo_khongthamgia_hdkt)
+      ->with('list_tinhtrangvl', $list_tinhtrangvl)
+      ->with('doituong_ut', $doituong_ut)
       ->with('list_cmkt', $list_cmkt)
       ->with('list_tdgd', $list_tdgd)
       ->with('list_nghe', $list_nghe)
-      ->with('list_vithe', $list_vithe)
       ->with('list_linhvuc', $list_linhvuc)
       ->with('list_hdld', $list_hdld);
   }
@@ -96,15 +171,15 @@ class nguoilaodongController extends Controller
     }
     nguoilaodong::create($inputs);
     return redirect('/nguoilaodong')
-            ->with('success','Thêm mới thành công');
+      ->with('success', 'Thêm mới thành công');
   }
 
   public function store_nuocngoai(Request $request)
   {
-    $inputs=$request->all();
-    $inputs['ma_nld']=getdate()[0];
-    $inputs['sohc']=$inputs['cmnd'];
-    $model=nguoilaodong::where('sohc',$inputs['sohc'])->first();
+    $inputs = $request->all();
+    $inputs['ma_nld'] = getdate()[0];
+    $inputs['sohc'] = $inputs['cmnd'];
+    $model = nguoilaodong::where('sohc', $inputs['sohc'])->first();
     if ($model != null) {
       return view('errors.tontai_dulieu')
         ->with('message', 'Người lao động đã có trong danh sách')
@@ -112,7 +187,7 @@ class nguoilaodongController extends Controller
     }
     nguoilaodong::create($inputs);
     return redirect('/nguoilaodong/nuoc_ngoai')
-            ->with('success','Thêm mới thành công');
+      ->with('success', 'Thêm mới thành công');
   }
 
   /**
@@ -137,39 +212,92 @@ class nguoilaodongController extends Controller
     $countries_list = $this->getCountries();
     // get params
     $dmhc = $this->getdanhmuc();
-    $list_cmkt = $this->getParamsByNametype('Trình độ CMKT');
-    $list_tdgd = $this->getParamsByNametype('Trình độ học vấn');
+    $list_cmkt = dmtrinhdokythuat::all();
+    $list_tdgd = dmtrinhdogdpt::all();
     $list_nghe = $this->getParamsByNametype('Nghề nghiệp người lao động');
-    $list_vithe = $this->getParamsByNametype('Vị thế việc làm');
-    $list_linhvuc = $this->getParamsByNametype('Lĩnh vực đào tạo');
-    $list_hdld = $this->getParamsByNametype('Loại hợp đồng lao động');
-    $model = nguoilaodong::findOrFail($id);
+    $list_linhvuc = dmchuyenmondaotao::all();
+    $list_hdld = dmloaihieuluchdld::all();
+    $doituong_ut = dmdoituonguutien::all();
+    $chucvu = dmchucvu::all();
+    $congty = Company::all();
+    $model_ld = nguoilaodong::findOrFail($id);
+
+    $list_tinhtrangvl = dmtinhtrangthamgiahdkt::all();
+    $list_tinhtrangvl1 = dmtinhtrangthamgiahdktct::all();
+    $list_tinhtrangvl2 = dmtinhtrangthamgiahdktct2::all();
+
+
+    $a_vithevl = array();
+    $a_thoigianthatnghiep = array();
+    $a_nguoithatnghiep = array();
+    $a_lydo_khongthamgia_hdkt = array();
+    foreach ($list_tinhtrangvl1 as $item) {
+      $model = $list_tinhtrangvl2->where('manhom2', $item->madmtgktct);
+      if (count($model) > 0) {
+        foreach ($model as $key => $ct) {
+          if ($item->tentgktct == 'Vị thế việc làm') {
+            $a_vithevl[$key]['madm'] = $ct->madmtgktct2;
+            $a_vithevl[$key]['tendm'] = $ct->tentgktct2;
+          }
+          if ($item->tentgktct == 'Thời gian thất nghiệp') {
+            $a_thoigianthatnghiep[$key]['madm'] = $ct->madmtgktct2;
+            $a_thoigianthatnghiep[$key]['tendm'] = $ct->tentgktct2;
+          }
+        }
+      }
+    } 
+    
+    foreach($list_tinhtrangvl as $val){
+        $m=$list_tinhtrangvl1->where('manhom',$val->madmtgkt);
+        if(count($m)){
+            foreach($m as $k=>$ct){
+              if($val->tentgkt =='Người thất nghiệp' && $ct->tentgktct != 'Thời gian thất nghiệp')
+              {
+                $a_nguoithatnghiep[$k]['madm'] = $ct->madmtgktct;
+                $a_nguoithatnghiep[$k]['tendm'] = $ct->tentgktct;
+              }
+
+              if($val->tentgkt =='Không tham gia hoạt động kinh tế')
+              {
+                $a_lydo_khongthamgia_hdkt[$k]['madm'] = $ct->madmtgktct;
+                $a_lydo_khongthamgia_hdkt[$k]['tendm'] = $ct->tentgktct;
+              }
+            }
+        }
+    }
     return view('pages.nguoilaodong.edit')
       ->with('countries_list', $countries_list)
       ->with('dmhc', $dmhc)
+      ->with('chucvu', $chucvu)
+      ->with('doituong_ut', $doituong_ut)
+      ->with('congty', $congty)
       ->with('list_cmkt', $list_cmkt)
       ->with('list_tdgd', $list_tdgd)
       ->with('list_nghe', $list_nghe)
-      ->with('list_vithe', $list_vithe)
+      ->with('a_vithevl', $a_vithevl)
+      ->with('a_thoigianthatnghiep', $a_thoigianthatnghiep)
+      ->with('a_nguoithatnghiep', $a_nguoithatnghiep)
+      ->with('a_lydo_khongthamgia_hdkt', $a_lydo_khongthamgia_hdkt)
+      ->with('list_tinhtrangvl', $list_tinhtrangvl)
       ->with('list_linhvuc', $list_linhvuc)
       ->with('list_hdld', $list_hdld)
-      ->with('model', $model);
+      ->with('model', $model_ld);
   }
 
   public function edit_nuocngoai($id)
   {
     $countries_list = $this->getCountries();
-    $dmchuyenmon=dmchuyenmondaotao::all();
-    $dmnghecongviec=nghecongviec::all();
-    $dmhinhthuccv=dmhinhthuclamviec::all();
+    $dmchuyenmon = dmchuyenmondaotao::all();
+    $dmnghecongviec = nghecongviec::all();
+    $dmhinhthuccv = dmhinhthuclamviec::all();
     $model = nguoilaodong::findOrFail($id);
     return view('pages.nguoilaodong.nuocngoai.edit')
-              ->with('model',$model)
-              ->with('countries_list',$countries_list)
-              ->with('dmchuyenmon',$dmchuyenmon)
-              ->with('dmnghecongviec',$dmnghecongviec)
-              ->with('dmhinhthuccv',$dmhinhthuccv)
-              ->with('success','Cập nhật thành công');
+      ->with('model', $model)
+      ->with('countries_list', $countries_list)
+      ->with('dmchuyenmon', $dmchuyenmon)
+      ->with('dmnghecongviec', $dmnghecongviec)
+      ->with('dmhinhthuccv', $dmhinhthuccv)
+      ->with('success', 'Cập nhật thành công');
   }
 
   /**
@@ -185,17 +313,17 @@ class nguoilaodongController extends Controller
     $model = nguoilaodong::findOrFail($id);
     $model->update($inputs);
     return redirect('/nguoilaodong')
-              ->with('success','Cập nhật thành công');
+      ->with('success', 'Cập nhật thành công');
   }
 
-  public function update_nuocngoai(Request $request,$id)
+  public function update_nuocngoai(Request $request, $id)
   {
-    $inputs=$request->all();
-    $inputs['sohc']=$inputs['cmnd'];
-    $model=nguoilaodong::findOrFail($id);
+    $inputs = $request->all();
+    $inputs['sohc'] = $inputs['cmnd'];
+    $model = nguoilaodong::findOrFail($id);
     $model->update($inputs);
     return redirect('/nguoilaoding/nuoc_ngoai')
-            ->with('success','Cập nhật thành công');
+      ->with('success', 'Cập nhật thành công');
   }
 
   /**
@@ -209,25 +337,25 @@ class nguoilaodongController extends Controller
     $model = nguoilaodong::findOrFail($id);
     $model->delete();
     return redirect('/nguoilaodong')
-            ->with('success','Xóa thành công');
+      ->with('success', 'Xóa thành công');
   }
 
   public function destroy_nuocngoai($id)
   {
-    $model= nguoilaodong::findOrFail($id);
+    $model = nguoilaodong::findOrFail($id);
     $model->delete();
     return redirect('/nguoilaodong/nuoc_ngoai')
-              ->with('success','Xóa thành công');
+      ->with('success', 'Xóa thành công');
   }
 
   public function danhsach_nuocngoai()
   {
-    $model= nguoilaodong::wherenotin('nation',['VN','Việt Nam'])->get();
-    $m_dv=dmdonvi::where('madv',session('admin')['madv'])->first();
+    $model = nguoilaodong::wherenotin('nation', ['VN', 'Việt Nam'])->get();
+    $m_dv = dmdonvi::where('madv', session('admin')['madv'])->first();
     return view('reports.laodongnuocngoai.danhsach')
-              ->with('model',$model)
-              ->with('m_dv',$m_dv)
-              ->with('pageTitle','Danh sách lao động nước ngoài');
+      ->with('model', $model)
+      ->with('m_dv', $m_dv)
+      ->with('pageTitle', 'Danh sách lao động nước ngoài');
   }
 
   public function getCompany($uid)
@@ -511,5 +639,106 @@ class nguoilaodongController extends Controller
       "ZM" => "Zambia",
       "ZW" => "Zimbabwe"
     );
+  }
+
+  public function importFile(Request $request)
+  {
+    $file = $request->file('import_file');
+    $dataOject = new stdClass();
+    $theArray = Excel::toArray($dataOject, $file);
+    $arr = $theArray[0];
+    $lds = array();
+    $nfield = 34;
+    for ($i = 1; $i < count($arr); $i++) {
+
+      $data = array();
+      for ($j = 0; $j < $nfield; $j++) {
+
+        $data[$arr[0][$j]] = $arr[$i][$j];
+      }
+      // check data
+      if (!$data['hoten']) {
+        break;
+      };
+      $data['cmnd'] = str_replace('\'', '', $data['cmnd']);
+
+      if (!$this->checkCmndExits($data['cmnd'])) {
+        $data['company'] = session('admin')['madv'];
+        $data['ma_nld'] = getdate()[0];
+        $unix_date = ($data['ngaysinh'] - 25569) * 86400;
+
+        $data['ngaysinh'] = date('Y-m-d', $unix_date);
+
+        if (!$data['state']) {
+          $data['state'] = 1;
+        }
+
+        if ($data['bdbhxh']) {
+
+          $unix_date = ($data['bdbhxh'] - 25569) * 86400;
+
+          $data['bdbhxh'] = date('Y-m-d', $unix_date);
+        }
+        if ($data['bdhopdong']) {
+
+          $unix_date = ($data['bdhopdong'] - 25569) * 86400;
+
+          $data['bdhopdong'] = date('Y-m-d', $unix_date);
+        }
+
+        if ($data['bddochai']) {
+
+          $unix_date = ($data['bddochai'] - 25569) * 86400;
+
+          $data['bddochai'] = date('Y-m-d', $unix_date);
+        }
+        if ($data['ktdochai']) {
+
+          $unix_date = ($data['ktdochai'] - 25569) * 86400;
+
+          $data['ktdochai'] = date('Y-m-d', $unix_date);
+        }
+        if ($data['kthopdong']) {
+
+          $unix_date = ($data['kthopdong'] - 25569) * 86400;
+
+          $data['kthopdong'] = date('Y-m-d', $unix_date);
+        }
+        if ($data['ktbhxh']) {
+
+          $unix_date = ($data['ktbhxh'] - 25569) * 86400;
+
+          $data['ktbhxh'] = date('Y-m-d', $unix_date);
+        }
+        $lds[] =  $data;
+      }
+    }
+    $num_valid_ld = count($lds);
+    if ($num_valid_ld) {
+      $result = DB::table('nguoilaodong')->insert($lds);
+      // $result=nguoilaodong::create($lds);
+      $note = "Đã lưu thành công " . $num_valid_ld . " lao động.";
+      // add to log system`
+      $rm = new Report();
+      $rm->report('import', $result, 'nguoilaodong', DB::getPdo()->lastInsertId(), $num_valid_ld, $note);
+      return redirect('/nguoilaodong')
+        ->with('success', "Thêm thành công");
+    } else {
+      return redirect('nguoilaodong')
+        ->with('error', 'Người lao động đã có trong danh sách');
+    }
+  }
+
+  // Kiểm tra CMND của người lao động, đảm bảo tính duy nhất
+  public function checkCmndExits($cmnd)
+  {
+
+    $result = DB::table('nguoilaodong')->select('id')->where('cmnd', $cmnd)->whereNotIn('state', [3])->get()->first();
+    if ($result) {
+      return $result->id;
+    } else {
+
+      return 0;
+    }
   }
 }

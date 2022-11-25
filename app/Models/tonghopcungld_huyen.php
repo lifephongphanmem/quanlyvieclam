@@ -11,6 +11,7 @@ class tonghopcungld_huyen extends Model
     protected $table='tonghopcungld_huyens';
     protected $fillable=[
         'mathdv',
+        'nam',
         'noidung',
         'trangthai',
         'lydo',

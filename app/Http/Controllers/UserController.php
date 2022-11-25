@@ -106,7 +106,8 @@ class UserController extends Controller
 				// $diaban=danhmuchanhchinh::where('id',$donvi->madiaban)->first();
 				$doanhnghiep=Company::where('user',$model->id)->first();
 				$a_dv=[
-					'masodn'=>$doanhnghiep->masodn,
+					'madv'=>$doanhnghiep->masodn,
+					'madb'=>$model->madv,
 					'tendn'=>$doanhnghiep->name,
 					'khuvuc'=>$doanhnghiep->khuvuc==1?'Thành thị':'Nông thôn'
 
