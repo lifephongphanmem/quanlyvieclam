@@ -1,18 +1,20 @@
-@extends('HeThong.main')
+@extends('main')
 @section('custom-style')
-    <link rel="stylesheet" type="text/css" href="{{url('/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{url('/global/plugins/select2/select2.css')}}"/>
+    <link rel="stylesheet" type="text/css"
+        href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
 @stop
 
 @section('custom-script')
-    <script type="text/javascript" src="{{url('/global/plugins/select2/select2.min.js')}}"></script>
-    <script type="text/javascript" src="{{url('/global/plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-    <script type="text/javascript" src="{{url('/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
+    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
+    </script>
 
-    <script src="{{url('assets/admin/pages/scripts/table-managed.js')}}"></script>
+
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            TableManaged.init();
+            TableManaged3.init();
         });
     </script>
 @stop
@@ -25,20 +27,22 @@
             <div class="card card-custom">
                 <div class="card-header card-header-tabs-line">
                     <div class="card-title">
-                        <h3 class="card-label text-uppercase">Danh sách đơn vị - {{$donvi->name}}</h3>
+                        <h3 class="card-label text-uppercase">Danh sách đơn vị - {{ $donvi->name }}</h3>
                     </div>
                     <div class="card-toolbar">
-                        <a href="{{'/dmdonvi/create?madonvi='.$donvi->id.'&maquocgia='.$donvi->maquocgia.'&parent='.$donvi->parent}}" class="btn btn-xs btn-icon btn-success mr-2" title="Thêm mới đơn vị"><i class="fa fa-plus"></i></a>
-                        <button class="btn btn-xs btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel"
+                        <a href="{{ '/dmdonvi/create?madonvi=' . $donvi->id . '&maquocgia=' . $donvi->maquocgia . '&parent=' . $donvi->parent }}"
+                            class="btn btn-xs btn-icon btn-success mr-2" title="Thêm mới đơn vị"><i
+                                class="fa fa-plus"></i></a>
+                        {{-- <button class="btn btn-xs btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel"
                             data-target="#modal-nhanexcel" data-toggle="modal">
                             <i class="fas fa-file-import"></i>
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="sample_1" class="table table-striped table-bordered table-hover dataTable no-footer">
+                    <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th>STT</th>
                                 <th>Tên đơn vị</th>
                                 <th>Thao tác</th>
@@ -46,24 +50,31 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($model as $key=>$diaban )
-                            <tr>
-                                <td>{{++$key}}</td>
-                                <td>{{$diaban->tendv}}</td>
-                                <td class="text-center">
-                                    <a title="Sửa thông tin" href="{{'/dmdonvi/edit/'.$diaban->id}}" class="btn btn-sm btn-clean btn-icon">
-                                        <i class="icon-lg la flaticon-edit-1 text-primary"></i>
-                                    </a>
-                                    <a href="{{'/TaiKhoan/DanhSach?madv='.$diaban->madv}}" class="btn btn-icon btn-clean btn-lg mb-1 position-relative" title="Danh sách tài khoản">
-                                        <span class="svg-icon svg-icon-xl">
-                                            <i class="icon-lg flaticon-list-2 text-dark"></i>
-                                        </span>
-                                        <span class="label label-sm label-light-danger text-dark label-rounded font-weight-bolder position-absolute top-0 right-0">{{count(App\Models\User::where('madv',$diaban->madv)->get())}}</span>
-                                    </a>
-                                    <button title="Xóa thông tin" type="button" onclick="cfDel('{{'/dmdonvi/delete/'.$diaban->id}}')" class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm" data-toggle="modal">
-                                        <i class="icon-lg flaticon-delete text-danger"></i></button>
-                                </td>
-                            </tr>
+                            @foreach ($model as $key => $diaban)
+                                <tr class="text-center">
+                                    <td>{{ ++$key }}</td>
+                                    <td class="text-left">{{ $diaban->tendv }}</td>
+                                    <td>
+                                        <a title="Sửa thông tin" href="{{ '/dmdonvi/edit/' . $diaban->id }}"
+                                            class="btn btn-sm btn-clean btn-icon">
+                                            <i class="icon-lg la flaticon-edit-1 text-primary"></i>
+                                        </a>
+                                        <a href="{{ '/TaiKhoan/DanhSach?madv=' . $diaban->madv }}"
+                                            class="btn btn-icon btn-clean btn-lg mb-1 position-relative"
+                                            title="Danh sách tài khoản">
+                                            <span class="svg-icon svg-icon-xl">
+                                                <i class="icon-lg flaticon-list-2 text-dark"></i>
+                                            </span>
+                                            <span
+                                                class="label label-sm label-light-danger text-dark label-rounded font-weight-bolder position-absolute top-0 right-0">{{ count(App\Models\User::where('madv', $diaban->madv)->get()) }}</span>
+                                        </a>
+                                        <button title="Xóa thông tin" type="button"
+                                            onclick="cfDel('{{ '/dmdonvi/delete/' . $diaban->id }}')"
+                                            class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm"
+                                            data-toggle="modal">
+                                            <i class="icon-lg flaticon-delete text-danger"></i></button>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

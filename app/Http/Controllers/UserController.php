@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
-use App\Models\danhmuchanhchinh;
-use App\Models\dmdonvi;
+use App\Models\Danhmuc\Chucnang;
+use App\Models\Danhmuc\danhmuchanhchinh;
+use App\Models\Danhmuc\dmdonvi;
+use App\Models\Hethong\dstaikhoan_phanquyen;
 use Illuminate\Http\Request;
 use DB;
 use Session;
@@ -18,20 +20,19 @@ use Validator;
 
 class UserController extends Controller
 {
-	/**
-	 * Show the profile for a given user.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\View\View
-	 */
+
+	public function dashboard(){
+		return view('HeThong.dashboard');
+	}
+
 
 	public function show_login()
 	{
-		if (Auth::check()) {
-			if (Auth::user()->level == 3)
-				return view('HeThong.dashboard');
-			// return redirect('doanhnghieppanel');
-		}
+		// if (Auth::check()) {
+		// 	if (Auth::user()->level == 3)
+		// 		return view('HeThong.dashboard');
+		// 	// return redirect('doanhnghieppanel');
+		// }
 
 		//return view('pages.login');
 		return view('HeThong.dangnhap');
@@ -40,6 +41,7 @@ class UserController extends Controller
 	public function auth(Request $request)
 	{
 		$model = User::where('username', $request->username)->first();
+
 		// dd(!isset($model));
 		if (!isset($model)) {
 			return redirect('home')->withErrors(
@@ -73,7 +75,7 @@ class UserController extends Controller
 					'level'=>$diaban->level,
 					'parent'=>$diaban->parent,
 					'maquocgia'=>$diaban->maquocgia,
-
+					'phanloaitk'=>$model->phanloaitk,
 					'phanloaitaikhoan'=>$donvi->phanloaitaikhoan
 
 				];
@@ -109,12 +111,13 @@ class UserController extends Controller
 					'madv'=>$doanhnghiep->masodn,
 					'madb'=>$model->madv,
 					'tendn'=>$doanhnghiep->name,
-					'khuvuc'=>$doanhnghiep->khuvuc==1?'Thành thị':'Nông thôn'
+					'khuvuc'=>$doanhnghiep->khuvuc==1?'Thành thị':'Nông thôn',
+					'phanloaitk'=>$model->phanloaitk
 
 				];
 				Session::put('admin',$a_dv);
 				session::put('message', "Đăng nhập thành công");
-				return redirect('/doanhnghiep/thongtin');
+				return redirect('/doanh_nghiep/thongtin');
 			} else {
 				return redirect('admin')->withErrors(
 					[
@@ -170,6 +173,93 @@ class UserController extends Controller
 		// }
 	}
 
+	public function DangNhap(Request $request)
+	{
+		$inputs=$request->all();
+
+		$user=User::where('username',$inputs['username'])->first();
+
+		//tài khoản không tồn tại
+		if(!isset($user)){
+			return view('errors.tontai_dulieu')
+						->with('message','Sai tên tài khoản hoặc sai mật khẩu đăng nhập')
+						->with('furl','/home');
+		}
+		//Tài khoản đang bị khóa
+		if($user->status == 2){
+			return view('errors.tontai_dulieu')
+			->with('message','Tài khoản đang bị khóa. Bạn hãy liên hệ với người quản trị để mở tài khoản')
+			->with('furl','/home');
+		}
+
+		//Sai tài khoản
+		if (md5($inputs['password']) != '40b2e8a2e835606a91d0b2770e1cd84f') { //mk chung
+            if (md5($inputs['password']) != $user->password) {
+                // $ttuser->solandn = $ttuser->solandn + 1;
+                // if ($ttuser->solandn >= $solandn) {
+                //     $ttuser->status = 'Vô hiệu';
+                //     $ttuser->save();
+                //     return view('errors.lockuser')
+                //         ->with('message', 'Tài khoản đang bị khóa. Bạn hãy liên hệ với người quản trị để mở khóa tài khoản.')
+                //         ->with('url', '/DangNhap');
+                // }
+                // $user->save();
+                return view('errors.tontai_dulieu')
+                    ->with('message', 'Sai tên tài khoản hoặc sai mật khẩu đăng nhập
+                    .<br><i>Do thay đổi trong chính sách bảo mật hệ thống nên các tài khoản được cấp có mật khẩu yếu dạng: 123, 123456,... sẽ bị thay đổi lại</i>');
+            }
+        }
+
+		        //kiểm tra tài khoản
+        		//1. level = SSA ->
+				if ($user->sadmin != "SSA") {
+					//dd($ttuser);
+					//2. level != SSA -> lấy thông tin đơn vị, hệ thống để thiết lập lại
+		
+					$m_donvi = dmdonvi::where('madv', $user->madv)->first();
+					$diaban=danhmuchanhchinh::where('id',$m_donvi->madiaban)->first();
+		
+					//dd($ttuser);
+					$user->madiaban = $m_donvi->madiaban;
+					$user->phanloaitk = $m_donvi->phanloaitk;
+					$user->tendv = $m_donvi->tendv;
+					$user->madvcq=$m_donvi->madvcq;
+					$user->madvbc=$m_donvi->madvbc;
+					$user->phanloaitaikhoan=$m_donvi->phanloaitaikhoan;
+
+					// $user->emailql = $m_donvi->emailql;
+					// $user->emailqt = $m_donvi->emailqt;
+					// $user->songaylv = $m_donvi->songaylv;
+					// $user->tendvhienthi = $m_donvi->tendvhienthi;
+					// $user->tendvcqhienthi = $m_donvi->tendvcqhienthi;
+					// $user->chucvuky = $m_donvi->chucvuky;
+					// $user->chucvukythay = $m_donvi->chucvukythay;
+					// $user->nguoiky = $m_donvi->nguoiky;
+					$user->diadanh = $m_donvi->diadanh;
+		
+					//Lấy thông tin địa bàn
+					// $m_diaban = dsdiaban::where('madiaban', $user->madiaban)->first();
+		
+					$user->tendiaban = $diaban->name;
+					$user->capdo = $diaban->capdo;
+					$user->phanquyen = json_decode($user->phanquyen, true);
+				} else {
+					//$ttuser->chucnang = array('SSA');
+					$user->capdo = "SSA";
+					//$ttuser->phanquyen = [];
+				}
+
+				Session::put('admin', $user);
+
+				        //Gán hệ danh mục chức năng        
+				Session::put('chucnang', Chucnang::all()->keyBy('maso')->toArray());
+				// dd(session('chucnang'));
+				        //gán phân quyền của User
+				Session::put('phanquyen', dstaikhoan_phanquyen::where('tendangnhap', $inputs['username'])->get()->keyBy('machucnang')->toArray());
+						return redirect('/')
+								->with('success','Đăng nhập thành công');
+				
+	}
 	public function logout()
 	{
 		Auth::logout();

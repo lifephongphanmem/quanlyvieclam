@@ -1,4 +1,4 @@
-@extends('HeThong.main')2x
+@extends('main')
 @section('custom-style')
     <link href="{{url('assets/global/css/plugins.css')}}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="{{url('assets/global/plugins/select2/select2.css')}}"/>

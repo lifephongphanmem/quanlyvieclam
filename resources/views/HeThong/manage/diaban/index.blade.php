@@ -1,4 +1,4 @@
-@extends('HeThong.main')
+@extends('main')
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
@@ -8,8 +8,6 @@
 @section('custom-script')
     <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    {{-- <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
-    </script> --}}
 
     <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
@@ -52,10 +50,10 @@
 
                             </tr>
                             <tr class="text-center">
-                                <th>T</th>
-                                <th>H</th>
-                                <th>X</th>
-                                <th>Th</th>
+                                <th width=3%>T</th>
+                                <th width=3%>H</th>
+                                <th width=3%>X</th>
+                                <th width=3%>Th</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -209,13 +207,13 @@
             if ($item->parent == $parent) {
                             echo '<tr>';
                                 if($item->level== 'Tỉnh'){
-                                    echo '<td class="text-center">'.convert2Roman(++$key).'</td>';
+                                    echo '<td class="text-center  text-uppercase">'.toAlpha(++$key).'</td>';
                                 }else {
                                     echo '<td></td>';
                                 }
                                 if($item->level== 'Thành phố' || $item->level == 'Huyện' || $item->level == 'Thị xã'){
 
-                                    echo '<td class="text-center">'.$i++.'</td>';
+                                    echo '<td class="text-center">'.convert2Roman($i++).'</td>';
                                 }else {
                                     echo '<td></td>';
                                 }
@@ -252,7 +250,7 @@
                                             <span class="svg-icon svg-icon-xl">
                                                 <i class="icon-lg la la-clipboard-list text-success icon-2x"></i>
                                              </span>
-                                            <span class="label label-sm label-light-danger text-dark label-rounded font-weight-bolder position-absolute top-0 right-0">'.count(App\Models\dmdonvi::where('madiaban',$item->id)->get()).'</span>
+                                            <span class="label label-sm label-light-danger text-dark label-rounded font-weight-bolder position-absolute top-0 right-0">'.count(App\Models\Danhmuc\dmdonvi::where('madiaban',$item->id)->get()).'</span>
                                          </a>';
                                          echo '<button title="Xóa thông tin" type="button" onclick="cfDel(`/dia_ban/delete/'.$item->id.'`)" class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm" data-toggle="modal">
                                                 <i class="icon-lg flaticon-delete text-danger"></i>
