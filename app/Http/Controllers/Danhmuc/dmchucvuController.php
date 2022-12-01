@@ -5,9 +5,19 @@ namespace App\Http\Controllers\Danhmuc;
 use App\Models\Danhmuc\dmchucvu;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class dmchucvuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,20 +25,14 @@ class dmchucvuController extends Controller
      */
     public function index()
     {
+        if (!chkPhanQuyen('chucvu', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'chucvu');
+        }
         $model=dmchucvu::all();
         return view('danhmuc.dmchucvu.index')
                     ->with('model',$model);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,33 +42,15 @@ class dmchucvuController extends Controller
      */
     public function store(Request $request)
     {
+        if (!chkPhanQuyen('chucvu', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'chucvu');
+        }
         $inputs=$request->all();
         dmchucvu::create($inputs);
         return redirect('/danh_muc/dm_chuc_vu')
                     ->with('success','Thêm mới thành công');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -75,6 +61,9 @@ class dmchucvuController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!chkPhanQuyen('chucvu', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'chucvu');
+        }
         $inputs=$request->all();
         $model=dmchucvu::findOrFail($id);
         $model->update($inputs);
@@ -90,6 +79,9 @@ class dmchucvuController extends Controller
      */
     public function destroy($id)
     {
+        if (!chkPhanQuyen('chucvu', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'chucvu');
+        }
         $model=dmchucvu::findOrFail($id);
         $model->delete();
         return redirect('/danh_muc/dm_chuc_vu')

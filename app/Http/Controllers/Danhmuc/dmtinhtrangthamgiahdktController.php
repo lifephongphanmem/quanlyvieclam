@@ -7,11 +7,24 @@ use App\Models\Danhmuc\dmtinhtrangthamgiahdktct;
 use App\Models\Danhmuc\dmtinhtrangthamgiahdktct2;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class dmtinhtrangthamgiahdktController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
 	public function index()
 	{
+		if (!chkPhanQuyen('tinhtrangthamgiahdkt', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tinhtrangthamgiahdkt');
+        }	
 		$model = dmtinhtrangthamgiahdkt::all()->sortBy('stt');
 		$count = Count($model);
 		return view('danhmuc.tinhtrangthamgiahoatdongkinhte.tinhtrangthamgiahdkt', compact('model', 'count'));
@@ -19,6 +32,9 @@ class dmtinhtrangthamgiahdktController extends Controller
 
 	public function store_update(Request $request)
 	{
+		if (!chkPhanQuyen('tinhtrangthamgiahdkt', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'tinhtrangthamgiahdkt');
+        }	
 		$input = $request->all();
 
 		if ($input['id'] != null) {
@@ -32,6 +48,9 @@ class dmtinhtrangthamgiahdktController extends Controller
 
 	public function delete($id)
 	{
+		if (!chkPhanQuyen('tinhtrangthamgiahdkt', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'tinhtrangthamgiahdkt');
+        }	
 		$id_delete = dmtinhtrangthamgiahdkt::findOrFail($id);
 		$id_delete1 = dmtinhtrangthamgiahdkt::Where('manhom', $id_delete->madmtgkt);
 		$id_delete2 = dmtinhtrangthamgiahdktct::Where('manhom', $id_delete1->madmtgktct);
@@ -49,6 +68,9 @@ class dmtinhtrangthamgiahdktController extends Controller
 
 	public function edit($id)
 	{
+		if (!chkPhanQuyen('tinhtrangthamgiahdkt', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'tinhtrangthamgiahdkt');
+        }	
 		$model = dmtinhtrangthamgiahdkt::Find($id);
 		die($model);
 	}
@@ -59,6 +81,9 @@ class dmtinhtrangthamgiahdktController extends Controller
 
 	public function index_ct(Request $request)
 	{
+		if (!chkPhanQuyen('tinhtrangthamgiahdkt', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tinhtrangthamgiahdkt');
+        }
 		$model = dmtinhtrangthamgiahdktct::Where('manhom', $request->manhom)->get();
 		$tennhom = dmtinhtrangthamgiahdkt::select('tentgkt','madmtgkt')->Where('madmtgkt', $request->manhom)->first();
 		$count = Count($model);
@@ -68,6 +93,9 @@ class dmtinhtrangthamgiahdktController extends Controller
 
 	public function store_update_ct(Request $request)
 	{
+		if (!chkPhanQuyen('tinhtrangthamgiahdkt', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'tinhtrangthamgiahdkt');
+        }	
 		$input = $request->all();
 
 		if ($input['id'] != null) {
@@ -87,6 +115,9 @@ class dmtinhtrangthamgiahdktController extends Controller
 
 	public function delete_ct($id)
 	{	
+		if (!chkPhanQuyen('tinhtrangthamgiahdkt', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'tinhtrangthamgiahdkt');
+        }	
 		$manhom = dmtinhtrangthamgiahdktct::select('manhom')->Find($id)->first();
 		$id_delete1 = dmtinhtrangthamgiahdktct::findOrFail($id);
 		$id_delete2 = dmtinhtrangthamgiahdktct2::Where('manhom', $id_delete1->madmtgktct);
@@ -103,6 +134,9 @@ class dmtinhtrangthamgiahdktController extends Controller
 
 	public function edit_ct($id)
 	{
+		if (!chkPhanQuyen('tinhtrangthamgiahdkt', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'tinhtrangthamgiahdkt');
+        }	
 		$model = dmtinhtrangthamgiahdktct::Find($id);
 		die($model);
 	}
@@ -112,7 +146,9 @@ class dmtinhtrangthamgiahdktController extends Controller
 
 		public function index_ct2(Request $request)
 		{		
-		
+			if (!chkPhanQuyen('tinhtrangthamgiahdkt', 'danhsach')) {
+				return view('errors.noperm')->with('machucnang', 'tinhtrangthamgiahdkt');
+			}
 			$model = dmtinhtrangthamgiahdktct2::Where('manhom2', $request->manhom)->get();
 			$tennhom = dmtinhtrangthamgiahdktct::select('tentgktct','madmtgktct','manhom')->Where('madmtgktct', $request->manhom)->first();
 			$nhom = $tennhom->manhom;
@@ -123,6 +159,9 @@ class dmtinhtrangthamgiahdktController extends Controller
 	
 		public function store_update_ct2(Request $request)
 		{
+			if (!chkPhanQuyen('tinhtrangthamgiahdkt', 'thaydoi')) {
+				return view('errors.noperm')->with('machucnang', 'tinhtrangthamgiahdkt');
+			}	
 			$input = $request->all();
 
 			if ($input['id'] != null) {
@@ -142,6 +181,9 @@ class dmtinhtrangthamgiahdktController extends Controller
 	
 		public function delete_ct2($id)
 		{	
+			if (!chkPhanQuyen('tinhtrangthamgiahdkt', 'thaydoi')) {
+				return view('errors.noperm')->with('machucnang', 'tinhtrangthamgiahdkt');
+			}	
 			$manhom = dmtinhtrangthamgiahdktct2::select('manhom2')->Find($id)->first();
 			$id_delete = dmtinhtrangthamgiahdktct2::findOrFail($id);
 			$model = dmtinhtrangthamgiahdktct2::where('stt', '>=', $id_delete->stt)->get();
@@ -156,6 +198,9 @@ class dmtinhtrangthamgiahdktController extends Controller
 	
 		public function edit_ct2($id)
 		{
+			if (!chkPhanQuyen('tinhtrangthamgiahdkt', 'thaydoi')) {
+				return view('errors.noperm')->with('machucnang', 'tinhtrangthamgiahdkt');
+			}	
 			$model = dmtinhtrangthamgiahdktct2::Find($id);
 			die($model);
 		}

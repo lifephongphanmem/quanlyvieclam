@@ -1,5 +1,5 @@
 
-
+@if (chkPhanQuyen('qlthongbao', 'phanquyen'))
 <li class="menu-section">
     <h4 class="menu-text">QUẢN LÝ THÔNG BÁO</h4>
     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
@@ -25,6 +25,7 @@
     <div class="menu-submenu">
         <i class="menu-arrow"></i>
         <ul class="menu-subnav">
+            @if (chkPhanQuyen('thongbaocunglaodong', 'phanquyen'))
             <li class="menu-item" aria-haspopup="true">
                 <a href="{{ '/cungld/thongbao' }}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
@@ -33,7 +34,8 @@
                     <span class="menu-text">Cung lao động</span>
                 </a>
             </li>
-            {{-- @if (session('admin')['level'] == 'Tỉnh') --}}
+            @endif
+            {{-- @if (chkPhanQuyen('qlthongbao', 'phanquyen')) --}}
             <li class="menu-item" aria-haspopup="true">
                 <a href="{{ '/' }}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
@@ -42,7 +44,8 @@
                     <span class="menu-text">Cầu lao động</span>
                 </a>
             </li>
-
+            {{-- @endif --}}
+            @if (chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'phanquyen'))
             <li class="menu-item" aria-haspopup="true">
                 <a href="{{ url('/tinhhinhsudungld/thongbao') }}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
@@ -51,6 +54,7 @@
                     <span class="menu-text">Tình hình sử dụng lao động</span>
                 </a>
             </li>
+            @endif
             {{-- @endif --}}
             {{-- <li class="menu-item" aria-haspopup="true">
                 <a href="{{ '/thongbao_khac/danhsach' }}" class="menu-link">
@@ -85,6 +89,7 @@
     <div class="menu-submenu">
         <i class="menu-arrow"></i>
         <ul class="menu-subnav">
+            @if (chkPhanQuyen('nhanthongbaocunglaodong', 'phanquyen'))
             <li class="menu-item" aria-haspopup="true">
                 {{-- <a href="{{url('/employer-ba')}}" class="menu-link"> --}}
                 {{-- <a href="{{url('/admessages')}}" class="menu-link"> --}}
@@ -96,6 +101,7 @@
                     <span class="menu-text">Cung lao động</span>
                 </a>
             </li>
+            @endif
             {{-- @if (session('admin')['level'] == 'Tỉnh') --}}
             <li class="menu-item" aria-haspopup="true">
                 <a href="{{ '/' }}" class="menu-link">
@@ -105,7 +111,7 @@
                     <span class="menu-text">Cầu lao động</span>
                 </a>
             </li>
-
+            @if (chkPhanQuyen('nhanthongbaotinhhinhsudungld', 'phanquyen'))
             <li class="menu-item" aria-haspopup="true">
                 <a href="{{ url('/tinhhinhsudungld/don_vi/thongbao') }}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
@@ -114,16 +120,17 @@
                     <span class="menu-text">Tình hình sử dụng lao động</span>
                 </a>
             </li>
-            {{-- @endif --}}
-            <li class="menu-item" aria-haspopup="true">
+            @endif
+            {{-- <li class="menu-item" aria-haspopup="true">
                 <a href="{{ '/' }}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>
                     <span class="menu-text">Khác</span>
                 </a>
-            </li>
+            </li> --}}
 
         </ul>
     </div>
 </li>
+@endif

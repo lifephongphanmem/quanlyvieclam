@@ -47,21 +47,21 @@
                         </div>
                         <div class="float-left ml-2" style="width:60%">
                             <div class="form-group">
-                                {!! Form::select('nam',getNam(),$nam, array('id' => 'nam', 'class' => 'form-control'))!!}
-    
+                                {!! Form::select('nam', getNam(), $nam, ['id' => 'nam', 'class' => 'form-control']) !!}
+
                             </div>
                         </div>
                     </div>
                     <div class="float-right" style="width:50%">
                         <div class="float-left mt-2" style="width:10%">
-                            <div class="form-group" >
+                            <div class="form-group">
                                 <label class="control-label">Loại báo cáo</label>
                             </div>
                         </div>
-                        <div class="float-left ml-2"  style="width:60%">
+                        <div class="float-left ml-2" style="width:60%">
                             <div class="form-group">
-                                {!! Form::select('tieude',$tieude,$_tieude, array('id' => 'tieude', 'class' => 'form-control'))!!}
-    
+                                {!! Form::select('tieude', $tieude, $_tieude, ['id' => 'tieude', 'class' => 'form-control']) !!}
+
                             </div>
                         </div>
                     </div>
@@ -72,38 +72,35 @@
                         <thead>
                             <tr>
                                 <th width="2%"> STT </th>
-                                <th width="15%" >Tên doanh nghiệp</th>
+                                <th width="15%">Tên doanh nghiệp</th>
                                 <th width="5%">Tình trạng</th>
                                 <th width="2%">Thao tác</th>
-                            </thead>
+                        </thead>
                         </tr>
                         <tbody>
                             @foreach ($model as $key => $tb)
                                 <tr>
                                     <td>{{ ++$key }}</td>
-                                    <td>{{ $tb->name}}</td>
-                                    <td class="{{getTextStatus($tb->trangthai)}}">{{getStatus()[$tb->trangthai]}}</td>
+                                    <td>{{ $tb->name }}</td>
+                                    <td class="{{ getTextStatus($tb->trangthai) }}">{{ getStatus()[$tb->trangthai] }}</td>
                                     <td>
-                                        <a title="In"
-                                        href=""
-                                        class="btn btn-sm btn-clean btn-icon" target="_blank">
-                                        <i class="icon-lg la flaticon2-print text-dark"></i>
-                                    </a>
-                                    
-                                        @if ($tb->trangthai == 'DAGUI')
-                                            <button type="button" onclick="tralai('{{ $tb->masodn }}','{{$tb->tieude}}','{{$tb->nam}}')"
-                                                title="Trả lại" data-target="#modify-modal-tralai" data-toggle="modal"
-                                                class="btn btn-sm btn-clean btn-icon">
-                                                <i class="fas fa-share-square text-success"></i>
-                                            </button>
-                                       
+                                        @if (chkPhanQuyen('tonghopdulieutinhhinhsudungld', 'danhsach'))
+                                            <a title="In" href="" class="btn btn-sm btn-clean btn-icon"
+                                                target="_blank">
+                                                <i class="icon-lg la flaticon2-print text-dark"></i>
+                                            </a>
+                                        @endif
 
-                                        {{-- <button title="Xóa thông tin" type="button"
-                                            onclick="cfDel('{{ '/tinhhinhsudungld/don_vi/delete/' . $tb->id }}')"
-                                            class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm"
-                                            data-toggle="modal">
-                                            <i class="icon-lg flaticon-delete text-danger"></i></button> --}}
+                                        @if ($tb->trangthai == 'DAGUI')
+                                            @if (chkPhanQuyen('tonghopdulieutinhhinhsudungld', 'thaydoi'))
+                                                <button type="button"
+                                                    onclick="tralai('{{ $tb->masodn }}','{{ $tb->tieude }}','{{ $tb->nam }}')"
+                                                    title="Trả lại" data-target="#modify-modal-tralai" data-toggle="modal"
+                                                    class="btn btn-sm btn-clean btn-icon">
+                                                    <i class="fas fa-share-square text-success"></i>
+                                                </button>
                                             @endif
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -131,7 +128,7 @@
                     </div>
                     <div class="modal-body">
                         <label for="" class="control-label">Lý do trả lại</label>
-                        <textarea name="lydo"  cols=""  rows="3" class="col-md-12"></textarea>
+                        <textarea name="lydo" cols="" rows="3" class="col-md-12"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-default">Đóng</button>
@@ -187,7 +184,7 @@
             </div>
         </div>
     </form> --}}
-<!-- Model edit -->
+    <!-- Model edit -->
     {{-- <form method="POST" action="" accept-charset="UTF-8" id="frm_modify_edit">
         @csrf
         <div id="modify-modal-edit" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;"
@@ -236,9 +233,8 @@
         </div>
     </form> --}}
     <script>
-
-        function tralai(masodn,tieude,nam) {
-            var url = '/tinhhinhsudungld/tinh/tralai?madv='+masodn+'&tieude='+tieude+'&nam='+ nam;
+        function tralai(masodn, tieude, nam) {
+            var url = '/tinhhinhsudungld/tinh/tralai?madv=' + masodn + '&tieude=' + tieude + '&nam=' + nam;
             $('#frm_modify_tralai').attr('action', url);
         }
 
@@ -281,7 +277,7 @@
         //             toastr.error(message, 'Lỗi!');
         //         }
         //     });
-            
+
         // }
 
         // function lydo(id) {

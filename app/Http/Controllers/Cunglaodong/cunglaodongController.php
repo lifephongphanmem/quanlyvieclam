@@ -19,9 +19,20 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class cunglaodongController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +40,9 @@ class cunglaodongController extends Controller
      */
     public function index()
     {
+        if (!chkPhanQuyen('tonghopcunglaodongxa', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongxa');
+        }
         $model = tonghopdanhsachcungld::where('madv', session('admin')['madv'])->get();
         $model_cungld = thongbaocungld::all();
         return view('cunglaodong.donvi.index')
@@ -39,6 +53,9 @@ class cunglaodongController extends Controller
 
 public function nhanthongbao()
 {
+    if (!chkPhanQuyen('nhanthongbaocunglaodong', 'danhsach')) {
+        return view('errors.noperm')->with('machucnang', 'nhanthongbaocunglaodong');
+    }
     $user=User::where('madv',session('admin')['madv'])->first();
     $model=thongbaocungld::join('thongbao_congty','thongbao_congty.thongbao_id','thongbaocungld.id')
                             ->select('thongbaocungld.*')
@@ -56,6 +73,9 @@ public function nhanthongbao()
      */
     public function store(Request $request)
     {
+        if (!chkPhanQuyen('tonghopcunglaodongxa', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongxa');
+        }
         $inputs = $request->all();
         $model=tonghopdanhsachcungld::where('nam',$inputs['nam'])->where('madv',session('admin')['madv'])->first();
         if(isset($model)){
@@ -133,6 +153,9 @@ public function nhanthongbao()
      */
     public function show($id)
     {
+        if (!chkPhanQuyen('tonghopcunglaodongxa', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongxa');
+        }
         $m_dv=dmdonvi::where('madv',session('admin')['madv'])->first();
         $model = tonghopdanhsachcungld_ct::where('math', $id)->get();
         $doituong_ut=dmdoituonguutien::all();
@@ -156,28 +179,6 @@ public function nhanthongbao()
             ->with('pageTitle', 'Thông tin cung lao động');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -187,6 +188,9 @@ public function nhanthongbao()
      */
     public function destroy($id)
     {
+        if (!chkPhanQuyen('tonghopcunglaodongxa', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongxa');
+        }
         $model = tonghopdanhsachcungld::findOrFail($id);
         $model_ct = tonghopdanhsachcungld_ct::where('math', $model->math)->get();
         foreach ($model_ct as $ct) {
@@ -199,6 +203,9 @@ public function nhanthongbao()
 
     public function senddata($id)
     {
+        if (!chkPhanQuyen('tonghopcunglaodongxa', 'hoanthanh')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongxa');
+        }
         $model = tonghopdanhsachcungld::findOrFail($id);
         $math = getdate()[0];
         $time = Carbon::now();
@@ -224,6 +231,9 @@ public function nhanthongbao()
 
     public function lydo($id)
     {
+        if (!chkPhanQuyen('tonghopcunglaodongxa', 'hoanthanh')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongxa');
+        }
         $model = tonghopdanhsachcungld::findOrFail($id);
 
         return response()->json($model);

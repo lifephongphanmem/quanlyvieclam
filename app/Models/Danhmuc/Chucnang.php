@@ -10,6 +10,6 @@ class Chucnang extends Model
     use HasFactory;
     protected $table = 'chucnangs';
     protected $fillable = [
-        'maso','tencn','capdo','parent','trangthai'
+        'maso','tencn','capdo','parent','trangthai','machucnang_goc'
     ];
 }

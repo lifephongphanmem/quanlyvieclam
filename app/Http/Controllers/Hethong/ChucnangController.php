@@ -5,9 +5,19 @@ namespace App\Http\Controllers\Hethong;
 use App\Http\Controllers\Controller;
 use App\Models\Danhmuc\Chucnang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ChucnangController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +25,10 @@ class ChucnangController extends Controller
      */
     public function index()
     {
-        $model=Chucnang::all();
+        if (!chkPhanQuyen('chucnang', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'chucnang');
+        }
+        $model=Chucnang::orderBy('id','DESC')->get();
         // foreach($model as $value){
         //     $m_cn=$model->where('parent',1);
         //     dd($m_cn);
@@ -42,6 +55,9 @@ class ChucnangController extends Controller
      */
     public function store(Request $request)
     {
+        if (!chkPhanQuyen('chucnang', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'chucnang');
+        }
         $inputs=$request->all();
         $inputs['parent'] = isset($inputs['parent'])?$inputs['parent']:0;
         if($inputs['edit'] == null){
@@ -69,16 +85,6 @@ class ChucnangController extends Controller
         return redirect('/Chuc_nang/Thong_tin');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -88,21 +94,14 @@ class ChucnangController extends Controller
      */
     public function edit($id)
     {
+        if (!chkPhanQuyen('chucnang', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'chucnang');
+        }
         $model=Chucnang::findOrFail($id);
         return response()->json($model);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -112,6 +111,9 @@ class ChucnangController extends Controller
      */
     public function destroy($id)
     {
+        if (!chkPhanQuyen('chucnang', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'chucnang');
+        }
         $model=Chucnang::findOrFail($id);
         $m_model=Chucnang::where('parent',$model->id)->get();
         if(isset($m_model)){

@@ -5,9 +5,19 @@ namespace App\Http\Controllers\Danhmuc;
 use App\Models\Danhmuc\dmchuyenmondaotao;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class dmchuyenmondaotaoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,20 +25,13 @@ class dmchuyenmondaotaoController extends Controller
      */
     public function index()
     {
+        if (!chkPhanQuyen('chuyenmondaotao', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'chuyenmondaotao');
+        }
         $model=dmchuyenmondaotao::all();
         return view('danhmuc.dmchuyenmondaotao.index')
                 ->with('model',$model);
     
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -39,33 +42,15 @@ class dmchuyenmondaotaoController extends Controller
      */
     public function store(Request $request)
     {
+        if (!chkPhanQuyen('chuyenmondaotao', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'chuyenmondaotao');
+        }
         $inputs=$request->all();
         dmchuyenmondaotao::create($inputs);
         return redirect('/dm_chuyen_mon_dao_tao')
                 ->with('success','Thêm mới thành công');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -76,6 +61,9 @@ class dmchuyenmondaotaoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!chkPhanQuyen('chuyenmondaotao', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'chuyenmondaotao');
+        }
         $inputs=$request->all();
         $model=dmchuyenmondaotao::findOrFail($id);
         $model->update($inputs);
@@ -91,6 +79,9 @@ class dmchuyenmondaotaoController extends Controller
      */
     public function destroy($id)
     {
+        if (!chkPhanQuyen('chuyenmondaotao', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'chuyenmondaotao');
+        }
         $model=dmchuyenmondaotao::findOrFail($id);
         $model->delete();
         return redirect('/dm_chuyen_mon_dao_tao')

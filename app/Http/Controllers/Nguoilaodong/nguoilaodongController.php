@@ -22,9 +22,19 @@ use DB;
 use Maatwebsite\Excel\Facades\Excel;
 use stdClass;
 use App\Models\Report;
+use Illuminate\Support\Facades\Session;
 
 class nguoilaodongController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware(function ($request, $next) {
+      if (!Session::has('admin')) {
+        return redirect('/home');
+      };
+      return $next($request);
+    });
+  }
   /**
    * Display a listing of the resource.
    *
@@ -32,10 +42,13 @@ class nguoilaodongController extends Controller
    */
   public function index()
   {
+    if (!chkPhanQuyen('laodongtrongnuoc', 'danhsach')) {
+      return view('errors.noperm')->with('machucnang', 'laodongtrongnuoc');
+    }
     // $model=nguoilaodong::paginate(20); 
     $model = nguoilaodong::where('madb', session('admin')['madv'])
       ->OrderBy('id', 'DESC')->get();
-      $a_chucvu=array_column(dmchucvu::all()->toarray(),'tencv','id');
+    $a_chucvu = array_column(dmchucvu::all()->toarray(), 'tencv', 'id');
     return view('nguoilaodong.index')
       ->with('model', $model)
       ->with('a_chucvu', $a_chucvu);
@@ -43,6 +56,9 @@ class nguoilaodongController extends Controller
 
   public function index_nuocngoai()
   {
+    if (!chkPhanQuyen('laodongnguoinuocngoai', 'danhsach')) {
+      return view('errors.noperm')->with('machucnang', 'laodongnguoinuocngoai');
+    }
     $model = nguoilaodong::wherenotin('nation', ['VN', 'Việt Nam'])
       ->OrderBy('id', 'DESC')->get();
     return view('nguoilaodong.nuocngoai.index')
@@ -51,6 +67,10 @@ class nguoilaodongController extends Controller
 
   public function create_nuocngoai()
   {
+
+    if (!chkPhanQuyen('laodongnguoinuocngoai', 'thaydoi')) {
+      return view('errors.noperm')->with('machucnang', 'laodongnguoinuocngoai');
+    }
     $countries_list = $this->getCountries();
     $dmchuyenmon = dmchuyenmondaotao::all();
     $dmnghecongviec = nghecongviec::all();
@@ -69,6 +89,9 @@ class nguoilaodongController extends Controller
    */
   public function create()
   {
+    if (!chkPhanQuyen('laodongtrongnuoc', 'thaydoi')) {
+      return view('errors.noperm')->with('machucnang', 'laodongtrongnuoc');
+    }
     $countries_list = $this->getCountries();
     // get params
     $dmhc = $this->getdanhmuc();
@@ -112,25 +135,23 @@ class nguoilaodongController extends Controller
           }
         }
       }
-    } 
-    
-    foreach($list_tinhtrangvl as $val){
-        $m=$list_tinhtrangvl1->where('manhom',$val->madmtgkt);
-        if(count($m)){
-            foreach($m as $k=>$ct){
-              if($val->tentgkt =='Người thất nghiệp' && $ct->tentgktct != 'Thời gian thất nghiệp')
-              {
-                $a_nguoithatnghiep[$k]['madm'] = $ct->madmtgktct;
-                $a_nguoithatnghiep[$k]['tendm'] = $ct->tentgktct;
-              }
+    }
 
-              if($val->tentgkt =='Không tham gia hoạt động kinh tế')
-              {
-                $a_lydo_khongthamgia_hdkt[$k]['madm'] = $ct->madmtgktct;
-                $a_lydo_khongthamgia_hdkt[$k]['tendm'] = $ct->tentgktct;
-              }
-            }
+    foreach ($list_tinhtrangvl as $val) {
+      $m = $list_tinhtrangvl1->where('manhom', $val->madmtgkt);
+      if (count($m)) {
+        foreach ($m as $k => $ct) {
+          if ($val->tentgkt == 'Người thất nghiệp' && $ct->tentgktct != 'Thời gian thất nghiệp') {
+            $a_nguoithatnghiep[$k]['madm'] = $ct->madmtgktct;
+            $a_nguoithatnghiep[$k]['tendm'] = $ct->tentgktct;
+          }
+
+          if ($val->tentgkt == 'Không tham gia hoạt động kinh tế') {
+            $a_lydo_khongthamgia_hdkt[$k]['madm'] = $ct->madmtgktct;
+            $a_lydo_khongthamgia_hdkt[$k]['tendm'] = $ct->tentgktct;
+          }
         }
+      }
     }
     // dd($a_lydo_khongthamgia_hdkt);
     // return view ('pages.employer.new')
@@ -160,6 +181,9 @@ class nguoilaodongController extends Controller
    */
   public function store(Request $request)
   {
+    if (!chkPhanQuyen('laodongtrongnuoc', 'thaydoi')) {
+      return view('errors.noperm')->with('machucnang', 'laodongtrongnuoc');
+    }
     $inputs = $request->all();
     $inputs['madb'] = session('admin')['madv'];
     $inputs['ma_nld'] = getdate()[0];
@@ -176,6 +200,9 @@ class nguoilaodongController extends Controller
 
   public function store_nuocngoai(Request $request)
   {
+    if (!chkPhanQuyen('laodongnguoinuocngoai', 'thaydoi')) {
+      return view('errors.noperm')->with('machucnang', 'laodongnguoinuocngoai');
+    }
     $inputs = $request->all();
     $inputs['ma_nld'] = getdate()[0];
     $inputs['sohc'] = $inputs['cmnd'];
@@ -198,6 +225,9 @@ class nguoilaodongController extends Controller
    */
   public function edit($id)
   {
+    if (!chkPhanQuyen('laodongtrongnuoc', 'thaydoi')) {
+      return view('errors.noperm')->with('machucnang', 'laodongtrongnuoc');
+    }
     $countries_list = $this->getCountries();
     // get params
     $dmhc = $this->getdanhmuc();
@@ -234,25 +264,23 @@ class nguoilaodongController extends Controller
           }
         }
       }
-    } 
-    
-    foreach($list_tinhtrangvl as $val){
-        $m=$list_tinhtrangvl1->where('manhom',$val->madmtgkt);
-        if(count($m)){
-            foreach($m as $k=>$ct){
-              if($val->tentgkt =='Người thất nghiệp' && $ct->tentgktct != 'Thời gian thất nghiệp')
-              {
-                $a_nguoithatnghiep[$k]['madm'] = $ct->madmtgktct;
-                $a_nguoithatnghiep[$k]['tendm'] = $ct->tentgktct;
-              }
+    }
 
-              if($val->tentgkt =='Không tham gia hoạt động kinh tế')
-              {
-                $a_lydo_khongthamgia_hdkt[$k]['madm'] = $ct->madmtgktct;
-                $a_lydo_khongthamgia_hdkt[$k]['tendm'] = $ct->tentgktct;
-              }
-            }
+    foreach ($list_tinhtrangvl as $val) {
+      $m = $list_tinhtrangvl1->where('manhom', $val->madmtgkt);
+      if (count($m)) {
+        foreach ($m as $k => $ct) {
+          if ($val->tentgkt == 'Người thất nghiệp' && $ct->tentgktct != 'Thời gian thất nghiệp') {
+            $a_nguoithatnghiep[$k]['madm'] = $ct->madmtgktct;
+            $a_nguoithatnghiep[$k]['tendm'] = $ct->tentgktct;
+          }
+
+          if ($val->tentgkt == 'Không tham gia hoạt động kinh tế') {
+            $a_lydo_khongthamgia_hdkt[$k]['madm'] = $ct->madmtgktct;
+            $a_lydo_khongthamgia_hdkt[$k]['tendm'] = $ct->tentgktct;
+          }
         }
+      }
     }
     return view('nguoilaodong.edit')
       ->with('countries_list', $countries_list)
@@ -275,6 +303,9 @@ class nguoilaodongController extends Controller
 
   public function edit_nuocngoai($id)
   {
+    if (!chkPhanQuyen('laodongnguoinuocngoai', 'thaydoi')) {
+      return view('errors.noperm')->with('machucnang', 'laodongnguoinuocngoai');
+    }
     $countries_list = $this->getCountries();
     $dmchuyenmon = dmchuyenmondaotao::all();
     $dmnghecongviec = nghecongviec::all();
@@ -298,6 +329,9 @@ class nguoilaodongController extends Controller
    */
   public function update(Request $request, $id)
   {
+    if (!chkPhanQuyen('laodongtrongnuoc', 'thaydoi')) {
+      return view('errors.noperm')->with('machucnang', 'laodongtrongnuoc');
+    }
     $inputs = $request->all();
     $model = nguoilaodong::findOrFail($id);
     $model->update($inputs);
@@ -307,6 +341,9 @@ class nguoilaodongController extends Controller
 
   public function update_nuocngoai(Request $request, $id)
   {
+    if (!chkPhanQuyen('laodongnguoinuocngoai', 'thaydoi')) {
+      return view('errors.noperm')->with('machucnang', 'laodongnguoinuocngoai');
+    }
     $inputs = $request->all();
     $inputs['sohc'] = $inputs['cmnd'];
     $model = nguoilaodong::findOrFail($id);
@@ -323,6 +360,9 @@ class nguoilaodongController extends Controller
    */
   public function destroy($id)
   {
+    if (!chkPhanQuyen('laodongtrongnuoc', 'thaydoi')) {
+      return view('errors.noperm')->with('machucnang', 'laodongtrongnuoc');
+    }
     $model = nguoilaodong::findOrFail($id);
     $model->delete();
     return redirect('/nguoilaodong')
@@ -331,6 +371,9 @@ class nguoilaodongController extends Controller
 
   public function destroy_nuocngoai($id)
   {
+    if (!chkPhanQuyen('laodongnguoinuocngoai', 'thaydoi')) {
+      return view('errors.noperm')->with('machucnang', 'laodongnguoinuocngoai');
+    }
     $model = nguoilaodong::findOrFail($id);
     $model->delete();
     return redirect('/nguoilaodong/nuoc_ngoai')

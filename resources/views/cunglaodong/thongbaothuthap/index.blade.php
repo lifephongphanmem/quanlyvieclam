@@ -38,9 +38,10 @@
                         <h3 class="card-label text-uppercase">Danh sách thông báo</h3>
                     </div>
                     <div class="card-toolbar">
-                        {{-- <a href="{{ '/cungld/thongbao/create' }}" class="btn btn-sm btn-success mr-2"
-                            title="Thêm mới tài khoản"><i class="fa fa-plus"></i></a> --}}
-                            <button class="btn btn-xs btn-icon btn-success mr-2" onclick="add()" title="Thêm thông báo" data-target="#modify-modal" data-toggle="modal"><i class="fa fa-plus"></i></button>
+                        @if (chkPhanQuyen('thongbaocunglaodong', 'thaydoi'))
+                            <button class="btn btn-sm btn-success mr-2" onclick="add()" title="Thêm thông báo"
+                                data-target="#modify-modal" data-toggle="modal"><i class="fa fa-plus"></i>Thêm mới</button>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body">
@@ -67,23 +68,27 @@
                                     </td>
                                     <td>
                                         @if ($th->ngaygui == 0)
-                                        <button title="Sửa thông tin"
-                                            onclick="edit(this,'{{ '/cungld/thongbao/update/' . $th->id }}')"
-                                            class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal-edit" data-toggle="modal">
-                                            <i class="icon-lg la flaticon-edit-1 text-primary"></i>
-                                        </button>
-                                        <button title="Xóa thông tin" type="button"
-                                            onclick="cfDel('{{ '/cungld/thongbao/delete/' . $th->id }}')"
-                                            class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm"
-                                            data-toggle="modal">
-                                            <i class="icon-lg flaticon-delete text-danger"></i></button>
-                                        
-                                            <button type="button" onclick="sendData({{ $th->id }})"
-                                                title="Gửi thông báo" data-target="#modify-modal-th" data-toggle="modal"
-                                                class="btn btn-sm btn-clean btn-icon">
-                                                <i class="fas fa-share-square text-success"></i>
-                                            </button>
-                                        {{-- @else
+                                            @if (chkPhanQuyen('thongbaocunglaodong', 'thaydoi'))
+                                                <button title="Sửa thông tin"
+                                                    onclick="edit(this,'{{ '/cungld/thongbao/update/' . $th->id }}')"
+                                                    class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal-edit"
+                                                    data-toggle="modal">
+                                                    <i class="icon-lg la flaticon-edit-1 text-primary"></i>
+                                                </button>
+                                                <button title="Xóa thông tin" type="button"
+                                                    onclick="cfDel('{{ '/cungld/thongbao/delete/' . $th->id }}')"
+                                                    class="btn btn-sm btn-clean btn-icon"
+                                                    data-target="#delete-modal-confirm" data-toggle="modal">
+                                                    <i class="icon-lg flaticon-delete text-danger"></i></button>
+                                            @endif
+                                            @if (chkPhanQuyen('thongbaocunglaodong', 'hoanthanh'))
+                                                <button type="button" onclick="sendData({{ $th->id }})"
+                                                    title="Gửi thông báo" data-target="#modify-modal-th" data-toggle="modal"
+                                                    class="btn btn-sm btn-clean btn-icon">
+                                                    <i class="fas fa-share-square text-success"></i>
+                                                </button>
+                                            @endif
+                                            {{-- @else
                                             <button type="button" onclick="sendData({{ $th->id }})"
                                                 title="Gửi thông báo" data-target="#modify-modal-th" data-toggle="modal"
                                                 class="btn btn-sm btn-clean btn-icon" disabled>
@@ -106,51 +111,49 @@
     </div>
     <!--end::Row-->
     @include('includes.delete')
-<!-- Modal thêm thông báo -->
+    <!-- Modal thêm thông báo -->
     <form method="POST" action="" accept-charset="UTF-8" id="frm_modify">
         @csrf
-        <div id="modify-modal" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;"
-            aria-hidden="true">
+        <div id="modify-modal" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header modal-header-primary">
                         <h4 id="modal-header-primary-label" class="modal-title">Thông tin thông báo</h4>
                         <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
                     </div>
-                    <div class="modal-body" >
+                    <div class="modal-body">
                         <div class="form-horizontal">
                             <div class="row form-group">
                                 <div class="col-lg-4">
                                     <label class="control-label">Năm thu thập</label>
-                                    {!! Form::select('nam',getNam(),$nam, array('id' => 'nam_add','class' => 'form-control'))!!}
+                                    {!! Form::select('nam', getNam(), $nam, ['id' => 'nam_add', 'class' => 'form-control']) !!}
                                 </div>
 
                                 <div class="col-lg-8">
                                     <label class="control-label">Tiêu đề<span class="require">*</span></label>
                                     <input class="form-control" required="required" name="tieude" type="text"
-                                      id='tieude_add' readonly >
+                                        id='tieude_add' readonly>
                                 </div>
                             </div>
 
                             <div class="row form-group">
                                 <div class="col-lg-12">
                                     <label class="control-label">Nội dung</label>
-                                    <textarea name="noidung" rows="3" class="form-control" ></textarea>
+                                    <textarea name="noidung" rows="3" class="form-control"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                        <button type="submit" id="submit" name="submit" value="submit"
-                            class="btn btn-primary">Đồng
+                        <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary">Đồng
                             ý</button>
                     </div>
                 </div>
             </div>
         </div>
     </form>
-<!-- Modal sửa thông báo -->
+    <!-- Modal sửa thông báo -->
     <form method="POST" action="" accept-charset="UTF-8" id="frm_modify_edit">
         @csrf
         <div id="modify-modal-edit" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;"
@@ -161,12 +164,12 @@
                         <h4 id="modal-header-primary-label" class="modal-title">Thông tin thông báo</h4>
                         <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
                     </div>
-                    <div class="modal-body" >
+                    <div class="modal-body">
                         <div class="form-horizontal">
                             <div class="row form-group">
                                 <div class="col-lg-4">
                                     <label class="control-label">Năm thu thập</label>
-                                    {!! Form::select('nam',getNam(),$nam, array('id' => 'nam', 'class' => 'form-control'))!!}
+                                    {!! Form::select('nam', getNam(), $nam, ['id' => 'nam', 'class' => 'form-control']) !!}
                                 </div>
 
                                 <div class="col-lg-8">
@@ -208,12 +211,14 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label><b>Thông báo khi gửi đi sẽ không thể chỉnh sửa. Bạn hãy kiểm tra kỹ số liệu trước khi gửi.</b></label>
+                            <label><b>Thông báo khi gửi đi sẽ không thể chỉnh sửa. Bạn hãy kiểm tra kỹ số liệu trước khi
+                                    gửi.</b></label>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                        <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary">Đồng
+                        <button type="submit" id="submit" name="submit" value="submit"
+                            class="btn btn-primary">Đồng
                             ý</button>
                     </div>
                 </div>
@@ -221,14 +226,14 @@
         </div>
     </form>
     <script>
-        $(document).ready(function(){
-            var nam=$('#nam_add').val();
-                var html= 'Thông báo thu thập thông tin cung lao động năm '+ nam;
-                $('#tieude_add').val(html)
-            $('#nam_add').on('change',function(){
-                
-                var nam=$('#nam_add').val();
-                var html= 'Thông báo thu thập thông tin cung lao động năm '+ nam;
+        $(document).ready(function() {
+            var nam = $('#nam_add').val();
+            var html = 'Thông báo thu thập thông tin cung lao động năm ' + nam;
+            $('#tieude_add').val(html)
+            $('#nam_add').on('change', function() {
+
+                var nam = $('#nam_add').val();
+                var html = 'Thông báo thu thập thông tin cung lao động năm ' + nam;
                 $('#tieude_add').val(html)
             });
         });
@@ -236,8 +241,8 @@
             $('.choose').prop('checked', true);
         })
 
-        function add(){
-            var url='/cungld/thongbao/store';
+        function add() {
+            var url = '/cungld/thongbao/store';
             $('#frm_modify').attr('action', url);
         }
 
@@ -247,9 +252,9 @@
             $('#frm_modify_th').attr('action', url);
         }
 
-        function edit(e,url) {
+        function edit(e, url) {
             var tr = $(e).closest('tr');
-            var nam=$(tr).find('td[name=nam]').text();
+            var nam = $(tr).find('td[name=nam]').text();
             $('#nam').val(parseInt(nam));
             // $('#nam option[value=' + nam + ' ]').attr('selected', 'selected');
             $('#tieude').val($(tr).find('td[name=tieude]').text());

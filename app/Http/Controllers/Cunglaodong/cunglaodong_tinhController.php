@@ -17,16 +17,30 @@ use App\Models\Danhmuc\dmtrinhdokythuat;
 use App\Models\Danhmuc\dmchuyenmondaotao;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class cunglaodong_tinhController extends Controller
 {
-    /**
+    
+    
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }/**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
+        if (!chkPhanQuyen('tonghopcunglaodongtinh', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongtinh');
+        }
         $model = thongbaocungld::all();
         return view('cunglaodong.tinh.index')
             ->with('model', $model);
@@ -40,6 +54,9 @@ class cunglaodong_tinhController extends Controller
      */
     public function show(Request $request)
     {
+        if (!chkPhanQuyen('tonghopcunglaodongtinh', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongtinh');
+        }
         $inputs = $request->all();
         $m_dvbc = dmdonvibaocao::where('level', 'H')->get();
         $model_tinh = tonghopcungld_tinh::where('matb', $inputs['matb'])->get();
@@ -60,6 +77,9 @@ class cunglaodong_tinhController extends Controller
 
     public function intonghop(Request $request)
     {
+        if (!chkPhanQuyen('tonghopcunglaodongtinh', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongtinh');
+        }
         $inputs = $request->all();
         $model = tonghopdanhsachcungld::join('tonghopdanhsachcungld_ct', 'tonghopdanhsachcungld_ct.math', 'tonghopdanhsachcungld.math')
             ->select('tonghopdanhsachcungld_ct.*', 'tonghopdanhsachcungld.madv')
@@ -92,6 +112,9 @@ class cunglaodong_tinhController extends Controller
     }
     public function intonghop_tinh(Request $request)
     {
+        if (!chkPhanQuyen('tonghopcunglaodongtinh', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongtinh');
+        }
         $inputs = $request->all();
         $model = tonghopdanhsachcungld::join('tonghopdanhsachcungld_ct', 'tonghopdanhsachcungld_ct.math', 'tonghopdanhsachcungld.math')
             ->select('tonghopdanhsachcungld_ct.*', 'tonghopdanhsachcungld.madv', 'tonghopdanhsachcungld.madvbc')
@@ -132,6 +155,9 @@ class cunglaodong_tinhController extends Controller
 
     public function tralai(Request $request)
     {
+        if (!chkPhanQuyen('tonghopcunglaodongtinh', 'hoanthanh')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongtinh');
+        }
         $inputs=$request->all();
         $model_tinh=tonghopcungld_tinh::where('matb',$inputs['matb'])
                                         ->where('madv',$inputs['madv'])

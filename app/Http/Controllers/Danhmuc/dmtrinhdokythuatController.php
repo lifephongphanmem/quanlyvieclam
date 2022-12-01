@@ -5,11 +5,24 @@ namespace App\Http\Controllers\Danhmuc;
 use App\Models\Danhmuc\dmtrinhdokythuat;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class dmtrinhdokythuatController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     public function index()
 	{		
+		if (!chkPhanQuyen('trinhdochuyenmonkythuat', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'trinhdochuyenmonkythuat');
+        }
         $model = dmtrinhdokythuat::all()->sortBy('stt');	
 		$count = Count($model);		
 		return view('danhmuc.trinhdochuyenmonkythuat.trinhdokythuat',compact('model','count'));
@@ -18,6 +31,9 @@ class dmtrinhdokythuatController extends Controller
 
 	public function store_update(Request $request)
 	{		
+		if (!chkPhanQuyen('trinhdochuyenmonkythuat', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'trinhdochuyenmonkythuat');
+        }
 		$input = $request->all();
 
 		if ($input['id'] != null) {
@@ -32,6 +48,9 @@ class dmtrinhdokythuatController extends Controller
 
 
     public function delete($id){	
+		if (!chkPhanQuyen('trinhdochuyenmonkythuat', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'trinhdochuyenmonkythuat');
+        }
 		$id_delete = dmtrinhdokythuat::findOrFail($id);
         $model = dmtrinhdokythuat::where('stt', '>=', $id_delete->stt)->get();
         if ($model != null) {
@@ -46,6 +65,9 @@ class dmtrinhdokythuatController extends Controller
 
 	public function edit($id)
 	{		
+		if (!chkPhanQuyen('trinhdochuyenmonkythuat', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'trinhdochuyenmonkythuat');
+        }
         $model = dmtrinhdokythuat::Find($id);	
 		die($model);
 	}

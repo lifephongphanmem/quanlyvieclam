@@ -7,9 +7,10 @@
 
 @section('custom-script')
     <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
     </script>
+    <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
 
     <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
@@ -36,13 +37,16 @@
                         <h3 class="card-label text-uppercase">Danh sách người lao động nước ngoài</h3>
                     </div>
                     <div class="card-toolbar">
-                       
+
                     </div>
                     <div class="card-toolbar">
-                        <a href="{{ '/nguoilaodong/nuoc_ngoai/in' }}" class="btn btn-sm btn-clean btn-icon mr-2"
-                        title="In danh sách" target="_blank"><i class="icon-lg la flaticon2-print text-dark"></i></a>
-                        <a href="{{ '/nguoilaodong/nuoc_ngoai/create' }}" class="btn btn-sm btn-success mr-2"
-                            title="Thêm mới tài khoản"><i class="fa fa-plus"></i></a>
+                        @if (chkPhanQuyen('laodongnguoinuocngoai', 'thaydoi'))
+                            <a href="{{ '/nguoilaodong/nuoc_ngoai/in' }}" class="btn btn-sm btn-clean btn-icon mr-2"
+                                title="In danh sách" target="_blank"><i
+                                    class="icon-lg la flaticon2-print text-dark"></i></a>
+                            <a href="{{ '/nguoilaodong/nuoc_ngoai/create' }}" class="btn btn-sm btn-success mr-2"
+                                title="Thêm mới tài khoản"><i class="fa fa-plus"></i></a>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body">
@@ -66,18 +70,24 @@
                                     <td>{{ ++$key }}</td>
                                     <td> {{ $ld->hoten }}</td>
                                     <td> {{ \Carbon\Carbon::parse($ld->ngaysinh)->format('d/m/Y') }}</td>
-                                    <td> {{ $ld->nation}}</td>
+                                    <td> {{ $ld->nation }}</td>
                                     <td> {{ $ld->gioitinh == 'nam' || $ld->gioitinh == 'Nam' ? 'Nam' : 'Nữ' }}</td>
                                     <td> {{ $ld->cmnd }}</td>
                                     <td> {{ $ld->address }} {{ $ld->xa }} {{ $ld->huyen }}
                                         {{ $ld->tinh }}</td>
                                     <td> {{ $ld->vitri }}</td>
                                     <td>
-                                        <a title="Sửa thông tin" href="{{'/nguoilaodong/nuoc_ngoai/edit/'.$ld->id}}" class="btn btn-sm btn-clean btn-icon">
-                                            <i class="icon-lg la flaticon-edit-1 text-primary"></i>
-                                        </a>
-                                        <button title="Xóa thông tin" type="button" onclick="cfDel('{{'/nguoilaodong/nuoc_ngoai/delete/'.$ld->id}}')" class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm" data-toggle="modal">
-                                            <i class="icon-lg flaticon-delete text-danger"></i></button>
+                                        @if (chkPhanQuyen('laodongnguoinuocngoai', 'thaydoi'))
+                                            <a title="Sửa thông tin" href="{{ '/nguoilaodong/nuoc_ngoai/edit/' . $ld->id }}"
+                                                class="btn btn-sm btn-clean btn-icon">
+                                                <i class="icon-lg la flaticon-edit-1 text-primary"></i>
+                                            </a>
+                                            <button title="Xóa thông tin" type="button"
+                                                onclick="cfDel('{{ '/nguoilaodong/nuoc_ngoai/delete/' . $ld->id }}')"
+                                                class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm"
+                                                data-toggle="modal">
+                                                <i class="icon-lg flaticon-delete text-danger"></i></button>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

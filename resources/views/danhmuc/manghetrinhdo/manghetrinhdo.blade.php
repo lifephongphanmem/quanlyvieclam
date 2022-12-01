@@ -1,4 +1,21 @@
 @extends('main')
+@section('custom-style')
+    <link rel="stylesheet" type="text/css"
+        href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
+@stop
+
+@section('custom-script')
+    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
+    <script>
+        jQuery(document).ready(function() {
+            TableManaged3.init();
+        });
+    </script>
+@stop
 @section('content')
 
     <!--begin::Row-->
@@ -12,12 +29,14 @@
                         <h3 class="card-label text-uppercase">DANH MỤC MÃ NGHỀ, TRÌNH ĐỘ</h3>
                     </div>
                     <div class="card-toolbar">
-                        <button onclick="create()" data-toggle="modal" data-target="#create_edit_modal" class="btn btn-xs btn-icon btn-success mr-2" title="Thêm mới"><i class="fa fa-plus"></i></button>
+                        @if (chkPhanQuyen('manghe', 'thaydoi'))
+                        <button onclick="create()" data-toggle="modal" data-target="#create_edit_modal" class="btn btn-sm btn-success mr-2" title="Thêm mới"><i class="fa fa-plus"></i>Thêm mới</button>
+                        @endif
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped b-t b-light table-hover">
+                        <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                             <thead>
                                 <tr class="text-center">
                                     <th width="5%"> STT </th>
@@ -47,6 +66,7 @@
                                     @endif
                                     </td>
                                     <td>
+                                        @if (chkPhanQuyen('manghe', 'thaydoi'))
                                         <button title="Sửa thông tin" data-toggle="modal" data-target="#create_edit_modal" type="button" 
                                         onclick="edit('{{$item->id}}')" class="btn btn-sm btn-clean btn-icon">
                                             <i class="icon-lg la flaticon-edit-1 text-primary"></i>
@@ -55,19 +75,13 @@
                                          onclick="cfDel('{{'/danh_muc/dm_ma_nghe_trinh_do/delete/'.$item->id}}')"  class="btn btn-sm btn-clean btn-icon">
                                             <i class="icon-lg flaticon-delete text-danger"></i>
                                         </button>
+                                        @endif
                                     </td>
                                 </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
                     </div>
-                    <footer class="panel-footer">
-                        <div class="row">
-                            <div class="d-flex justify-content-center">
-                                Tổng cộng {{ $count }} kết quả
-                            </div>
-                        </div>
-                    </footer>
 
                 </div>
             </div>
@@ -85,7 +99,7 @@
        <div class="modal-content">
            <div class="modal-header">
                <h3 class="card-label">
-                   Thêm mới danh mục mã nghề, trình độ
+                   Thông tin danh mục
                </h3>
                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                    <i aria-hidden="true" class="ki ki-close"></i>

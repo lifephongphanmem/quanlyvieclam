@@ -111,6 +111,7 @@ return array(
     'App\\Models\\Danhmuc\\vithevieclam' => $baseDir . '/app/Models/Danhmuc/vithevieclam.php',
     'App\\Models\\Dichvu' => $baseDir . '/app/Models/Dichvu.php',
     'App\\Models\\Employer' => $baseDir . '/app/Models/Employer.php',
+    'App\\Models\\Hethong\\dstaikhoan_phanquyen' => $baseDir . '/app/Models/Hethong/dstaikhoan_phanquyen.php',
     'App\\Models\\Nguoilaodong\\nguoilaodong' => $baseDir . '/app/Models/Nguoilaodong/nguoilaodong.php',
     'App\\Models\\Report' => $baseDir . '/app/Models/Report.php',
     'App\\Models\\Thongbao\\Thongbao' => $baseDir . '/app/Models/Thongbao/Thongbao.php',

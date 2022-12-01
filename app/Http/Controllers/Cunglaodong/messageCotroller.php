@@ -10,9 +10,19 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class messageCotroller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +30,10 @@ class messageCotroller extends Controller
      */
     public function index()
     {
+
+        if (!chkPhanQuyen('thongbaocunglaodong', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaocunglaodong');
+        }
         $model=thongbaocungld::orderBy('nam')->get();
         // $model_cty=User::where('phanloaitk',2)->get();
         $nam=date('Y');
@@ -35,6 +49,9 @@ class messageCotroller extends Controller
      */
     public function create()
     {
+        if (!chkPhanQuyen('thongbaocunglaodong', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaocunglaodong');
+        }
         return view('cunglaodong.thongbaothuthap.create');
     }
 
@@ -46,6 +63,9 @@ class messageCotroller extends Controller
      */
     public function store(Request $request)
     {
+        if (!chkPhanQuyen('thongbaocunglaodong', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaocunglaodong');
+        }
         $inputs=$request->all();
         $inputs['matb']=getdate()[0];
         thongbaocungld::create($inputs);
@@ -61,6 +81,9 @@ class messageCotroller extends Controller
      */
     public function show($id)
     {
+        if (!chkPhanQuyen('thongbaocunglaodong', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaocunglaodong');
+        }
         $model=messages::join('threads','threads.id','messages.thread_id')
                         ->select('messages.*','threads.subject')
                         ->where('thread_id',$id)
@@ -77,6 +100,9 @@ class messageCotroller extends Controller
      */
     public function edit($id)
     {
+        if (!chkPhanQuyen('thongbaocunglaodong', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaocunglaodong');
+        }
         $model=thongbaocungld::findOrFail($id);
         return view('cunglaodong.thongbaothuthap.edit')
                 ->with('model',$model);
@@ -91,6 +117,9 @@ class messageCotroller extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!chkPhanQuyen('thongbaocunglaodong', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaocunglaodong');
+        }
         $inputs=$request->all();
         $model=thongbaocungld::findOrFail($id);
         $model->update($inputs);
@@ -106,6 +135,9 @@ class messageCotroller extends Controller
      */
     public function destroy($id)
     {
+        if (!chkPhanQuyen('thongbaocunglaodong', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaocunglaodong');
+        }
         $model=thongbaocungld::findOrFail($id);
         $model_ct=thongbao_congty::where('thongbao_id',$id)->get();
         foreach($model_ct as $ct){
@@ -119,6 +151,9 @@ class messageCotroller extends Controller
 
     public function guithongbao(Request $request, $id)
     {
+        if (!chkPhanQuyen('thongbaocunglaodong', 'hoanthanh')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaocunglaodong');
+        }
         $inputs=$request->all();
         $tb_ct=thongbao_congty::where('thongbao_id',$id)->get();
         if(count($tb_ct)>0){

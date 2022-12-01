@@ -6,9 +6,19 @@ use App\Models\Tinhhinhsudunglaodong\tinhhinhsudunglaodong;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class tonghop_tinhhinhsudungldController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +26,9 @@ class tonghop_tinhhinhsudungldController extends Controller
      */
     public function index(Request $request)
     {
+        if (!chkPhanQuyen('tonghopdulieutinhhinhsudungld', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopdulieutinhhinhsudungld');
+        }
         $inputs=$request->all();
         // $tieude=[
         //     '0'=>'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng',
@@ -48,6 +61,9 @@ class tonghop_tinhhinhsudungldController extends Controller
      */
     public function show(Request $request)
     {
+        if (!chkPhanQuyen('tonghopdulieutinhhinhsudungld', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopdulieutinhhinhsudungld');
+        }
         $inputs=$request->all();
         $tieude=array(
             '0'=>'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng',
@@ -81,6 +97,9 @@ class tonghop_tinhhinhsudungldController extends Controller
 
     public function tralai(Request $request)
     {
+        if (!chkPhanQuyen('tonghopdulieutinhhinhsudungld', 'hoanthanh')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopdulieutinhhinhsudungld');
+        }
         $inputs=$request->all();
         $model=tinhhinhsudunglaodong::where('nam',$inputs['nam'])
                                         ->where('tieude',$inputs['tieude'])

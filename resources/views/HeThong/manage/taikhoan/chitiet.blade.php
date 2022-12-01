@@ -74,7 +74,7 @@
                                             <i class="icon-lg la flaticon-edit-1 text-primary "></i>
                                         </a>
                                         @if ($tk->status == 1)
-                                            <a title="Phân quyền" href="" class="btn btn-sm btn-clean btn-icon">
+                                            <a title="Phân quyền" href="{{'/TaiKhoan/PhanQuyen?tendangnhap='.$tk->username}}" class="btn btn-sm btn-clean btn-icon">
                                                 <i class="icon-lg la flaticon-user-settings text-primary icon-2x"></i></a>
 
                                             <button type="button" onclick="setPerGroup('1664590482','qbsgiaothong')"

@@ -36,14 +36,16 @@
                         <h3 class="card-label text-uppercase">Thông báo tình hình sử dụng lao động</h3>
                     </div>
                     <div class="card-toolbar">
-                        <button onclick="add()" class="btn btn-xs btn-success btn-icon mr-2" title="Thêm mới thông báo"
-                            data-target="#modify-modal" data-toggle="modal"><i class="fa fa-plus"></i></button>
+                        @if (chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'thaydoi'))
+                        <button onclick="add()" class="btn btn-sm btn-success mr-2" title="Thêm mới thông báo"
+                            data-target="#modify-modal" data-toggle="modal"><i class="fa fa-plus"></i>Thêm mới</button>
+                            @endif
                     </div>
                 </div>
                 <div class="card-body">
                     <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th width="2%"> STT </th>
                                 <th width="2%">Năm</th>
                                 <th width="10%" >Tiêu đề </th>
@@ -58,13 +60,14 @@
                                 <tr>
                                     <td>{{ ++$key }}</td>
                                     <td name="nam">{{$tb->nam }}</td>
-                                    <td name="tieude">{{ $tb->tieude == 0?'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng':'Báo cáo tình hình sử dụng lao động hằng năm' }}</td>
+                                    <td name="tieude" class="text-left">{{ $tb->tieude == 0?'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng':'Báo cáo tình hình sử dụng lao động hằng năm' }} </td>
                                     <td name="noidung"> {{ $tb->noidung }}</td>
                                     <td> {{ $tb->hannop.'-'.$tb->nam }}</td>
                                     <td class="{{ $tb->ngaygui == 0 ? 'text-danger' : '' }}">
                                         {{ $tb->ngaygui == null ? 'Chưa gửi' : \Carbon\Carbon::parse($tb->ngaygui)->format('d-m-Y') }}
                                     </td>
                                     <td>
+                                        @if (chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'thaydoi'))
                                         <button type="button" onclick="chinhsua({{$tb->id}})" title="Sửa thông tin" href="" class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal-edit" data-toggle="modal">
                                             <i class="icon-lg la flaticon-edit-1 text-primary"></i>
                                         </button>
@@ -81,6 +84,7 @@
                                             class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm"
                                             data-toggle="modal">
                                             <i class="icon-lg flaticon-delete text-danger"></i></button>
+                                            @endif
                                     </td>
                                 </tr>
                             @endforeach

@@ -44,7 +44,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            {!! Form::select('nam',getNam(),$nam, array('id' => 'nam', 'class' => 'form-control'))!!}
+                            {!! Form::select('nam', getNam(), $nam, ['id' => 'nam', 'class' => 'form-control']) !!}
 
                         </div>
                     </div>
@@ -54,29 +54,31 @@
                         <thead>
                             <tr>
                                 <th width="2%"> STT </th>
-                                <th width="15%" >Tiêu đề </th>
+                                <th width="15%">Tiêu đề </th>
                                 <th width="5%">Đơn vị gửi số liệu</th>
                                 <th width="2%">Thao tác</th>
-                            </thead>
+                        </thead>
                         </tr>
                         <tbody>
                             @foreach ($model as $key => $tb)
                                 <tr>
                                     <td>{{ ++$key }}</td>
-                                    <td>{{ $tb['tieude'] == 0?'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng':'Báo cáo tình hình sử dụng lao động hằng năm' }}</td>
-                                    <td>{{ $tb['sodv'].'/'.$sldv }}</td>
+                                    <td>{{ $tb['tieude'] == 0 ? 'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng' : 'Báo cáo tình hình sử dụng lao động hằng năm' }}
+                                    </td>
+                                    <td>{{ $tb['sodv'] . '/' . $sldv }}</td>
                                     {{-- <td> {{ $tb->hannop.'-'.$tb->nam }}</td> --}}
                                     <td>
-                                        <a title="In"
-                                        href=""
-                                        class="btn btn-sm btn-clean btn-icon" target="_blank">
-                                        <i class="icon-lg la flaticon2-print text-dark"></i>
-                                    </a>
-                                    <a title="Xem chi tiết"
-                                    href="{{'/tinhhinhsudungld/tinh/xem_du_lieu?nam='.$nam.'&tieude='.$tb['tieude']}}"
-                                    class="btn btn-sm btn-clean btn-icon">
-                                    <i class="icon-lg la la-clipboard-list text-primary icon-2x"></i>
-                                </a>
+                                        @if (chkPhanQuyen('tonghopdulieutinhhinhsudungld', 'danhsach'))
+                                            <a title="In" href="" class="btn btn-sm btn-clean btn-icon"
+                                                target="_blank">
+                                                <i class="icon-lg la flaticon2-print text-dark"></i>
+                                            </a>
+                                            <a title="Xem chi tiết"
+                                                href="{{ '/tinhhinhsudungld/tinh/xem_du_lieu?nam=' . $nam . '&tieude=' . $tb['tieude'] }}"
+                                                class="btn btn-sm btn-clean btn-icon">
+                                                <i class="icon-lg la la-clipboard-list text-primary icon-2x"></i>
+                                            </a>
+                                        @endif
                                         {{-- @if ($tb->trangthai == 'CHUAGUI')
                                             <button type="button" onclick="sendData({{ $tb->id }})"
                                                 title="Gửi danh sach" data-target="#modify-modal-send" data-toggle="modal"
@@ -128,8 +130,7 @@
     <!-- modal add -->
     <form method="POST" action="" accept-charset="UTF-8" id="frm_modify">
         @csrf
-        <div id="modify-modal" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;"
-            aria-hidden="true">
+        <div id="modify-modal" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header modal-header-primary">
@@ -172,7 +173,7 @@
             </div>
         </div>
     </form>
-<!-- Model edit -->
+    <!-- Model edit -->
     <form method="POST" action="" accept-charset="UTF-8" id="frm_modify_edit">
         @csrf
         <div id="modify-modal-edit" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;"
@@ -208,7 +209,7 @@
                             <label class="control-label">Nội dung</label>
                             <textarea name="noidung" rows="5" class="form-control" id='noidung_edit'></textarea>
                         </div>
-                        
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
@@ -232,8 +233,8 @@
             $('#frm_modify_send').attr('action', url);
         }
 
-        function chinhsua(id){
-            var  url = '/tinhhinhsudungld/thongbao/edit/' + id;
+        function chinhsua(id) {
+            var url = '/tinhhinhsudungld/thongbao/edit/' + id;
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 url: url,
@@ -249,14 +250,14 @@
                     $('#nam_edit option[value=' + data.nam + ' ]').attr('selected', 'selected');
                     $('#tieude_edit option[value=' + data.tieude + ' ]').attr('selected', 'selected');
 
-                    var  url = '/tinhhinhsudungld/thongbao/update/' + id;
+                    var url = '/tinhhinhsudungld/thongbao/update/' + id;
                     $("#frm_modify_edit").attr("action", url);
                 },
                 error: function(message) {
                     toastr.error(message, 'Lỗi!');
                 }
             });
-            
+
         }
 
         function lydo(id) {

@@ -43,7 +43,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
-            "app/Library/global-functions.php"
+            "app/Library/global-functions.php",
+            "app/Library/quanlyvieclam.php"
         ]
     },
     "autoload-dev": {

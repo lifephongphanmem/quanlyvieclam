@@ -5,9 +5,19 @@ namespace App\Http\Controllers\Danhmuc;
 use App\Models\Danhmuc\nghecongviec;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class nghecongviecController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,20 +25,15 @@ class nghecongviecController extends Controller
      */
     public function index()
     {
+        if (!chkPhanQuyen('nghecongviec', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'nghecongviec');
+        }
         $model=nghecongviec::all();
         return view('danhmuc.nghecongviec.index')
                 ->with('model',$model);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -38,33 +43,15 @@ class nghecongviecController extends Controller
      */
     public function store(Request $request)
     {
+        if (!chkPhanQuyen('nghecongviec', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'nghecongviec');
+        }
         $inputs=$request->all();
         nghecongviec::create($inputs);
         return redirect('/nghe_cong_viec')
                 ->with('success','Thêm mới thành công');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -75,6 +62,9 @@ class nghecongviecController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!chkPhanQuyen('nghecongviec', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'nghecongviec');
+        }
         $inputs=$request->all();
         $model=nghecongviec::findOrFail($id);
         $model->update($inputs);
@@ -90,6 +80,9 @@ class nghecongviecController extends Controller
      */
     public function destroy($id)
     {
+        if (!chkPhanQuyen('nghecongviec', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'nghecongviec');
+        }
         $model=nghecongviec::findOrFail($id);
         $model->delete();
         return redirect('/nghe_cong_viec')

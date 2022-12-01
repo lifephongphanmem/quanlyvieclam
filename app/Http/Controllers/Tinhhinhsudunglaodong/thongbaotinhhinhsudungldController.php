@@ -9,9 +9,19 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 class thongbaotinhhinhsudungldController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,6 +29,9 @@ class thongbaotinhhinhsudungldController extends Controller
      */
     public function index()
     {
+        if (!chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaotinhhinhsudunglaodong');
+        }
         $model=thongbaotinhhinhsudungld::all();
         $model_cty=User::where('phanloaitk',2)->get();
         $congty=Company::all();
@@ -44,6 +57,9 @@ class thongbaotinhhinhsudungldController extends Controller
      */
     public function store(Request $request)
     {
+        if (!chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaotinhhinhsudunglaodong');
+        }
         $inputs=$request->all();
         $inputs['matb']=getdate()[0];
         $inputs['tieude'] ==0?$inputs['hannop']='05-06':$inputs['hannop']='05-12';
@@ -62,6 +78,9 @@ class thongbaotinhhinhsudungldController extends Controller
      */
     public function edit($id)
     {
+        if (!chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaotinhhinhsudunglaodong');
+        }
         $model=thongbaotinhhinhsudungld::findOrFail($id);
 
         return response()->json($model);
@@ -76,6 +95,9 @@ class thongbaotinhhinhsudungldController extends Controller
      */
     public function update(Request $request, $id)
     {   
+        if (!chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaotinhhinhsudunglaodong');
+        }
         $inputs=$request->all();
         $inputs['tieude'] ==0?$inputs['hannop']='05-06':$inputs['hannop']='05-12';
         $model=thongbaotinhhinhsudungld::findOrFail($id);
@@ -93,6 +115,9 @@ class thongbaotinhhinhsudungldController extends Controller
      */
     public function destroy($id)
     {
+        if (!chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaotinhhinhsudunglaodong');
+        }
         $model=thongbaotinhhinhsudungld::findOrFail($id);
         $model_ct=thongbaotinhhinhsudungld_doanhnghiep::where('matb',$model->matb)->get();
         if(isset($model_ct)){
@@ -106,6 +131,9 @@ class thongbaotinhhinhsudungldController extends Controller
                     ->with('success','Xóa thành công');
     }
     public function sendData(Request $request,$id){
+        if (!chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'hoanthanh')) {
+            return view('errors.noperm')->with('machucnang', 'thongbaotinhhinhsudunglaodong');
+        }
         $inputs=$request->all();
         $thongbao=thongbaotinhhinhsudungld::findOrFail($id);
         $tb_ct=thongbaotinhhinhsudungld_doanhnghiep::where('matb',$thongbao->matb)->get();

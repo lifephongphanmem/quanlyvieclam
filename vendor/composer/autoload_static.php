@@ -39,6 +39,7 @@ class ComposerStaticInitea9d6f1e56691f84e5f173248cbf2a42
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         'd27eb44c80de13f037480208689755d3' => __DIR__ . '/../..' . '/app/Library/global-functions.php',
+        'c904d6a5968e9a356fac35ffcc7dd5c3' => __DIR__ . '/../..' . '/app/Library/quanlyvieclam.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -659,6 +660,7 @@ class ComposerStaticInitea9d6f1e56691f84e5f173248cbf2a42
         'App\\Models\\Danhmuc\\vithevieclam' => __DIR__ . '/../..' . '/app/Models/Danhmuc/vithevieclam.php',
         'App\\Models\\Dichvu' => __DIR__ . '/../..' . '/app/Models/Dichvu.php',
         'App\\Models\\Employer' => __DIR__ . '/../..' . '/app/Models/Employer.php',
+        'App\\Models\\Hethong\\dstaikhoan_phanquyen' => __DIR__ . '/../..' . '/app/Models/Hethong/dstaikhoan_phanquyen.php',
         'App\\Models\\Nguoilaodong\\nguoilaodong' => __DIR__ . '/../..' . '/app/Models/Nguoilaodong/nguoilaodong.php',
         'App\\Models\\Report' => __DIR__ . '/../..' . '/app/Models/Report.php',
         'App\\Models\\Thongbao\\Thongbao' => __DIR__ . '/../..' . '/app/Models/Thongbao/Thongbao.php',

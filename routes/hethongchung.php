@@ -16,7 +16,7 @@ Route::get('/DangXuat',[UserController::class,'logout']);
 
 //dmdonvi
 Route::prefix('dmdonvi')->group(function () {
-    Route::get('/danh_sach', [DmdonviController::class, 'index']);
+    Route::get('/danhsach', [DmdonviController::class, 'index']);
     Route::get('/danh_sach_don_vi/{id}', [DmdonviController::class, 'detail']);
     Route::get('/create', [DmdonviController::class, 'create']);
     Route::post('/store', [DmdonviController::class, 'store']);
@@ -27,7 +27,7 @@ Route::prefix('dmdonvi')->group(function () {
     Route::post('/update_dvql/{id}', [DmdonviController::class, 'update_dvql']);
 });
 
-//Tài khoản đơn vị nhà nước
+//Tài khoản
 Route::prefix('TaiKhoan')->group(function () {
     Route::get('/ThongTin', [UserController::class, 'index_nn']);
     Route::get('/DanhSach', [UserController::class, 'chitiet']);
@@ -36,6 +36,9 @@ Route::prefix('TaiKhoan')->group(function () {
     Route::get('/delete/{id}', [UserController::class, 'destroy']);
     Route::get('/edit_tk/{id}', [UserController::class, 'edit_tk']);
     Route::post('/update_tk/{id}', [UserController::class, 'update_tk']);
+
+    Route::get('/PhanQuyen',[UserController::class,'phanquyen']);
+    Route::post('/PhanQuyen',[UserController::class,'luuphanquyen']);
 });
 
 //danh mục chức năng

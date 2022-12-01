@@ -5,9 +5,19 @@ namespace App\Http\Controllers\Danhmuc;
 use App\Models\Danhmuc\danhmuchanhchinh;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class danhmuchanhchinhController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +25,9 @@ class danhmuchanhchinhController extends Controller
      */
     public function index()
     {
+        if (!chkPhanQuyen('diaban', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'chucnang');
+        }
         $model=danhmuchanhchinh::all();
         // dd(getdate()[0]);
         return view('HeThong.manage.diaban.index')
@@ -39,6 +52,9 @@ class danhmuchanhchinhController extends Controller
      */
     public function store(Request $request)
     {
+        if (!chkPhanQuyen('diaban', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'chucnang');
+        }
         $inputs=$request->all();
         $inputs['madb']=getdate()[0];
             danhmuchanhchinh::create($inputs);
@@ -76,6 +92,9 @@ class danhmuchanhchinhController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!chkPhanQuyen('diaban', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'chucnang');
+        }
         $inputs=$request->all();
         $id=$inputs['edit'];
         $model=danhmuchanhchinh::findOrFail($id);
@@ -91,6 +110,9 @@ class danhmuchanhchinhController extends Controller
      */
     public function destroy($id)
     {
+        if (!chkPhanQuyen('diaban', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'chucnang');
+        }
         $model=danhmuchanhchinh::findOrFail($id);
         $model->delete();
         return redirect('/dia_ban');

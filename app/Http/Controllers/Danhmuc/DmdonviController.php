@@ -7,9 +7,19 @@ use App\Models\Danhmuc\danhmuchanhchinh;
 use App\Models\Danhmuc\dmdonvi;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class DmdonviController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,6 +27,9 @@ class DmdonviController extends Controller
      */
     public function index()
     {
+        if (!chkPhanQuyen('donvi', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'donvi');
+        }
         $model_diaban=danhmuchanhchinh::all();
         return view('HeThong.manage.dmdonvi.index')
                 ->with('model_diaban',$model_diaban);
@@ -29,14 +42,26 @@ class DmdonviController extends Controller
      */
     public function create(Request $request)
     {   
+        if (!chkPhanQuyen('donvi', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'donvi');
+        }
         $inputs['madonvi']= $request->madonvi;
         $inputs['maquocgia']=$request->maquocgia;
         $inputs['parent']=$request->parent;
         // dd($inputs);
-        $model_diaban=danhmuchanhchinh::where('maquocgia',$inputs['parent'])->first();
-        $model_donvi= dmdonvi::where('madiaban',$model_diaban->id)->get();
+        if($inputs['parent'] == 0){
+            $model_donvi= null;
+            $model_diaban=danhmuchanhchinh::where('parent',$inputs['parent'])->first();
+        }else{
+            $model_diaban=danhmuchanhchinh::where('maquocgia',$inputs['parent'])->orwhere('parent',$inputs['parent'])->get();
+            $a_diaban=array_column($model_diaban->toarray(),'id');
+            $model_donvi= dmdonvi::wherein('madiaban',$a_diaban)->get();
+        }
+        // dd($model_diaban);
+        // dd($model_donvi);
+       $m_diaban=danhmuchanhchinh::where('maquocgia',$inputs['maquocgia'])->first();
         return view('HeThong.manage.dmdonvi.create')
-                    ->with('model_diaban',$model_diaban)
+                    ->with('model_diaban',$m_diaban)
                     ->with('furl','/dmdonvi/')
                     ->with('inputs',$inputs['madonvi'])
                     ->with('model_donvi',$model_donvi);
@@ -50,6 +75,9 @@ class DmdonviController extends Controller
      */
     public function store(Request $request)
     {
+        if (!chkPhanQuyen('donvi', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'donvi');
+        }
         $inputs=$request->all();
         $inputs['madv']=getdate()[0];
         // dd($inputs);
@@ -76,8 +104,14 @@ class DmdonviController extends Controller
      */
     public function edit($id)
     {
+        if (!chkPhanQuyen('donvi', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'donvi');
+        }
         $model=dmdonvi::findOrFail($id);
-        $model_donvi= dmdonvi::where('madiaban',$model->madiaban)->get();
+        $model_diaban=danhmuchanhchinh::where('id',$model->madiaban)->first();
+        $m_diaban=danhmuchanhchinh::where('maquocgia',$model_diaban->parent)->orwhere('parent',$model_diaban->parent)->get();
+        $a_diaban=array_column($m_diaban->toarray(),'id');
+        $model_donvi= dmdonvi::wherein('madiaban',$a_diaban)->get();
         return view('HeThong.manage.dmdonvi.edit')
         ->with('model',$model)
         ->with('furl','/dmdonvi/')
@@ -94,6 +128,9 @@ class DmdonviController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!chkPhanQuyen('donvi', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'donvi');
+        }
         $inputs=$request->all();
         $model=dmdonvi::findOrFail($id);
         $model->update($inputs);
@@ -108,12 +145,18 @@ class DmdonviController extends Controller
      */
     public function destroy($id)
     {
+        if (!chkPhanQuyen('donvi', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'donvi');
+        }
         $model=dmdonvi::findOrFail($id);
         $model->delete();
         return redirect('/dmdonvi/danh_sach_don_vi/'.$model->madiaban);
     }
 
     public function detail(Request $request){
+        if (!chkPhanQuyen('donvi', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'donvi');
+        }
         $inputs=$request->all();
         $id=$request->id;
         $donvi=danhmuchanhchinh::findOrFail($id);
@@ -125,6 +168,9 @@ class DmdonviController extends Controller
 
     public function dvql($id)
     {
+        if (!chkPhanQuyen('donvi', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'donvi');
+        }
         $model_donvi=dmdonvi::where('madiaban',$id)->get();
         $model_hc=danhmuchanhchinh::findOrFail($id);
         return view('HeThong.manage.dmdonvi.dvql')
@@ -135,6 +181,9 @@ class DmdonviController extends Controller
     public function update_dvql(Request $request,$id)
     {
 
+        if (!chkPhanQuyen('donvi', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'donvi');
+        }
         $model=danhmuchanhchinh::findOrFail($id);
         $inputs=$model->toarray();
         $inputs['madvql']=$request->madvql;

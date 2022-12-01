@@ -10,22 +10,19 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Report;
 use App\Models\Employer;
+use Illuminate\Support\Facades\Session;
 
 class CompanyController extends Controller
 {
-
-	// public function __construct() {
-	// 	$this->middleware(function ($request, $next) {
-    //         if(!Auth::check()){ 
-	// 		return redirect('home');
-	// 		};
-	// 		if(Auth::user()->level!=3){
-
-	// 			return redirect('home'); 
-	// 			}
-	// 		return $next($request);
-    //     });
-	// }   
+	public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
    
 	 public function show($action=null)
     {
@@ -259,6 +256,9 @@ class CompanyController extends Controller
 
 	public function danhsach()
 	{
+		if (!chkPhanQuyen('danhsachdoanhnghiep', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
+        }
 		$model=Company::orderBy('id','DESC')->get();
 		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
 		// $ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
@@ -273,6 +273,9 @@ class CompanyController extends Controller
 
 	public function create()
 	{
+		if (!chkPhanQuyen('danhsachdoanhnghiep', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
+        }
 		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
 		// $ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
 		$ctype=dmloaihinhhdkt::all();
@@ -288,6 +291,9 @@ class CompanyController extends Controller
 	
 	public function store(Request $request)
 	{
+		if (!chkPhanQuyen('danhsachdoanhnghiep', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
+        }
 		$inputs=$request->all();
 
 		Company::create($inputs);
@@ -297,6 +303,9 @@ class CompanyController extends Controller
 
 	public function edit(Request $request,$id)
 	{
+		if (!chkPhanQuyen('danhsachdoanhnghiep', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
+        }
 		$inputs=$request->edit;
 		$model=Company::findOrFail($id);
 		$dmhanhchinh=danhmuchanhchinh::all();
@@ -322,6 +331,9 @@ class CompanyController extends Controller
 
 	public function update_dn(Request $request,$id)
 	{
+		if (!chkPhanQuyen('danhsachdoanhnghiep', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
+        }
 		$inputs=$request->all();
 		$model=Company::findOrFail($id);
 		$model->update($inputs);
@@ -337,6 +349,9 @@ class CompanyController extends Controller
 
 	public function destroy($id)
 	{
+		if (!chkPhanQuyen('danhsachdoanhnghiep', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
+        }
 		$model=Company::findOrFail($id);
 		$model->delete();
 		return redirect('/doanh_nghiep/danh_sach')
@@ -345,6 +360,9 @@ class CompanyController extends Controller
 
 	public function indanhsach($id)
 	{
+		if (!chkPhanQuyen('danhsachdoanhnghiep', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
+        }
 		$model=Company::findOrFail($id);
 		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
 		$ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
@@ -376,6 +394,9 @@ class CompanyController extends Controller
 
 	public function intonghop()
 	{
+		if (!chkPhanQuyen('danhsachdoanhnghiep', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
+        }
 		$model=Company::all();
 		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
 		$ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
@@ -408,6 +429,9 @@ class CompanyController extends Controller
 
 	public function thongtin()
 	{
+		if (!chkPhanQuyen('chitietdoanhnghiep', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'quanlythongtindoanhnghiep');
+        }
 		$model=Company::where('masodn',session('admin')['madv'])->first();
 		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
 		$ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp

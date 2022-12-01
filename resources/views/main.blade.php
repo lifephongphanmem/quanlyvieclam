@@ -265,7 +265,7 @@
                                         <span
                                             class="text-white opacity-70 font-weight-bold font-size-base d-none d-md-inline mr-1">Xin chào,</span>
                                         <span
-                                            class="text-white font-weight-bolder font-size-base d-none d-md-inline mr-4">{{Auth::check()?Auth::user()->name:''}}</span>
+                                            class="text-white font-weight-bolder font-size-base d-none d-md-inline mr-4">{{session('admin')?session('admin')->name:''}}</span>
                                         <span class="symbol symbol-35">
                                             <span class="symbol-label bg-white-o-50">
                                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

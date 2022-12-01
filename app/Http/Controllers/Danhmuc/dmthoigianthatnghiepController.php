@@ -5,11 +5,24 @@ namespace App\Http\Controllers\Danhmuc;
 use App\Models\Danhmuc\dmthoigianthatnghiep;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class dmthoigianthatnghiepController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     public function index()
 	{		
+		if (!chkPhanQuyen('thoigianthatnghiep', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'thoigianthatnghiep');
+        }	
         $model = dmthoigianthatnghiep::all()->sortBy('stt');	
 		$count = Count($model);		
 		return view('danhmuc.thoigianthatnghiep.thoigianthatnghiep',compact('model','count'));
@@ -18,6 +31,9 @@ class dmthoigianthatnghiepController extends Controller
 
 	public function store_update(Request $request)
 	{		
+		if (!chkPhanQuyen('thoigianthatnghiep', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'thoigianthatnghiep');
+        }	
 		$input = $request->all();
 
 		if ($input['id'] != null) {
@@ -31,7 +47,10 @@ class dmthoigianthatnghiepController extends Controller
 	}
 
 
-    public function delete($id){	
+    public function delete($id){
+		if (!chkPhanQuyen('thoigianthatnghiep', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'thoigianthatnghiep');
+        }		
 		$id_delete = dmthoigianthatnghiep::findOrFail($id);
         $model = dmthoigianthatnghiep::where('stt', '>=', $id_delete->stt)->get();
         if ($model != null) {
@@ -46,6 +65,9 @@ class dmthoigianthatnghiepController extends Controller
 
 	public function edit($id)
 	{		
+		if (!chkPhanQuyen('thoigianthatnghiep', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'thoigianthatnghiep');
+        }	
         $model = dmthoigianthatnghiep::Find($id);	
 		die($model);
 	}

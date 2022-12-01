@@ -59,34 +59,43 @@
                                     <td>{{ $th->nam }}</td>
                                     <td> {{ $th->tieude }}</td>
                                     <td>
-                                        <a title="In tổng hợp" href="{{'/cungld/danh_sach/huyen/intonghop?matb='.$th->matb}}" class="btn btn-sm btn-clean btn-icon" target="_blank">
-                                            <i class="icon-lg la flaticon2-print text-primary" ></i>
-                                        </a>
-                                        <a title="Tổng hợp danh sách"
-                                            href="{{ '/cungld/danh_sach/huyen/tong_hop?matb=' . $th->matb }}"
-                                            class="btn btn-sm btn-clean btn-icon">
-                                            <i class="icon-lg la la-clipboard-list text-success icon-2x"></i>
-                                        </a>
-                                        @if ($th->trangthai == 'TRALAI' || $th->mathh ==  null)
-                                        <button type="button" onclick="sendData('{{ $th->matb }}','{{$th->nam}}')"
-                                            title="Gửi danh sách" data-target="#modify-modal-th" data-toggle="modal"
-                                            class="btn btn-sm btn-clean btn-icon">
-                                            <i class="fas fa-share-square text-success"></i>
-                                        </button>
+                                        @if (chkPhanQuyen('tonghopcunglaodonghuyen', 'danhsach'))
+                                            <a title="In tổng hợp"
+                                                href="{{ '/cungld/danh_sach/huyen/intonghop?matb=' . $th->matb }}"
+                                                class="btn btn-sm btn-clean btn-icon" target="_blank">
+                                                <i class="icon-lg la flaticon2-print text-primary"></i>
+                                            </a>
+                                            <a title="Tổng hợp danh sách"
+                                                href="{{ '/cungld/danh_sach/huyen/tong_hop?matb=' . $th->matb }}"
+                                                class="btn btn-sm btn-clean btn-icon">
+                                                <i class="icon-lg la la-clipboard-list text-success icon-2x"></i>
+                                            </a>
                                         @endif
-                                        @if ($th->trangthai== 'TRALAI')
-                                        <button type="button" onclick="lydo({{ $th->matb }},{{ $th->madv }})"
-                                            title="Lý do trả lại" data-target="#lydo-modal" data-toggle="modal"
-                                            class="btn btn-sm btn-clean btn-icon">
-                                            <i class="fas fa-question-circle text-primary"></i>
-                                        </button>
+                                        @if (chkPhanQuyen('tonghopcunglaodonghuyen', 'hoanthanh'))
+                                            @if ($th->trangthai == 'TRALAI' || $th->mathh == null)
+                                                <button type="button"
+                                                    onclick="sendData('{{ $th->matb }}','{{ $th->nam }}')"
+                                                    title="Gửi danh sách" data-target="#modify-modal-th" data-toggle="modal"
+                                                    class="btn btn-sm btn-clean btn-icon">
+                                                    <i class="fas fa-share-square text-success"></i>
+                                                </button>
+                                            @endif
+                                            @if ($th->trangthai == 'TRALAI')
+                                                <button type="button"
+                                                    onclick="lydo({{ $th->matb }},{{ $th->madv }})"
+                                                    title="Lý do trả lại" data-target="#lydo-modal" data-toggle="modal"
+                                                    class="btn btn-sm btn-clean btn-icon">
+                                                    <i class="fas fa-question-circle text-primary"></i>
+                                                </button>
+                                            @endif
                                         @endif
-
-                                        <button title="Xóa thông tin" type="button"
-                                            onclick="cfDel('{{ '/cungld/danh_sach/delete/' . $th->id }}')"
-                                            class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm"
-                                            data-toggle="modal">
-                                            <i class="icon-lg flaticon-delete text-danger"></i></button>
+                                        {{-- @if (chkPhanQuyen('tonghopcunglaodonghuyen', 'thaydoi'))
+                                            <button title="Xóa thông tin" type="button"
+                                                onclick="cfDel('{{ '/cungld/danh_sach/delete/' . $th->id }}')"
+                                                class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm"
+                                                data-toggle="modal">
+                                                <i class="icon-lg flaticon-delete text-danger"></i></button>
+                                        @endif --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -114,13 +123,13 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label><b>Số liệu tổng hợp khi gửi đi sẽ không thể chỉnh sửa. Bạn hãy kiểm tra kỹ số liệu trước khi gửi.</b></label>
+                            <label><b>Số liệu tổng hợp khi gửi đi sẽ không thể chỉnh sửa. Bạn hãy kiểm tra kỹ số liệu trước
+                                    khi gửi.</b></label>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                        <button type="submit" id="submit" name="submit" value="submit"
-                            class="btn btn-primary">Đồng
+                        <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary">Đồng
                             ý</button>
                     </div>
                 </div>
@@ -128,39 +137,37 @@
         </div>
     </form>
 
-        <!-- modal lý do -->
+    <!-- modal lý do -->
 
-            <div id="lydo-modal" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;"
-                aria-hidden="true">
-                <div class="modal-dialog modal-xs">
-                    <div class="modal-content">
-                        <div class="modal-header modal-header-primary">
-                            <h4 id="modal-header-primary-label" class="modal-title">Thông tin lý do trả lại dữ liệu</h4>
-                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
-                        </div>
-                        <div class="modal-body">
-                                <textarea name="lydo" id="lydo" cols=""  rows="3" class="col-md-12"></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" data-dismiss="modal" class="btn btn-default">Đóng</button>
-                        </div>
-                    </div>
+    <div id="lydo-modal" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-xs">
+            <div class="modal-content">
+                <div class="modal-header modal-header-primary">
+                    <h4 id="modal-header-primary-label" class="modal-title">Thông tin lý do trả lại dữ liệu</h4>
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+                </div>
+                <div class="modal-body">
+                    <textarea name="lydo" id="lydo" cols="" rows="3" class="col-md-12"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Đóng</button>
                 </div>
             </div>
+        </div>
+    </div>
     <script>
         function add() {
             var url = '/cungld/danh_sach/store'
             $('#frm_modify').attr('action', url);
         }
 
-        function sendData(matb,nam) {
-            var url = '/cungld/danh_sach/huyen/send?matb=' + matb+'&nam='+nam;
+        function sendData(matb, nam) {
+            var url = '/cungld/danh_sach/huyen/send?matb=' + matb + '&nam=' + nam;
             $('#frm_modify_th').attr('action', url);
         }
 
-        function lydo(matb,madv)
-        {
-            var url='/cungld/danh_sach/huyen/lydo';
+        function lydo(matb, madv) {
+            var url = '/cungld/danh_sach/huyen/lydo';
 
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
@@ -169,7 +176,7 @@
                 data: {
                     _token: CSRF_TOKEN,
                     matb: matb,
-                    madv:madv
+                    madv: madv
                 },
                 dataType: 'JSON',
                 success: function(data) {

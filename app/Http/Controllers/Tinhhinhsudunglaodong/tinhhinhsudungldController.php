@@ -9,10 +9,20 @@ use App\Models\Tinhhinhsudunglaodong\tinhhinhsudunglaodong_ct;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 
 
 class tinhhinhsudungldController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +30,9 @@ class tinhhinhsudungldController extends Controller
      */
     public function index()
     {
+        if (!chkPhanQuyen('nhanthongbaotinhhinhsudungld', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'nhanthongbaotinhhinhsudungld');
+        }
         // $model=tinhhinhsudunglaodong::join('thongbaotinhhinhsudungld','thongbaotinhhinhsudungld.matb','tinhhinhsudunglaodong.matb')
         //                                 ->join('thongbaotinhhinhsudungld_doanhnghiep','thongbaotinhhinhsudungld_doanhnghiep.matb','thongbaotinhhinhsudungld.matb')
         //                                 ->select('thongbaotinhhinhsudungld.*','tinhhinhsudunglaodong.ngaygui AS senddate')
@@ -51,6 +64,9 @@ class tinhhinhsudungldController extends Controller
      */
     public function store(Request $request)
     {
+        if (!chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopdulieutinhhinhsudunglaodongdonvi');
+        }
         $inputs=$request->all();
         $time=Carbon::now();
         // $inputs['ngaygui']=$time->toDateString();
@@ -106,6 +122,9 @@ class tinhhinhsudungldController extends Controller
      */
     public function destroy($id)
     {
+        if (!chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopdulieutinhhinhsudunglaodongdonvi');
+        }
         $model=tinhhinhsudunglaodong::findOrFail($id);
         $model_ct=tinhhinhsudunglaodong_ct::where('matb',$model->matb)->get();
         if(isset($model_ct)){
@@ -121,6 +140,9 @@ class tinhhinhsudungldController extends Controller
 
     public function danhsach()
     {
+        if (!chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopdulieutinhhinhsudunglaodongdonvi');
+        }
         $model=tinhhinhsudunglaodong::join('thongbaotinhhinhsudungld','thongbaotinhhinhsudungld.matb','tinhhinhsudunglaodong.matb')
                                         ->select('tinhhinhsudunglaodong.*','thongbaotinhhinhsudungld.tieude','thongbaotinhhinhsudungld.hannop','thongbaotinhhinhsudungld.ngaygui AS ngaynhan')
                                         ->where('madv',session('admin')['madv'])
@@ -131,6 +153,9 @@ class tinhhinhsudungldController extends Controller
 
     public function sendData($id)
     {
+        if (!chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'hoanthanh')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopdulieutinhhinhsudunglaodongdonvi');
+        }
         $model=tinhhinhsudunglaodong::findOrFail($id);
         $time=Carbon::now();
         $model->update(['trangthai'=>'DAGUI','ngaygui'=>$time->toDateString()]);
@@ -140,6 +165,9 @@ class tinhhinhsudungldController extends Controller
 
     public function lydo($id)
     {
+        if (!chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'hoanthanh')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopdulieutinhhinhsudunglaodongdonvi');
+        }
         $model=tinhhinhsudunglaodong::findOrFail($id);
         return response()->json($model);
     }

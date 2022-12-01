@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Report;
+use Illuminate\Database\Eloquent\Collection;
 
 use Validator;
 
@@ -262,8 +263,12 @@ class UserController extends Controller
 	}
 	public function logout()
 	{
-		Auth::logout();
-		return redirect('home');
+        if (Session::has('admin')) {
+            Session::flush();
+            return redirect('/home');
+        } else {
+            return redirect('');
+        }
 	}
 	public function edit()
 	{
@@ -395,7 +400,11 @@ class UserController extends Controller
 	public function store(Request $request)
 	{
 		$inputs = $request->all();
-		$inputs['password'] = Hash::make($inputs['password']);
+		$inputs['password'] = md5($inputs['password']);
+		$inputs['phanloaitk']=1;
+		// $inputs['email']='a@gmail.com';
+		$inputs['status']=1;
+		// dd($inputs);
 		User::create($inputs);
 		return redirect('/TaiKhoan/DanhSach/?madv=' . $inputs['madv']);
 	}
@@ -428,4 +437,72 @@ class UserController extends Controller
 		$model->delete();
 		return redirect('/TaiKhoan/DanhSach?madv=' . $model->madv);
 	}
+
+	public function phanquyen(Request $request)
+	{
+		$inputs=$request->all();
+		$m_taikhoan = User::where('username', $inputs['tendangnhap'])->first();
+		$m_phanquyen = dstaikhoan_phanquyen::where('tendangnhap', $inputs['tendangnhap'])->get();
+		$m_chucnang =Chucnang::where('trangthai', '1')->get();
+
+		foreach ($m_chucnang as $chucnang) {
+            $phanquyen = $m_phanquyen->where('machucnang', $chucnang->maso)->first();
+            $chucnang->phanquyen = $phanquyen->phanquyen ?? 0;
+            $chucnang->danhsach = $phanquyen->danhsach ?? 0;
+            $chucnang->thaydoi = $phanquyen->thaydoi ?? 0;
+            $chucnang->hoanthanh = $phanquyen->hoanthanh ?? 0;
+            $chucnang->nhomchucnang = $m_chucnang->where('machucnang_goc', $chucnang->maso)->count() > 0 ? 1 : 0;
+        }
+
+		return view('HeThong.manage.taikhoan.phanquyen')
+		->with('model', $m_chucnang->where('capdo', '1')->sortby('sapxep'))
+		->with('m_chucnang', $m_chucnang)
+		->with('m_taikhoan', $m_taikhoan);
+	}
+
+	public function luuphanquyen(Request $request)
+	{
+		$inputs=$request->all();
+		$inputs['phanquyen'] = isset($inputs['phanquyen']) ? 1 : 0;
+        $inputs['danhsach'] = isset($inputs['danhsach']) ? 1 : 0;
+        $inputs['thaydoi'] = isset($inputs['thaydoi']) ? 1 : 0;
+        $inputs['hoanthanh'] = isset($inputs['hoanthanh']) ? 1 : 0;
+        $inputs['danhsach'] = ($inputs['hoanthanh'] == 1 || $inputs['thaydoi'] == 1) ? 1 : $inputs['danhsach'];
+		$m_chucnang = Chucnang::where('trangthai', '1')->get();
+        $ketqua = new Collection();
+        if (isset($inputs['nhomchucnang'])) {
+            $this->getChucNang($m_chucnang, $inputs['machucnang'], $ketqua);
+        }
+        $ketqua->add($m_chucnang->where('maso', $inputs['machucnang'])->first());
+
+		foreach ($ketqua as $ct) {
+            $chk = dstaikhoan_phanquyen::where('machucnang', $ct->maso)->where('tendangnhap', $inputs['tendangnhap'])->first();
+            $a_kq = [
+                'machucnang' => $ct->maso,
+                'tendangnhap' => $inputs['tendangnhap'],
+                'phanquyen' => $inputs['phanquyen'],
+                'danhsach' => $inputs['danhsach'],
+                'thaydoi' => $inputs['thaydoi'],
+                'hoanthanh' => $inputs['hoanthanh'],
+            ];
+            if ($chk == null) {
+                dstaikhoan_phanquyen::create($a_kq);
+            } else {
+                $chk->update($a_kq);
+            }
+        }
+		return redirect('/TaiKhoan/PhanQuyen?tendangnhap='.$inputs['tendangnhap'])
+					->with('success','Phân quyền thành công');
+	}
+
+	function getChucNang(&$dschucnang, $machucnang_goc, &$ketqua)
+    {
+        foreach ($dschucnang as $key => $val) {
+            if ($val->machucnang_goc == $machucnang_goc) {
+                $ketqua->add($val);
+                $dschucnang->forget($key);
+                $this->getChucNang($dschucnang, $val->machucnang, $ketqua);
+            }
+        }
+    }
 }

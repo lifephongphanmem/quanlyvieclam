@@ -19,9 +19,19 @@ use App\Models\Danhmuc\dmchuyenmondaotao;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class cunglaodong_huyenController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +39,9 @@ class cunglaodong_huyenController extends Controller
      */
     public function index()
     {
+        if (!chkPhanQuyen('tonghopcunglaodonghuyen', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodonghuyen');
+        }
         $model = thongbaocungld::all();
         $model_huyen = tonghopcungld_huyen::where('madvbc', session('admin')['madvbc'])->get();
         $m_th = tonghop_huyen::where('madvbc', session('admin')['madvbc'])->get();
@@ -48,6 +61,9 @@ class cunglaodong_huyenController extends Controller
     }
     public function tonghop(Request $request)
     {
+        if (!chkPhanQuyen('tonghopcunglaodonghuyen', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodonghuyen');
+        }
         $inputs = $request->all();
         $model = tonghopdanhsachcungld::where('matb', $inputs['matb'])->get();
         $model_huyen = tonghopcungld_huyen::where('matb', $inputs['matb'])
@@ -89,6 +105,9 @@ class cunglaodong_huyenController extends Controller
 
     public function sendata(Request $request)
     {
+        if (!chkPhanQuyen('tonghopcunglaodonghuyen', 'hoanthanh')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodonghuyen');
+        }
         $inputs = $request->all();
         $inputs['math'] = getdate()[0];
         $inputs['madv'] = session('admin')['madv'];
@@ -113,6 +132,9 @@ class cunglaodong_huyenController extends Controller
 
     public function indanhsach(Request $request)
     {
+        if (!chkPhanQuyen('tonghopcunglaodonghuyen', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodonghuyen');
+        }
         $inputs = $request->all();
         $model = tonghopdanhsachcungld::join('tonghopdanhsachcungld_ct', 'tonghopdanhsachcungld_ct.math', 'tonghopdanhsachcungld.math')
             ->select('tonghopdanhsachcungld_ct.*')
@@ -142,6 +164,9 @@ class cunglaodong_huyenController extends Controller
 
     public function intonghop(Request $request)
     {
+        if (!chkPhanQuyen('tonghopcunglaodonghuyen', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodonghuyen');
+        }
         $inputs = $request->all();
         $model = tonghopdanhsachcungld::join('tonghopdanhsachcungld_ct', 'tonghopdanhsachcungld_ct.math', 'tonghopdanhsachcungld.math')
             ->select('tonghopdanhsachcungld_ct.*', 'tonghopdanhsachcungld.madv')
@@ -176,6 +201,9 @@ class cunglaodong_huyenController extends Controller
 
     public function tralai(Request $request)
     {
+        if (!chkPhanQuyen('tonghopcunglaodonghuyen', 'hoanthanh')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodonghuyen');
+        }
         $inputs = $request->all();
         $model_dv = tonghopdanhsachcungld::where('matb', $inputs['matb'])
             ->where('madv', $inputs['madv'])
@@ -199,6 +227,9 @@ class cunglaodong_huyenController extends Controller
 
     public function lydo(Request $request)
     {
+        if (!chkPhanQuyen('tonghopcunglaodonghuyen', 'hoanthanh')) {
+            return view('errors.noperm')->with('machucnang', 'tonghopcunglaodonghuyen');
+        }
         $inputs = $request->all();
         $model = tonghop_huyen::where('matb', $inputs['matb'])
             ->where('madv', $inputs['madv'])

@@ -53,16 +53,18 @@
                                     <td>{{ $th->nam }}</td>
                                     <td> {{ $th->tieude }}</td>
                                     <td>
-                                        <a title="In tổng hợp"
-                                        href="{{'/cungld/danh_sach/tinh/intonghop_tinh?matb='.$th->matb}}"
-                                        class="btn btn-sm btn-clean btn-icon"  target="_blank">
-                                        <i class="icon-lg la flaticon2-print text-dark"></i>
-                                        </a>
-                                        <a title="Tổng hợp danh sách"
-                                            href="{{ '/cungld/danh_sach/tinh/tong_hop?matb=' . $th->matb .'&nam='.$th->nam}}"
-                                            class="btn btn-sm btn-clean btn-icon">
-                                            <i class="icon-lg la la-clipboard-list text-success icon-2x"></i>
-                                        </a>
+                                        @if (chkPhanQuyen('tonghopcunglaodongtinh', 'danhsach'))
+                                            <a title="In tổng hợp"
+                                                href="{{ '/cungld/danh_sach/tinh/intonghop_tinh?matb=' . $th->matb }}"
+                                                class="btn btn-sm btn-clean btn-icon" target="_blank">
+                                                <i class="icon-lg la flaticon2-print text-dark"></i>
+                                            </a>
+                                            <a title="Tổng hợp danh sách"
+                                                href="{{ '/cungld/danh_sach/tinh/tong_hop?matb=' . $th->matb . '&nam=' . $th->nam }}"
+                                                class="btn btn-sm btn-clean btn-icon">
+                                                <i class="icon-lg la la-clipboard-list text-success icon-2x"></i>
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -95,8 +97,7 @@
                     </div> --}}
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                        <button type="submit" id="submit" name="submit" value="submit"
-                            class="btn btn-primary">Đồng
+                        <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary">Đồng
                             ý</button>
                     </div>
                 </div>
@@ -104,30 +105,28 @@
         </div>
     </form>
 
-        <!-- modal lý do -->
-        <form method="POST" action="" accept-charset="UTF-8" id="frm_modify_th">
-            @csrf
-            <div id="lydo-modal" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;"
-                aria-hidden="true">
-                <div class="modal-dialog modal-xs">
-                    <div class="modal-content">
-                        <div class="modal-header modal-header-primary">
-                            <h4 id="modal-header-primary-label" class="modal-title">Thông tin lý do trả lại dữ liệu</h4>
-                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
-                        </div>
-                        <div class="modal-body">
-                                <textarea name="lydo" id="lydo" cols=""  rows="3" class="col-md-12"></textarea>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                            <button type="submit" id="submit" name="submit" value="submit"
-                                class="btn btn-primary">Đồng
-                                ý</button>
-                        </div>
+    <!-- modal lý do -->
+    <form method="POST" action="" accept-charset="UTF-8" id="frm_modify_th">
+        @csrf
+        <div id="lydo-modal" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-xs">
+                <div class="modal-content">
+                    <div class="modal-header modal-header-primary">
+                        <h4 id="modal-header-primary-label" class="modal-title">Thông tin lý do trả lại dữ liệu</h4>
+                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <textarea name="lydo" id="lydo" cols="" rows="3" class="col-md-12"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                        <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary">Đồng
+                            ý</button>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
+    </form>
 
     <form method="POST" action="" accept-charset="UTF-8" id="frm_modify">
         @csrf
@@ -149,7 +148,8 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                            <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary">Đồng
+                            <button type="submit" id="submit" name="submit" value="submit"
+                                class="btn btn-primary">Đồng
                                 ý</button>
                         </div>
                     </div>
@@ -167,9 +167,8 @@
             $('#frm_modify_th').attr('action', url);
         }
 
-        function lydo(id)
-        {
-            var url='/cungld/danh_sach/huyen/lydo/'+id;
+        function lydo(id) {
+            var url = '/cungld/danh_sach/huyen/lydo/' + id;
 
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             // $.ajax({

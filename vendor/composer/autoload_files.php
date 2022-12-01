@@ -38,4 +38,5 @@ return array(
     'f18cc91337d49233e5754e93f3ed9ec3' => $vendorDir . '/laravelcollective/html/src/helpers.php',
     'ec07570ca5a812141189b1fa81503674' => $vendorDir . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
     'd27eb44c80de13f037480208689755d3' => $baseDir . '/app/Library/global-functions.php',
+    'c904d6a5968e9a356fac35ffcc7dd5c3' => $baseDir . '/app/Library/quanlyvieclam.php',
 );
