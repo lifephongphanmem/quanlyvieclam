@@ -135,8 +135,23 @@
                     <div class="menu-submenu">
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
-
                             <li class="menu-item" aria-haspopup="true">
+                                <a href="{{ url('/tuyen_dung/khai_bao_nhu_cau/dot_thu_thap') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text font-weight-bold">Khai báo </span>
+                                </a>
+                            </li>
+                            <li class="menu-item" aria-haspopup="true">
+                                <a href="{{ url('/tuyen_dung/thong_tin_tong_hop/dot_thu_thap') }}" class="menu-link">
+                                    <i class="menu-bullet menu-bullet-dot">
+                                        <span></span>
+                                    </i>
+                                    <span class="menu-text font-weight-bold">tổng hợp </span>
+                                </a>
+                            </li>
+                            {{-- <li class="menu-item" aria-haspopup="true">
                                 <a href="{{ url('/tuyen_dung/khai_bao_tong_hop') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
@@ -152,8 +167,8 @@
                                     </i>
                                     <span class="menu-text font-weight-bold">Thông tin tuyển dụng Tổng hợp</span>
                                 </a>
-                            </li>
-{{-- 
+                            </li> --}}
+
                             <li class="menu-item" aria-haspopup="true">
                                 <a href="{{ url('/tuyendung-fn') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
@@ -170,7 +185,7 @@
                                     </i>
                                     <span class="menu-text font-weight-bold">Lịch sử tuyển dụng</span>
                                 </a>
-                            </li> --}}
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -195,20 +210,13 @@
                     <div class="menu-submenu">
                         <i class="menu-arrow"></i>
                         <ul class="menu-subnav">
+
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ url('/thong_bao') }}" class="menu-link">
+                                <a href="{{ url('/tuyen_dung/damh_sach_thong_bao') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text font-weight-bold">Gửi thông báo</span>
-                                </a>
-                            </li>
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ url('/thong_bao/danhsach') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text font-weight-bold">Nhận thông báo</span>
+                                    <span class="menu-text font-weight-bold">Danh sách thông báo</span>
                                 </a>
                             </li>
                             {{-- <li class="menu-item" aria-haspopup="true">
@@ -219,7 +227,6 @@
                                     <span class="menu-text font-weight-bold">Danh sách văn bản</span>
                                 </a>
                             </li> --}}
-
                         </ul>
                     </div>
                 </li>
@@ -362,19 +369,11 @@
                                 </a>
                             </li> --}}
                             <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ url('/bao_cao/nguoi_su_dung_lao_dong/dn_bao_cao') }}" class="menu-link">
+                                <a href="{{ url('/bao_cao_tong_hop') }}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
-                                    <span class="menu-text">Báo cáo sử dụng lao động<br>(người sử dụng lao động lập)</span>
-                                </a>
-                            </li>
-                            <li class="menu-item" aria-haspopup="true">
-                                <a href="{{ url('/bao_cao/so_lao_dong_thuong_binh_xa_hoi/ldtbxh_bao_cao') }}" class="menu-link">
-                                    <i class="menu-bullet menu-bullet-dot">
-                                        <span></span>
-                                    </i>
-                                    <span class="menu-text">Báo cáo sử dụng lao động<br>(Sở Lao động-Thương binh và Xã hội lập)</span>
+                                    <span class="menu-text">Báo cáo tổng hợp</span>
                                 </a>
                             </li>
                         </ul>

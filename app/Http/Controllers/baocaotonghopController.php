@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\dmloaihinhhdkt;
 use App\Models\nguoilaodong;
+use App\Models\nhucautuyendung;
+use App\Models\nhucautuyendungct;
+use App\Models\thongbao;
 use App\Models\thongtintuyendung;
 use App\Models\tonghopdanhsachcungld;
 use Illuminate\Http\Request;
@@ -12,43 +16,107 @@ use Illuminate\Support\Facades\Auth;
 class baocaotonghopController extends Controller
 {
     // người sử dụng lao động
-    public function dnbaocao()
+    public function index()
     {
         $id_user = Auth::user()->id;
         $nguoidung = Company::Find($id_user)->first();
         $tonghopcungld = tonghopdanhsachcungld::all();
         $company = Company::all();
-        return view('admin.baocaotonghop.doanhnghiep.dnbaocao', compact('nguoidung', 'tonghopcungld', 'company'));
+        $thongbaocungld = thongbao::all();
+        return view('reports.baocaotonghop.index', compact('nguoidung', 'tonghopcungld', 'company','thongbaocungld'));
     }
 
 
-    public function dntonghop(Request $request)
+    public function doanhnghiep(Request $request)
     {
         $id_user = Auth::user()->id;
         $nguoidung = Company::Find($id_user)->first();
         $model = nguoilaodong::where('company', $request->id)->where('madb', $request->madb)->get();
-        return view('admin.baocaotonghop.doanhnghiep.dntonghop', compact('model', 'nguoidung'))
+        return view('reports.baocaotonghop.cungld.doanhnghiep', compact('model', 'nguoidung'))
             ->with('pageTitle', 'Báo thông tin người lao động');
     }
 
-
-    // sỏ lao động thương binh và xã hội
-    public function ldtbxhbaocao()
+    // sở lao động thương binh và xã hội
+    public function soldtbxh(Request $request)
     {
-        $tonghopcungld = tonghopdanhsachcungld::all();
-        return view('admin.baocaotonghop.solaodongtbxh.ldtbxhbaocao', compact('tonghopcungld'));
+        $dotthongbao = nguoilaodong::where('madb', $request->madb)->get();
+        $doanhnghiep = $dotthongbao->where('loaihinh', '!=', ['81', '51']);
+        $hoptacxa = $dotthongbao->where('loaihinh', ['81', '51']);
+
+        //doanh nghiệp
+        $tong_dn = count($doanhnghiep);
+        $ldnu_dn  = count($doanhnghiep->where('gioitinh', 'nu'));
+        $ldtren35_dn  = 0;
+        $bhxh_dn  = count($doanhnghiep->where('bdbhxh', '!=', null));
+        $cmktquanly_dn  = count($doanhnghiep->where('nghenghiep', ['Nhà lãnh đạo', 'Giám đốc']));
+        $cmktcao_dn  = count($doanhnghiep->where('trinhdocmkt', 'Đại học trở lên'));
+        $cmkttrung_dn  = count($doanhnghiep->where('trinhdocmkt', '!=', 'Đại học trở lên'));
+        $cmktkhac_dn  = 0;
+        $lhldco_dn  = count($doanhnghiep->where('loaihdld', '!=', 'Không xác định thời hạn')->where('loaihdld', '!=', 'Dưới 3 tháng'));
+        $lhldkhong_dn  = count($doanhnghiep->where('loaihdld', 'Không xác định thời hạn'));
+        $lhldkhac_dn  = count($doanhnghiep->where('loaihdld', 'Dưới 3 tháng'));
+
+        //hợp tác xã
+        $tong_htx = count($hoptacxa);
+        $ldnu_htx = count($hoptacxa->where('gioitinh', 'nu'));
+        $ldtren35_htx = 0;
+        $bhxh_htx = count($hoptacxa->where('bdbhxh', '!=', null));
+        $cmktquanly_htx = count($hoptacxa->where('nghenghiep', ['Nhà lãnh đạo', 'Giám đốc']));
+        $cmktcao_htx = count($hoptacxa->where('trinhdocmkt', 'Đại học trở lên'));
+        $cmkttrung_htx = count($hoptacxa->where('trinhdocmkt', '!=', 'Đại học trở lên'));
+        $cmktkhac_htx = 0;
+        $lhldco_htx = count($hoptacxa->where('loaihdld', '!=', 'Không xác định thời hạn')->where('loaihdld', '!=', 'Dưới 3 tháng'));
+        $lhldkhong_htx = count($hoptacxa->where('loaihdld', 'Không xác định thời hạn'));
+        $lhldkhac_htx = count($hoptacxa->where('loaihdld', 'Dưới 3 tháng'));
+
+        $model_doanhnghiep = [$tong_dn, $ldnu_dn, $ldtren35_dn, $bhxh_dn,  $cmktquanly_dn, $cmktcao_dn, $cmkttrung_dn, $cmktkhac_dn, $lhldco_dn, $lhldkhong_dn, $lhldkhac_dn];
+        $model_hoptacxa = [$tong_htx, $ldnu_htx, $ldtren35_htx, $bhxh_htx,  $cmktquanly_htx, $cmktcao_htx, $cmkttrung_htx, $cmktkhac_htx, $lhldco_htx, $lhldkhong_htx, $lhldkhac_htx];
+        return view('reports.baocaotonghop.cungld.solaodongtbxh', compact('model_doanhnghiep', 'model_hoptacxa'))
+            ->with('pageTitle', 'Báo thông tin người lao động');
     }
 
-    public function ldtbxhtonghop(Request $request)
+    public function thongtincungld()
     {
-        $dotthongbao = nguoilaodong::where('madb' , $request->madb)->get();
-        $c_tong = count($dotthongbao);
-        $c_ldnu = count($dotthongbao->where('gioitinh','nu'));
-
-        // $c_ldtren35 = $dotthongbao->where('ngaysinh','>',date('Ymd') - (0035-1-1))->get();
-        $c_bhxh = count($dotthongbao->where('bdbhxh','!=',null));
-        
-        return view('admin.baocaotonghop.solaodongtbxh.ldtbxhtonghop', compact('doanhnghiep'))
-            ->with('pageTitle', 'Báo thông tin người lao động');
+        return view('reports.baocaotonghop.cungld.thongtincungld')
+            ->with('pageTitle', 'Thông tin cung lao động lao động');
+    }
+    public function laodongnuocngoai()
+    {
+        return view('reports.baocaotonghop.cungld.laodongnuocngoai')
+            ->with('pageTitle', 'Thông tin người lao động nước ngoài');
+    }
+    
+    public function tinhhinhsudungld()
+    {
+        return view('reports.baocaotonghop.cauld.tinhhinhsudungld')
+            ->with('pageTitle', 'Tình hình sử dụng lao động');
+    }
+    public function dsttcungld()
+    {
+        return view('reports.baocaotonghop.cungld.dsttcungld')
+            ->with('pageTitle', 'Danh sách thông tin cung dụng lao động');
+    }
+    public function nhucautuyendungld()
+    {
+        return view('reports.baocaotonghop.cauld.nhucautuyendungld')
+            ->with('pageTitle', 'Thông tin nhu cầu tuyển dụng lao động');
+    }
+    public function cungldcapxahuyen()
+    {
+        return view('reports.baocaotonghop.cungld.cungldcapxahuyen')
+            ->with('pageTitle', 'Báo cáo tổng hợp về thông tin về cung lao động dành cho cấp xã và cấp huyện');
+    }
+    public function thongtinthitruongld(Request $request)
+    {
+        $nam = $request->nam;
+        $loaihinhkt = dmloaihinhhdkt::all();
+        $company = Company::all();
+        $nhucautuyendungct = nhucautuyendungct::all();
+        // $nhucautuyendung = nhucautuyendung::where('nam',$nam)->get();
+        $nhucautuyendung = nhucautuyendung::join('nhucautuyendungct', 'nhucautuyendung.mahs' ,'=','nhucautuyendungct.mahs')
+        ->select('nhucautuyendungct.*', 'nhucautuyendung.*')->get();
+        // dd($nhucautuyendung);
+        return view('reports.baocaotonghop.cauld.thongtinthitruongld',compact('loaihinhkt','company','nhucautuyendung','nam'))
+        ->with('pageTitle', 'Báo cáo về thông tin thị trường lao động');
     }
 }

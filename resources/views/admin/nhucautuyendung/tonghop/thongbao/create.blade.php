@@ -20,7 +20,7 @@
                 </div>
 
 
-                <form method="POST" action="{{ '/thong_bao/store' }}" accept-charset="UTF-8" class="horizontal-form"
+                <form method="POST" action="{{ '/tuyen_dung/thong_tin_tong_hop/store' }}" accept-charset="UTF-8" class="horizontal-form"
                     id="frm_edit" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
@@ -28,11 +28,7 @@
                             <div class="col-xl-6">
                                 <div class="form-group fv-plugins-icon-container">
                                     <label><b>Tiêu đề*</b></label>
-                                    <select id="matttd" name="matttd" class="form-control">
-                                        @foreach ($thongtintd as $item)
-                                            <option value="{{ $item->matttd }}">{{ $item->tieude }}</option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" id="matttd" name="matttd" class="form-control" />
                                 </div>
                             </div>
                             <div class="col-xl-6">
@@ -45,7 +41,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="col-lg-12" style="text-align: center">
-                            <a href="{{ '/thong_bao' }}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại
+                            <a href="{{ '/tuyen_dung/thong_tin_tong_hop/dot_thu_thap' }}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại
                             </a>
                             <button type="submit" class="btn btn-primary mr-2"><i class="fa fa-check"></i>Hoàn
                                 thành</button>

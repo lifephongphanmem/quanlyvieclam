@@ -29,8 +29,9 @@
             <div class="card card-custom">
                 <div class="card-header card-header-tabs-line">
                     <div class="card-title">
-                        <h3 class="card-label text-uppercase">DANH SÁCH THÔNG BÁO</h3>
+                        <h3 class="card-label text-uppercase"> ĐỢT THU THẬP</h3>
                     </div>
+        
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -40,31 +41,31 @@
                                     <th width="5%"> STT </th>
                                     <th>Tiêu đề</th>
                                     <th>Nội dung</th>
-                                    <td>Thời điểm nhận</td>
+                                    <td>Thời điểm gửi</td>
                                     <td>Người gửi</td>
+                                    <th width="5%">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
                                   foreach ($model as $i => $item ){
                                 ?>
-                                <tr class="text-center" >
-                                    <td>{{ ++$i }} </td>
-                                    <td>
-                                        @foreach ($thongtintd as $tt)
-                                            @if ($tt->matttd == $item->matttd)
-                                                <span>{{ $tt->tieude }}</span>
-                                            @endif
-                                        @endforeach
-                                    </td>
+                                <tr >
+                                    <td class="text-center">{{ ++$i }} </td>
+                                    <td>{{ $item->matttd }}</td>
                                     <td>{{ $item->noidung }}</td>
-                                    <td>{{ $item->thoidiem }}</td>
-                                    <td >
+                                    <td class="text-center">{{ $item->thoidiem }}</td>
+                                    <td class="text-center">
                                         @foreach ($user as $us)
                                             @if ($us->madv == $item->manguoigui)
                                                 <span>{{ $us->name }}</span>
                                             @endif
                                         @endforeach
+                                    </td>
+                                    <td>
+                                        <a  title="danh sách" href="{{ '/tuyen_dung/khai_bao_nhu_cau?matb='.$item->matb}}">
+                                            <i class="icon-lg la la-clipboard-list text-success icon-2x"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 <?php } ?>
@@ -73,6 +74,7 @@
                     </div>
 
                 </div>
+ 
             </div>
             <!--end::Card-->
             <!--end::Example-->
@@ -80,5 +82,6 @@
     </div>
     <!--end::Row-->
 
-  
+
+   
 @endsection

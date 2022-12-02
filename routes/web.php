@@ -65,7 +65,10 @@ use App\Models\dmloailaodong;
 
 use App\Http\Controllers\messageCotroller;
 use App\Http\Controllers\nguoilaodongController;
-
+use App\Http\Controllers\nhucautuyendung;
+use App\Http\Controllers\nhucautuyendungController;
+use App\Http\Controllers\nhucautuyendungctController;
+use App\Models\thongbao;
 use PHPUnit\TextUI\XmlConfiguration\Group;
 
 
@@ -347,13 +350,13 @@ Route::prefix('danh_muc')->group(function () {
     });
 });
 
-Route::get('/dichvu-ba/{cid?}',[AdminDichvu::class,'show_all']);
-Route::get('/dichvudk-ba/{dvid}',[AdminDichvu::class,'show_dk']);
-Route::get('/dichvu-be/{uid}',[AdminDichvu::class,'edit']);
-Route::get('/dichvu-bd/{uid}',[AdminDichvu::class,'delete']);
-Route::get('/dichvu-bn/',[AdminDichvu::class,'new']);
-Route::post('/dichvu-bs/',[AdminDichvu::class,'save']);
-Route::post('/dichvu-bu/',[AdminDichvu::class,'update']);
+Route::get('/dichvu-ba/{cid?}', [AdminDichvu::class, 'show_all']);
+Route::get('/dichvudk-ba/{dvid}', [AdminDichvu::class, 'show_dk']);
+Route::get('/dichvu-be/{uid}', [AdminDichvu::class, 'edit']);
+Route::get('/dichvu-bd/{uid}', [AdminDichvu::class, 'delete']);
+Route::get('/dichvu-bn/', [AdminDichvu::class, 'new']);
+Route::post('/dichvu-bs/', [AdminDichvu::class, 'save']);
+Route::post('/dichvu-bu/', [AdminDichvu::class, 'update']);
 
 
 //dmdonvi
@@ -395,125 +398,139 @@ Route::prefix('Chuc_nang')->group(function () {
 // Tuyển dụng
 
 Route::prefix('tuyen_dung')->group(function () {
+    //thông báo
+    Route::get('damh_sach_thong_bao', [thongbaoController::class, 'thongbaodagui']);
+    // khai bao
+    Route::prefix('/khai_bao_nhu_cau')->group(function () {
+        Route::get('dot_thu_thap', [thongbaoController::class, 'khaibao']);
 
-    //thông tin tổng hợp
+        Route::get('', [nhucautuyendungController::class, 'index_khaibao']);
+        Route::get('/them_moi', [nhucautuyendungController::class, 'create']);
+        Route::post('/store', [nhucautuyendungController::class, 'store']);
+        Route::get('/chinh_sua', [nhucautuyendungController::class, 'edit']);
+        Route::post('/update', [nhucautuyendungController::class, 'update']);
+        Route::post('/chuyen', [nhucautuyendungController::class, 'chuyen']);
+        Route::get('/xem', [nhucautuyendungController::class, 'show']);
+        Route::get('/delete/{id}', [nhucautuyendungController::class, 'delete']);
+        //chi tiết
+        Route::post('/store_ct', [nhucautuyendungctController::class, 'store']);
+        Route::get('/edit_ct', [nhucautuyendungctController::class, 'edit']);
+        Route::post('/update_ct', [nhucautuyendungctController::class, 'update']);
+        Route::get('/delete_ct', [nhucautuyendungctController::class, 'delete']);
+    });
+    // tổng hợp
     Route::prefix('/thong_tin_tong_hop')->group(function () {
-        Route::get('', [thongtintuyendungController::class, 'index']);
-        Route::get('/edit/{id}', [thongtintuyendungController::class, 'edit']);
-        Route::post('/store_update', [thongtintuyendungController::class, 'store_update']);
-        Route::get('/delete/{id}', [thongtintuyendungController::class, 'delete']);
-        //chi tiết
-        Route::get('/chi_tiet', [thongtintuyendungController::class, 'detail']);
-        Route::post('/tralai', [thongtintuyendungController::class, 'tralai']);
+        Route::get('dot_thu_thap', [thongbaoController::class, 'tonghop']);
+   
+        Route::get('/them_moi', [thongbaoController::class, 'create']);
+        Route::post('/store', [thongbaoController::class, 'store']);
+        Route::get('/chinh_sua', [thongbaoController::class, 'edit']);
+        Route::post('/update', [thongbaoController::class, 'update']);
+        Route::get('/delete/{id}', [thongbaoController::class, 'delete']);
+        Route::post('/chuyen', [thongbaoController::class, 'chuyen']);
+
+        Route::get('', [nhucautuyendungController::class, 'index_tonghop']);
+        Route::post('/tralai', [nhucautuyendungController::class, 'tralai']);
     });
 
-    //  Khai báo tổng hợp
-    Route::prefix('/khai_bao_tong_hop')->group(function () {
-        Route::get('', [khaibaotuyendungController::class, 'index']);
-        //chi tiết
-        Route::get('chi_tiet', [khaibaotuyendungController::class, 'detail']);
-        Route::get('/them_moi', [khaibaotuyendungController::class, 'create']);
-        Route::get('/chinh_sua', [khaibaotuyendungController::class, 'edit']);
-        Route::post('/store_update', [khaibaotuyendungController::class, 'store_update']);
-        Route::get('/xem', [khaibaotuyendungController::class, 'show']);
-        Route::get('/delete/{id}', [khaibaotuyendungController::class, 'delete']);
-        Route::get('/chuyen/{id}', [khaibaotuyendungController::class, 'chuyen']);
-    });
+
 });
 
 // thông báo 
 
-Route::prefix('thong_bao')->group(function () {
-    //người gửi
-    Route::get('',[thongbaoController::class, 'index']);
-    Route::get('/them_moi',[thongbaoController::class, 'create']);
-    Route::post('/store',[thongbaoController::class, 'store']);
-    Route::get('/chinh_sua',[thongbaoController::class, 'edit']);
-    Route::post('/update',[thongbaoController::class, 'update']);
-    Route::get('/delete/{id}', [thongbaoController::class, 'delete']);
-    Route::post('/chuyen',[thongbaoController::class, 'chuyen']);
-    // người nhận
-    Route::get('danhsach',[thongbaoController::class, 'danhsach']);
-});
+// Route::prefix('thong_bao')->group(function () {
+//     //người gửi
+//     Route::get('', [thongbaoController::class, 'index']);
+//     Route::get('/them_moi', [thongbaoController::class, 'create']);
+//     Route::post('/store', [thongbaoController::class, 'store']);
+//     Route::get('/chinh_sua', [thongbaoController::class, 'edit']);
+//     Route::post('/update', [thongbaoController::class, 'update']);
+//     Route::get('/delete/{id}', [thongbaoController::class, 'delete']);
+//     Route::post('/chuyen', [thongbaoController::class, 'chuyen']);
+//     // người nhận
+//     Route::get('danhsach', [thongbaoController::class, 'danhsach']);
+// });
 
 // báo cáo tổng hợp
 
-Route::prefix('bao_cao')->group(function () {
-    Route::prefix('nguoi_su_dung_lao_dong')->group(function () {
-        Route::get('dn_bao_cao',[baocaotonghopController::class, 'dnbaocao']);
-        Route::get('dn_tong_hop',[baocaotonghopController::class, 'dntonghop']);
-    });
-    Route::prefix('so_lao_dong_thuong_binh_xa_hoi')->group(function () {
-        Route::get('ldtbxh_bao_cao',[baocaotonghopController::class, 'ldtbxhbaocao']);
-        Route::get('ldtbxh_tong_hop',[baocaotonghopController::class, 'ldtbxhtonghop']);
-    });
+Route::prefix('bao_cao_tong_hop')->group(function () {
+    Route::get('', [baocaotonghopController::class, 'index']);
+    // tổng hợp
+    Route::get('nguoi_su_dung_lao_dong', [baocaotonghopController::class, 'doanhnghiep']);
+    Route::get('so_lao_dong_thuong_binh_xa_hoi', [baocaotonghopController::class, 'soldtbxh']);
+    //mẫu báo cáo
+    Route::get('thong_tin_cung_lao_dong', [baocaotonghopController::class, 'thongtincungld']);
+    Route::get('thong_tin_nguoi_lao_dong_nuoc_ngoai', [baocaotonghopController::class, 'laodongnuocngoai']);
+    Route::get('tinh_hinh_su_dung_lao_dong', [baocaotonghopController::class, 'tinhhinhsudungld']);
+    Route::get('ds_thong_tin_cung_ld', [baocaotonghopController::class, 'dsttcungld']);
+    Route::get('thong_tin_nhu_cau_tuyen_dung', [baocaotonghopController::class, 'nhucautuyendungld']);
+    Route::get('tong_hop_cung_ld_cap_xa_huyen', [baocaotonghopController::class, 'cungldcapxahuyen']);
+    Route::get('thonh_tin_thi_truong_ld', [baocaotonghopController::class, 'thongtinthitruongld']);
 });
 
 // Danh mục địa bàn
-Route::prefix('dia_ban')->group(function(){
-    Route::get('/',[danhmuchanhchinhController::class,'index']);
-    Route::get('/edit/{id}',[danhmuchanhchinhController::class,'edit']);
-    Route::post('/store',[danhmuchanhchinhController::class,'store']);
-    Route::post('/update/{id}',[danhmuchanhchinhController::class,'update']);
-    Route::get('/delete/{id}',[danhmuchanhchinhController::class,'destroy']);
+Route::prefix('dia_ban')->group(function () {
+    Route::get('/', [danhmuchanhchinhController::class, 'index']);
+    Route::get('/edit/{id}', [danhmuchanhchinhController::class, 'edit']);
+    Route::post('/store', [danhmuchanhchinhController::class, 'store']);
+    Route::post('/update/{id}', [danhmuchanhchinhController::class, 'update']);
+    Route::get('/delete/{id}', [danhmuchanhchinhController::class, 'destroy']);
 });
 
 //thông tin người lao động
-Route::prefix('nguoilaodong')->group(function(){
-    Route::get('',[nguoilaodongController::class,'index']);
-    Route::get('/them_moi',[nguoilaodongController::class,'create']);
-    Route::get('/edit/{id}',[nguoilaodongController::class,'edit']);
-    Route::post('/store',[nguoilaodongController::class,'store']);
-    Route::post('/update/{id}',[nguoilaodongController::class,'update']);
-    Route::get('/delete/{id}',[nguoilaodongController::class,'destroy']);
+Route::prefix('nguoilaodong')->group(function () {
+    Route::get('', [nguoilaodongController::class, 'index']);
+    Route::get('/them_moi', [nguoilaodongController::class, 'create']);
+    Route::get('/edit/{id}', [nguoilaodongController::class, 'edit']);
+    Route::post('/store', [nguoilaodongController::class, 'store']);
+    Route::post('/update/{id}', [nguoilaodongController::class, 'update']);
+    Route::get('/delete/{id}', [nguoilaodongController::class, 'destroy']);
 });
 
 //Cung lao động
-Route::prefix('cungld')->group(function(){
-    Route::prefix('thongbao')->group(function(){
-        Route::get('/',[messageCotroller::class,'index']);
-        Route::get('/create',[messageCotroller::class,'create']);
-        Route::get('/edit/{id}',[messageCotroller::class,'edit']);
-        Route::post('/store',[messageCotroller::class,'store']);
-        Route::post('/update/{id}',[messageCotroller::class,'update']);
-        Route::get('/delete/{id}',[messageCotroller::class,'destroy']);
-        Route::get('/chitiet/{id}',[messageCotroller::class,'show']);
-        Route::post('/send/{id}',[messageCotroller::class,'guithongbao']);
+Route::prefix('cungld')->group(function () {
+    Route::prefix('thongbao')->group(function () {
+        Route::get('/', [messageCotroller::class, 'index']);
+        Route::get('/create', [messageCotroller::class, 'create']);
+        Route::get('/edit/{id}', [messageCotroller::class, 'edit']);
+        Route::post('/store', [messageCotroller::class, 'store']);
+        Route::post('/update/{id}', [messageCotroller::class, 'update']);
+        Route::get('/delete/{id}', [messageCotroller::class, 'destroy']);
+        Route::get('/chitiet/{id}', [messageCotroller::class, 'show']);
+        Route::post('/send/{id}', [messageCotroller::class, 'guithongbao']);
     });
+
     // Tổng hợp danh sách  cung lao động
-    Route::prefix('danh_sach')->group(function(){
-        Route::prefix('don_vi')->group(function(){
-            Route::get('/',[cunglaodongController::class,'index']);
-            Route::get('/create',[cunglaodongController::class,'create']);
-            Route::get('/edit/{id}',[cunglaodongController::class,'edit']);
-            Route::post('/store',[cunglaodongController::class,'store']);
-            Route::post('/update/{id}',[cunglaodongController::class,'update']);
-            Route::get('/delete/{id}',[cunglaodongController::class,'destroy']);
-            Route::get('/chi_tiet/{id}',[cunglaodongController::class,'show']);
-            Route::post('/send/{id}',[cunglaodongController::class,'senddata']);
-            Route::get('/lydo/{id}',[cunglaodongController::class,'lydo']);
+    Route::prefix('danh_sach')->group(function () {
+        Route::prefix('don_vi')->group(function () {
+            Route::get('/', [cunglaodongController::class, 'index']);
+            Route::get('/create', [cunglaodongController::class, 'create']);
+            Route::get('/edit/{id}', [cunglaodongController::class, 'edit']);
+            Route::post('/store', [cunglaodongController::class, 'store']);
+            Route::post('/update/{id}', [cunglaodongController::class, 'update']);
+            Route::get('/delete/{id}', [cunglaodongController::class, 'destroy']);
+            Route::get('/chi_tiet/{id}', [cunglaodongController::class, 'show']);
+            Route::post('/send/{id}', [cunglaodongController::class, 'senddata']);
+            Route::get('/lydo/{id}', [cunglaodongController::class, 'lydo']);
         });
-        Route::prefix('huyen')->group(function(){
-            Route::get('/',[cunglaodong_huyenController::class,'index']);
-            Route::get('/tong_hop',[cunglaodong_huyenController::class,'tonghop']);
-            Route::post('/send',[cunglaodong_huyenController::class,'sendata']);
-            Route::post('/tralai',[cunglaodong_huyenController::class,'tralai']);
-            Route::get('/lydo',[cunglaodong_huyenController::class,'lydo']);
+        Route::prefix('huyen')->group(function () {
+            Route::get('/', [cunglaodong_huyenController::class, 'index']);
+            Route::get('/tong_hop', [cunglaodong_huyenController::class, 'tonghop']);
+            Route::post('/send', [cunglaodong_huyenController::class, 'sendata']);
+            Route::post('/tralai', [cunglaodong_huyenController::class, 'tralai']);
+            Route::get('/lydo', [cunglaodong_huyenController::class, 'lydo']);
 
-            Route::get('/in',[cunglaodong_huyenController::class,'indanhsach']);
-            Route::get('/intonghop',[cunglaodong_huyenController::class,'intonghop']);
+            Route::get('/in', [cunglaodong_huyenController::class, 'indanhsach']);
+            Route::get('/intonghop', [cunglaodong_huyenController::class, 'intonghop']);
         });
 
-        Route::prefix('tinh')->group(function(){
-            Route::get('/',[cunglaodong_tinhController::class,'index']);
-            Route::get('/tong_hop',[cunglaodong_tinhController::class,'show']);
-            Route::post('/tralai',[cunglaodong_tinhController::class,'tralai']);
+        Route::prefix('tinh')->group(function () {
+            Route::get('/', [cunglaodong_tinhController::class, 'index']);
+            Route::get('/tong_hop', [cunglaodong_tinhController::class, 'show']);
+            Route::post('/tralai', [cunglaodong_tinhController::class, 'tralai']);
 
-            Route::get('/intonghop',[cunglaodong_tinhController::class,'intonghop']);
-            Route::get('/intonghop_tinh',[cunglaodong_tinhController::class,'intonghop_tinh']);
+            Route::get('/intonghop', [cunglaodong_tinhController::class, 'intonghop']);
+            Route::get('/intonghop_tinh', [cunglaodong_tinhController::class, 'intonghop_tinh']);
         });
-       
     });
 });
-
-

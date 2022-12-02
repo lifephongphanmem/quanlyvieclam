@@ -6,7 +6,7 @@ use App\Models\Company;
 use App\Models\dmdonvi;
 use App\Models\thongbao;
 use App\Models\thongbaoct;
-use App\Models\thongtintuyendung;
+// use App\Models\thongtintuyendung;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
@@ -14,30 +14,37 @@ use Illuminate\Support\Facades\Auth;
 
 class thongbaoController extends Controller
 {
-    public function index()
+    public function thongbaodagui()
+    {
+        $model = thongbao::where('trangthai', 'dg')->get();
+        $company = Company::all();
+        $user = User::all();
+
+        return view('admin.nhucautuyendung.thongbaodagui', compact('model', 'company', 'user'));
+    }
+    public function khaibao()
+    {
+        $model = thongbao::where('trangthai', 'dg')->get();
+        $company = Company::all();
+        $user = User::all();
+
+        return view('admin.nhucautuyendung.khaibao.thongbao.dsthuthap', compact('model', 'company', 'user'));
+    }
+    public function tonghop()
     {
         $model = thongbao::all();
         $company = Company::all();
         $user = User::all();
-        $thongtintd = thongtintuyendung::all();
-        return view('admin.thongbao.index', compact('model','company', 'user', 'thongtintd'));
-    }
 
-    public function danhsach()
-    {
-        $user = User::all();
-        $model = thongbao::all();
-        $thongtintd = thongtintuyendung::all();
-        return view('admin.thongbao.danhsach', compact('model', 'user', 'thongtintd'));
+        return view('admin.nhucautuyendung.tonghop.thongbao.dsthuthap', compact('model', 'company', 'user'));
     }
 
     public function create()
     {
         $nguoigui = Auth::user();
-        $thongtintd = thongtintuyendung::all();
-        return view('admin.thongbao.create', compact('nguoigui', 'thongtintd'));
+        return view('admin.nhucautuyendung.tonghop.thongbao.create', compact('nguoigui'));
     }
- 
+
     public function store(Request $request)
     {
         $input = $request->all();
@@ -45,16 +52,15 @@ class thongbaoController extends Controller
         $input['matb'] = date('YmdHis');
         $input['trangthai'] = 'cg';
         thongbao::create($input);
-        $messeager = 'đã thêm mới thông báo';
-        return redirect('thong_bao')->with('success', $messeager);
+        $messeager = 'đã thêm mới ';
+        return redirect('/tuyen_dung/thong_tin_tong_hop/dot_thu_thap')->with('success', $messeager);
     }
 
     public function edit(Request $request)
     {
         $model = thongbao::where('matb', $request->matb)->first();
         $user = User::all();
-        $thongtintd = thongtintuyendung::all();
-        return view('admin.thongbao.edit', compact('thongtintd', 'user', 'model'));
+        return view('admin.nhucautuyendung.tonghop.thongbao.edit', compact('user', 'model'));
     }
 
     public function update(Request $request)
@@ -63,24 +69,39 @@ class thongbaoController extends Controller
         unset($input['_token']);
         thongbao::where('matb', $input['matb'])->update($input);
         $messeager = 'Thông báo đã được thay đổi';
-        return redirect('thong_bao')->with('success', $messeager);
+        return redirect('/tuyen_dung/thong_tin_tong_hop/dot_thu_thap')->with('success', $messeager);
     }
 
-    public function chuyen(Request $request){     
+    public function chuyen(Request $request)
+    {
         $input = $request->all();
-        // dd($input['matb']);
-        foreach ($input['manguoinhan'] as $item){
-            thongbaoct::create(['matb' => $input['matb'], 'manguoinhan' => (string)$item]);
+        $doanhnghiep = Company::select('user')->get();
+        $all = 0;
+
+        foreach ($input['manguoinhan'] as $item) {
+            if ($item == 'all') {
+                foreach ($doanhnghiep as $dn) {
+                    thongbaoct::create(['matb' => $input['matb'], 'manguoinhan' => (string)$dn->user]);
+                }
+                $all = 1;
+            }
         }
-        thongbao::where('matb',$input['matb'])->update(['trangthai' => 'dg','thoidiem' => date('d/m/Y')]);
-        return redirect('thong_bao')->with('success', 'Thông báo đã được gửi');
+     
+        if ($all != 1) {
+            foreach ($input['manguoinhan'] as $item) {
+                thongbaoct::create(['matb' => $input['matb'], 'manguoinhan' => (string)$item]);
+            }
+        }
+
+        thongbao::where('matb', $input['matb'])->update(['trangthai' => 'dg', 'thoidiem' => date('d/m/Y')]);
+        return redirect('/tuyen_dung/thong_tin_tong_hop/dot_thu_thap')->with('success', 'Thông báo đã được gửi');
     }
 
     public function delete($id)
     {
-       $model = thongbao::findOrFail($id);
-       thongbaoct::where('matb',$model->matb)->delete();
-       $model->delete();
-        return redirect('thong_bao')->with('success', 'Thông báo đã được xóa');
+        $model = thongbao::findOrFail($id);
+        thongbaoct::where('matb', $model->matb)->delete();
+        $model->delete();
+        return redirect('/tuyen_dung/thong_tin_tong_hop/dot_thu_thap')->with('success', 'Thông báo đã được xóa');
     }
 }

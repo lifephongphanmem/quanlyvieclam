@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateThongtintuyendungct extends Migration
+class CreateNhucautuyendung extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,18 @@ class CreateThongtintuyendungct extends Migration
      */
     public function up()
     {
-        Schema::create('thongtintuyendungct', function (Blueprint $table) {
+        Schema::create('nhucautuyendung', function (Blueprint $table) {
             $table->id();
             $table->string('mahs')->nullable();
-            $table->string('manhom')->nullable();
             $table->string('madn')->nullable();
             $table->string('noidung')->nullable();
+            $table->string('ten')->nullable();
+            $table->string('sdt')->nullable();
+            $table->string('email')->nullable();
+            $table->string('yeucau')->nullable();
             $table->string('trangthai')->nullable();
-            $table->string('thoidiemtu')->nullable();
-            $table->string('thoidiemden')->nullable();
-            $table->string('soluong')->nullable();
             $table->string('lydo')->nullable();
+            $table->string('nam')->nullable();
             $table->timestamps();
         });
     }
@@ -35,6 +36,6 @@ class CreateThongtintuyendungct extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('thongtintuyendungct');
+        Schema::dropIfExists('nhucautuyendung');
     }
 }

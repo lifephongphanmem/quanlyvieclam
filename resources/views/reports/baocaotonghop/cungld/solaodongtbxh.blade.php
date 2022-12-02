@@ -19,8 +19,8 @@
             <td style="vertical-align: top;">
                 <b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>
                     Độc lập - Tự do - Hạnh phúc</b>
-                <hr style="color: black;;width: 15%;vertical-align: top; margin-top: 2px">
-
+                <hr style="color: black;width: 15%;vertical-align: top; margin-top: 2px">
+                
             </td>
         </tr>
         <tr>
@@ -63,42 +63,23 @@
                 <td style="text-align: center">{{ $i }}</td>
             @endfor
 
-
-            @foreach ($company as $key => $item)
-                <tr>
-                    <td style="text-align: center">1</td>
-                    <td>{{ $item->hoten }}</td>
-                    <td style="text-align: center">{{ $item->bdbhxh }}</td>
-                    <td style="text-align: center">{{ $item->ngaysinh }}</td>
-                    <td style="text-align: center">{{ $item->gioitinh }}</td>
-                    <td style="text-align: center">{{ $item->cmnd }}</td>
-                    <td style="text-align: center">{{ $item->cvhientai }}</td>
-                    <td style="text-align: center">{{ $item->cvhientai }}</td>
-                    <td style="text-align: center">{{ $item->trinhdocmkt }}</td>
-                    <td style="text-align: center">{{ $item->trinhdocmkt }}</td>
-                    <td style="text-align: center">{{ $item->trinhdocmkt }}</td>
-                    <td style="text-align: center">{{ $item->luong }}</td>
-                    <td style="text-align: center">{{ $item->pcchucvu }}</td>
-                </tr>
-            @endforeach
-
-            @foreach ($company as $key => $item)
             <tr>
                 <td style="text-align: center">1</td>
-                <td>{{ Count() }}</td>
-                <td style="text-align: center">{{ $item->bdbhxh }}</td>
-                <td style="text-align: center">{{ $item->ngaysinh }}</td>
-                <td style="text-align: center">{{ $item->gioitinh }}</td>
-                <td style="text-align: center">{{ $item->cmnd }}</td>
-                <td style="text-align: center">{{ $item->cvhientai }}</td>
-                <td style="text-align: center">{{ $item->cvhientai }}</td>
-                <td style="text-align: center">{{ $item->trinhdocmkt }}</td>
-                <td style="text-align: center">{{ $item->trinhdocmkt }}</td>
-                <td style="text-align: center">{{ $item->trinhdocmkt }}</td>
-                <td style="text-align: center">{{ $item->luong }}</td>
-                <td style="text-align: center">{{ $item->pcchucvu }}</td>
+                <td>Doanh nghiệp</td>
+                @foreach ($model_doanhnghiep as $item)
+                    <td style="text-align: center">{{ $item }}</td>
+                @endforeach
+                <td></td>
             </tr>
-        @endforeach
+
+            <tr>
+                <td style="text-align: center">2</td>
+                <td>Hợp tác xã</td>
+                @foreach ($model_hoptacxa as $item)
+                    <td style="text-align: center">{{ $item }}</td>
+                @endforeach
+                <td></td>
+            </tr>
 
             <tr style="font-weight: bold" class="text-right;">
                 <td colspan="2">Tổng</td>
@@ -115,6 +96,7 @@
                 <td></td>
                 <td></td>
             </tr>
+
         </tbody>
     </table>
     <table width="96%" cellspacing="0" height cellpadding="0" style="margin: 20px auto;text-align: center; height:200px">
