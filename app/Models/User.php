@@ -11,8 +11,8 @@ use Cmgmyr\Messenger\Traits\Messagable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-	use Messagable;
-	protected $table = 'users';
+    use Messagable;
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','category','public','level','madv','maxa','mahuyen','matinh','username','phanloaitk','status'
+        'name', 'email', 'password', 'category', 'public', 'level', 'madv', 'maxa', 'mahuyen', 'matinh', 'username', 'phanloaitk', 'status', 'sadmin', 'solandn', 'manhomchucnang', 'nhaplieu', 'tonghop', 'hethong', 'chucnangkhac'
     ];
 
     /**

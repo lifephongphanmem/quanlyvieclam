@@ -13,55 +13,9 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\EmployerController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\TuyendungController;
-use App\Http\Controllers\MessagesController;
-use App\Http\Controllers\DichvuController;
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminCompany;
-use App\Http\Controllers\AdminTuyendung;
-use App\Http\Controllers\AdminDanhmuchanhchinh;
-use App\Http\Controllers\AdminParamtype;
-use App\Http\Controllers\AdminParam;
-use App\Http\Controllers\AdminUser;
-use App\Http\Controllers\AdminReport;
-use App\Http\Controllers\AdminMessages;
-use App\Http\Controllers\AdminDichvu;
-use App\Http\Controllers\dmdoituonguutienController;
-use App\Http\Controllers\AdminEmployer;
-use App\Http\Controllers\baocaotonghopController;
-use App\Http\Controllers\ChucnangController;
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\cunglaodong_huyenController;
-use App\Http\Controllers\cunglaodong_tinh;
-use App\Http\Controllers\cunglaodong_tinhController;
-use App\Http\Controllers\cunglaodongController;
-use App\Http\Controllers\danhmuchanhchinhController;
-use App\Http\Controllers\DmdonviController;
 
-use App\Http\Controllers\dmkhongthamgiahdktController;
-use App\Http\Controllers\dmloaihieuluchdldController;
-use App\Http\Controllers\dmloaihinhhdktController;
-use App\Http\Controllers\dmloailaodongController;
-use App\Http\Controllers\dmmanghetrinhdoController;
-use App\Http\Controllers\dmnganhsxkdController;
-use App\Http\Controllers\dmnguoicovieclamController;
-use App\Http\Controllers\dmnguoithatnghiepController;
-use App\Http\Controllers\dmthoigianthatnghiepController;
-use App\Http\Controllers\dmtinhtrangthamgiahdktController;
-use App\Http\Controllers\dmtrinhdogdptController;
-use App\Http\Controllers\dmtrinhdokythuatController;
-use App\Http\Controllers\dmvitricongviecController;
-use App\Http\Controllers\dmvitrivieclamController;
-use App\Http\Controllers\khaibaotuyendungController;
-use App\Http\Controllers\thongbaoController;
-use App\Http\Controllers\thongtintuyendungController;
-use App\Models\dmdonvi;
-use App\Models\dmloailaodong;
+
 
 use App\Http\Controllers\messageCotroller;
 use App\Http\Controllers\nguoilaodongController;
@@ -70,6 +24,19 @@ use App\Http\Controllers\nhucautuyendungController;
 use App\Http\Controllers\nhucautuyendungctController;
 use App\Models\thongbao;
 use PHPUnit\TextUI\XmlConfiguration\Group;
+
+
+include('route_cu.php');
+
+include('cunglaodong.php');
+include('danhmuc.php');
+include('caulaodong.php');
+include('hethongchung.php');
+include('tinhhinhsudunglaodong.php');
+include('nguoilaodong.php');
+include('doanhnghiep.php');
+include('baocao.php');
+include('thongbao.php');
 
 
 // Frontend SECTION
@@ -534,3 +501,7 @@ Route::prefix('cungld')->group(function () {
         });
     });
 });
+
+
+
+
