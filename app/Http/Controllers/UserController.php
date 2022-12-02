@@ -7,6 +7,8 @@ use App\Models\Company;
 use App\Models\Danhmuc\Chucnang;
 use App\Models\Danhmuc\danhmuchanhchinh;
 use App\Models\Danhmuc\dmdonvi;
+use App\Models\Danhmuc\dsnhomtaikhoan;
+use App\Models\Danhmuc\dsnhomtaikhoan_phanquyen;
 use App\Models\Hethong\dstaikhoan_phanquyen;
 use Illuminate\Http\Request;
 use DB;
@@ -384,8 +386,10 @@ class UserController extends Controller
 		$inputs = $request->all();
 		$model = dmdonvi::where('madv', $inputs['madv'])->first();
 		$model_tk = User::where('madv', $inputs['madv'])->get();
+		$a_nhomtk = array_column(dsnhomtaikhoan::all()->toArray(), 'tennhomchucnang', 'manhomchucnang');
 		return view('HeThong.manage.taikhoan.chitiet')
 			->with('model', $model)
+			->with('a_nhomtk',$a_nhomtk )
 			->with('model_tk', $model_tk);
 	}
 
@@ -455,7 +459,7 @@ class UserController extends Controller
         }
 
 		return view('HeThong.manage.taikhoan.phanquyen')
-		->with('model', $m_chucnang->where('capdo', '1')->sortby('sapxep'))
+		->with('model', $m_chucnang->where('capdo', '1')->sortby('id'))
 		->with('m_chucnang', $m_chucnang)
 		->with('m_taikhoan', $m_taikhoan);
 	}
@@ -504,5 +508,42 @@ class UserController extends Controller
                 $this->getChucNang($dschucnang, $val->machucnang, $ketqua);
             }
         }
+    }
+
+	public function NhomChucNang(Request $request)
+    {
+        // if (!chkPhanQuyen('dstaikhoan', 'thaydoi')) {
+        //     return view('errors.noperm')->with('machucnang', 'dstaikhoan');
+        // }
+
+        $inputs = $request->all();
+        $m_taikhoan = User::where('username', $inputs['tendangnhap'])->first();
+        // dd($inputs);
+
+        if (!isset($inputs['manhomchucnang'])) {
+            return view('errors.404')
+                ->with('message', 'Bạn cần chọn nhóm chức năng cho tài khoản để cài lại phân quyền')
+                ->with('url', '/TaiKhoan/DanhSach?madonvi=' . $m_taikhoan->madonvi);
+        }
+
+        $a_phanquyen = [];
+        foreach (dsnhomtaikhoan_phanquyen::where('manhomchucnang', $inputs['manhomchucnang'])->get() as $phanquyen) {
+            $a_phanquyen[] = [
+                "tendangnhap" => $inputs['tendangnhap'],
+                "machucnang" => $phanquyen->machucnang,
+                "phanquyen" => $phanquyen->phanquyen,
+                "danhsach" => $phanquyen->danhsach,
+                "thaydoi" => $phanquyen->thaydoi,
+                "hoanthanh" => $phanquyen->hoanthanh,
+            ];
+        }
+        //Xóa phân quyền cũ
+        dstaikhoan_phanquyen::where('tendangnhap', $inputs['tendangnhap'])->delete();
+        //Lưu thông tin nhóm tài khoản
+        $m_taikhoan->manhomchucnang = $inputs['manhomchucnang'];
+        $m_taikhoan->save();
+        //Lưu phân uyền
+        dstaikhoan_phanquyen::insert($a_phanquyen);
+        return redirect('/TaiKhoan/DanhSach?madonvi=' . $m_taikhoan->madv);
     }
 }

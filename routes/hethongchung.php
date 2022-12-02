@@ -5,6 +5,7 @@ use App\Http\Controllers\Danhmuc\DmdonviController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Hethong\ChucnangController;
 use App\Http\Controllers\Danhmuc\danhmuchanhchinhController;
+use App\Http\Controllers\Hethong\dsnhomtaikhoanController;
 
 //Đăng nhập
 Route::get('/',[UserController::class,'dashboard']);
@@ -39,6 +40,8 @@ Route::prefix('TaiKhoan')->group(function () {
 
     Route::get('/PhanQuyen',[UserController::class,'phanquyen']);
     Route::post('/PhanQuyen',[UserController::class,'luuphanquyen']);
+
+    Route::post('/NhomChucNang',[UserController::class,'NhomChucNang']);
 });
 
 //danh mục chức năng
@@ -57,4 +60,15 @@ Route::prefix('dia_ban')->group(function () {
     Route::post('/store', [danhmuchanhchinhController::class, 'store']);
     Route::post('/update/{id}', [danhmuchanhchinhController::class, 'update']);
     Route::get('/delete/{id}', [danhmuchanhchinhController::class, 'destroy']);
+});
+
+Route::prefix('nhomchucnang')->group(function(){
+    Route::get('/danhsach',[dsnhomtaikhoanController::class,'index']);
+    Route::post('/store',[dsnhomtaikhoanController::class,'store']);
+    Route::get('/delete/{id}',[dsnhomtaikhoanController::class,'destroy']);
+
+    Route::get('/PhanQuyen',[dsnhomtaikhoanController::class,'PhanQuyen']);
+    Route::post('/PhanQuyen',[dsnhomtaikhoanController::class,'LuuPhanQuyen']);
+
+    Route::get('/danhsach_donvi',[dsnhomtaikhoanController::class,'DanhSachDonVi']);
 });

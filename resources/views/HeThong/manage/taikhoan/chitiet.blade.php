@@ -77,7 +77,7 @@
                                             <a title="Phân quyền" href="{{'/TaiKhoan/PhanQuyen?tendangnhap='.$tk->username}}" class="btn btn-sm btn-clean btn-icon">
                                                 <i class="icon-lg la flaticon-user-settings text-primary icon-2x"></i></a>
 
-                                            <button type="button" onclick="setPerGroup('1664590482','qbsgiaothong')"
+                                            <button type="button" onclick="setPerGroup('{{ $tk->manhomchucnang }}','{{ $tk->username }}')"
                                                 class="btn btn-sm btn-clean btn-icon" data-target="#modify-nhomchucnang"
                                                 data-toggle="modal" title="Đặt lại quyền theo nhóm chức năng">
                                                 <i class="icon-lg la flaticon-network text-primary icon-2x"></i>
@@ -101,6 +101,44 @@
         </div>
     </div>
     <!--end::Row-->
+    <div id="modify-nhomchucnang" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade kt_select2_modal">
+        {!! Form::open(['url' => '/TaiKhoan/NhomChucNang', 'id' => 'frm_nhomchucnang']) !!}
+        <input type="hidden" name="tendangnhap" />
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-primary">
+                    <h4 id="modal-header-primary-label" class="modal-title">Đồng ý tải lại phân quyền của tài khoản?
+                    </h4>
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+    
+                </div>
+                <div class="modal-body">
+                    <p style="color: #0000FF">Các phân quyền của tài khoản sẽ được tải lại theo nhóm chức năng và không thể khôi phục lại</p>
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label class="control-label">Tên nhóm chức năng<span class="require">*</span></label>
+                            {!! Form::select('manhomchucnang', $a_nhomtk, null, ['class' => 'form-control select2_modal', 'required'=>'true']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                    <button type="submit" data-dismiss="modal" class="btn btn-primary" onclick="clickNhanvaTKT()">Đồng
+                        ý</button>
+                </div>
+            </div>
+        </div>
+        {!! Form::close() !!}
+    </div>
 
     @include('includes.delete')
+    <script>
+            function clickNhanvaTKT() {
+        $('#frm_nhomchucnang').submit();
+    }
+    function setPerGroup(manhomchucnang, tendangnhap) {
+        $('#frm_nhomchucnang').find("[name='manhomchucnang']").val(manhomchucnang);
+        $('#frm_nhomchucnang').find("[name='tendangnhap']").val(tendangnhap);
+    }
+    </script>
 @stop
