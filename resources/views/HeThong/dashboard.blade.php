@@ -1,4 +1,4 @@
-@extends('HeThong.main')
+@extends('main')
 
 
 @section('content')

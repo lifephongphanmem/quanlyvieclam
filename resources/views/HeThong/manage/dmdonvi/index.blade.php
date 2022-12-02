@@ -1,4 +1,4 @@
-@extends('HeThong.main')
+@extends('main')
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
@@ -8,18 +8,12 @@
 @section('custom-script')
     <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
-    </script>
 
-    <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
+
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-<<<<<<< HEAD
-            TableManaged.init();
-=======
-            // TableManaged.init();
-            // $('#sample_3').DataTable();
->>>>>>> c2d0ed3b36c9b445bd91811785ecca35b97c26ac
+            TableManaged3.init();
         });
     </script>
 @stop
@@ -35,24 +29,24 @@
                         <h3 class="card-label text-uppercase">Danh mục đơn vị</h3>
                     </div>
                     <div class="card-toolbar">
-                        <a href="" class="btn btn-xs btn-success mr-2">Tạo mới</a>
-                        <button class="btn btn-xs btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel"
+                        {{-- <button onclick="add()" class="btn btn-xs btn-icon btn-success mr-2" title="Thêm mới"><i class="fa fa-plus"></i></button> --}}
+                        {{-- <button class="btn btn-xs btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel"
                             data-target="#modal-nhanexcel" data-toggle="modal">
                             <i class="fas fa-file-import"></i>
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
                 <div class="card-body">
                     <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th colspan="3">STT</th>
                                 <th rowspan="2">Tên địa bàn</th>
                                 <th rowspan="2">Đơn vị quản lý địa bàn</th>
                                 <th rowspan="2">Thao tác</th>
 
                             </tr>
-                            <tr>
+                            <tr class="text-center">
                                 <th>T</th>
                                 <th>H</th>
                                 <th>X</th>
@@ -99,26 +93,26 @@
             if ($item->parent == $parent) {
                             echo '<tr>';
                                 if($item->level== 'Tỉnh'){
-                                    echo '<td>'.++$key.'</td>';
+                                    echo '<td class="text-center">'.++$key.'</td>';
                                 }else {
                                     echo '<td></td>';
                                 }
                                 if($item->level== 'Thành phố' || $item->level == 'Huyện' || $item->level == 'Thị xã'){
 
-                                    echo '<td>'.$i++.'</td>';
+                                    echo '<td class="text-center">'.$i++.'</td>';
                                 }else {
                                     echo '<td></td>';
                                 }
 
                                 if($item->level== 'Phường' || $item->level == 'Xã' || $item->level == 'Thị trấn'){
                                     // $key=0;
-                                    echo '<td>'.$j++.'</td>';
+                                    echo '<td class="text-center">'.$j++.'</td>';
                                 }else {
                                     echo '<td></td>';
                                 }
 
                                echo '<td>'.$item->name.'</td>';
-                               $tendvql=App\Models\dmdonvi::where('madv',$item->madvql)->first();
+                               $tendvql=App\Models\Danhmuc\dmdonvi::where('madv',$item->madvql)->first();
                                if(isset($tendvql)){
                                 echo '<td>'.$tendvql->tendv.'</td>';
                                }else {
@@ -132,7 +126,7 @@
                                             <span class="svg-icon svg-icon-xl">
                                                 <i class="icon-lg la la-clipboard-list text-success icon-2x"></i>
                                              </span>
-                                            <span class="label label-sm label-light-danger text-dark label-rounded font-weight-bolder position-absolute top-0 right-0">'.count(App\Models\dmdonvi::where('madiaban',$item->id)->get()).'</span>
+                                            <span class="label label-sm label-light-danger text-dark label-rounded font-weight-bolder position-absolute top-0 right-0">'.count(App\Models\Danhmuc\dmdonvi::where('madiaban',$item->id)->get()).'</span>
                                          </a>';
                                echo '</td>';
                            echo '</tr>';

@@ -292,3 +292,102 @@ function convert2Roman($num){
     "ZW" => "Zimbabwe"
   );
 }
+
+function getNam($all = false)
+{
+    $a_kq = array();
+    if ($all) {
+        $a_kq['ALL'] = '--Tất cả các năm--';
+    }
+    for ($i = date('Y') - 4; $i <= date('Y') + 2; $i++) {
+        $a_kq[$i] = $i;
+    }
+    return $a_kq;
+}
+
+function getTextStatus($status)
+{
+    //text-danger; text-warning; text-success; text-info
+    $a_trangthai = array(
+        'CHUATAO' => 'text-danger',
+        'CHUADL' => 'text-danger', //dùng cho đơn vị chủ quản - chưa có đơn vị cấp dưới nào gửi dữ liệu
+        'CHOGUI' => 'text-dark',
+        'DAGUI' => 'text-success',
+        'TRALAI' => 'text-danger',
+        'CHUADAYDU' => 'text-warning',
+        'CHUAGUI' => 'text-dark', //dùng cho đơn vị chủ quản - các đơn vị cấp dưới đã có dữ liệu nhưng chưa gửi đi
+        'GUILOI' => 'text-danger',
+    );
+    return isset($a_trangthai[$status]) ? $a_trangthai[$status] : '';
+}
+
+function getStatus()
+{
+    return array(
+        'CHONHAN' => 'Dữ liệu chờ nhận',
+        'CHUATAO' => 'Dữ liệu chưa khởi tạo',
+        'CHOGUI' => 'Dữ liệu chờ gửi',
+        'DAGUI' => 'Dữ liệu đã gửi',
+        'TRALAI' => 'Dữ liệu bị trả lại',
+        'CHUADAYDU' => 'Dữ liệu chưa đầy đủ',
+        'CHUAGUI' => 'Dữ liệu chờ gửi',
+        'CHUADL' => 'Dữ liệu chưa được gửi lên',
+        'GUILOI' => 'Dữ liệu bị lỗi',
+    );
+}
+
+function toAlpha($data)
+{
+    $alphabet =   array('', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+    $alpha_flip = array_flip($alphabet);
+    if ($data <= 25) {
+        return $alphabet[$data];
+    } elseif ($data > 25) {
+        $dividend = ($data + 1);
+        $alpha = '';
+        $modulo = '';
+        while ($dividend > 0) {
+            $modulo = ($dividend - 1) % 26;
+            $alpha = $alphabet[$modulo] . $alpha;
+            $dividend = floor((($dividend - $modulo) / 26));
+        }
+        return $alpha;
+    }
+}
+
+function romanNumerals($num)
+{
+    $n = intval($num);
+    $res = '';
+
+    /*** roman_numerals array  ***/
+    $roman_numerals = array(
+        'M'  => 1000,
+        'CM' => 900,
+        'D'  => 500,
+        'CD' => 400,
+        'C'  => 100,
+        'XC' => 90,
+        'L'  => 50,
+        'XL' => 40,
+        'X'  => 10,
+        'IX' => 9,
+        'V'  => 5,
+        'IV' => 4,
+        'I'  => 1
+    );
+
+    foreach ($roman_numerals as $roman => $number) {
+        /*** divide to get  matches ***/
+        $matches = intval($n / $number);
+
+        /*** assign the roman char * $matches ***/
+        $res .= str_repeat($roman, $matches);
+
+        /*** substract from the number ***/
+        $n = $n % $number;
+    }
+
+    /*** return the res ***/
+    return $res;
+}

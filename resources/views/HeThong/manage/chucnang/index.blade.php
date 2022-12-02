@@ -1,4 +1,4 @@
-@extends('HeThong.main')
+@extends('main')
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
@@ -7,14 +7,13 @@
 
 @section('custom-script')
     <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}">
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
     </script>
 
-    <script src="{{ url('assets/admin/pages/scripts/table-managed.js') }}"></script>
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            TableManaged.init();
+            TableManaged3.init();
         });
     </script>
 @stop
@@ -30,19 +29,21 @@
                         <h3 class="card-label text-uppercase">Danh mục chức năng</h3>
                     </div>
                     <div class="card-toolbar">
-                        <button type="button" onclick="add()" class="btn btn-success btn-sm" data-target="#modify-modal"
-                            data-toggle="modal" title="Thêm mới">
-                            <i class="fa fa-plus"></i></button>
-                        <button class="btn btn-sm btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel"
+                        @if (chkPhanQuyen('chucnang', 'thaydoi'))
+                            <button type="button" onclick="add()" class="btn btn-success btn-xs btn-icon"
+                                data-target="#modify-modal" data-toggle="modal" title="Thêm mới">
+                                <i class="fa fa-plus"></i></button>
+                        @endif
+                        {{-- <button class="btn btn-sm btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel"
                             data-target="#modal-nhanexcel" data-toggle="modal">
                             <i class="fas fa-file-import"></i>
-                        </button>
+                        </button> --}}
                     </div>
                 </div>
                 <div class="card-body">
-                    <table id="#sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
+                    <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th>STT</th>
                                 <th>Mã số</th>
                                 <th>Tên chức năng</th>
@@ -62,39 +63,45 @@
                                         <td>{{ $cd1->tencn }}</td>
                                         @if ($cd1->capdo == 1)
                                             <td style="text-decoration: none;text-align: center">
-                                                <button onclick="getChucNang('{{ $cd1->id }}')"
-                                                    class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
-                                                    title="Thay đổi thông tin" data-toggle="modal">
-                                                    <i class="icon-lg la fa-edit text-primary icon-2x"></i></button>
-                                                <button onclick="addChucNang('{{ $cd1->capdo }}','{{ $cd1->id }}')"
-                                                    class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
-                                                    title="Thêm chức năng" data-toggle="modal">
-                                                    <i class="icon-lg la fa-plus text-primary icon-2x"></i>
-                                                </button>
-                                                <button title="Xóa thông tin" type="button"
-                                                    onclick="cfDel('{{'/Chuc_nang/destroy/'. $cd1->id }}')"
-                                                    class="btn btn-sm btn-clean btn-icon"
-                                                    data-target="#delete-modal-confirm" data-toggle="modal">
-                                                    <i class="icon-lg la fa-trash-alt text-danger icon-2x"></i>
-                                                </button>
+                                                @if (chkPhanQuyen('chucnang', 'thaydoi'))
+                                                    <button onclick="getChucNang('{{ $cd1->id }}')"
+                                                        class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
+                                                        title="Thay đổi thông tin" data-toggle="modal">
+                                                        <i class="icon-lg la fa-edit text-primary icon-2x"></i></button>
+                                                    <button
+                                                        onclick="addChucNang('{{ $cd1->capdo }}','{{ $cd1->maso }}')"
+                                                        class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
+                                                        title="Thêm chức năng" data-toggle="modal">
+                                                        <i class="icon-lg la fa-plus text-primary icon-2x"></i>
+                                                    </button>
+                                                    <button title="Xóa thông tin" type="button"
+                                                        onclick="cfDel('{{ '/Chuc_nang/destroy/' . $cd1->id }}')"
+                                                        class="btn btn-sm btn-clean btn-icon"
+                                                        data-target="#delete-modal-confirm" data-toggle="modal">
+                                                        <i class="icon-lg la fa-trash-alt text-danger icon-2x"></i>
+                                                    </button>
+                                                @endif
                                             </td>
                                         @else
                                             <td style="text-decoration: none;text-align: center">
-                                                <button onclick="getChucNang('{{ $cd1->id }}')"
-                                                    class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
-                                                    title="Thay đổi thông tin" data-toggle="modal">
-                                                    <i class="icon-lg la fa-edit text-dark icon-2x"></i></button>
+                                                @if (chkPhanQuyen('chucnang', 'thaydoi'))
+                                                    <button onclick="getChucNang('{{ $cd1->id }}')"
+                                                        class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
+                                                        title="Thay đổi thông tin" data-toggle="modal">
+                                                        <i class="icon-lg la fa-edit text-dark icon-2x"></i></button>
 
-                                                <button onclick="addChucNang('{{ $cd1->capdo }}','{{ $cd1->id }}')"
-                                                    class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
-                                                    title="Thêm chức năng" data-toggle="modal">
-                                                    <i class="icon-lg la fa-plus text-dark icon-2x"></i>
-                                                </button>
-                                                <button title="Xóa thông tin" type="button"
-                                                    onclick="cfDel('{{'/Chuc_nang/destroy/'.$cd1->id }}')"
-                                                    class="btn btn-sm btn-clean btn-icon"
-                                                    data-target="#delete-modal-confirm" data-toggle="modal">
-                                                    <i class="icon-lg la fa-trash-alt text-danger icon-2x"></i>
+                                                    <button
+                                                        onclick="addChucNang('{{ $cd1->capdo }}','{{ $cd1->maso }}')"
+                                                        class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
+                                                        title="Thêm chức năng" data-toggle="modal">
+                                                        <i class="icon-lg la fa-plus text-dark icon-2x"></i>
+                                                    </button>
+                                                    <button title="Xóa thông tin" type="button"
+                                                        onclick="cfDel('{{ '/Chuc_nang/destroy/' . $cd1->id }}')"
+                                                        class="btn btn-sm btn-clean btn-icon"
+                                                        data-target="#delete-modal-confirm" data-toggle="modal">
+                                                        <i class="icon-lg la fa-trash-alt text-danger icon-2x"></i>
+                                                @endif
                                                 </button>
                                             </td>
                                         @endif
@@ -104,22 +111,26 @@
                                         <td style="text-decoration: line-through;">{{ $cd1->tencn }}</td>
                                         @if ($cd1->capdo == 1)
                                             <td style="text-decoration: none;text-align: center">
-                                                <button onclick="getChucNang('{{ $cd1->id }}')"
-                                                    class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
-                                                    title="Thay đổi thông tin" data-toggle="modal">
-                                                    <i class="icon-lg la fa-edit text-primary icon-2x"></i></button>
+                                                @if (chkPhanQuyen('chucnang', 'thaydoi'))
+                                                    <button onclick="getChucNang('{{ $cd1->id }}')"
+                                                        class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
+                                                        title="Thay đổi thông tin" data-toggle="modal">
+                                                        <i class="icon-lg la fa-edit text-primary icon-2x"></i></button>
+                                                @endif
                                             </td>
                                         @else
                                             <td style="text-decoration: none;text-align: center">
-                                                <button onclick="getChucNang('{{ $cd1->id }}')"
-                                                    class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
-                                                    title="Thay đổi thông tin" data-toggle="modal">
-                                                    <i class="icon-lg la fa-edit text-dark icon-2x"></i></button>
+                                                @if (chkPhanQuyen('chucnang', 'thaydoi'))
+                                                    <button onclick="getChucNang('{{ $cd1->id }}')"
+                                                        class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
+                                                        title="Thay đổi thông tin" data-toggle="modal">
+                                                        <i class="icon-lg la fa-edit text-dark icon-2x"></i></button>
+                                                @endif
                                             </td>
                                         @endif
                                     @endif
                                 </tr>
-                                <?php $model_cd2 = $model->where('parent', $cd1->id);
+                                <?php $model_cd2 = $model->where('machucnang_goc', $cd1->maso);
                                 $j = 1;
                                 ?>
                                 @foreach ($model_cd2 as $cd2)
@@ -129,22 +140,25 @@
                                             <td>{{ $cd2->maso }}</td>
                                             <td>{{ $cd2->tencn }}</td>
                                             <td style="text-decoration: none;text-align: center">
-                                                <button onclick="getChucNang('{{ $cd2->id }}')"
-                                                    class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
-                                                    title="Thay đổi thông tin" data-toggle="modal">
-                                                    <i class="icon-lg la fa-edit text-success icon-2x"></i></button>
+                                                @if (chkPhanQuyen('chucnang', 'thaydoi'))
+                                                    <button onclick="getChucNang('{{ $cd2->id }}')"
+                                                        class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
+                                                        title="Thay đổi thông tin" data-toggle="modal">
+                                                        <i class="icon-lg la fa-edit text-success icon-2x"></i></button>
 
-                                                <button onclick="addChucNang('{{ $cd2->capdo }}','{{ $cd2->id }}')"
-                                                    class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
-                                                    title="Thêm chức năng" data-toggle="modal">
-                                                    <i class="icon-lg la fa-plus text-success icon-2x"></i>
-                                                </button>
-                                                <button title="Xóa thông tin" type="button"
-                                                    onclick="cfDel('{{'/Chuc_nang/destroy/'.$cd2->id }}')"
-                                                    class="btn btn-sm btn-clean btn-icon"
-                                                    data-target="#delete-modal-confirm" data-toggle="modal">
-                                                    <i class="icon-lg la fa-trash-alt text-danger icon-2x"></i>
-                                                </button>
+                                                    <button
+                                                        onclick="addChucNang('{{ $cd2->capdo }}','{{ $cd2->maso }}')"
+                                                        class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
+                                                        title="Thêm chức năng" data-toggle="modal">
+                                                        <i class="icon-lg la fa-plus text-success icon-2x"></i>
+                                                    </button>
+                                                    <button title="Xóa thông tin" type="button"
+                                                        onclick="cfDel('{{ '/Chuc_nang/destroy/' . $cd2->id }}')"
+                                                        class="btn btn-sm btn-clean btn-icon"
+                                                        data-target="#delete-modal-confirm" data-toggle="modal">
+                                                        <i class="icon-lg la fa-trash-alt text-danger icon-2x"></i>
+                                                    </button>
+                                                @endif
                                             </td>
                                         @else
                                             <td style="text-decoration: line-through;">
@@ -152,14 +166,16 @@
                                             <td style="text-decoration: line-through;">{{ $cd2->maso }}</td>
                                             <td style="text-decoration: line-through;">{{ $cd2->tencn }}</td>
                                             <td style="text-decoration: none;text-align: center">
-                                                <button onclick="getChucNang('{{ $cd2->id }}')"
-                                                    class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
-                                                    title="Thay đổi thông tin" data-toggle="modal">
-                                                    <i class="icon-lg la fa-edit text-success icon-2x"></i></button>
+                                                @if (chkPhanQuyen('chucnang', 'thaydoi'))
+                                                    <button onclick="getChucNang('{{ $cd2->id }}')"
+                                                        class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
+                                                        title="Thay đổi thông tin" data-toggle="modal">
+                                                        <i class="icon-lg la fa-edit text-success icon-2x"></i></button>
+                                                @endif
                                             </td>
                                         @endif
                                     </tr>
-                                    <?php $model_cd3 = $model->where('parent', $cd2->id);
+                                    <?php $model_cd3 = $model->where('machucnang_goc', $cd2->maso);
                                     $y = 1;
                                     
                                     ?>
@@ -170,23 +186,27 @@
                                                 <td>{{ $cd3->maso }}</td>
                                                 <td>{{ $cd3->tencn }}</td>
                                                 <td style="text-decoration: none;text-align: center">
-                                                    <button onclick="getChucNang('{{ $cd3->id }}')"
-                                                        class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
-                                                        title="Thay đổi thông tin" data-toggle="modal">
-                                                        <i class="icon-lg la fa-edit text-dark icon-2x"></i></button>
+                                                    @if (chkPhanQuyen('chucnang', 'thaydoi'))
+                                                        <button onclick="getChucNang('{{ $cd3->id }}')"
+                                                            class="btn btn-sm btn-clean btn-icon"
+                                                            data-target="#modify-modal" title="Thay đổi thông tin"
+                                                            data-toggle="modal">
+                                                            <i class="icon-lg la fa-edit text-dark icon-2x"></i></button>
 
-                                                    <button
-                                                        onclick="addChucNang('{{ $cd3->capdo }}','{{ $cd2->id }}')"
-                                                        class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
-                                                        title="Thêm chức năng" data-toggle="modal">
-                                                        <i class="icon-lg la fa-plus text-dark icon-2x"></i>
-                                                    </button>
-                                                    <button title="Xóa thông tin" type="button"
-                                                        onclick="cfDel('{{'/Chuc_nang/destroy/'. $cd3->id }}')"
-                                                        class="btn btn-sm btn-clean btn-icon"
-                                                        data-target="#delete-modal-confirm" data-toggle="modal">
-                                                        <i class="icon-lg la fa-trash-alt text-danger icon-2x"></i>
-                                                    </button>
+                                                        <button
+                                                            onclick="addChucNang('{{ $cd3->capdo }}','{{ $cd2->maso }}')"
+                                                            class="btn btn-sm btn-clean btn-icon"
+                                                            data-target="#modify-modal" title="Thêm chức năng"
+                                                            data-toggle="modal">
+                                                            <i class="icon-lg la fa-plus text-dark icon-2x"></i>
+                                                        </button>
+                                                        <button title="Xóa thông tin" type="button"
+                                                            onclick="cfDel('{{ '/Chuc_nang/destroy/' . $cd3->id }}')"
+                                                            class="btn btn-sm btn-clean btn-icon"
+                                                            data-target="#delete-modal-confirm" data-toggle="modal">
+                                                            <i class="icon-lg la fa-trash-alt text-danger icon-2x"></i>
+                                                        </button>
+                                                    @endif
                                                 </td>
                                             @else
                                                 <td style="text-decoration: line-through;">
@@ -194,10 +214,13 @@
                                                 <td style="text-decoration: line-through;">{{ $cd3->maso }}</td>
                                                 <td style="text-decoration: line-through;">{{ $cd3->tencn }}</td>
                                                 <td style="text-decoration: none;text-align: center">
-                                                    <button onclick="getChucNang('{{ $cd3->id }}')"
-                                                        class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
-                                                        title="Thay đổi thông tin" data-toggle="modal">
-                                                        <i class="icon-lg la fa-edit text-dark icon-2x"></i></button>
+                                                    @if (chkPhanQuyen('chucnang', 'thaydoi'))
+                                                        <button onclick="getChucNang('{{ $cd3->id }}')"
+                                                            class="btn btn-sm btn-clean btn-icon"
+                                                            data-target="#modify-modal" title="Thay đổi thông tin"
+                                                            data-toggle="modal">
+                                                            <i class="icon-lg la fa-edit text-dark icon-2x"></i></button>
+                                                    @endif
                                                 </td>
                                             @endif
 
@@ -271,10 +294,10 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="control-label">Chức năng gốc</label>
-                                    <select class="form-control select2me " name='parent' id='parent'>
+                                    <select class="form-control select2me " name='machucnang_goc' id='machucnang_goc'>
                                         <option value="">Không chọn</option>
                                         @foreach ($model as $item)
-                                            <option value="{{ $item->id }}">{{ $item->tencn }}</option>
+                                            <option value="{{ $item->maso }}">{{ $item->tencn }}</option>
                                         @endforeach
 
                                     </select>
@@ -302,105 +325,7 @@
             </div>
         </div>
     </form>
-    <?php
-    function menuchucnang($model, $parent = 0, $char = '', $capdo = 0)
-    {
-        $i = 1;
-        $j = 1;
-        foreach ($model as $key => $item) {
-            //Nếu là chuyên mục con thì hiển thị
-            if ($item->parent == $parent) {
-                echo '<tr>';
-                // if($item->capdo == 1){
-                //     echo '<td>'.convert2Roman($i++).'</td>';
-                // }
-    
-                // if($item->capdo == 2){
-                //     echo '<td>'.convert2Roman($i++).$char.$j++.'</td>';
-                // }
-    
-                echo '<td>' . iteration_loop($item) . '</td>';
-    
-                if ($item->trangthai == 1) {
-                    echo '<td>' . $item->maso . '</td>';
-                    echo '<td>' . $item->tencn . '</td>';
-                    if ($item->capdo == 1) {
-                        echo '<td style="text-decoration: none;text-align: center">
-                                         <button onclick="getChucNang(`' .
-                            $item->id .
-                            '`)" class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal" title="Thay đổi thông tin" data-toggle="modal">
-                                             <i class="icon-lg la fa-edit text-primary icon-2x"></i></button>
-                                        <button onclick="addChucNang(`' .
-                            $item->capdo .
-                            '`,`' .
-                            $item->id .
-                            '`)" class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal" title="Thêm chức năng" data-toggle="modal">
-                                             <i class="icon-lg la fa-plus text-primary icon-2x"></i>
-                                             </button>
-                                        <button title="Xóa thông tin" type="button" onclick="cfDel(`/Chuc_nang/destroy/' .
-                            $item->id .
-                            '`)" class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm" data-toggle="modal">
-                                        <i class="icon-lg la fa-trash-alt text-danger icon-2x"></i>
-                                        </button>
-                                        </td>';
-                        // echo '</tr>';
-                    } else {
-                        echo '<td style="text-decoration: none;text-align: center">
-                                        <button onclick="getChucNang(`' .
-                            $item->id .
-                            '`)" class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal" title="Thay đổi thông tin" data-toggle="modal">
-                                        <i class="icon-lg la fa-edit text-dark icon-2x"></i></button>
-                                                            
-                                        <button onclick="addChucNang(`' .
-                            $item->capdo .
-                            '`,`' .
-                            $item->id .
-                            '`)" class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal" title="Thêm chức năng" data-toggle="modal">
-                                            <i class="icon-lg la fa-plus text-dark icon-2x"></i>
-                                        </button>
-                                        <button title="Xóa thông tin" type="button" onclick="cfDel(`/Chuc_nang/destroy/' .
-                            $item->id .
-                            '`)" class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm" data-toggle="modal">
-                                            <i class="icon-lg la fa-trash-alt text-danger icon-2x"></i>
-                                        </button>
-                                                                                                    
-                                        </td>';
-                        // echo '</tr>';
-                    }
-                } else {
-                    echo '<td style="text-decoration: line-through;">' . $item->maso . '</td>';
-                    echo '<td style="text-decoration: line-through;">' . $item->tencn . '</td>';
-    
-                    if ($item->capdo == 1) {
-                        echo '<td style="text-decoration: none;text-align: center">
-                                                                <button onclick="getChucNang(`' .
-                            $item->id .
-                            '`)" class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal" title="Thay đổi thông tin" data-toggle="modal">
-                                                                <i class="icon-lg la fa-edit text-primary icon-2x"></i></button>                                                                                                                                               
-                                                    </td>';
-                        // echo '</tr>';
-                    } else {
-                        echo '<td style="text-decoration: none;text-align: center">
-                                                                <button onclick="getChucNang(`' .
-                            $item->id .
-                            '`)" class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal" title="Thay đổi thông tin" data-toggle="modal">
-                                                                <i class="icon-lg la fa-edit text-dark icon-2x"></i></button>                                                                                                          
-                                                                                                    
-                                                    </td>';
-                        // echo '</tr>';
-                    }
-                }
-                echo '</tr>';
-    
-                //Xóa menu đã lặp
-                //    unset($model[$key]);
-    
-                //đệ quy để lấy danh sách con
-                menuchucnang($model, $item->id, $char . '--');
-            }
-        }
-    }
-    ?>
+
     <script>
         function cfDel(url) {
             $('#frmDelete').attr('action', url);
@@ -411,16 +336,24 @@
         }
 
         function add() {
+            $('#machucnang_goc').val('');
+            $('#capdo').val('');
+            $('#maso').val('');
+            $('#tencn').val('');
+            $('#edit').val('')
+            $('#trngthai').val('')
             var url = '/Chuc_nang/store';
             $("#frm_modify").attr("action", url);
 
         }
 
-        function addChucNang(capdo, id) {
+        function addChucNang(capdo, maso) {
             var cd = ++capdo;
             var url = '/Chuc_nang/store';
+            $('#capdo option[value=' + cd + ' ]').attr('selected', false);
             $('#capdo option[value=' + cd + ' ]').attr('selected', 'selected');
-            $('#parent option[value=' + id + ' ]').attr('selected', 'selected');
+            $('#machucnang_goc option[value=' + maso + ' ]').attr('selected', false);
+            $('#machucnang_goc option[value=' + maso + ' ]').attr('selected', 'selected');
             $("#frm_modify").attr("action", url);
         }
 
@@ -439,8 +372,12 @@
                     $('#maso').val(data.maso);
                     $('#tencn').val(data.tencn);
                     $('#edit').val(data.id);
+                    $('#capdo option[value=' + data.capdo + ' ]').attr('selected', false);
                     $('#capdo option[value=' + data.capdo + ' ]').attr('selected', 'selected');
-                    $('#parent option[value=' + data.parent + ' ]').attr('selected', 'selected');
+                    $('#machucnang_goc option[value=' + data.machucnang_goc + ' ]').attr('selected', false);
+                    $('#machucnang_goc option[value=' + data.machucnang_goc + ' ]').attr('selected',
+                        'selected');
+                    $('#trangthai option[value=' + data.trangthai + ']').attr('selected', false);
                     $('#trangthai option[value=' + data.trangthai + ']').attr('selected', 'selected');
 
                     var url = '/Chuc_nang/store';

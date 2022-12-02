@@ -9,7 +9,26 @@ class Company extends Model
 
 	protected $table = 'company';
 	
-	
+	protected $fillable=[
+		'name',
+		'masodn',
+		'dkkd',
+		'phone',
+		'fax',
+		'website',
+		'email',
+		'adress',
+		'tinh',
+		'huyen',
+		'xa',
+		'khuvuc',
+		'khucn',
+		'loaihinh',
+		'public',
+		'image',
+		'user',
+		'nganhnghe'
+	];
 
     /**
      * The attributes that are mass assignable.

@@ -93,7 +93,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 @endif
                             </div>
 
-                            {!! Form::open(['url' => '/login-user', 'class' => 'form text-left', 'id' => 'kt_login_signin_form']) !!}
+                            {!! Form::open(['url' => '/DangNhap', 'class' => 'form text-left', 'id' => 'kt_login_signin_form']) !!}
                             <div class="input-group form-group py-2 m-0">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
