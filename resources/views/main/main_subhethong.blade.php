@@ -222,7 +222,7 @@
                         @endif
                         @if (chkPhanQuyen('taikhoan', 'phanquyen'))
                         <li class="menu-item" aria-haspopup="true">
-                            <a href="{{ url('/TaiKhoan/ThongTin') }}" class="menu-link">
+                            <a href="{{ url('/TaiKhoan/ThongTin?phanloaitk=1') }}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
                                     <span></span>
                                 </i>

@@ -429,8 +429,8 @@ class CompanyController extends Controller
 
 	public function thongtin()
 	{
-		if (!chkPhanQuyen('chitietdoanhnghiep', 'thaydoi')) {
-            return view('errors.noperm')->with('machucnang', 'quanlythongtindoanhnghiep');
+		if (!chkPhanQuyen('chitietdoanhnghiep', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'chitietdoanhnghiep');
         }
 		$model=Company::where('masodn',session('admin')['madv'])->first();
 		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
