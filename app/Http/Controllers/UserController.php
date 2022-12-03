@@ -41,141 +41,6 @@ class UserController extends Controller
 		return view('HeThong.dangnhap');
 	}
 
-	public function auth(Request $request)
-	{
-		$model = User::where('username', $request->username)->first();
-
-		// dd(!isset($model));
-		if (!isset($model)) {
-			return redirect('home')->withErrors(
-				[
-					'message' => 'Đăng nhập không thành công'
-				]
-			);
-		}
-		if ($model->phanloaitk == 1) {
-			$data = [
-				'username' => $request->username,
-				'password' => $request->password,
-				// 'public' => 1,
-				'phanloaitk' => 1,
-			];
-			// dd($data);
-			$ret = Auth::attempt($data);
-			// dd($ret);
-			if ($ret) {
-				$donvi=dmdonvi::where('madv',$model->madv)->first();
-				$diaban=danhmuchanhchinh::where('id',$donvi->madiaban)->first();
-				$a_dv=[
-					'madv'=>$donvi->madv,
-					'tendv'=>$donvi->tendv,
-					'madvcq'=>$donvi->madvcq,
-
-					'madvbc'=>$donvi->madvbc,
-
-					'madb'=>$diaban->madb,
-					'tendiaban'=>$diaban->name,
-					'level'=>$diaban->level,
-					'parent'=>$diaban->parent,
-					'maquocgia'=>$diaban->maquocgia,
-					'phanloaitk'=>$model->phanloaitk,
-					'phanloaitaikhoan'=>$donvi->phanloaitaikhoan
-
-				];
-				Session::put('admin',$a_dv);
-				$request->session()->regenerate();
-				$request->session()->flash('message', 'Đăng nhập thành công');
-				return redirect('/dmdonvi/danh_sach');
-			} else {
-				return redirect('home')->withErrors(
-					[
-						'message' => 'Đăng nhập không thành công'
-					]
-				);
-			}
-		} else {
-			$data = [
-				'username' => $request->username,
-				'password' => $request->password,
-				'public' => 1,
-				// 'level' => [2, 1], // level 1 2 for backen user
-				'level'=>3,
-				'phanloaitk'=>2
-			];
-			Auth::logout();
-			$ret = Auth::attempt($data);
-
-			if ($ret) {
-				$request->session()->regenerate();
-				// $donvi=dmdonvi::where('madv',$model->madv)->first();
-				// $diaban=danhmuchanhchinh::where('id',$donvi->madiaban)->first();
-				$doanhnghiep=Company::where('user',$model->id)->first();
-				$a_dv=[
-					'madv'=>$doanhnghiep->masodn,
-					'madb'=>$model->madv,
-					'tendn'=>$doanhnghiep->name,
-					'khuvuc'=>$doanhnghiep->khuvuc==1?'Thành thị':'Nông thôn',
-					'phanloaitk'=>$model->phanloaitk
-
-				];
-				Session::put('admin',$a_dv);
-				session::put('message', "Đăng nhập thành công");
-				return redirect('/doanh_nghiep/thongtin');
-			} else {
-				return redirect('admin')->withErrors(
-					[
-						'email' => 'Đăng nhập không thành công'
-					]
-				);
-			}
-		}
-		// if ($model->level == '3') {
-		// 	$data = [
-		// 		'email' => $request->email,
-		// 		'password' => $request->password,
-		// 		'public' => 1,
-		// 		'level' => 3,
-		// 	];
-		// 	$ret = Auth::attempt($data);
-
-		// 	if ($ret) {
-		// 		$request->session()->regenerate();
-		// 		$request->session()->flash('message', 'Đăng nhập thành công');
-		// 		return redirect('/doanhnghiep/thongtin');
-		// 	} else {
-
-		// 		return redirect('home')->withErrors(
-		// 			[
-		// 				'message' => 'Đăng nhập không thành công'
-		// 			]
-		// 		);
-		// 	}
-		// } else {
-
-		// 	$data = [
-		// 		'email' => $request->email,
-		// 		'password' => $request->password,
-		// 		'public' => 1,
-		// 		'level' => [2, 1], // level 1 2 for backen user
-		// 	];
-		// 	Auth::logout();
-		// 	$ret = Auth::attempt($data);
-
-		// 	if ($ret) {
-		// 		$request->session()->regenerate();
-		// 		Session::put('message', "Đăng nhập thành công");
-		// 		return redirect('dashboard');
-		// 	} else {
-
-		// 		return redirect('admin')->withErrors(
-		// 			[
-		// 				'email' => 'Đăng nhập không thành công'
-		// 			]
-		// 		);
-		// 	}
-		// }
-	}
-
 	public function DangNhap(Request $request)
 	{
 		$inputs=$request->all();
@@ -216,6 +81,7 @@ class UserController extends Controller
 		        //kiểm tra tài khoản
         		//1. level = SSA ->
 				if ($user->sadmin != "SSA") {
+					if($user->phanloaitk == 1){
 					//dd($ttuser);
 					//2. level != SSA -> lấy thông tin đơn vị, hệ thống để thiết lập lại
 		
@@ -246,6 +112,11 @@ class UserController extends Controller
 					$user->tendiaban = $diaban->name;
 					$user->capdo = $diaban->capdo;
 					$user->phanquyen = json_decode($user->phanquyen, true);
+					}else{
+						$cty=Company::where('madv',$user->madv)->first();
+						$user->tendv=$cty->name;
+						
+					}
 				} else {
 					//$ttuser->chucnang = array('SSA');
 					$user->capdo = "SSA";
@@ -259,7 +130,7 @@ class UserController extends Controller
 				// dd(session('chucnang'));
 				        //gán phân quyền của User
 				Session::put('phanquyen', dstaikhoan_phanquyen::where('tendangnhap', $inputs['username'])->get()->keyBy('machucnang')->toArray());
-						return redirect('/')
+						return redirect('/dashboard')
 								->with('success','Đăng nhập thành công');
 				
 	}
@@ -267,7 +138,7 @@ class UserController extends Controller
 	{
         if (Session::has('admin')) {
             Session::flush();
-            return redirect('/home');
+            return redirect('/');
         } else {
             return redirect('');
         }
@@ -326,8 +197,6 @@ class UserController extends Controller
 		]);
 
 
-
-
 		$data = array();
 		$data['name'] = $request->name;
 		$data['ctyname'] = $request->ctyname;
@@ -370,15 +239,31 @@ class UserController extends Controller
 		return redirect('home');
 	}
 
-	public function index_nn()
+	public function index_nn(Request $request)
 	{
-		$model = User::where('phanloaitk', 1)->get();
+		$inputs=$request->all();
+		$model = User::where('phanloaitk', $inputs['phanloaitk'])->get();
 		$model_dv = dmdonvi::all();
 		$model_hc = danhmuchanhchinh::all();
-		return view('HeThong.manage.taikhoan.index')
+		if($inputs['phanloaitk'] == 1){
+			return view('HeThong.manage.taikhoan.index')
 			->with('model', $model)
+			->with('phanloaitk', $inputs['phanloaitk'])
 			->with('model_dv', $model_dv)
 			->with('model_hc', $model_hc);
+		}else{
+			$model_tk = User::where('phanloaitk', 2)->get();
+			$a_nhomtk = array_column(dsnhomtaikhoan::all()->toArray(), 'tennhomchucnang', 'manhomchucnang');
+			return view('HeThong.manage.taikhoan.dstaikhoan_doanhnghiep')
+			->with('model', $model)
+			->with('phanloaitk', $inputs['phanloaitk'])
+			->with('model_dv', $model_dv)
+			->with('model_hc', $model_hc)
+			->with('a_nhomtk',$a_nhomtk )
+			->with('model_tk', $model_tk);
+
+		}
+
 	}
 
 	public function chitiet(Request $request)
@@ -544,6 +429,51 @@ class UserController extends Controller
         $m_taikhoan->save();
         //Lưu phân uyền
         dstaikhoan_phanquyen::insert($a_phanquyen);
-        return redirect('/TaiKhoan/DanhSach?madonvi=' . $m_taikhoan->madv);
+		if($inputs['phanloaitk']==1){
+			return redirect('/TaiKhoan/DanhSach?madv=' . $m_taikhoan->madv);
+		}else{
+			return redirect('/TaiKhoan/ThongTin?phanloaitk='.$inputs['phanloaitk']);
+		}
+       
     }
+
+	public function DangKy(Request $request)
+	{
+		$validate = $request->validate([
+			'username' => 'required|max:255',
+			'email' => 'required|email|max:255|unique:users',
+			'dkkd' => 'required|max:20|unique:company',
+			'password' => 'required|min:8|confirmed',
+		]);
+		$inputs=$request->all();
+		$data_user=[
+			'name'=>$inputs['name'],
+			'username'=>$inputs['username'],
+			'email'=>$inputs['email'],
+			'password'=>md5($inputs['password']),
+			'phanloaitk'=>2,
+			'madv'=>$inputs['dkkd'],
+			'status'=>1,
+			'nhaplieu'=>1
+		];
+		$model=User::where('username',$inputs['username'])->first();
+		if(isset($model)){
+			Session::put('message', "Tài khoản đã tồn tại");
+		}else{
+			$model_user=User::create($data_user);
+			$data_company=[
+				'name'=>$inputs['name'],
+				'madv'=>$inputs['dkkd'],
+				'masodn'=>$inputs['dkkd'],
+				'dkkd'=>$inputs['dkkd'],
+				'user'=>$model_user->id
+			];
+
+			Company::create($data_company);
+		}
+
+		return redirect('/')
+				->with('success','Đăng ký thành công');
+
+	}
 }

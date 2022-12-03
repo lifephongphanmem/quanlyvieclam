@@ -8,7 +8,8 @@ use App\Http\Controllers\Danhmuc\danhmuchanhchinhController;
 use App\Http\Controllers\Hethong\dsnhomtaikhoanController;
 
 //Đăng nhập
-Route::get('/',[UserController::class,'dashboard']);
+Route::get('/', [UserController::class, 'show_login']);
+Route::get('/dashboard',[UserController::class,'dashboard']);
 Route::get('/DangNhap',[UserController::class,'show_login']);
 Route::post('/DangNhap',[UserController::class,'DangNhap']);
 Route::post('/DangKy',[UserController::class,'DangKy']);
