@@ -12,7 +12,7 @@ use App\Models\Danhmuc\dsnhomtaikhoan_phanquyen;
 use App\Models\Hethong\dstaikhoan_phanquyen;
 use Illuminate\Http\Request;
 use DB;
-use Session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -37,143 +37,8 @@ class UserController extends Controller
 		// 	// return redirect('doanhnghieppanel');
 		// }
 
-		//return view('pages.login');
+		// return view('pages.login');
 		return view('HeThong.dangnhap');
-	}
-
-	public function auth(Request $request)
-	{
-		$model = User::where('username', $request->username)->first();
-
-		// dd(!isset($model));
-		if (!isset($model)) {
-			return redirect('home')->withErrors(
-				[
-					'message' => 'Đăng nhập không thành công'
-				]
-			);
-		}
-		if ($model->phanloaitk == 1) {
-			$data = [
-				'username' => $request->username,
-				'password' => $request->password,
-				// 'public' => 1,
-				'phanloaitk' => 1,
-			];
-			// dd($data);
-			$ret = Auth::attempt($data);
-			// dd($ret);
-			if ($ret) {
-				$donvi=dmdonvi::where('madv',$model->madv)->first();
-				$diaban=danhmuchanhchinh::where('id',$donvi->madiaban)->first();
-				$a_dv=[
-					'madv'=>$donvi->madv,
-					'tendv'=>$donvi->tendv,
-					'madvcq'=>$donvi->madvcq,
-
-					'madvbc'=>$donvi->madvbc,
-
-					'madb'=>$diaban->madb,
-					'tendiaban'=>$diaban->name,
-					'level'=>$diaban->level,
-					'parent'=>$diaban->parent,
-					'maquocgia'=>$diaban->maquocgia,
-					'phanloaitk'=>$model->phanloaitk,
-					'phanloaitaikhoan'=>$donvi->phanloaitaikhoan
-
-				];
-				Session::put('admin',$a_dv);
-				$request->session()->regenerate();
-				$request->session()->flash('message', 'Đăng nhập thành công');
-				return redirect('/dmdonvi/danh_sach');
-			} else {
-				return redirect('home')->withErrors(
-					[
-						'message' => 'Đăng nhập không thành công'
-					]
-				);
-			}
-		} else {
-			$data = [
-				'username' => $request->username,
-				'password' => $request->password,
-				'public' => 1,
-				// 'level' => [2, 1], // level 1 2 for backen user
-				'level'=>3,
-				'phanloaitk'=>2
-			];
-			Auth::logout();
-			$ret = Auth::attempt($data);
-
-			if ($ret) {
-				$request->session()->regenerate();
-				// $donvi=dmdonvi::where('madv',$model->madv)->first();
-				// $diaban=danhmuchanhchinh::where('id',$donvi->madiaban)->first();
-				$doanhnghiep=Company::where('user',$model->id)->first();
-				$a_dv=[
-					'madv'=>$doanhnghiep->masodn,
-					'madb'=>$model->madv,
-					'tendn'=>$doanhnghiep->name,
-					'khuvuc'=>$doanhnghiep->khuvuc==1?'Thành thị':'Nông thôn',
-					'phanloaitk'=>$model->phanloaitk
-
-				];
-				Session::put('admin',$a_dv);
-				session::put('message', "Đăng nhập thành công");
-				return redirect('/doanh_nghiep/thongtin');
-			} else {
-				return redirect('admin')->withErrors(
-					[
-						'email' => 'Đăng nhập không thành công'
-					]
-				);
-			}
-		}
-		// if ($model->level == '3') {
-		// 	$data = [
-		// 		'email' => $request->email,
-		// 		'password' => $request->password,
-		// 		'public' => 1,
-		// 		'level' => 3,
-		// 	];
-		// 	$ret = Auth::attempt($data);
-
-		// 	if ($ret) {
-		// 		$request->session()->regenerate();
-		// 		$request->session()->flash('message', 'Đăng nhập thành công');
-		// 		return redirect('/doanhnghiep/thongtin');
-		// 	} else {
-
-		// 		return redirect('home')->withErrors(
-		// 			[
-		// 				'message' => 'Đăng nhập không thành công'
-		// 			]
-		// 		);
-		// 	}
-		// } else {
-
-		// 	$data = [
-		// 		'email' => $request->email,
-		// 		'password' => $request->password,
-		// 		'public' => 1,
-		// 		'level' => [2, 1], // level 1 2 for backen user
-		// 	];
-		// 	Auth::logout();
-		// 	$ret = Auth::attempt($data);
-
-		// 	if ($ret) {
-		// 		$request->session()->regenerate();
-		// 		Session::put('message', "Đăng nhập thành công");
-		// 		return redirect('dashboard');
-		// 	} else {
-
-		// 		return redirect('admin')->withErrors(
-		// 			[
-		// 				'email' => 'Đăng nhập không thành công'
-		// 			]
-		// 		);
-		// 	}
-		// }
 	}
 
 	public function DangNhap(Request $request)
@@ -259,7 +124,7 @@ class UserController extends Controller
 				// dd(session('chucnang'));
 				        //gán phân quyền của User
 				Session::put('phanquyen', dstaikhoan_phanquyen::where('tendangnhap', $inputs['username'])->get()->keyBy('machucnang')->toArray());
-						return redirect('/')
+						return redirect('/dashboard')
 								->with('success','Đăng nhập thành công');
 				
 	}
@@ -267,7 +132,7 @@ class UserController extends Controller
 	{
         if (Session::has('admin')) {
             Session::flush();
-            return redirect('/home');
+            return redirect('/');
         } else {
             return redirect('');
         }
@@ -314,61 +179,61 @@ class UserController extends Controller
 		}
 	}
 
-	public function signup(Request $request)
-	{
+	// public function signup(Request $request)
+	// {
 
-		//validate data sign up
-		$validate = $request->validate([
-			'name' => 'required|max:255',
-			'email' => 'required|email|max:255|unique:users',
-			'dkkd' => 'required|max:20|unique:company',
-			'password' => 'required|min:8|confirmed',
-		]);
-
-
-
-
-		$data = array();
-		$data['name'] = $request->name;
-		$data['ctyname'] = $request->ctyname;
-		$data['dkkd'] = $request->dkkd;
-		$data['public'] = 1;
-		$data['email'] = $request->email;
-		$data['level'] = 3;
-		$data['phanloaitk'] = 2;
-		$data['password'] = Hash::make($request->password);
-
-		// creat user
-
-		$user = User::create($data);
+	// 	//validate data sign up
+	// 	$validate = $request->validate([
+	// 		'name' => 'required|max:255',
+	// 		'email' => 'required|email|max:255|unique:users',
+	// 		'dkkd' => 'required|max:20|unique:company',
+	// 		'password' => 'required|min:8|confirmed',
+	// 	]);
 
 
 
-		$rm = new Report();
 
-		// navigate
-		if ($user) {
-			// add to log system`
-			$rm->report('add', true, 'users', $user->id, 1);
-			// creat company
-			$result = DB::table('company')->insertGetId([
-				'dkkd' => $request->dkkd,
-				'name' => $request->ctyname,
-				'user' => $user->id
-			]);
-			if ($result) {
+	// 	$data = array();
+	// 	$data['name'] = $request->name;
+	// 	$data['ctyname'] = $request->ctyname;
+	// 	$data['dkkd'] = $request->dkkd;
+	// 	$data['public'] = 1;
+	// 	$data['email'] = $request->email;
+	// 	$data['level'] = 3;
+	// 	$data['phanloaitk'] = 2;
+	// 	$data['password'] = Hash::make($request->password);
 
-				$rm->report('add', true, 'company', $result, 1);
-			}
-			$request->session()->flash('message', 'Đăng ký thành công');
-			return redirect('home');
-		}
+	// 	// creat user
 
-		// add to log system`
-		$rm->report('add', false, 'users', $user->id, 1);
-		$request->session()->flash('message', 'Đăng ký không thành công');
-		return redirect('home');
-	}
+	// 	$user = User::create($data);
+
+
+
+	// 	$rm = new Report();
+
+	// 	// navigate
+	// 	if ($user) {
+	// 		// add to log system`
+	// 		$rm->report('add', true, 'users', $user->id, 1);
+	// 		// creat company
+	// 		$result = DB::table('company')->insertGetId([
+	// 			'dkkd' => $request->dkkd,
+	// 			'name' => $request->ctyname,
+	// 			'user' => $user->id
+	// 		]);
+	// 		if ($result) {
+
+	// 			$rm->report('add', true, 'company', $result, 1);
+	// 		}
+	// 		$request->session()->flash('message', 'Đăng ký thành công');
+	// 		return redirect('home');
+	// 	}
+
+	// 	// add to log system`
+	// 	$rm->report('add', false, 'users', $user->id, 1);
+	// 	$request->session()->flash('message', 'Đăng ký không thành công');
+	// 	return redirect('home');
+	// }
 
 	public function index_nn()
 	{

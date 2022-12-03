@@ -1,7 +1,7 @@
 <?php 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\ReportController;
@@ -20,11 +20,11 @@ use App\Http\Controllers\AdminReport;
 use App\Http\Controllers\AdminMessages;
 use App\Http\Controllers\AdminDichvu;
 use App\Http\Controllers\AdminEmployer;
-
+use App\Http\Controllers\UserController;
 
 // Route::get('/', [UserController::class, 'show_login']);
 
-Route::get('/home', [UserController::class, 'show_login']);
+// Route::get('/', [UserController::class, 'show_login']);
 
 Route::post('/login-user', [UserController::class, 'auth']);
 Route::post('/signup', [UserController::class, 'signup']);
