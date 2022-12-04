@@ -45,7 +45,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Đối tượng ưu tiên </label>
-                    <select class="form-control input-sm m-bot15 select2me" name="doituonguutien">
+                    <select class="form-control input-sm m-bot15 select2basic" name="doituonguutien">
                         <option value=''>-- Chọn đối tượng --</option>
                         @foreach ($doituong_ut as $dt )
                             <option value="{{$dt->madmdt}}" {{isset($model)?($dt->madmdt == $model->doituonguutien?'selected':''):''}}>{{$dt->tendoituong}}</option>
@@ -56,7 +56,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Chức vụ </label>
-                    <select class="form-control input-sm m-bot15 select2me" name="chucvu">
+                    <select class="form-control input-sm m-bot15 select2basic" name="chucvu">
                         <option value=''>-- Chọn chức vụ --</option>
                         @foreach ($chucvu as $cv )
                             <option value="{{$cv->id}}" {{isset($model)?($cv->id == $model->chucvu?'selected':''):''}}>{{$cv->tencv}}</option>
@@ -77,7 +77,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Công ty</label>
-                    <select class="form-control input-sm m-bot15 select2me" name="company">
+                    <select class="form-control input-sm m-bot15 select2basic" name="company">
                         <option value=''>-- Chọn công ty --</option>
                         @foreach ($congty as $ct )
                             <option value="{{$ct->masodn}}" {{isset($model)?($ct->masodn == $model->company?'selected':''):''}}>{{$ct->name}}</option>
@@ -108,7 +108,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Chuyên ngành đào tạo</label>
-                    <select class="form-control input-sm m-bot15 select2me" name="chuyenmondaotao">
+                    <select class="form-control input-sm m-bot15 select2basic" name="chuyenmondaotao">
                         <option value=''>-- Chọn chuyên ngành --</option>
                         @foreach ($list_linhvuc as $lv )
                             <option value="{{$lv->id}}" {{isset($model)?($lv->id == $model->chuyenmondaotao?'selected':''):''}}>{{$lv->tendm}}</option>
@@ -119,7 +119,7 @@
             {{-- <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Nghề nghiệp</label>
-                    <select class="form-control input-sm m-bot15 select2me" name="nghenghiep">
+                    <select class="form-control input-sm m-bot15 select2basic" name="nghenghiep">
                         <option value=''>Chọn nghề nghiệp</option>
                         @foreach ($list_nghe as $lv )
                             <option value="{{$lv->id}}" {{isset($model)?($lv->id == $model->nghenghiep?'selected':''):''}}>{{$lv->name}}</option>
@@ -161,7 +161,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Công việc hiện tại</label>
-                    <select class="form-control input-sm m-bot15 select2me" name="nghenghiep">
+                    <select class="form-control input-sm m-bot15 select2basic" name="nghenghiep">
                         <option value=''>-- Chọn nghề nghiệp --</option>
                         @foreach ($list_nghe as $lv )
                             <option value="{{$lv->id}}" {{isset($model)?($lv->id == $model->nghenghiep?'selected':''):''}}>{{$lv->name}}</option>
@@ -231,7 +231,7 @@
             html += '<div class="col-md-3 ttvl"';
             html += '<div class="form-group">';
             html += '<label class="control-label">Vị thế việc làm</label>'
-            html += '<select class="form-control input-sm m-bot15 select2me" name="vithevl">';
+            html += '<select class="form-control input-sm m-bot15 select2basic" name="vithevl">';
             html += '<option value="1">Chủ cơ sở SXKD</option>';
             html += '<option value="2">Tự làm</option>';
             html += '<option value="3">Lao động gia đình</option>';
