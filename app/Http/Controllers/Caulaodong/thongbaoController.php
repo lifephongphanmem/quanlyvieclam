@@ -11,6 +11,9 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Caulaodong\nhucautuyendung;
+use App\Models\Caulaodong\nhucautuyendungct;
+use App\Models\Danhmuc\dmmanghetrinhdo;
 use Illuminate\Support\Facades\Session;
 
 class thongbaoController extends Controller
@@ -57,7 +60,7 @@ class thongbaoController extends Controller
     public function thongbaodagui()
     {
 
-        $model = thongbao::where('trangthai', 'dg')->get();
+        $model = thongbao::all();
         $company = Company::all();
         $user = User::all();
 
@@ -73,7 +76,7 @@ class thongbaoController extends Controller
     }
     public function tonghop()
     {
-        $model = thongbao::all();
+        $model = thongbao::where('trangthai', 'dg')->get();
         $company = Company::all();
         $user = User::all();
 
@@ -82,9 +85,9 @@ class thongbaoController extends Controller
 
     public function create()
     {
-        // $nguoigui = Auth::user();
+
         $nguoigui = session('admin')['name'];
-        return view('Caulaodong.tonghop.thongbao.create', compact('nguoigui'));
+        return view('Caulaodong.create', compact('nguoigui'));
     }
 
     public function store(Request $request)
@@ -95,14 +98,14 @@ class thongbaoController extends Controller
         $input['trangthai'] = 'cg';
         thongbao::create($input);
         $messeager = 'đã thêm mới ';
-        return redirect('/tuyen_dung/thong_tin_tong_hop/dot_thu_thap')->with('success', $messeager);
+        return redirect('/tuyen_dung/damh_sach_thong_bao')->with('success', $messeager);
     }
 
     public function edit(Request $request)
     {
         $model = thongbao::where('matb', $request->matb)->first();
         $user = User::all();
-        return view('Caulaodong.tonghop.thongbao.edit', compact('user', 'model'));
+        return view('Caulaodong.edit', compact('user', 'model'));
     }
 
     public function update(Request $request)
@@ -111,7 +114,7 @@ class thongbaoController extends Controller
         unset($input['_token']);
         thongbao::where('matb', $input['matb'])->update($input);
         $messeager = 'Thông báo đã được thay đổi';
-        return redirect('/tuyen_dung/thong_tin_tong_hop/dot_thu_thap')->with('success', $messeager);
+        return redirect('/tuyen_dung/damh_sach_thong_bao')->with('success', $messeager);
     }
 
     public function chuyen(Request $request)
@@ -136,15 +139,28 @@ class thongbaoController extends Controller
         }
 
         thongbao::where('matb', $input['matb'])->update(['trangthai' => 'dg', 'thoidiem' => date('d/m/Y')]);
-        return redirect('/tuyen_dung/thong_tin_tong_hop/dot_thu_thap')->with('success', 'Thông báo đã được gửi');
+        return redirect('/tuyen_dung/damh_sach_thong_bao')->with('success', 'Thông báo đã được gửi');
     }
 
     public function delete($id)
     {
-        dd(1);
+
         $model = thongbao::findOrFail($id);
         thongbaoct::where('matb', $model->matb)->delete();
         $model->delete();
-        return redirect('/tuyen_dung/thong_tin_tong_hop/dot_thu_thap')->with('success', 'Thông báo đã được xóa');
+        return redirect('/tuyen_dung/damh_sach_thong_bao')->with('success', 'Thông báo đã được xóa');
     }
+
+    public function indanhsachcauld(Request $request)
+    {
+        $nhucautuyendungct = nhucautuyendungct::all();
+        $model = nhucautuyendung::where('matb',$request->matb)->join('nhucautuyendungct', 'nhucautuyendungct.mahs' ,'=','nhucautuyendung.mahs')
+        ->select('nhucautuyendungct.*', 'nhucautuyendung.*')->get();
+        // dd($model);
+        $company =Company::all();
+        $manghecap2 = dmmanghetrinhdo::all();
+        return view('Caulaodong.indanhsachcauld',compact('model','company','manghecap2'))
+        ->with('pageTitle', 'danh sách cầu lao động');
+    }
+
 }
