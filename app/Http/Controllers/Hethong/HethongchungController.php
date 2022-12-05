@@ -14,6 +14,16 @@ use Session;
 
 class HethongchungController extends Controller
 {
+	public function index()
+    {
+        if (Session::has('admin')) {
+            return view('HeThong.dashboard')
+                // ->with('model', getHeThongChung())
+                ->with('pageTitle', 'Thông tin hỗ trợ');
+        } else {
+            return redirect('/');
+        }
+    }
     public function show_login()
 	{
 		return view('HeThong.dangnhap');

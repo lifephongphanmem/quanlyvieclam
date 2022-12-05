@@ -25,7 +25,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Giới tính</label>
-                    <select class="form-control input-sm m-bot5" name="gioitinh">
+                    <select class="form-control input-sm m-bot5 select2basic" name="gioitinh">
                         <option value='Nam' {{isset($model)?($model->gioitinh=='Nam'?'selected':''):''}}>Nam</option>
                         <option value='Nữ'{{isset($model)?($model->gioitinh=='Nữ'?'selected':''):''}}>Nữ</option>
                     </select>
@@ -88,7 +88,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Trình độ giáo dục </label>
-                    <select class="form-control input-sm m-bot15" name="trinhdogiaoduc">
+                    <select class="form-control input-sm m-bot15 select2basic" name="trinhdogiaoduc">
                         <?php foreach ( $list_tdgd as $td){ ?>
                         <option value='{{ $td->madmgdpt }}' {{isset($model)?($td->madmgdpt == $model->trinhdogiaoduc?'selected':''):''}}>{{ $td->tengdpt }}</option>
                         <?php } ?>
@@ -98,7 +98,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Trình độ CMKT </label>
-                    <select class="form-control input-sm m-bot15" name="trinhdocmkt">
+                    <select class="form-control input-sm m-bot15 select2basic" name="trinhdocmkt">
                         <?php foreach ( $list_cmkt as $td){ ?>
                         <option value='{{ $td->madmtdkt }}' {{isset($model)?($td->madmtdkt == $model->trinhdocmkt?'selected':''):''}}>{{ $td->tentdkt }}</option>
                         <?php } ?>
@@ -133,7 +133,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Tình trạng tham gia hoạt động kinh tế</label>
-                    <select class="form-control input-sm m-bot15" name="tinhtrangvl" id='tinhtrangvl'>
+                    <select class="form-control input-sm m-bot15 select2basic" name="tinhtrangvl" id='tinhtrangvl'>
                         <option value="">-- Chọn tình trạng --</option>
                         @foreach ($list_tinhtrangvl as $tt )
                         <option value="{{$tt->madmtgkt}}" {{isset($model)?($model->tinhtrangvl==$tt->madmtgkt?'selected':''):''}}>{{$tt->tentgkt}}</option>
@@ -144,7 +144,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Vị thế việc làm</label>
-                    <select class="form-control input-sm m-bot15" name="vithevl" id='vithevl'>
+                    <select class="form-control input-sm m-bot15 select2basic" name="vithevl" id='vithevl'>
                         <option value="">-- Chọn vị thế việc làm --</option>
                         @foreach ($a_vithevl as $vt )
                         <option value="{{$vt['madm']}}" {{isset($model)?($vt['madm'] == $model->vithevl?'selected':''):''}}>{{$vt['tendm']}}</option>
@@ -167,7 +167,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Vị trí việc làm</label>
-                    <select class="form-control input-sm m-bot15 select2me" name="nghenghiep">
+                    {{-- <select class="form-control input-sm m-bot15 select2me" name="nghenghiep"> --}}
                     <select class="form-control input-sm m-bot15 select2basic" name="nghenghiep">
                         <option value=''>-- Chọn nghề nghiệp --</option>
                         @foreach ($list_nghe as $lv )
@@ -181,7 +181,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Người thất nghiệp</label>
-                    <select class="form-control input-sm m-bot15" name="thatnghiep" id='thatnghiep'>
+                    <select class="form-control input-sm m-bot15 select2basic" name="thatnghiep" id='thatnghiep'>
                         <option value=''>-- Chọn  --</option>
                         @foreach ($a_nguoithatnghiep as $vt )
                         <option value="{{$vt['madm']}}" {{isset($model)?($vt['madm'] == $model->thatnghiep?'selected':''):''}}>{{$vt['tendm']}}</option>
@@ -192,7 +192,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Thời gian thất nghiệp</label>
-                    <select class="form-control input-sm m-bot15" name="thoigianthatnghiep" id='thoigianthatnghiep'>
+                    <select class="form-control input-sm m-bot15 select2basic" name="thoigianthatnghiep" id='thoigianthatnghiep'>
                         <option value=''>-- Chọn thời gian --</option>
                         @foreach ($a_thoigianthatnghiep as $vt )
                         <option value="{{$vt['madm']}}" {{isset($model)?($vt['madm'] == $model->thoigianthatnghiep?'selected':''):''}}>{{$vt['tendm']}}</option>
@@ -203,7 +203,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Lý do không tham gia HĐKT</label>
-                    <select class="form-control input-sm m-bot15" name="lydoktg" >
+                    <select class="form-control input-sm m-bot15 select2basic" name="lydoktg" >
                         <option value=''>-- Chọn lý do --</option>
                         @foreach ($a_lydo_khongthamgia_hdkt as $vt )
                         <option value="{{$vt['madm']}}" {{isset($model)?($vt['madm'] == $model->lydoktg?'selected':''):''}}>{{$vt['tendm']}}</option>

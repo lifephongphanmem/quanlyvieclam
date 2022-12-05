@@ -255,7 +255,7 @@
             @endif
             @if (chkPhanQuyen('cauhinhhethong', 'phanquyen'))
             <li class="menu-item" aria-haspopup="true">
-                <a href="{{ url('/') }}" class="menu-link">
+                <a href="{{ url('/dashboard') }}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>

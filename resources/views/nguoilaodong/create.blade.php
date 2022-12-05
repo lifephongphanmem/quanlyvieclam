@@ -1,19 +1,12 @@
 @extends('main')
 @section('custom-style')
-    {{-- <link href="{{url('assets/global/css/plugins.css')}}" rel="stylesheet" type="text/css"/> --}}
-    {{-- <link rel="stylesheet" type="text/css" href="{{url('assets/global/plugins/select2/select2.css')}}"/> --}}
     <link rel="stylesheet" type="text/css" href="{{url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}"/>
-    {{-- <link rel="stylesheet" type="text/css" href="{{url('assets/global/plugins/select2/select2.css')}}"/> --}}
 @stop
 @section('custom-script')
     <script type="text/javascript" src="{{url('assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js') }}"></script>
-    {{-- <script type="text/javascript" src="{{url('assets/global/plugins/select2/select2.min.js') }}"></script> --}}
     <script src="/assets/js/pages/select2.js"></script>
     <script type="text/javascript" src="{{url('assets/admin/pages/scripts/form-wizard.js')}}"></script>
 
-    {{-- <script type="text/javascript" src="{{url('assets/global/plugins/select2/select2.min.js')}}"></script> --}}
-
-    {{-- <script src="{{url('assets/admin/pages/scripts/table-managed.js')}}"></script> --}}
     <script>
         jQuery(document).ready(function() {
             FormWizard.init();
@@ -23,10 +16,10 @@
 @stop
 
 @section('content')
-<div class="row">
+<div class="card">
     <div class="col-md-12" style="background-color: #F3F6F9">
-        <div class="portlet box blue" id="form_wizard_1" >
-            <div class="portlet-title">
+        <div class="card box blue" id="form_wizard_1" >
+            <div class="card-title">
                 <div class="caption text-uppercase">
                     THÊM MỚI THÔNG TIN NGƯỜI LAO ĐỘNG
                 </div>
@@ -36,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="portlet-body form" id="form_wizard">
+            <div class="card-body form" id="form_wizard">
                 {{-- {!! Form::open(['url'=>'/nghiep_vu/ho_so/store','method'=>'post' , 'files'=>true, 'id' => 'create_hscb','enctype'=>'multipart/form-data']) !!} --}}
                 <form action="{{'/nguoilaodong/store'}}" method="POST" enctype="multipart/form-data">
                     @csrf
