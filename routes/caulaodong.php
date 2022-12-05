@@ -11,6 +11,14 @@ Route::prefix('tuyen_dung')->group(function () {
     //thông báo
     Route::get('damh_sach_thong_bao', [thongbaoController::class, 'thongbaodagui']);
     Route::get('hopthucauld',[ThongbaoController::class,'hopthucauld']);
+
+    Route::get('/them_moi', [thongbaoController::class, 'create']);
+    Route::post('/store', [thongbaoController::class, 'store']);
+    Route::get('/chinh_sua', [thongbaoController::class, 'edit']);
+    Route::post('/update', [thongbaoController::class, 'update']);
+    Route::get('/delete/{id}', [thongbaoController::class, 'delete']);
+    Route::post('/chuyen', [thongbaoController::class, 'chuyen']);
+    Route::get('/indanhsachcauld', [thongbaoController::class, 'indanhsachcauld']);
     // khai bao
     Route::prefix('/khai_bao_nhu_cau')->group(function () {
         Route::get('dot_thu_thap', [thongbaoController::class, 'khaibao']);
@@ -32,13 +40,7 @@ Route::prefix('tuyen_dung')->group(function () {
     // tổng hợp
     Route::prefix('/thong_tin_tong_hop')->group(function () {
         Route::get('dot_thu_thap', [thongbaoController::class, 'tonghop']);
-   
-        Route::get('/them_moi', [thongbaoController::class, 'create']);
-        Route::post('/store', [thongbaoController::class, 'store']);
-        Route::get('/chinh_sua', [thongbaoController::class, 'edit']);
-        Route::post('/update', [thongbaoController::class, 'update']);
-        Route::get('/delete/{id}', [thongbaoController::class, 'delete']);
-        Route::post('/chuyen', [thongbaoController::class, 'chuyen']);
+
 
         Route::get('', [nhucautuyendungController::class, 'index_tonghop']);
         Route::post('/tralai', [nhucautuyendungController::class, 'tralai']);

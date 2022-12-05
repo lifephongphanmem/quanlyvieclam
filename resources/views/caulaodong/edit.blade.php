@@ -23,7 +23,7 @@
                     </div>
                 </div>
 
-                <form method="POST" action="{{ '/tuyen_dung/thong_tin_tong_hop/update' }}" accept-charset="UTF-8" class="horizontal-form"
+                <form method="POST" action="{{ '/tuyen_dung/update' }}" accept-charset="UTF-8" class="horizontal-form"
                     id="frm_edit" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
@@ -45,7 +45,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="col-lg-12" style="text-align: center">
-                            <a href="{{ '/tuyen_dung/thong_tin_tong_hop/dot_thu_thap' }}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại
+                            <a href="{{ '/tuyen_dung/damh_sach_thong_bao' }}" class="btn btn-danger"><i class="fa fa-reply"></i>&nbsp;Quay lại
                             </a>
                             <button type="submit" class="btn btn-primary mr-2"><i class="fa fa-check"></i>Hoàn
                                 thành</button>
