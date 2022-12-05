@@ -7,6 +7,9 @@ use App\Models\Tinhhinhsudunglaodong\thongbaotinhhinhsudungld;
 use App\Models\Tinhhinhsudunglaodong\tinhhinhsudunglaodong;
 use App\Models\Tinhhinhsudunglaodong\tinhhinhsudunglaodong_ct;
 use App\Http\Controllers\Controller;
+use App\Models\Danhmuc\dmchucvu;
+use App\Models\Danhmuc\dmloaihieuluchdld;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
@@ -18,7 +21,7 @@ class tinhhinhsudungldController extends Controller
     {
         $this->middleware(function ($request, $next) {
             if (!Session::has('admin')) {
-                return redirect('/home');
+                return redirect('/');
             };
             return $next($request);
         });
@@ -74,17 +77,18 @@ class tinhhinhsudungldController extends Controller
         $thongbao=thongbaotinhhinhsudungld::where('nam',$inputs['nam'])->where('tieude',$inputs['tieude'])->first();
         $inputs['matb']=$thongbao->matb;
         $inputs['madv']=session('admin')['madv'];
-        $model=nguoilaodong::where('company',session('admin')['madv'])->get();
+        $model=nguoilaodong::where('madb',session('admin')['madv'])->get();
 
         foreach($model as $val)
         {
             $data=[
                 'matb'=>$inputs['matb'],
                 'nam'=>$inputs['nam'],
-                'madv'=>session('admin')['madv'],
+                'madv'=>$val->madb,
                 'tieude'=>$inputs['tieude'],
                 'hoten'=>$val->hoten,
                 'mangld'=>$val->ma_nld,
+                'cmnd'=>$val->cmnd,
                 'gioitinh'=>$val->gioitinh,
                 'sobhxh'=>$val->sobhxh,
                 'bdbhxh'=>$val->bdbhxh,
@@ -148,7 +152,8 @@ class tinhhinhsudungldController extends Controller
                                         ->where('madv',session('admin')['madv'])
                                         ->get();
         return view('tinhhinhsudunglaodong.donvi.tonghop')
-                    ->with('model',$model);
+                    ->with('model',$model)
+                    ->with('capdo','X');
     }
 
     public function sendData($id)
@@ -170,5 +175,55 @@ class tinhhinhsudungldController extends Controller
         }
         $model=tinhhinhsudunglaodong::findOrFail($id);
         return response()->json($model);
+    }
+
+    public function tonghop(Request $request)
+    {
+        $inputs=$request->all();
+       if( $inputs['capdo'] == 'X'){
+            if (!chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'danhsach')) {
+                return view('errors.noperm')->with('machucnang', 'tonghopdulieutinhhinhsudunglaodongdonvi');
+            }
+        }else{
+            if (!chkPhanQuyen('tonghopdulieutinhhinhsudungld', 'danhsach')) {
+                return view('errors.noperm')->with('machucnang', 'tonghopdulieutinhhinhsudunglaodongdonvi');
+            }
+        }
+
+
+        $model=tinhhinhsudunglaodong::join('tinhhinhsudunglaodong_ct','tinhhinhsudunglaodong_ct.matb','tinhhinhsudunglaodong.matb')
+                                        ->select('tinhhinhsudunglaodong_ct.*')
+                                        ->where('tinhhinhsudunglaodong.matb',$inputs['matb'])
+                                        ->where('tinhhinhsudunglaodong.madv',$inputs['madv'])
+                                        ->where('tinhhinhsudunglaodong.nam',$inputs['nam'])
+                                        ->get();
+
+        $m_dv=User::where('madv',session('admin')->madv)->first();
+        $list_nghe = getParamsByNametype('Nghề nghiệp người lao động');
+        $a_vitri=array();
+        $a_vitrikhac=array();
+        foreach($list_nghe as $key=>$ct){
+            if(in_array($ct->id,[37,38,39])){
+                $a_vitri[$ct->id]=$ct->name;
+            }else{
+                $a_vitrikhac[$key]=$ct->id;
+            }
+                
+        }
+
+        // dd($a_vitrikhac);
+        // $a_vitri=array_column($list_nghe->toarray(),'name','id');
+        $a_chucvu=array_column(dmchucvu::all()->toarray(),'tencv','id');
+        $a_loaihdld=array_column(dmloaihieuluchdld::all()->toarray(),'tenlhl','madmlhl');
+        
+
+        return view('tinhhinhsudunglaodong.export.donvi.tonghop')
+                    ->with('model',$model)
+                    ->with('m_dv',$m_dv)
+                    ->with('a_vitri',$a_vitri)
+                    ->with('a_vitrikhac',$a_vitrikhac)
+                    ->with('a_chucvu',$a_chucvu)
+                    ->with('a_loaihdld',$a_loaihdld)
+                    ->with('pageTitle','Tổng hợp dữ liệu');
     }
 }

@@ -131,7 +131,7 @@
                                         @endif
         
                                         <td class="text-center">
-                                            {{-- @if (chkPhanQuyen('dstaikhoan', 'thaydoi')) --}}
+                                            @if (chkPhanQuyen('taikhoan', 'thaydoi'))
                                                 <button
                                                     onclick="getChucNang('{{ $c1->maso }}','{{ $c1->tencn }}',{{ $c1->phanquyen }},
                                                     {{ $c1->danhsach }}, {{ $c1->thaydoi }}, {{ $c1->hoanthanh }}, {{ $c1->nhomchucnang }})"
@@ -139,7 +139,7 @@
                                                     title="Thay đổi thông tin" data-toggle="modal">
                                                     <i class="icon-lg la flaticon-edit-1 text-primary"></i>
                                                 </button>
-                                            {{-- @endif --}}
+                                            @endif
         
                                         </td>
                                     </tr>
@@ -183,7 +183,7 @@
                                                 </td>
                                             @endif
                                             <td class="text-center">
-                                                {{-- @if (chkPhanQuyen('dstaikhoan', 'thaydoi') && $c1->phanquyen) --}}
+                                                @if (chkPhanQuyen('taikhoan', 'thaydoi') && $c1->phanquyen)
                                                     <button
                                                         onclick="getChucNang('{{ $c2->maso }}','{{ $c2->tencn }}',{{ $c2->phanquyen }},
                                                         {{ $c2->danhsach }}, {{ $c2->thaydoi }}, {{ $c2->hoanthanh }}, {{ $c2->nhomchucnang }})"
@@ -191,7 +191,7 @@
                                                         title="Thay đổi thông tin" data-toggle="modal">
                                                         <i class="icon-lg la flaticon-edit-1 text-warning"></i>
                                                     </button>
-                                                {{-- @endif --}}
+                                                @endif
         
                                             </td>
                                         </tr>
@@ -234,7 +234,7 @@
                                                     </td>
                                                 @endif
                                                 <td style="text-align: center">
-                                                    {{-- @if (chkPhanQuyen('dstaikhoan', 'thaydoi') && $c1->phanquyen && $c2->phanquyen) --}}
+                                                    @if (chkPhanQuyen('taikhoan', 'thaydoi') && $c1->phanquyen && $c2->phanquyen)
                                                         <button
                                                             onclick="getChucNang('{{ $c3->maso }}','{{ $c3->tencn }}','{{ $c3->phanquyen }}',
                                                         '{{ $c3->danhsach }}', '{{ $c3->thaydoi }}', '{{ $c3->hoanthanh }}', '{{ $c3->nhomchucnang }}')"
@@ -247,7 +247,7 @@
                                                             class="btn btn-sm btn-clean btn-icon">
                                                             <i class="icon-lg la flaticon-list text-dark"></i>
                                                         </a> --}}
-                                                    {{-- @endif --}}
+                                                    @endif
         
                                                 </td>
                                             </tr>
@@ -290,7 +290,7 @@
                                                         </td>
                                                     @endif
                                                     <td style="text-align: center">
-                                                        {{-- @if (chkPhanQuyen('dstaikhoan', 'thaydoi') && $c1->phanquyen && $c2->phanquyen && $c3->phanquyen) --}}
+                                                        @if (chkPhanQuyen('taikhoan', 'thaydoi') && $c1->phanquyen && $c2->phanquyen && $c3->phanquyen)
                                                             <button
                                                                 onclick="getChucNang('{{ $c4->maso }}','{{ $c4->tencn }}',{{ $c4->phanquyen }},
                                                        {{ $c4->danhsach }}, {{ $c4->thaydoi }}, {{ $c4->hoanthanh }}, {{ $c4->nhomchucnang }})"
@@ -311,7 +311,7 @@
                                                                 class="btn btn-sm btn-clean btn-icon">
                                                                 <i class="icon-lg la flaticon-list text-dark"></i>
                                                             </a> --}}
-                                                        {{-- @endif --}}
+                                                        @endif
         
                                                     </td>
                                                 </tr>

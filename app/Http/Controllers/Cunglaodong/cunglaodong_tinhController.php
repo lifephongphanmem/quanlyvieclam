@@ -16,6 +16,7 @@ use App\Models\Danhmuc\dmtrinhdogdpt;
 use App\Models\Danhmuc\dmtrinhdokythuat;
 use App\Models\Danhmuc\dmchuyenmondaotao;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -27,7 +28,7 @@ class cunglaodong_tinhController extends Controller
     {
         $this->middleware(function ($request, $next) {
             if (!Session::has('admin')) {
-                return redirect('/home');
+                return redirect('/');
             };
             return $next($request);
         });
@@ -58,7 +59,7 @@ class cunglaodong_tinhController extends Controller
             return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongtinh');
         }
         $inputs = $request->all();
-        $m_dvbc = dmdonvibaocao::where('level', 'H')->get();
+        $m_dvbc = User::where('capdo', 'H')->get();
         $model_tinh = tonghopcungld_tinh::where('matb', $inputs['matb'])->get();
         foreach ($m_dvbc as $dv) {
             $dv->matb = $inputs['matb'];
@@ -82,14 +83,16 @@ class cunglaodong_tinhController extends Controller
         }
         $inputs = $request->all();
         $model = tonghopdanhsachcungld::join('tonghopdanhsachcungld_ct', 'tonghopdanhsachcungld_ct.math', 'tonghopdanhsachcungld.math')
-            ->select('tonghopdanhsachcungld_ct.*', 'tonghopdanhsachcungld.madv')
+            ->select('tonghopdanhsachcungld_ct.*', 'tonghopdanhsachcungld.madv','tonghopdanhsachcungld.madvbc')
             ->where('tonghopdanhsachcungld.matb', $inputs['matb'])
-            ->where('tonghopdanhsachcungld.madvbc', $inputs['madvbc'])
+            ->where('tonghopdanhsachcungld.madvbc', $inputs['madv'])
             ->get();
+            // dd($model);
         $m_dv = dmdonvi::where('madv', $inputs['madv'])->first();
-        $model_dv = dmdonvi::where('madvbc', $inputs['madvbc'])
-            ->where('phanloaitaikhoan', 'SD')
-            ->get();
+        // $model_dv = dmdonvi::where('madvbc', $inputs['madvbc'])
+        //     ->where('phanloaitaikhoan', 'SD')
+        //     ->get();
+        $model_dv =User::where('madv',$inputs['madv'])->get();
             $doituong_ut = dmdoituonguutien::all();
             $gdpt = dmtrinhdogdpt::all();
             $cmkt = dmtrinhdokythuat::all();
@@ -97,7 +100,7 @@ class cunglaodong_tinhController extends Controller
             $tttghdkt1 = dmtinhtrangthamgiahdktct::all();
             $tttghdkt2 = dmtinhtrangthamgiahdktct2::all();
             $a_chuyennganh = array_column(dmchuyenmondaotao::all()->toarray(), 'tendm', 'id');
-        return view('cunglaodong.export.tonghop')
+        return view('cunglaodong.export.tinh.tonghop_huyen')
             ->with('model', $model)
             ->with('m_dv', $m_dv)
             ->with('model_dv', $model_dv)
@@ -120,8 +123,10 @@ class cunglaodong_tinhController extends Controller
             ->select('tonghopdanhsachcungld_ct.*', 'tonghopdanhsachcungld.madv', 'tonghopdanhsachcungld.madvbc')
             ->where('tonghopdanhsachcungld.matb', $inputs['matb'])
             ->get();
+            // dd($model);
         $m_dv = dmdonvi::where('madv', session('admin')['madv'])->first();
-        $model_dv = dmdonvibaocao::where('level', 'H')->get();
+        // $model_dv = dmdonvibaocao::where('level', 'H')->get();
+        $model_dv=User::where('tonghop',1)->where('madvbc',session('admin')->madv)->where('capdo','H')->get();
         $model_tinh=tonghopcungld_tinh::where('matb',$inputs['matb'])->get();
         foreach ($model as $th){
             $m_tinh=$model_tinh->where('madvbc',$th->madvbc)->first();

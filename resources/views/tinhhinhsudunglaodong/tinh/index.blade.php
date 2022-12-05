@@ -69,7 +69,7 @@
                                     {{-- <td> {{ $tb->hannop.'-'.$tb->nam }}</td> --}}
                                     <td>
                                         @if (chkPhanQuyen('tonghopdulieutinhhinhsudungld', 'danhsach'))
-                                            <a title="In" href="" class="btn btn-sm btn-clean btn-icon"
+                                            <a title="In" href="{{'/tinhhinhsudungld/tinh/intonghop?matb='.$tb['matb'].'&nam='.$tb['nam']}}" class="btn btn-sm btn-clean btn-icon"
                                                 target="_blank">
                                                 <i class="icon-lg la flaticon2-print text-dark"></i>
                                             </a>

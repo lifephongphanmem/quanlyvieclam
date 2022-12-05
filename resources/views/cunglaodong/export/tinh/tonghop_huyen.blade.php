@@ -13,7 +13,7 @@
         </tr>
         <tr>
             <td style="text-align: left;width: 60%">
-                <b>Đơn vị: {{isset($m_dv)?$m_dv->tendv:''}}</b>
+                <b>Đơn vị: {{$m_dv->tendv}}</b>
             </td>
             <td style="text-align: center; font-style: italic">
 
@@ -144,7 +144,13 @@
         </thead>
         <tbody>
             @if (isset($model))
-                @foreach ($model as $key => $ct)
+                @foreach ($model_dv as $k => $val)
+                    <tr style="font-weight: bold">
+                        <td>{{convert2Roman(++$k)}}</td>
+                        <td colspan="43">{{$val->name}}</td>
+                    </tr>
+                    <?php $m_th=$model->where('madvbc',$val->madv) ?>
+                    @foreach ($m_th as $key=>$ct )
                     <tr>
                         <td>{{ ++$key }}</td>
                         <td>{{ $ct->hoten }}</td>
@@ -183,7 +189,7 @@
                         @else
                             <td></td>
                         @endif
-                        <td>{{$a_chuyennganh[$ct->linhvucdaotao]}}</td>
+                        <td>{{isset($ct->linhvucdaotao)?$a_chuyennganh[$ct->linhvucdaotao]:''}}</td>
                         @if (isset($tttghdkt))
                             @foreach ($tttghdkt as $tt)
                                 <td class="text-center">{{ $tt->madmtgkt == $ct->tinhtrangvl ? 'X' : '' }}</td>
@@ -249,6 +255,8 @@
                         @endif
 
                     </tr>
+                                            
+                    @endforeach
                 @endforeach
             @endif
         </tbody>

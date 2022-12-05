@@ -349,13 +349,31 @@
     <!--end::Main-->
 
     <!-- begin::User Panel-->
-		<div id="kt_quick_user" class="offcanvas offcanvas-right p-10">
+		<div id="kt_quick_user" class="offcanvas offcanvas-right p-10" style="background-color: #1BC5BD">
 
 			<!--begin::Header-->
 			<div class="offcanvas-header d-flex align-items-center justify-content-between pb-5">
-				<h3 class="font-weight-bold m-0">User Profile
+				{{-- <h3 class="font-weight-bold m-0">User Profile
 					<small class="text-muted font-size-sm ml-2">12 messages</small>
-				</h3>
+				</h3> --}}
+                <div class="btn btn-icon btn-hover-transparent-white d-flex align-items-center btn-lg px-md-2 w-md-auto"
+                id="kt_quick_user_toggle">
+                {{-- <span
+                    class="text-white opacity-70 font-weight-bold font-size-base d-none d-md-inline mr-1">Xin chào,</span> --}}
+                <span
+                    class="font-weight-bolder font-size-base d-none d-md-inline mr-4">{{session('admin')?session('admin')->name:''}}</span>
+                <span class="symbol symbol-35">
+                    <span class="symbol-label bg-white-o-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <polygon points="0 0 24 0 24 24 0 24" />
+                                <path d="M12,11 C9.790861,11 8,9.209139 8,7 C8,4.790861 9.790861,3 12,3 C14.209139,3 16,4.790861 16,7 C16,9.209139 14.209139,11 12,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                <path d="M3.00065168,20.1992055 C3.38825852,15.4265159 7.26191235,13 11.9833413,13 C16.7712164,13 20.7048837,15.2931929 20.9979143,20.2 C21.0095879,20.3954741 20.9979143,21 20.2466999,21 C16.541124,21 11.0347247,21 3.72750223,21 C3.47671215,21 2.97953825,20.45918 3.00065168,20.1992055 Z" fill="#000000" fill-rule="nonzero" />
+                            </g>
+                        </svg>
+                    </span>
+                </span>
+            </div>
 				<a href="#" class="btn btn-xs btn-icon btn-light btn-hover-primary" id="kt_quick_user_close">
 					<i class="ki ki-close icon-xs text-muted"></i>
 				</a>
@@ -376,7 +394,7 @@
 				<div class="navi navi-spacer-x-0 p-0">
 
 					<!--begin::Item-->
-					<a href="{{url('/doanhnghiep/taikhoan')}}" class="navi-item">
+					<a href="{{url('/TaiKhoan/DoiMatKhau')}}" class="navi-item">
 						<div class="navi-link">
 							<div class="symbol symbol-40 bg-light mr-3">
 								<div class="symbol-label">
@@ -396,7 +414,7 @@
 								</div>
 							</div>
 							<div class="navi-text">
-								<div class="font-weight-bold">Thông tin tài khoản</div>								
+								<div class="font-weight-bold">Đổi mật khẩu</div>								
 							</div>
 						</div>
 					</a>
@@ -404,7 +422,7 @@
 					<!--end:Item-->
 
 					<!--begin::Item-->
-					<a href="{{url('/doanhnghiep/taikhoan')}}" class="navi-item">
+					{{-- <a href="{{url('/doanhnghiep/taikhoan')}}" class="navi-item">
 						<div class="navi-link">
 							<div class="symbol symbol-40 bg-light mr-3">
 								<div class="symbol-label">
@@ -429,12 +447,12 @@
 								<div class="font-weight-bold">Thông báo</div>
 							</div>
 						</div>
-					</a>
+					</a> --}}
 
 					<!--end:Item-->
 
 					<!--begin::Item-->
-					<a href="{{url('/logout')}}" class="navi-item">
+					<a href="{{url('/DangXuat')}}" class="navi-item">
 						<div class="navi-link">
 							<div class="symbol symbol-40 bg-light mr-3">
 								<div class="symbol-label">

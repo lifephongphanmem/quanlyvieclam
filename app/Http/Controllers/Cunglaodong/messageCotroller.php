@@ -18,7 +18,7 @@ class messageCotroller extends Controller
     {
         $this->middleware(function ($request, $next) {
             if (!Session::has('admin')) {
-                return redirect('/home');
+                return redirect('/');
             };
             return $next($request);
         });

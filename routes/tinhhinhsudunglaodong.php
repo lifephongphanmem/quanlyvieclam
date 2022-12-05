@@ -24,10 +24,12 @@ Route::prefix('tinhhinhsudungld')->group(function () {
         Route::get('/delete/{id}', [tinhhinhsudungldController::class, 'destroy']);
         Route::post('/send/{id}', [tinhhinhsudungldController::class, 'sendData']);
         Route::get('/lydo/{id}', [tinhhinhsudungldController::class, 'lydo']);
+        Route::get('/tonghop',[tinhhinhsudungldController::class,'tonghop']);
     });
     Route::prefix('tinh')->group(function () {
         Route::get('/tonghop', [tonghop_tinhhinhsudungldController::class, 'index']);
         Route::get('/xem_du_lieu', [tonghop_tinhhinhsudungldController::class, 'show']);
         Route::post('/tralai', [tonghop_tinhhinhsudungldController::class, 'tralai']);
+        Route::get('/intonghop', [tonghop_tinhhinhsudungldController::class, 'tonghop']);
     });
 });

@@ -37,7 +37,7 @@
                         <h3 class="card-label text-uppercase">Tổng hợp tình hình sử dụng lao động</h3>
                     </div>
                     <div class="card-toolbar">
-                        @if (chkPhanQuyen('	tonghopdulieutinhhinhsudunglaodongdonvi', 'thaydoi'))
+                        @if (chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'thaydoi'))
                             <button onclick="add()" class="btn btn-sm btn-success mr-2" title="Tổng hợp dữ liệu"
                                 data-target="#modify-modal" data-toggle="modal"><i class="fa fa-plus"></i>Thêm mới</button>
                         @endif
@@ -74,14 +74,14 @@
                                         {{ $tb->ngaygui == null ? getStatus()[$tb->trangthai] : \Carbon\Carbon::parse($tb->ngaygui)->format('d/m/Y') }}
                                     </td>
                                     <td>
-                                        @if (chkPhanQuyen('	tonghopdulieutinhhinhsudunglaodongdonvi', 'danhsach'))
-                                            <a title="In" href="" class="btn btn-sm btn-clean btn-icon"
+                                        @if (chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'danhsach'))
+                                            <a title="In" href="{{'/tinhhinhsudungld/don_vi/tonghop?matb='.$tb->matb.'&madv='.$tb->madv.'&nam='.$tb->nam.'&capdo='.$capdo}}" class="btn btn-sm btn-clean btn-icon"
                                                 target="_blank">
                                                 <i class="icon-lg la flaticon2-print text-dark"></i>
                                             </a>
                                         @endif
                                         @if ($tb->trangthai == 'TRALAI')
-                                            @if (chkPhanQuyen('	tonghopdulieutinhhinhsudunglaodongdonvi', 'hoanthanh'))
+                                            @if (chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'hoanthanh'))
                                                 <button type="button" onclick="lydo({{ $tb->id }})"
                                                     title="Lý do trả lại" data-target="#lydo-modal" data-toggle="modal"
                                                     class="btn btn-sm btn-clean btn-icon">
@@ -90,14 +90,14 @@
                                             @endif
                                         @endif
                                         @if ($tb->trangthai == 'CHUAGUI' || $tb->trangthai == 'TRALAI')
-                                            @if (chkPhanQuyen('	tonghopdulieutinhhinhsudunglaodongdonvi', 'hoanthanh'))
+                                            @if (chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'hoanthanh'))
                                                 <button type="button" onclick="sendData({{ $tb->id }})"
                                                     title="Gửi danh sach" data-target="#modify-modal-send"
                                                     data-toggle="modal" class="btn btn-sm btn-clean btn-icon">
                                                     <i class="fas fa-share-square text-success"></i>
                                                 </button>
                                             @endif
-                                            @if (chkPhanQuyen('	tonghopdulieutinhhinhsudunglaodongdonvi', 'thaydoi'))
+                                            @if (chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'thaydoi'))
                                                 <button title="Xóa thông tin" type="button"
                                                     onclick="cfDel('{{ '/tinhhinhsudungld/don_vi/delete/' . $tb->id }}')"
                                                     class="btn btn-sm btn-clean btn-icon"

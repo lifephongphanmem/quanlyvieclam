@@ -85,7 +85,7 @@
                                     <td class="{{ getTextStatus($tb->trangthai) }}">{{ getStatus()[$tb->trangthai] }}</td>
                                     <td>
                                         @if (chkPhanQuyen('tonghopdulieutinhhinhsudungld', 'danhsach'))
-                                            <a title="In" href="" class="btn btn-sm btn-clean btn-icon"
+                                            <a title="In" href="{{'/tinhhinhsudungld/don_vi/tonghop?matb='.$tb->matb.'&madv='.$tb->madv.'&nam='.$tb->nam.'&capdo=T'}}" class="btn btn-sm btn-clean btn-icon"
                                                 target="_blank">
                                                 <i class="icon-lg la flaticon2-print text-dark"></i>
                                             </a>
@@ -132,7 +132,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-default">Đóng</button>
+                        <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary">Đồng
+                            ý</button>
                     </div>
+
                 </div>
             </div>
         </div>
