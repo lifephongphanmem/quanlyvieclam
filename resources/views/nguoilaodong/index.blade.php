@@ -36,13 +36,16 @@
                     </div>
                     <div class="card-toolbar">
                         @if (chkPhanQuyen('laodongtrongnuoc', 'thaydoi'))
-                            <a href="{{ '/nguoilaodong/them_moi' }}" class="btn btn-sm btn-success mr-2"
+                            <a href="{{ '/nguoilaodong/them_moi' }}" class="btn btn-xs btn-success mr-2"
                                 title="Thêm mới tài khoản"><i class="fa fa-plus"></i>Thêm mới</a>
 
-                            <button class="btn btn-xs btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel"
+                            <button class="btn btn-xs btn-success mr-2 ml-2" title="Nhận dữ liệu từ file Excel"
                                 data-target="#modal-nhanexcel" data-toggle="modal">
-                                <i class="fas fa-file-import"></i>
+                                <i class="fas fa-file-import">Nhận Excel</i>
                             </button>
+                            <a href="{{asset('excel/maunhapnguoilaodong.xlsx')}}" class="btn btn-xs btn-success mr-2 ml-2" title="Nhận dữ liệu từ file Excel">                            
+                                <i class="fa fa-file-download"></i> Tải File Excel mẫu</i>
+                        </a>
                         @endif
                     </div>
                 </div>

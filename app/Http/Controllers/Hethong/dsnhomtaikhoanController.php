@@ -14,15 +14,15 @@ use Illuminate\Database\Eloquent\Collection;
 class dsnhomtaikhoanController extends Controller
 {
 
-    // public function __construct()
-    // {
-    //     $this->middleware(function ($request, $next) {
-    //         if (!Session::has('admin')) {
-    //             return redirect('/home');
-    //         };
-    //         return $next($request);
-    //     });
-    // }
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/');
+            };
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +30,9 @@ class dsnhomtaikhoanController extends Controller
      */
     public function index(Request $request)
     {
+        if (!chkPhanQuyen('nhomtaikhoan', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'nhomtaikhoan');
+        }
         $inputs = $request->all();
         $model = dsnhomtaikhoan::all();        
         $m_taikhoan = User::all();
@@ -50,6 +53,9 @@ class dsnhomtaikhoanController extends Controller
      */
     public function store(Request $request)
     {
+        if (!chkPhanQuyen('nhomtaikhoan', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'nhomtaikhoan');
+        }
         $inputs = $request->all();
 
 
@@ -74,6 +80,9 @@ class dsnhomtaikhoanController extends Controller
      */
     public function PhanQuyen(Request $request)
     {
+        if (!chkPhanQuyen('nhomtaikhoan', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'nhomtaikhoan');
+        }
         $inputs = $request->all();
         $m_nhomtaikhoan = dsnhomtaikhoan::where('manhomchucnang', $inputs['manhomchucnang'])->first();
         $m_nhomphanquyen = dsnhomtaikhoan_phanquyen::where('manhomchucnang', $inputs['manhomchucnang'])->get();
@@ -96,9 +105,9 @@ class dsnhomtaikhoanController extends Controller
 
     public function LuuPhanQuyen(Request $request)
     {
-        // if (!chkPhanQuyen('dsnhomtaikhoan', 'thaydoi')) {
-        //     return view('errors.noperm')->with('machucnang', 'dstaikhoan');
-        // }
+        if (!chkPhanQuyen('nhomtaikhoan', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'nhomtaikhoan');
+        }
 
         $inputs = $request->all();
         $inputs['phanquyen'] = isset($inputs['phanquyen']) ? 1 : 0;
@@ -153,6 +162,9 @@ class dsnhomtaikhoanController extends Controller
      */
     public function destroy($id)
     {
+        if (!chkPhanQuyen('nhomtaikhoan', 'thaydoi')) {
+            return view('errors.noperm')->with('machucnang', 'nhomtaikhoan');
+        }
         $model=dsnhomtaikhoan::findOrFail($id);
         $model->delete();
 
@@ -162,10 +174,9 @@ class dsnhomtaikhoanController extends Controller
 
     public function DanhSachDonVi(Request $request)
     {
-        // if (!chkPhanQuyen('dsnhomtaikhoan', 'danhsach')) {
-        //     return view('errors.noperm')->with('machucnang', 'dsnhomtaikhoan');
-        // }
-
+        if (!chkPhanQuyen('nhomtaikhoan', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'nhomtaikhoan');
+        }
         $inputs = $request->all();
         $m_nhom = dsnhomtaikhoan::where('manhomchucnang', $inputs['manhomchucnang'])->first();
         $model = User::where('manhomchucnang', $inputs['manhomchucnang'])->get();

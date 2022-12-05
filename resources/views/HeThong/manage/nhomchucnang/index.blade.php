@@ -38,11 +38,11 @@
                     </div>
                     <div class="card-toolbar">
                         <!--begin::Button-->
-                        {{-- @if (chkPhanQuyen('dsnhomtaikhoan', 'thaydoi')) --}}
+                        @if (chkPhanQuyen('nhomtaikhoan', 'thaydoi'))
                         <button type="button" onclick="setNhomTK('','', '{{ count($model) }}')"
                             class="btn btn-success btn-xs" data-target="#modify-modal" data-toggle="modal">
                             <i class="fa fa-plus"></i>&nbsp;Thêm mới</button>
-                        {{-- @endif --}}
+                        @endif
                         <!--end::Button-->
                     </div>
                 </div>
@@ -66,19 +66,21 @@
                                             <td class="text-center">{{ $i++ }}</td>
                                             <td>{{ $tt->tennhomchucnang }}</td>
                                             <td class="text-center">
+                                                @if (chkPhanQuyen('nhomtaikhoan', 'thaydoi'))
                                                 <button
                                                     onclick="setNhomTK('{{ $tt->manhomchucnang }}','{{ $tt->tennhomchucnang }}','{{ $tt->stt }}',)"
                                                     class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal"
                                                     title="Thay đổi thông tin địa bàn" data-toggle="modal">
                                                     <i class="icon-lg flaticon-edit-1 text-info"></i>
                                                 </button>
-
+                                                
                                                 <a title="Phân quyền"
                                                     href="{{ url('/nhomchucnang/PhanQuyen?manhomchucnang=' . $tt->manhomchucnang) }}"
                                                     class="btn btn-sm btn-clean btn-icon">
                                                     <i class="icon-lg flaticon2-user-1 text-primary"></i>
                                                 </a>
-
+                                                @endif
+                                                @if (chkPhanQuyen('nhomtaikhoan', 'danhsach'))
                                                 <a href="{{ url('/nhomchucnang/danhsach_donvi?manhomchucnang=' . $tt->manhomchucnang) }}"
                                                     class="btn btn-icon btn-clean btn-lg mb-1 position-relative"
                                                     title="Danh sách đơn vị trong nhóm">
@@ -88,12 +90,15 @@
                                                     <span
                                                         class="label label-sm label-light-danger text-dark label-rounded font-weight-bolder position-absolute top-0 right-0">{{ $tt->soluong }}</span>
                                                 </a>
+                                                @endif
+                                                @if (chkPhanQuyen('nhomtaikhoan', 'thaydoi'))
                                                 <button title="Xóa thông tin" type="button"
                                                     onclick="cfDel('{{'/nhomchucnang/delete/'.$tt->id}}')"
                                                     class="btn btn-sm btn-clean btn-icon"
                                                     data-target="#delete-modal-confirm" data-toggle="modal">
                                                     <i class="icon-lg flaticon-delete text-danger"></i>
                                                 </button>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

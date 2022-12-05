@@ -31,7 +31,7 @@
             <div class="card card-custom">
                 <div class="card-header card-header-tabs-line">
                     <div class="card-title">
-                        <h3 class="card-label text-uppercase">Danh sách người lao động</h3>
+                        <h3 class="card-label text-uppercase">Tổng hợp dữ liệu</h3>
                     </div>
                     <div class="card-toolbar">
                         {{-- <a href="{{ '/nguoilaodong/them_moi' }}" class="btn btn-sm btn-success mr-2"
@@ -52,7 +52,7 @@
                             @foreach ($m_dv as $k => $dv)
                                 <tr style="font-weight: bold">
                                     <td>{{ ++$k }}</td>
-                                    <td>{{ $dv->tendv }}</td>
+                                    <td>{{ $dv->name }}</td>
                                     <td>{{ $dv->noidung }}</td>
                                     <td>
                                         @if ($dv->dv == null)

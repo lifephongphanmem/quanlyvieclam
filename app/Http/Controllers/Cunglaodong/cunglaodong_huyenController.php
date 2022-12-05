@@ -17,6 +17,7 @@ use App\Models\Danhmuc\dmtrinhdogdpt;
 use App\Models\Danhmuc\dmtrinhdokythuat;
 use App\Models\Danhmuc\dmchuyenmondaotao;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -27,7 +28,7 @@ class cunglaodong_huyenController extends Controller
     {
         $this->middleware(function ($request, $next) {
             if (!Session::has('admin')) {
-                return redirect('/home');
+                return redirect('/');
             };
             return $next($request);
         });
@@ -67,10 +68,13 @@ class cunglaodong_huyenController extends Controller
         $inputs = $request->all();
         $model = tonghopdanhsachcungld::where('matb', $inputs['matb'])->get();
         $model_huyen = tonghopcungld_huyen::where('matb', $inputs['matb'])
-            ->where('madvbc', session('admin')['madvbc'])
+            ->where('madvbc', session('admin')['madv'])
             ->get();
+            // dd(session('admin'));
         // dd($model);
-        $m_dv = dmdonvi::where('madvbc', session('admin')['madvbc'])->where('phanloaitaikhoan', 'SD')->get();
+        // $m_dv = dmdonvi::where('madvbc', session('admin')['madvbc'])->where('phanloaitaikhoan', 'TH')->get();
+        $m_dv=User::where('nhaplieu',1)->where('madvbc',session('admin')->madv)->get();
+
         $m_tonghop = tonghop_huyen::where('matb', $inputs['matb'])
             ->where('madv', session('admin')['madv'])->first();
 
@@ -169,15 +173,18 @@ class cunglaodong_huyenController extends Controller
         }
         $inputs = $request->all();
         $model = tonghopdanhsachcungld::join('tonghopdanhsachcungld_ct', 'tonghopdanhsachcungld_ct.math', 'tonghopdanhsachcungld.math')
-            ->select('tonghopdanhsachcungld_ct.*', 'tonghopdanhsachcungld.madv')
+            ->select('tonghopdanhsachcungld_ct.*', 'tonghopdanhsachcungld.madv','tonghopdanhsachcungld.madvbc')
             ->where('tonghopdanhsachcungld.matb', $inputs['matb'])
-            ->where('tonghopdanhsachcungld.madvbc', session('admin')['madvbc'])
+            ->where('tonghopdanhsachcungld.madvbc', session('admin')['madv'])
             ->get();
         // dd($model);
         $m_dv = dmdonvi::where('madv', session('admin')['madv'])->first();
-        $model_dv = dmdonvi::where('madvbc', session('admin')['madvbc'])
-            ->where('phanloaitaikhoan', 'SD')
-            ->get();
+        // $model_dv = dmdonvi::where('madvbc', session('admin')['madvbc'])
+        //     ->where('phanloaitaikhoan', 'SD')
+        //     ->get();
+        // dd(session('admin'));
+        $model_dv=User::where('nhaplieu',1)->where('madvbc',session('admin')->madv)->get();
+        // dd($model_dv);
         $doituong_ut = dmdoituonguutien::all();
         $gdpt = dmtrinhdogdpt::all();
         $cmkt = dmtrinhdokythuat::all();

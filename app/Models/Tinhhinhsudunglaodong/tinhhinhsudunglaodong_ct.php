@@ -17,6 +17,7 @@ class tinhhinhsudunglaodong_ct extends Model
         'ngaygui',
         'nam',
         'mangld',
+        'cmnd',
         'hoten',
         'gioitinh',
         'sobhxh',

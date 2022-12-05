@@ -161,6 +161,13 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Công việc hiện tại</label>
+                        <input type="text" name='cvhientai' class="form-control">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">Vị trí việc làm</label>
+                    <select class="form-control input-sm m-bot15 select2me" name="nghenghiep">
                     <select class="form-control input-sm m-bot15 select2basic" name="nghenghiep">
                         <option value=''>-- Chọn nghề nghiệp --</option>
                         @foreach ($list_nghe as $lv )
