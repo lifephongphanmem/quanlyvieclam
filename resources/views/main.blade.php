@@ -600,6 +600,7 @@
     <!--begin::Page Vendors(used by this page)-->
     <script src="{{ url('assets/js/pages/widgets.js') }}"></script>
     <script src="{{ url('assets/js/pages/main.js') }}"></script>
+    <script src="{{url('assets/js/pages/select2.js')}}"></script>
     {{-- <script src="{{ url('assets/js/pages/bootstrap.js') }}"></script> --}}
     
     {{-- <script src="{{ url('assets/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script> --}}

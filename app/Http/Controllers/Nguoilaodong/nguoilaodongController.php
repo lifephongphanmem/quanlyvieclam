@@ -208,6 +208,7 @@ class nguoilaodongController extends Controller
     $inputs = $request->all();
     $inputs['ma_nld'] = getdate()[0];
     $inputs['sohc'] = $inputs['cmnd'];
+    $inputs['madb']=session('admin')->madv;
     $model = nguoilaodong::where('sohc', $inputs['sohc'])->first();
     if ($model != null) {
       return view('errors.tontai_dulieu')

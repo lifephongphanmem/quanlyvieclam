@@ -1,4 +1,4 @@
-<div id="tab1" class="tab-pane active">
+{{-- <div id="tab1" class="tab-pane active"> --}}
     <div class="form-body">
         <div class="row">
             <div class="col-md-3">
@@ -196,7 +196,7 @@
                         <option value=''>-- Chọn thời gian --</option>
                         @foreach ($a_thoigianthatnghiep as $vt )
                         <option value="{{$vt['madm']}}" {{isset($model)?($vt['madm'] == $model->thoigianthatnghiep?'selected':''):''}}>{{$vt['tendm']}}</option>
-                        @endforeach>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -207,7 +207,7 @@
                         <option value=''>-- Chọn lý do --</option>
                         @foreach ($a_lydo_khongthamgia_hdkt as $vt )
                         <option value="{{$vt['madm']}}" {{isset($model)?($vt['madm'] == $model->lydoktg?'selected':''):''}}>{{$vt['tendm']}}</option>
-                        @endforeach>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -229,8 +229,8 @@
         </div>
     </div>
     <input type="hidden" name='nation' value="VN">
-</div>
-<script>
+{{-- </div> --}}
+{{-- <script>
     $('#tinhtrangvl').on('change', function() {
         var tinhtrang = $(this).val();
         var html = '';
@@ -300,4 +300,4 @@
 
 
     })
-</script>
+</script> --}}

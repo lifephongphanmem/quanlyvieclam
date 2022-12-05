@@ -607,6 +607,7 @@ class ComposerStaticInitea9d6f1e56691f84e5f173248cbf2a42
         'App\\Http\\Controllers\\Doanhnghiep\\CompanyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Doanhnghiep/CompanyController.php',
         'App\\Http\\Controllers\\EmployerController' => __DIR__ . '/../..' . '/app/Http/Controllers/EmployerController.php',
         'App\\Http\\Controllers\\Hethong\\ChucnangController' => __DIR__ . '/../..' . '/app/Http/Controllers/Hethong/ChucnangController.php',
+        'App\\Http\\Controllers\\Hethong\\HethongchungController' => __DIR__ . '/../..' . '/app/Http/Controllers/Hethong/HethongchungController.php',
         'App\\Http\\Controllers\\Hethong\\dsnhomtaikhoanController' => __DIR__ . '/../..' . '/app/Http/Controllers/Hethong/dsnhomtaikhoanController.php',
         'App\\Http\\Controllers\\Hethong\\taikhoanController' => __DIR__ . '/../..' . '/app/Http/Controllers/Hethong/taikhoanController.php',
         'App\\Http\\Controllers\\MessagesController' => __DIR__ . '/../..' . '/app/Http/Controllers/MessagesController.php',

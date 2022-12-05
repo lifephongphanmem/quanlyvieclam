@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-md-3">
                 <label class="control-label">Quốc tịch</label>
-                <select class="form-control input-sm m-bot5" name="nation">
+                <select class="form-control input-sm m-bot5 select2basic" name="nation">
                     <?php foreach ( $countries_list as $key => $value){ ?>
                     <option value='{{ $value }}' {{isset($model)?($model->nation==$value?'selected':''):''}}>{{ $value }}
                     </option>
@@ -44,7 +44,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Giới tính</label>
-                    <select class="form-control input-sm m-bot5" name="gioitinh">
+                    <select class="form-control input-sm m-bot5 select2basic" name="gioitinh">
                         <option value='Nam' {{isset($model)?($model->gioitinh=='Nam'?'selected':''):''}}>Nam</option>
                         <option value='Nữ' {{isset($model)?($model->gioitinh=='Nữ'?'selected':''):''}}>Nữ</option>
                     </select>
@@ -53,7 +53,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Trình độ</label>
-                    <select class=" form-control input-sm m-bot5 select2me" name="trinhdo">
+                    <select class=" form-control input-sm m-bot5 select2basic" name="trinhdo">
                         <option value='Chứng chỉ đào tạo'{{isset($model)?($model->trinhdo=='Chứng chỉ đào tạo'?'selected':''):''}}>Chứng chỉ đào tạo</option>
                         <option value='Chứng chỉ hành nghề'{{isset($model)?($model->trinhdo=='Chứng chỉ hành nghề'?'selected':''):''}}>Chứng chỉ hành nghề</option>
                         <option value='Đại học'{{isset($model)?($model->trinhdo=='Đại học'?'selected':''):''}}>Đại học</option>
@@ -66,7 +66,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Chuyên môn đào tạo</label>
-                    <select class="form-control input-sm m-bot5 select2me" name="chuyenmondaotao">
+                    <select class="form-control input-sm m-bot5 select2basic" name="chuyenmondaotao">
                         @foreach ($dmchuyenmon as $cm )
                         <option value='{{$cm->id}}'{{isset($model)?($model->chuyenmondaotao==$cm->id?'selected':''):''}}>{{$cm->tendm}}</option>
                         @endforeach

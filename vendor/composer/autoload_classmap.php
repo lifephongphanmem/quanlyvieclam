@@ -58,6 +58,7 @@ return array(
     'App\\Http\\Controllers\\Doanhnghiep\\CompanyController' => $baseDir . '/app/Http/Controllers/Doanhnghiep/CompanyController.php',
     'App\\Http\\Controllers\\EmployerController' => $baseDir . '/app/Http/Controllers/EmployerController.php',
     'App\\Http\\Controllers\\Hethong\\ChucnangController' => $baseDir . '/app/Http/Controllers/Hethong/ChucnangController.php',
+    'App\\Http\\Controllers\\Hethong\\HethongchungController' => $baseDir . '/app/Http/Controllers/Hethong/HethongchungController.php',
     'App\\Http\\Controllers\\Hethong\\dsnhomtaikhoanController' => $baseDir . '/app/Http/Controllers/Hethong/dsnhomtaikhoanController.php',
     'App\\Http\\Controllers\\Hethong\\taikhoanController' => $baseDir . '/app/Http/Controllers/Hethong/taikhoanController.php',
     'App\\Http\\Controllers\\MessagesController' => $baseDir . '/app/Http/Controllers/MessagesController.php',
