@@ -49,7 +49,7 @@
                             @foreach ($model as $k => $dv)
                                 <tr style="font-weight: bold">
                                     <td>{{ ++$k }}</td>
-                                    <td>{{ $dv->tendvbc }}</td>
+                                    <td>{{ $dv->name }}</td>
                                     <td>{{ $dv->noidung }}</td>
                                     <td>
                                         @if ($dv->dv == null)

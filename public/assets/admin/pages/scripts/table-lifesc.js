@@ -11,7 +11,7 @@ var TableManaged1 = function () {
             //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
 
             "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-            
+
             "lengthMenu": [
                 [5, 10, 15, 20, -1],
                 [5, 10, 15, 20, "All"] // change per page values here
@@ -105,7 +105,7 @@ var TableManaged2 = function () {
                 "searchable": false,
                 "targets": [0]
             }],
-            "bSort" : false
+            "bSort": false
         });
 
         var tableWrapper = jQuery('#sample_2_wrapper');
@@ -160,7 +160,7 @@ var TableManaged3 = function () {
             "pageLength": -1,
             "language": {
                 "lengthMenu": "Hiển thị _MENU_ thông tin",
-                "search": "Tìm kiếm:",
+                "search": "Tìm kiếm thông tin ",
                 "emptyTable": "Không có thông tin",
                 "info": "Hiển thị _START_ đến _END_ trên _TOTAL_ thông tin",
                 "infoEmpty": "",
@@ -174,7 +174,7 @@ var TableManaged3 = function () {
                 "searchable": false,
                 "targets": [0]
             }],
-            "bSort" : false,
+            "bSort" : false
         });
 
         var tableWrapper = jQuery('#sample_3_wrapper');
@@ -243,7 +243,7 @@ var TableManaged4 = function () {
                 "searchable": false,
                 "targets": [0]
             }],
-            "bSort" : false
+            "bSort": false
         });
 
         var tableWrapper = jQuery('#sample_4_wrapper');
@@ -312,7 +312,7 @@ var TableManaged5 = function () {
                 "searchable": false,
                 "targets": [0]
             }],
-            "bSort" : false
+            "bSort": false
         });
 
         var tableWrapper = jQuery('#sample_5_wrapper');
@@ -352,7 +352,7 @@ var TableManagedclass = function () {
         // begin: third table
         table.dataTable({
             "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-            
+
             "lengthMenu": [
                 [5, 10, 15, 20, -1],
                 [5, 10, 15, 20, "All"] // change per page values here
@@ -375,7 +375,7 @@ var TableManagedclass = function () {
                 "searchable": false,
                 "targets": [0]
             }],
-            "bSort" : false
+            "bSort": false
             //"order": [
             //    [0, "asc"]
             //] // set first column as a default sort by asc

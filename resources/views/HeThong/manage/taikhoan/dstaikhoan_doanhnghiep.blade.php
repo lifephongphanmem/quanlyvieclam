@@ -1,3 +1,4 @@
+
 @extends('main')
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
@@ -7,8 +8,8 @@
 
 @section('custom-script')
     <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
+    <script src="{{ url('assets/js/pages/select2.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-
 
     <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
@@ -26,17 +27,27 @@
             <div class="card card-custom">
                 <div class="card-header card-header-tabs-line">
                     <div class="card-title">
-                        <h3 class="card-label text-uppercase">Danh sách tài khoản đơn vị: {{ $model->tendv }}</h3>
+                        <h3 class="card-label text-uppercase">Danh sách tài khoản</h3>
                     </div>
-                    <div class="card-toolbar">
-                        <a href="{{ '/TaiKhoan/ThemMoi?id=' . $model->id }}" class="btn btn-sm btn-success mr-2"
-                            title="Thêm mới tài khoản"><i class="fa fa-plus"></i>Thêm mới</a>
-                        <a href="{{ '/TaiKhoan/ThongTin?phanloaitk=1' }}" class="btn btn-sm btn-info mr-2"
-                            title="Quay lại"><i class="fa fa-reply"></i>Quay lại</a>
-                        {{-- <button class="btn btn-sm btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel"
+                    {{-- <div class="card-toolbar">
+                        <a href="" class="btn btn-xs btn-success mr-2">Tạo mới</a>
+                        <button class="btn btn-xs btn-icon btn-success mr-2" title="Nhận dữ liệu từ file Excel"
                             data-target="#modal-nhanexcel" data-toggle="modal">
                             <i class="fas fa-file-import"></i>
-                        </button> --}}
+                        </button>
+                    </div> --}}
+                </div>
+                <div class="float-left mr-5 mt-5" style="width:40%;margin-left:140px">
+                    <div class="mt-2 float-left">
+                        <div class="form-group">
+                            <label class="control-label">Loại tài khoản </label>
+                        </div>
+                    </div>
+                    <div class="float-left ml-2" style="width:60%">
+                        <div class="form-group">
+                            {!! Form::select('phanloaitk', ['2'=>'Doanh nghiệp','1'=>'Hành chính nhà nước'], $phanloaitk, ['id' => 'phanloaitk', 'class' => 'form-control']) !!}
+
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -74,10 +85,10 @@
                                             <i class="icon-lg la flaticon-edit-1 text-primary "></i>
                                         </a>
                                         @if ($tk->status == 1)
-                                            <a title="Phân quyền" href="{{'/TaiKhoan/PhanQuyen?tendangnhap='.$tk->username.'&phnaloaitk='.$tk->phanloaitk}}" class="btn btn-sm btn-clean btn-icon">
+                                            <a title="Phân quyền" href="{{'/TaiKhoan/PhanQuyen?tendangnhap='.$tk->username.'&phanloaitk='.$tk->phanloaitk}}" class="btn btn-sm btn-clean btn-icon">
                                                 <i class="icon-lg la flaticon-user-settings text-primary icon-2x"></i></a>
 
-                                            <button type="button" onclick="setPerGroup('{{ $tk->manhomchucnang }}','{{ $tk->username }}','{{$tk->phanloaitk}}')"
+                                            <button type="button" onclick="setPerGroup('{{ $tk->manhomchucnang }}','{{ $tk->username }}',{{$tk->phanloaitk}})"
                                                 class="btn btn-sm btn-clean btn-icon" data-target="#modify-nhomchucnang"
                                                 data-toggle="modal" title="Đặt lại quyền theo nhóm chức năng">
                                                 <i class="icon-lg la flaticon-network text-primary icon-2x"></i>
@@ -142,5 +153,12 @@
         $('#frm_nhomchucnang').find("[name='tendangnhap']").val(tendangnhap);
         $('#frm_nhomchucnang').find("[name='phanloaitk']").val(phanloaitk);
     }
+    $('#phanloaitk').on('change', function(){
+            phanloaitk=$('#phanloaitk').val();
+            url='/TaiKhoan/ThongTin?phanloaitk='+phanloaitk;
+
+            window.location.href=url;
+        })
     </script>
+
 @stop

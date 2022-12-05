@@ -138,15 +138,15 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <p class="text-muted font-weight-bold">Nhập thông tin doanh nghiệp</p>
 							</div>
 
-							{!! Form::open(['url' => '/lsignup', 'class' => 'form text-left', 'id' => 'kt_login_signup_form']) !!}                            
+							{!! Form::open(['url' => '/DangKy', 'class' => 'form text-left', 'id' => 'kt_login_signup_form']) !!}                            
                                 <div class="form-group py-2 m-0">
                                     <input class="form-control h-auto border-0 px-0 placeholder-dark-75" type="text"
-                                        placeholder="Tên công ty" name="ctyname" required />
+                                        placeholder="Tên công ty" name="name" required />
                                 </div>
 
                                 <div class="form-group py-2 m-0 border-top">
                                     <input class="form-control h-auto border-0 px-0 placeholder-dark-75" type="text"
-                                        placeholder="Tên tài khoản" name="name" required />
+                                        placeholder="Tên tài khoản" name="username" required />
                                 </div>
 
                                 <div class="form-group py-2 m-0 border-top">                                    

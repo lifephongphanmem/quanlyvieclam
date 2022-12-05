@@ -6,14 +6,17 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Hethong\ChucnangController;
 use App\Http\Controllers\Danhmuc\danhmuchanhchinhController;
 use App\Http\Controllers\Hethong\dsnhomtaikhoanController;
+use App\Http\Controllers\Hethong\HethongchungController;
 
 //Đăng nhập
-Route::get('/', [UserController::class, 'show_login']);
-Route::get('/dashboard',[UserController::class,'dashboard']);
-Route::get('/DangNhap',[UserController::class,'show_login']);
-Route::post('/DangNhap',[UserController::class,'DangNhap']);
-Route::post('/DangKy',[UserController::class,'DangKy']);
-Route::get('/DangXuat',[UserController::class,'logout']);
+
+Route::get('/', [HethongchungController::class, 'show_login']);
+Route::get('/dashboard',[HethongchungController::class,'dashboard']);
+Route::get('/DangNhap',[HethongchungController::class,'show_login']);
+Route::post('/DangNhap',[HethongchungController::class,'DangNhap']);
+Route::post('/DangKy',[HethongchungController::class,'DangKy']);
+Route::get('/DangXuat',[HethongchungController::class,'logout']);
+
 
 
 //dmdonvi
@@ -43,6 +46,8 @@ Route::prefix('TaiKhoan')->group(function () {
     Route::post('/PhanQuyen',[UserController::class,'luuphanquyen']);
 
     Route::post('/NhomChucNang',[UserController::class,'NhomChucNang']);
+    Route::get('/DoiMatKhau',[UserController::class,'DoiMatKhau']);
+    Route::post('/DoiMatKhau',[UserController::class,'capnhatdoimatkhau']);
 });
 
 //danh mục chức năng

@@ -319,7 +319,7 @@
     <div class="card-footer">
         <div class="row text-center">
             <div class="col-lg-12">
-                <a href="{{ url('/TaiKhoan/DanhSach?madonvi=' . $m_taikhoan->madonvi) }}"
+                <a href="{{ url('/TaiKhoan/DanhSach?madv=' . $m_taikhoan->madv) }}"
                     class="btn btn-danger mr-5"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
             </div>
         </div>

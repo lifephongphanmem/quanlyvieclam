@@ -36,6 +36,19 @@
                         </button>
                     </div> --}}
                 </div>
+                <div class="float-left mr-5 mt-5" style="width:40%;margin-left:140px">
+                    <div class="mt-2 float-left">
+                        <div class="form-group">
+                            <label class="control-label">Loại tài khoản </label>
+                        </div>
+                    </div>
+                    <div class="float-left ml-2" style="width:60%">
+                        <div class="form-group">
+                            {!! Form::select('phanloaitk', ['2'=>'Doanh nghiệp','1'=>'Hành chính nhà nước'], $phanloaitk, ['id' => 'phanloaitk', 'class' => 'form-control']) !!}
+
+                        </div>
+                    </div>
+                </div>
                 <div class="card-body">
                     <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer" >
                         <thead>
@@ -136,4 +149,13 @@
         }            
     }
      ?>
+
+     <script>
+        $('#phanloaitk').on('change', function(){
+            phanloaitk=$('#phanloaitk').val();
+            url='/TaiKhoan/ThongTin?phanloaitk='+phanloaitk;
+
+            window.location.href=url;
+        })
+     </script>
 @stop

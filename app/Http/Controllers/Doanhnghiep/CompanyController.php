@@ -18,7 +18,7 @@ class CompanyController extends Controller
     {
         $this->middleware(function ($request, $next) {
             if (!Session::has('admin')) {
-                return redirect('/home');
+                return redirect('/');
             };
             return $next($request);
         });
@@ -291,11 +291,13 @@ class CompanyController extends Controller
 	
 	public function store(Request $request)
 	{
+	
+
 		if (!chkPhanQuyen('danhsachdoanhnghiep', 'thaydoi')) {
             return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
         }
-		$inputs=$request->all();
 
+		$inputs=$request->all();
 		Company::create($inputs);
 		return redirect('/doanh_nghiep/danh_sach')
 						->with('success','Thêm mới thành công');
@@ -303,10 +305,18 @@ class CompanyController extends Controller
 
 	public function edit(Request $request,$id)
 	{
-		if (!chkPhanQuyen('danhsachdoanhnghiep', 'thaydoi')) {
-            return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
-        }
 		$inputs=$request->edit;
+		if(isset($inputs)){
+			if (!chkPhanQuyen('chitietdoanhnghiep', 'thaydoi')) {
+				return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
+			}
+		}else{
+			if (!chkPhanQuyen('danhsachdoanhnghiep', 'thaydoi')) {
+				return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
+			}
+		}
+
+
 		$model=Company::findOrFail($id);
 		$dmhanhchinh=danhmuchanhchinh::all();
 		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
@@ -331,10 +341,18 @@ class CompanyController extends Controller
 
 	public function update_dn(Request $request,$id)
 	{
-		if (!chkPhanQuyen('danhsachdoanhnghiep', 'thaydoi')) {
-            return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
-        }
 		$inputs=$request->all();
+		if($inputs['edit'] == 0){
+			if (!chkPhanQuyen('danhsachdoanhnghiep', 'thaydoi')) {
+				return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
+			}
+		}else{
+			if (!chkPhanQuyen('chitietdoanhnghiep', 'thaydoi')) {
+				return view('errors.noperm')->with('machucnang', 'danhsachdoanhnghiep');
+			}
+		}
+
+
 		$model=Company::findOrFail($id);
 		$model->update($inputs);
 		if($inputs['edit']==0){
@@ -429,8 +447,8 @@ class CompanyController extends Controller
 
 	public function thongtin()
 	{
-		if (!chkPhanQuyen('chitietdoanhnghiep', 'thaydoi')) {
-            return view('errors.noperm')->with('machucnang', 'quanlythongtindoanhnghiep');
+		if (!chkPhanQuyen('chitietdoanhnghiep', 'danhsach')) {
+            return view('errors.noperm')->with('machucnang', 'chitietdoanhnghiep');
         }
 		$model=Company::where('masodn',session('admin')['madv'])->first();
 		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp

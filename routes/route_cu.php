@@ -1,8 +1,14 @@
 <?php 
 
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 
 use App\Http\Controllers\CompanyController;
+=======
+use App\Http\Controllers\UserController;
+// use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\Doanhnghiep\CompanyController;
+>>>>>>> 86897f704a1ea33c644e96381add95d99b9a0adc
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TuyendungController;
@@ -24,7 +30,11 @@ use App\Http\Controllers\UserController;
 
 // Route::get('/', [UserController::class, 'show_login']);
 
+<<<<<<< HEAD
 // Route::get('/', [UserController::class, 'show_login']);
+=======
+
+>>>>>>> 86897f704a1ea33c644e96381add95d99b9a0adc
 
 Route::post('/login-user', [UserController::class, 'auth']);
 Route::post('/signup', [UserController::class, 'signup']);

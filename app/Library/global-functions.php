@@ -391,3 +391,44 @@ function romanNumerals($num)
     /*** return the res ***/
     return $res;
 }
+
+function getAge($birthdate = '0000-00-00') {
+    if ($birthdate == '0000-00-00') return 'Unknown';
+  
+    $bits = explode('-', $birthdate);
+    $age = date('Y') - $bits[0] - 1;
+  
+    $arr[1] = 'm';
+    $arr[2] = 'd';
+  
+    for ($i = 1; $arr[$i]; $i++) {
+        $n = date($arr[$i]);
+        if ($n < $bits[$i])
+            break;
+        if ($n > $bits[$i]) {
+            ++$age;
+            break;
+        }
+    }
+    return $age;
+}
+function dinhdangso ($number , $decimals = 0, $unit = '1' , $dec_point = ',' , $thousands_sep = '.' ) {
+    if(!is_numeric($number) || $number == 0){return '';}
+    $r = $unit;
+
+    switch ($unit) {
+        case 2:{
+            $decimals = 3;
+            $r = 1000;
+            break;
+        }
+        case 3:{
+            $decimals = 5;
+            $r = 1000000;
+            break;
+        }
+    }
+
+    $number = round($number / $r , $decimals);
+    return number_format($number, $decimals ,$dec_point, $thousands_sep);
+}

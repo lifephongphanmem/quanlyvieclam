@@ -30,7 +30,7 @@ class nguoilaodongController extends Controller
   {
     $this->middleware(function ($request, $next) {
       if (!Session::has('admin')) {
-        return redirect('/home');
+        return redirect('/');
       };
       return $next($request);
     });
@@ -59,7 +59,9 @@ class nguoilaodongController extends Controller
     if (!chkPhanQuyen('laodongnguoinuocngoai', 'danhsach')) {
       return view('errors.noperm')->with('machucnang', 'laodongnguoinuocngoai');
     }
-    $model = nguoilaodong::wherenotin('nation', ['VN', 'Việt Nam'])
+    // $model = nguoilaodong::wherenotin('nation', ['VN', 'Việt Nam'])
+    //   ->OrderBy('id', 'DESC')->get();
+    $model = nguoilaodong::where('madb', session('admin')['madv'])
       ->OrderBy('id', 'DESC')->get();
     return view('nguoilaodong.nuocngoai.index')
       ->with('model', $model);

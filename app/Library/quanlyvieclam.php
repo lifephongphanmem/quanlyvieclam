@@ -24,3 +24,14 @@ function chkGiaoDien($machucnang, $tentruong = 'trangthai')
     // }
     return $chk[$tentruong];
 }
+
+
+function getParamsByNametype($paramtype)
+{
+  $cats = array();
+  $type = DB::table('paramtype')->where('name', $paramtype)->get()->first();
+  if ($type) {
+    $cats = DB::table('param')->where('type', $type->id)->get();
+  }
+  return $cats;
+}

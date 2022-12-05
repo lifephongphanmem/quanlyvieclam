@@ -27,7 +27,8 @@ class Company extends Model
 		'public',
 		'image',
 		'user',
-		'nganhnghe'
+		'nganhnghe',
+		'madv'
 	];
 
     /**

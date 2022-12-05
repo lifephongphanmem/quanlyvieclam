@@ -23,25 +23,50 @@
         </div>
         <div class="card-body">
             <div class="form-group row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <label>Đơn vị quản lý</label>
                     <select class="form-control select2me" name="madv" >
                         <option value="{{$model->madv}}">{{$model->tendv}}</option>                            
                     </select>
                 </div>
+                <div class="col-lg-3">
+                    <label>Đơn vị báo cáo</label>
+                    <select class="form-control select2me" name="madvbc" >
+                        <option value="">-- Chọn đơn vị báo cáo --</option>
+                        @foreach ($model_dvbc as $dv )
+                        <option value="{{$dv->madv}}">{{$dv->name}}</option> 
+                        @endforeach
+                                                  
+                    </select>
+                </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <label>Tên tài khoản<span class="require">*</span></label>
                     <input class="form-control"  name="name" type="text">
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <label>Tài khoản truy cập<span class="require">*</span></label>
                     <input class="form-control" name="username" type="text">
                 </div>                
             </div>
 
             <div class="form-group row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
+                    <label>Phân loại </label>
+                    <select class="form-control select2me" name="phanloai">
+                        <option value="tonghop">Tổng hợp</option>
+                        <option value="nhaplieu">Nhập liệu</option>
+                    </select>
+                </div>
+                <div class="col-lg-3">
+                <label>Cấp độ</label>
+                <select class="form-control select2me" name="capdo">
+                    <option value="T">Tài khoản cấp Tỉnh</option>
+                    <option value="H">Tài khản cấp Huyện</option>
+                    <option value="X">Tài khản cấp Xã</option>
+                </select>
+            </div>
+                <div class="col-lg-3">
                     <label>Trạng thái</label>
                     <select class="form-control select2me" name="status">
                         <option value="1">Kích hoạt</option>
@@ -49,9 +74,9 @@
                     </select>
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <label>Mật khẩu <span class="require">*</span></label>
-                    <input class="form-control" name="password" type="password" value='123456789'>
+                    <input class="form-control" name="password" type="password" value='@pmcs123@!'>
                 </div>                
             </div>
         </div>

@@ -147,10 +147,10 @@
                 @foreach ($model_dv as $k => $val)
                     <tr style="font-weight: bold">
                         <td>{{convert2Roman(++$k)}}</td>
-                        <td colspan="43">{{$val->tendvbc}}</td>
+                        <td colspan="43">{{$val->name}}</td>
                     </tr>
                     {{-- <?php $m_th=$model->where('madv',$val->madv) ?> --}}
-                    <?php $m_th = $model->where('madvbc_tinh', $val->madvbc); ?>
+                    <?php $m_th = $model->where('madvbc', $val->madv); ?>
                     @foreach ($m_th as $key=>$ct )
                     <tr>
                         <td>{{ ++$key }}</td>
