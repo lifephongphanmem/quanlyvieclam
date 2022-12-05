@@ -1,9 +1,11 @@
 <?php 
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\UserController;
 // use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\Doanhnghiep\CompanyController;
+
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TuyendungController;
@@ -25,6 +27,8 @@ use App\Http\Controllers\AdminEmployer;
 
 // Route::get('/', [UserController::class, 'show_login']);
 
+
+// Route::get('/', [UserController::class, 'show_login']);
 
 
 Route::post('/login-user', [UserController::class, 'auth']);

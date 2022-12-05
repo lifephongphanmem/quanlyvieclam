@@ -16,7 +16,7 @@ class CreateThongbaoct extends Migration
         Schema::create('thongbaoct', function (Blueprint $table) {
             $table->id();
             $table->string('matb')->nullable();
-            $table->bigInteger('manguoinhan')->nullable();
+            $table->string('manguoinhan')->nullable();
             $table->timestamps();
         });
     }

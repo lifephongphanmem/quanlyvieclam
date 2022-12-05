@@ -1,51 +1,47 @@
 <?php 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\khaibaotuyendungController;
-use App\Http\Controllers\thongbaoController;
-use App\Http\Controllers\thongtintuyendungController;
-
+use App\Http\Controllers\Caulaodong\thongbaoController;
+use App\Http\Controllers\Caulaodong\nhucautuyendungController;
+use App\Http\Controllers\Caulaodong\nhucautuyendungctController;
 
 
 
 Route::prefix('tuyen_dung')->group(function () {
+    //thông báo
+    Route::get('damh_sach_thong_bao', [thongbaoController::class, 'thongbaodagui']);
+    Route::get('hopthucauld',[ThongbaoController::class,'hopthucauld']);
+    // khai bao
+    Route::prefix('/khai_bao_nhu_cau')->group(function () {
+        Route::get('dot_thu_thap', [thongbaoController::class, 'khaibao']);
 
-//thông tin tổng hợp
-Route::prefix('/thong_tin_tong_hop')->group(function () {
-    Route::get('', [thongtintuyendungController::class, 'index']);
-    Route::get('/edit/{id}', [thongtintuyendungController::class, 'edit']);
-    Route::post('/store_update', [thongtintuyendungController::class, 'store_update']);
-    Route::get('/delete/{id}', [thongtintuyendungController::class, 'delete']);
-    //chi tiết
-    Route::get('/chi_tiet', [thongtintuyendungController::class, 'detail']);
-    Route::post('/tralai', [thongtintuyendungController::class, 'tralai']);
+        Route::get('', [nhucautuyendungController::class, 'index_khaibao']);
+        Route::get('/them_moi', [nhucautuyendungController::class, 'create']);
+        Route::post('/store', [nhucautuyendungController::class, 'store']);
+        Route::get('/chinh_sua', [nhucautuyendungController::class, 'edit']);
+        Route::post('/update', [nhucautuyendungController::class, 'update']);
+        Route::post('/chuyen', [nhucautuyendungController::class, 'chuyen']);
+        Route::get('/xem', [nhucautuyendungController::class, 'show']);
+        Route::get('/delete/{id}', [nhucautuyendungController::class, 'delete']);
+        //chi tiết
+        Route::post('/store_ct', [nhucautuyendungctController::class, 'store']);
+        Route::get('/edit_ct', [nhucautuyendungctController::class, 'edit']);
+        Route::post('/update_ct', [nhucautuyendungctController::class, 'update']);
+        Route::get('/delete_ct', [nhucautuyendungctController::class, 'delete']);
+    });
+    // tổng hợp
+    Route::prefix('/thong_tin_tong_hop')->group(function () {
+        Route::get('dot_thu_thap', [thongbaoController::class, 'tonghop']);
+   
+        Route::get('/them_moi', [thongbaoController::class, 'create']);
+        Route::post('/store', [thongbaoController::class, 'store']);
+        Route::get('/chinh_sua', [thongbaoController::class, 'edit']);
+        Route::post('/update', [thongbaoController::class, 'update']);
+        Route::get('/delete/{id}', [thongbaoController::class, 'delete']);
+        Route::post('/chuyen', [thongbaoController::class, 'chuyen']);
+
+        Route::get('', [nhucautuyendungController::class, 'index_tonghop']);
+        Route::post('/tralai', [nhucautuyendungController::class, 'tralai']);
+    });
 });
 
-//  Khai báo tổng hợp
-Route::prefix('/khai_bao_tong_hop')->group(function () {
-    Route::get('', [khaibaotuyendungController::class, 'index']);
-    //chi tiết
-    Route::get('chi_tiet', [khaibaotuyendungController::class, 'detail']);
-    Route::get('/them_moi', [khaibaotuyendungController::class, 'create']);
-    Route::get('/chinh_sua', [khaibaotuyendungController::class, 'edit']);
-    Route::post('/store_update', [khaibaotuyendungController::class, 'store_update']);
-    Route::get('/xem', [khaibaotuyendungController::class, 'show']);
-    Route::get('/delete/{id}', [khaibaotuyendungController::class, 'delete']);
-    Route::get('/chuyen/{id}', [khaibaotuyendungController::class, 'chuyen']);
-});
-});
-
-// thông báo 
-
-Route::prefix('thong_bao')->group(function () {
-    //người gửi
-    Route::get('', [thongbaoController::class, 'index']);
-    Route::get('/them_moi', [thongbaoController::class, 'create']);
-    Route::post('/store', [thongbaoController::class, 'store']);
-    Route::get('/chinh_sua', [thongbaoController::class, 'edit']);
-    Route::post('/update', [thongbaoController::class, 'update']);
-    Route::get('/delete/{id}', [thongbaoController::class, 'delete']);
-    Route::post('/chuyen', [thongbaoController::class, 'chuyen']);
-    // người nhận
-    Route::get('danhsach', [thongbaoController::class, 'danhsach']);
-});
