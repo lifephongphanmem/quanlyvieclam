@@ -1,4 +1,4 @@
-@extends('HeThong.main')
+@extends('main')
 @section('content')
     <!--begin::Row-->
     <div class="row">

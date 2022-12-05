@@ -1,26 +1,66 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Caulaodong;
 
 use App\Models\Company;
 use App\Models\dmdonvi;
-use App\Models\thongbao;
-use App\Models\thongbaoct;
-// use App\Models\thongtintuyendung;
+use App\Models\Caulaodong\thongbao;
+use App\Models\Caulaodong\thongbaoct;
 use App\Models\User;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class thongbaoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function hopthucauld()
+    {
+        $model = [];
+        $manguoinhan = session('admin')['madv'];
+        $modelct = thongbaoct::where('manguoinhan', $manguoinhan)->get();
+        $modelth = thongbao::where('trangthai', 'dg')->get();
+        if ($modelth != null && $modelct != null) {
+            foreach ($modelth as $item){
+                foreach ($modelct as $item2){
+                    if ($item->matb == $item2->matb) {
+                        array_push($model, $item);
+                    }
+                }
+            }
+        }
+        else {
+            $model = null;
+        }
+ 
+        $company = Company::all();
+        $user = User::all();
+
+        return view('Caulaodong.hopthucauld', compact('model', 'company', 'user'));
+    }
     public function thongbaodagui()
     {
+
         $model = thongbao::where('trangthai', 'dg')->get();
         $company = Company::all();
         $user = User::all();
 
-        return view('admin.nhucautuyendung.thongbaodagui', compact('model', 'company', 'user'));
+        return view('Caulaodong.thongbaodagui', compact('model', 'company', 'user'));
     }
     public function khaibao()
     {
@@ -28,7 +68,7 @@ class thongbaoController extends Controller
         $company = Company::all();
         $user = User::all();
 
-        return view('admin.nhucautuyendung.khaibao.thongbao.dsthuthap', compact('model', 'company', 'user'));
+        return view('Caulaodong.khaibao.thongbao.dsthuthap', compact('model', 'company', 'user'));
     }
     public function tonghop()
     {
@@ -36,19 +76,20 @@ class thongbaoController extends Controller
         $company = Company::all();
         $user = User::all();
 
-        return view('admin.nhucautuyendung.tonghop.thongbao.dsthuthap', compact('model', 'company', 'user'));
+        return view('Caulaodong.tonghop.thongbao.dsthuthap', compact('model', 'company', 'user'));
     }
 
     public function create()
     {
-        $nguoigui = Auth::user();
-        return view('admin.nhucautuyendung.tonghop.thongbao.create', compact('nguoigui'));
+        // $nguoigui = Auth::user();
+        $nguoigui = session('admin')['name'];
+        return view('Caulaodong.tonghop.thongbao.create', compact('nguoigui'));
     }
 
     public function store(Request $request)
     {
         $input = $request->all();
-        $input['manguoigui'] = Auth::user()->madv;
+        $input['manguoigui'] = session('admin')['madv'];
         $input['matb'] = date('YmdHis');
         $input['trangthai'] = 'cg';
         thongbao::create($input);
@@ -60,7 +101,7 @@ class thongbaoController extends Controller
     {
         $model = thongbao::where('matb', $request->matb)->first();
         $user = User::all();
-        return view('admin.nhucautuyendung.tonghop.thongbao.edit', compact('user', 'model'));
+        return view('Caulaodong.tonghop.thongbao.edit', compact('user', 'model'));
     }
 
     public function update(Request $request)
@@ -99,6 +140,7 @@ class thongbaoController extends Controller
 
     public function delete($id)
     {
+        dd(1);
         $model = thongbao::findOrFail($id);
         thongbaoct::where('matb', $model->matb)->delete();
         $model->delete();

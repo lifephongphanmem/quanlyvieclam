@@ -159,33 +159,12 @@
     </form>
 </div>
 <script>
-    // function setcreate() {
-
-    //     var form = $('#frm_create');
-    //     // form.find("[name='id']").val(null);
-    //     $('#id').val(null);
-    //     // form.find("[name='mahs']").val('{{ $mahs }}');
-    //     form.find("[name='tencongviec']").val('');
-    //     form.find("[name='soluong']").val('');
-    //     form.find("[name='mota']").val('');
-    //     form.find("[name='tdvanhoa']").val('chua có');
-    //     form.find("[name='tdkythuat']").val('');
-    //     form.find("[name='chuyennganh']").val('');
-    //     form.find("[name='tdtinhoc']").val('');
-    //     form.find("[name='tdngoaingu']").val('');
-    //     form.find("[name='kynangmem']").val('');
-    //     form.find("[name='kinhnghiem']").val('');
-    //     form.find("[name='noilamviec']").val('');
-    //     form.find("[name='luong']").val('');
-    //     form.find("[name='hotroan']").val('0');
-    //     form.find("[name='phucloikhac']").val('');
-    // }
 
     function setcreate() {
-
+        console.log(1);
         $('#id').val(null);
-        $('#tencongviec').val($manghefirst);
-        $('#soluong').val('');
+        $('#tencongviec').val('{{$manghefirst->madmmntd}}');
+        $('#soluong').val(null);
         $('#mota').val('');
         $('#tdvanhoa').val('chua có');
         $('#tdkythuat').val('');
@@ -201,6 +180,7 @@
     }
 
     function store() {
+
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             url: '/tuyen_dung/khai_bao_nhu_cau/store_ct',
@@ -265,40 +245,7 @@
         })
     }
 
-    // function setedit(id) {
-    //     var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-    //     $.ajax({
-    //         url: '/tuyen_dung/khai_bao_nhu_cau/edit_ct',
-    //         type: 'GET',
-    //         data: {
-    //             _token: CSRF_TOKEN,
-    //             id: id
-    //         },
-    //         dataType: 'JSON',
-    //         success: function(data) {
-    //             console.log(data.id);
-    //             var form = $('#frm_create');
-    //             // form.find("[name='id']").val(data.id);
-    //             $('#id').val(data.id);
-    //             form.find("[name='mahs']").val(data.mahs);
-    //             form.find("[name='tencongviec']").val(data.tencongviec);
-    //             form.find("[name='soluong']").val(data.soluong);
-    //             form.find("[name='mota']").val(data.mota);
-    //             form.find("[name='tdvanhoa']").val(data.tdvanhoa);
-    //             form.find("[name='tdkythuat']").val(data.tdkythuat);
-    //             form.find("[name='chuyennganh']").val(data.chuyennganh);
-    //             form.find("[name='tdtinhoc']").val(data.tdtinhoc);
-    //             form.find("[name='tdngoaingu']").val(data.tdngoaingu);
-    //             form.find("[name='kynangmem']").val(data.kynangmem);
-    //             form.find("[name='kinhnghiem']").val(data.kinhnghiem);
-    //             form.find("[name='noilamviec']").val(data.noilamviec);
-    //             form.find("[name='luong']").val(data.luong);
-    //             form.find("[name='hotroan']").val(data.hotroan);
-    //             form.find("[name='phucloikhac']").val(data.phucloikhac);
-    //         },
-    //     });
-    // }
+    
     function setedit(id) {
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
@@ -311,10 +258,9 @@
             },
             dataType: 'JSON',
             success: function(data) {
-                console.log(data.id);
+                console.log(data);
 
                 $('#id').val(data.id);
-                // $('#id').val(data.id);
                 $('#tencongviec').val(data.tencongviec);
                 $('#soluong').val(data.soluong);
                 $('#mota').val(data.mota);

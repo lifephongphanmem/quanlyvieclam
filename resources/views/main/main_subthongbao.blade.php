@@ -37,7 +37,7 @@
             @endif
             {{-- @if (chkPhanQuyen('qlthongbao', 'phanquyen')) --}}
             <li class="menu-item" aria-haspopup="true">
-                <a href="{{ '/' }}" class="menu-link">
+                <a  href="{{ url('/tuyen_dung/damh_sach_thong_bao') }}"  class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>
@@ -104,7 +104,7 @@
             @endif
             {{-- @if (session('admin')['level'] == 'Tỉnh') --}}
             <li class="menu-item" aria-haspopup="true">
-                <a href="{{ '/' }}" class="menu-link">
+                <a href="{{ '/tuyen_dung/hopthucauld' }}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>

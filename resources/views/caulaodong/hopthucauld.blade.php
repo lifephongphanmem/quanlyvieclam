@@ -42,7 +42,6 @@
                                     <th>Nội dung</th>
                                     <td>Thời điểm gửi</td>
                                     <td>Người gửi</td>
-                                    {{-- <td width="5%">trạng thái</td> --}}
                                 
                                 </tr>
                             </thead>
@@ -61,16 +60,8 @@
                                                 <span>{{ $us->name }}</span>
                                             @endif
                                         @endforeach
+                                        
                                     </td>
-                                    {{-- <td class="text-center">
-                                        @if ($item->trangthai == 'cg')
-                                            <span class="badge badge-warning">Chưa gửi</span>
-                                        @endif
-                                        @if ($item->trangthai == 'dg')
-                                            <span class="badge badge-success ">Đã gửi</span>
-                                        @endif
-                                    </td> --}}
-
                                 </tr>
                                 <?php } ?>
                             </tbody>

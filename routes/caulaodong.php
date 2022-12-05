@@ -1,15 +1,16 @@
 <?php 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\thongbaoController;
-use App\Http\Controllers\nhucautuyendungController;
-use App\Http\Controllers\nhucautuyendungctController;
-use App\Http\Controllers\baocaotonghopController;
+use App\Http\Controllers\Caulaodong\thongbaoController;
+use App\Http\Controllers\Caulaodong\nhucautuyendungController;
+use App\Http\Controllers\Caulaodong\nhucautuyendungctController;
+
 
 
 Route::prefix('tuyen_dung')->group(function () {
     //thông báo
     Route::get('damh_sach_thong_bao', [thongbaoController::class, 'thongbaodagui']);
+    Route::get('hopthucauld',[ThongbaoController::class,'hopthucauld']);
     // khai bao
     Route::prefix('/khai_bao_nhu_cau')->group(function () {
         Route::get('dot_thu_thap', [thongbaoController::class, 'khaibao']);

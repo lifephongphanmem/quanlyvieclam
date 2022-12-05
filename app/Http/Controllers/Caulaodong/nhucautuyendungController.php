@@ -1,31 +1,48 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Caulaodong;
 
 use App\Models\Company;
-use App\Models\dmmanghetrinhdo;
-use App\Models\dmtrinhdogdpt;
-use App\Models\dmtrinhdokythuat;
-use App\Models\nhucautuyendung;
-use App\Models\nhucautuyendungct;
+use App\Models\Danhmuc\dmmanghetrinhdo;
+use App\Models\Danhmuc\dmtrinhdogdpt;
+use App\Models\Danhmuc\dmtrinhdokythuat;
+use App\Models\Caulaodong\nhucautuyendung;
+use App\Models\Caulaodong\nhucautuyendungct;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class nhucautuyendungController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
     //khai báo
     public function index_khaibao(Request $request)
-    {
-
-        $madn = Auth::user()->id;
-        $model = nhucautuyendung::where('matb', $request->matb)->where('madn', $madn)->get();
+    {  
+        $model = nhucautuyendung::where('matb', $request->matb)->where('madn',session('admin')['madv'])->get();
         $matb = $request->matb;
-        return view('admin.nhucautuyendung.khaibao.index', compact('model', 'matb'));
+        return view('Caulaodong.khaibao.index', compact('model', 'matb'));
     }
     
     public function create(Request $request)
     {
+       
         nhucautuyendungct::where('xd', 'cxd')->delete();
         $matb = $request->matb;
         $mahs = date('YmdHis');
@@ -34,7 +51,7 @@ class nhucautuyendungController extends Controller
         $dmtrinhdokythuat = dmtrinhdokythuat::all();
         $dmmanghetrinhdo = dmmanghetrinhdo::where('trangthai','kh')->get();
         $manghefirst = dmmanghetrinhdo::select('madmmntd')->first();
-        return view('admin.nhucautuyendung.khaibao.create', compact('matb', 'mahs', 'modelct', 'dmtrinhdokythuat', 'dmtrinhdogdpt','dmmanghetrinhdo','manghefirst'));
+        return view('Caulaodong.khaibao.create', compact('matb', 'mahs', 'modelct', 'dmtrinhdokythuat', 'dmtrinhdogdpt','dmmanghetrinhdo','manghefirst'));
     }
 
     public function store(Request $request)
@@ -42,7 +59,7 @@ class nhucautuyendungController extends Controller
         $input = $request->all();
         $input['nam'] = date('Y');
         $input['trangthai'] = 'cc';
-        $input['madn'] = Auth::user()->id;
+        $input['madn'] = session('admin')['madv'];
         nhucautuyendung::create($input);
         nhucautuyendungct::where('mahs',$request->mahs)->update(['xd'=>'xd']);
         return redirect('tuyen_dung/khai_bao_nhu_cau?matb=' . $request->matb);
@@ -58,7 +75,7 @@ class nhucautuyendungController extends Controller
         $matb = $model->matb;
         $mahs = $model->mahs;
         $manghefirst = dmmanghetrinhdo::select('madmmntd')->first();
-        return view('admin.nhucautuyendung.khaibao.edit', compact('model','matb','modelct', 'dmtrinhdokythuat', 'dmtrinhdogdpt','mahs','dmmanghetrinhdo','manghefirst'));
+        return view('Caulaodong.khaibao.edit', compact('model','matb','modelct', 'dmtrinhdokythuat', 'dmtrinhdogdpt','mahs','dmmanghetrinhdo','manghefirst'));
     }
     public function update(Request $request)
     {
@@ -83,7 +100,7 @@ class nhucautuyendungController extends Controller
         $matb = $model->matb;
         $modelct = nhucautuyendungct::where('mahs', $request->mahs)->get();
         $dmmanghetrinhdo = dmmanghetrinhdo::where('trangthai','kh')->get();
-        return view('admin.nhucautuyendung.khaibao.show', compact('model','matb','modelct','dmmanghetrinhdo'));
+        return view('Caulaodong.khaibao.show', compact('model','matb','modelct','dmmanghetrinhdo'));
     }
 
     public function delete($id)
@@ -100,7 +117,7 @@ class nhucautuyendungController extends Controller
         $model = nhucautuyendung::where('matb', $request->matb)->where('trangthai','dc')->get();
         $matb = $request->matb;
         $doanhnghiep = Company::all();
-        return view('admin.nhucautuyendung.tonghop.index', compact('model', 'matb','doanhnghiep'));
+        return view('Caulaodong.tonghop.index', compact('model', 'matb','doanhnghiep'));
     }
 
     public function tralai(Request $request)

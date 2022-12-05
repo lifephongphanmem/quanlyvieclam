@@ -1,4 +1,4 @@
-@extends('HeThong.main')
+@extends('main')
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
@@ -33,12 +33,21 @@
                             <div class="col-lg-12">
                                 <ol>
                                     <li><a href="#" data-target="#doanhnghiep-modal" data-toggle="modal">Mẫu số
-                                            01/PLI.
-                                            Báo cáo tình hình sử dụng lao động (do người sử dụng lao động lập)</a>
-                                    </li>
+                                        01/PLI.
+                                        Báo cáo tình hình sử dụng lao động (do người sử dụng lao động lập)</a>
+                                </li>
                                     <li><a href="#" data-target="#solaodongtbxh-modal" data-toggle="modal">Mẫu số
                                             02/PLI. Báo cáo tình hình sử dụng lao động (do Sở Lao động - Thương binh và Xã
                                             hội lập)</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ 'bao_cao_tong_hop/tong_hop_cung_ld_cap_xa_huyen' }}"
+                                            target="_blank">Mẫu số 04a Báo
+                                            cáo tổng hợp về thông tin về cung lao động ( dành cho cấp xã và cấp huyện)</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" data-target="#thitruongld-modal" data-toggle="modal">Mẫu số
+                                            04 Báo cáo về thông tin thị trường lao động</a>
                                     </li>
                                 </ol>
                             </div>
@@ -77,15 +86,7 @@
                                             số
                                             03a/PLI Báo cáo tình hình sử dụng lao động (do người sử dụng lao động lập)</a>
                                     </li>
-                                    <li>
-                                        <a href="{{ 'bao_cao_tong_hop/tong_hop_cung_ld_cap_xa_huyen' }}"
-                                            target="_blank">Mẫu số 04a Báo
-                                            cáo tổng hợp về thông tin về cung lao động ( dành cho cấp xã và cấp huyện)</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-target="#thitruongld-modal" data-toggle="modal">Mẫu số
-                                            04 Báo cáo về thông tin thị trường lao động</a>
-                                    </li>
+                            
                                 </ol>
                             </div>
                         </div>
@@ -113,8 +114,8 @@
                                 <label><b>Đơn vị*</b></label>
                                 <select class="col-md-12 select2me" id="id" name="id">
                                     @foreach ($company as $com)
-                                        <option value="{{ $com->id }}"
-                                            {{ $nguoidung->id == $com->id ? 'selected' : '' }}>{{ $com->name }}
+                                        <option value="{{ $com->madv }}"
+                                            {{ $nguoidung == $com->madv ? 'selected' : '' }}>{{ $com->name }}
                                         </option>
                                     @endforeach
                                 </select>

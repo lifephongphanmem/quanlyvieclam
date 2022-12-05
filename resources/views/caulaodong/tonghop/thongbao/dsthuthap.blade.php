@@ -1,4 +1,4 @@
-@extends('HeThong.main')
+@extends('main')
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
@@ -47,7 +47,7 @@
                                     <td>Thời điểm gửi</td>
                                     <td>Người gửi</td>
                                     <td width="5%">trạng thái</td>
-                                    <th width="5%">Thao tác</th>
+                                    <th width="12%">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -1,25 +1,42 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Baocao;
 
 use App\Models\Company;
-use App\Models\dmloaihinhhdkt;
-use App\Models\nguoilaodong;
-use App\Models\nhucautuyendung;
-use App\Models\nhucautuyendungct;
-use App\Models\thongbao;
-use App\Models\thongtintuyendung;
-use App\Models\tonghopdanhsachcungld;
+use App\Models\Danhmuc\dmloaihinhhdkt;
+use App\Models\Nguoilaodong\nguoilaodong;
+use App\Models\Caulaodong\nhucautuyendung;
+use App\Models\Caulaodong\nhucautuyendungct;
+use App\Models\Thongbao\thongbao;
+use App\Models\Cunglaodong\tonghopdanhsachcungld;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class baocaotonghopController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!Session::has('admin')) {
+                return redirect('/home');
+            };
+            return $next($request);
+        });
+    }
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
     // người sử dụng lao động
     public function index()
     {
-        $id_user = Auth::user()->id;
-        $nguoidung = Company::Find($id_user)->first();
+        $madv = session('admin')['madv'];
+        $nguoidung = Company::where('madv',$madv)->first();
+   
         $tonghopcungld = tonghopdanhsachcungld::all();
         $company = Company::all();
         $thongbaocungld = thongbao::all();
@@ -29,8 +46,8 @@ class baocaotonghopController extends Controller
 
     public function doanhnghiep(Request $request)
     {
-        $id_user = Auth::user()->id;
-        $nguoidung = Company::Find($id_user)->first();
+        $madv = session('admin')['madv'];
+        $nguoidung = Company::where('madv',$madv)->first();
         $model = nguoilaodong::where('company', $request->id)->where('madb', $request->madb)->get();
         return view('reports.baocaotonghop.cungld.doanhnghiep', compact('model', 'nguoidung'))
             ->with('pageTitle', 'Báo thông tin người lao động');

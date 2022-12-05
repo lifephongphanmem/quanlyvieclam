@@ -12,7 +12,7 @@
         <tr>
             <td width="40%" style="vertical-align: top;">
                 <span style="text-transform: uppercase"></span><br>
-                <span style="text-transform: uppercase;font-weight: bold">{{$nguoidung->name}}</span>
+                <span style="text-transform: uppercase;font-weight: bold">{{$nguoidung}}</span>
                 <hr style="width: 10%;vertical-align: top;  margin-top: 2px">
 
             </td>

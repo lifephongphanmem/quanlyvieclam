@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Caulaodong;
 
-use App\Models\dmmanghetrinhdo;
-use App\Models\nhucautuyendungct;
+use App\Models\Danhmuc\dmmanghetrinhdo;
+use App\Models\Caulaodong\nhucautuyendungct;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class nhucautuyendungctController extends Controller
 {
@@ -94,7 +95,7 @@ class nhucautuyendungctController extends Controller
             $result['message'] .= '<td>';
             $result['message'] .= '<a title="Sửa chi tiết" onclick="setedit(' . $item->id . ')" data-toggle="modal"';
             $result['message'] .= 'data-target="#create_modal" type="button" class="btn btn-sm btn-clean btn-icon">';
-            $result['message'] .= '<i class="icon-lg la flaticon-edit-1 text-primary"></i>' . $item->id . '</a>';
+            $result['message'] .= '<i class="icon-lg la flaticon-edit-1 text-primary"></i></a>';
             $result['message'] .= '<button title="Xóa" onclick="setdelete(' . $item->id . ')"';
             $result['message'] .= 'data-toggle="modal" data-target="#delete-modal"';
             $result['message'] .= 'class="btn btn-sm btn-clean btn-icon">';

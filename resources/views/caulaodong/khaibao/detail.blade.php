@@ -74,4 +74,4 @@
         <!--end::Example-->
     </div>
 </div>
-@include('admin.nhucautuyendung.khaibao.modal')
+@include('Caulaodong.khaibao.modal')

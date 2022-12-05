@@ -1,4 +1,4 @@
-@extends('HeThong.main')
+@extends('main')
 
 @section('content')
     <!--begin::Row-->
@@ -15,7 +15,7 @@
 
                 <div class="row" style="margin-top: 4%;margin-left: 1%">
                     <div class="col-md-4">
-                        <p style="font-weight: bold">Người gửi: {{ $nguoigui->name }}</p>
+                        <p style="font-weight: bold">Người gửi: {{ $nguoigui }}</p>
                     </div>
                 </div>
 

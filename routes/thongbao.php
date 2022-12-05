@@ -9,3 +9,4 @@ Route::prefix('thongbao_khac')->group(function(){
     Route::post('/update/{id}',[ThongbaoController::class,'update']);
     Route::get('/delete/{id}',[ThongbaoController::class,'destroy']);
 });
+

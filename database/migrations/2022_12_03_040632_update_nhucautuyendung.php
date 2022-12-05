@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateThongbaoct extends Migration
+class UpdateNhucautuyendung extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateThongbaoct extends Migration
      */
     public function up()
     {
-        Schema::create('thongbaoct', function (Blueprint $table) {
-            $table->id();
+        Schema::create('nhucautuyendung', function (Blueprint $table) {
             $table->string('matb')->nullable();
-            $table->string('manguoinhan')->nullable();
-            $table->timestamps();
         });
     }
 
@@ -28,6 +25,6 @@ class CreateThongbaoct extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('thongbaoct');
+        //
     }
 }

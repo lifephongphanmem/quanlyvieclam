@@ -1,4 +1,4 @@
-@extends('HeThong.main')
+@extends('main')
 @section('content')
     <!--begin::Row-->
     <div class="row">
@@ -71,7 +71,7 @@
 
                 </form>
 
-                @include('admin.nhucautuyendung.khaibao.detail')
+                @include('Caulaodong.khaibao.detail')
 
                 <div class="card-footer">
                     <div class="col-lg-12" style="text-align: center">

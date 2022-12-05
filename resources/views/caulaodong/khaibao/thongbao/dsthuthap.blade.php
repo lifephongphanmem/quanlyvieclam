@@ -1,4 +1,4 @@
-@extends('HeThong.main')
+@extends('main')
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
