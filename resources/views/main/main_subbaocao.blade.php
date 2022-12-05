@@ -25,6 +25,14 @@
     <div class="menu-submenu">
         <i class="menu-arrow"></i>
         <ul class="menu-subnav">
+            <li class="menu-item" aria-haspopup="true">
+                <a href="{{ url('/bao_cao_tong_hop') }}" class="menu-link">
+                    <i class="menu-bullet menu-bullet-dot">
+                        <span></span>
+                    </i>
+                    <span class="menu-text">Báo cáo tổng hợp</span>
+                </a>
+            </li>
             {{-- <li class="menu-item" aria-haspopup="true">
                 <a href="{{ url('/employer-ba') }}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
@@ -33,22 +41,7 @@
                     <span class="menu-text">Đơn vị</span>
                 </a>
             </li> --}}
-            <li class="menu-item" aria-haspopup="true">
-                <a href="{{ url('/bao_cao/nguoi_su_dung_lao_dong/dn_bao_cao') }}" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Báo cáo sử dụng lao động<br>(người sử dụng lao động lập)</span>
-                </a>
-            </li>
-            <li class="menu-item" aria-haspopup="true">
-                <a href="{{ url('/bao_cao/so_lao_dong_thuong_binh_xa_hoi/ldtbxh_bao_cao') }}" class="menu-link">
-                    <i class="menu-bullet menu-bullet-dot">
-                        <span></span>
-                    </i>
-                    <span class="menu-text">Báo cáo sử dụng lao động<br>(Sở Lao động-Thương binh và Xã hội lập)</span>
-                </a>
-            </li>
+
         </ul>
     </div>
 </li>

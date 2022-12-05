@@ -40,7 +40,7 @@ class dmmanghetrinhdoController extends Controller
         if ($input['id'] != null) {
             dmmanghetrinhdo::FindOrFail($input['id'])->update($input);
         } else {
-            $input["madmtgtn"] = date('YmdHis');
+            $input["madmmntd"] = date('YmdHis');
             dmmanghetrinhdo::create($input);
         }
         return redirect('/danh_muc/dm_ma_nghe_trinh_do');

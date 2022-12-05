@@ -9,12 +9,14 @@ use App\Http\Controllers\Hethong\dsnhomtaikhoanController;
 use App\Http\Controllers\Hethong\HethongchungController;
 
 //Đăng nhập
+
 Route::get('/', [HethongchungController::class, 'show_login']);
 Route::get('/dashboard',[HethongchungController::class,'dashboard']);
 Route::get('/DangNhap',[HethongchungController::class,'show_login']);
 Route::post('/DangNhap',[HethongchungController::class,'DangNhap']);
 Route::post('/DangKy',[HethongchungController::class,'DangKy']);
 Route::get('/DangXuat',[HethongchungController::class,'logout']);
+
 
 
 //dmdonvi

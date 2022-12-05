@@ -12,7 +12,7 @@ use App\Models\Danhmuc\dsnhomtaikhoan_phanquyen;
 use App\Models\Hethong\dstaikhoan_phanquyen;
 use Illuminate\Http\Request;
 use DB;
-use Session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
@@ -84,6 +84,7 @@ class UserController extends Controller
 	// 				if($user->phanloaitk == 1){
 	// 				//dd($ttuser);
 	// 				//2. level != SSA -> lấy thông tin đơn vị, hệ thống để thiết lập lại
+
 		
 	// 				$m_donvi = dmdonvi::where('madv', $user->madv)->first();
 	// 				$diaban=danhmuchanhchinh::where('id',$m_donvi->madiaban)->first();
@@ -125,6 +126,7 @@ class UserController extends Controller
 
 	// 			Session::put('admin', $user);
 
+
 	// 			        //Gán hệ danh mục chức năng        
 	// 			Session::put('chucnang', Chucnang::all()->keyBy('maso')->toArray());
 	// 			// dd(session('chucnang'));
@@ -143,6 +145,7 @@ class UserController extends Controller
     //         return redirect('');
     //     }
 	// }
+
 	public function edit()
 	{
 
@@ -185,59 +188,73 @@ class UserController extends Controller
 		}
 	}
 
-	public function signup(Request $request)
-	{
+	// public function signup(Request $request)
+	// {
 
-		//validate data sign up
-		$validate = $request->validate([
-			'name' => 'required|max:255',
-			'email' => 'required|email|max:255|unique:users',
-			'dkkd' => 'required|max:20|unique:company',
-			'password' => 'required|min:8|confirmed',
-		]);
-
-
-		$data = array();
-		$data['name'] = $request->name;
-		$data['ctyname'] = $request->ctyname;
-		$data['dkkd'] = $request->dkkd;
-		$data['public'] = 1;
-		$data['email'] = $request->email;
-		$data['level'] = 3;
-		$data['phanloaitk'] = 2;
-		$data['password'] = Hash::make($request->password);
-
-		// creat user
-
-		$user = User::create($data);
+	// 	//validate data sign up
+	// 	$validate = $request->validate([
+	// 		'name' => 'required|max:255',
+	// 		'email' => 'required|email|max:255|unique:users',
+	// 		'dkkd' => 'required|max:20|unique:company',
+	// 		'password' => 'required|min:8|confirmed',
+	// 	]);
 
 
 
-		$rm = new Report();
 
-		// navigate
-		if ($user) {
-			// add to log system`
-			$rm->report('add', true, 'users', $user->id, 1);
-			// creat company
-			$result = DB::table('company')->insertGetId([
-				'dkkd' => $request->dkkd,
-				'name' => $request->ctyname,
-				'user' => $user->id
-			]);
-			if ($result) {
 
-				$rm->report('add', true, 'company', $result, 1);
-			}
-			$request->session()->flash('message', 'Đăng ký thành công');
-			return redirect('home');
-		}
+	// 	$data = array();
+	// 	$data['name'] = $request->name;
+	// 	$data['ctyname'] = $request->ctyname;
+	// 	$data['dkkd'] = $request->dkkd;
+	// 	$data['public'] = 1;
+	// 	$data['email'] = $request->email;
+	// 	$data['level'] = 3;
+	// 	$data['phanloaitk'] = 2;
+	// 	$data['password'] = Hash::make($request->password);
 
-		// add to log system`
-		$rm->report('add', false, 'users', $user->id, 1);
-		$request->session()->flash('message', 'Đăng ký không thành công');
-		return redirect('home');
-	}
+		// $data = array();
+		// $data['name'] = $request->name;
+		// $data['ctyname'] = $request->ctyname;
+		// $data['dkkd'] = $request->dkkd;
+		// $data['public'] = 1;
+		// $data['email'] = $request->email;
+		// $data['level'] = 3;
+		// $data['phanloaitk'] = 2;
+		// $data['password'] = Hash::make($request->password);
+
+
+	// 	// creat user
+
+	// 	$user = User::create($data);
+
+
+
+	// 	$rm = new Report();
+
+	// 	// navigate
+	// 	if ($user) {
+	// 		// add to log system`
+	// 		$rm->report('add', true, 'users', $user->id, 1);
+	// 		// creat company
+	// 		$result = DB::table('company')->insertGetId([
+	// 			'dkkd' => $request->dkkd,
+	// 			'name' => $request->ctyname,
+	// 			'user' => $user->id
+	// 		]);
+	// 		if ($result) {
+
+	// 			$rm->report('add', true, 'company', $result, 1);
+	// 		}
+	// 		$request->session()->flash('message', 'Đăng ký thành công');
+	// 		return redirect('home');
+	// 	}
+
+	// 	// add to log system`
+	// 	$rm->report('add', false, 'users', $user->id, 1);
+	// 	$request->session()->flash('message', 'Đăng ký không thành công');
+	// 	return redirect('home');
+	// }
 
 	public function index_nn(Request $request)
 	{
