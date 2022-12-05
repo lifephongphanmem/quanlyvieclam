@@ -38,7 +38,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped b-t b-light table-hover">
+                        <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                             <thead>
                                 <tr class="text-center">
                                     <th width="5%"> STT </th>
@@ -129,7 +129,7 @@
                                 <select id="manguoinhan" name="manguoinhan[]" class="col-xl-12 select2me" multiple>
                                     <option  value="all" selected>chọn tất cả</option>
                                     @foreach ($company as $item)
-                                        <option value="{{ $item->user }}" >{{ $item->name }}</option>
+                                        <option value="{{ $item->madv }}" >{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

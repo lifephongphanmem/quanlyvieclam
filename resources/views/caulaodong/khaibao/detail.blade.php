@@ -16,7 +16,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped b-t b-light table-hover">
+                    <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                         <thead>
                             <tr class="text-center">
                                 <th width="5%"> STT </th>

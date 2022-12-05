@@ -33,6 +33,7 @@ class thongbaoController extends Controller
     {
         $model = [];
         $manguoinhan = session('admin')['madv'];
+   
         $modelct = thongbaoct::where('manguoinhan', $manguoinhan)->get();
         $modelth = thongbao::where('trangthai', 'dg')->get();
         if ($modelth != null && $modelct != null) {
@@ -122,7 +123,7 @@ class thongbaoController extends Controller
         foreach ($input['manguoinhan'] as $item) {
             if ($item == 'all') {
                 foreach ($doanhnghiep as $dn) {
-                    thongbaoct::create(['matb' => $input['matb'], 'manguoinhan' => (string)$dn->user]);
+                    thongbaoct::create(['matb' => $input['matb'], 'manguoinhan' => (string)$dn->madv]);
                 }
                 $all = 1;
             }
