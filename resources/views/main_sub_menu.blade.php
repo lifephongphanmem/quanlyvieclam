@@ -9,7 +9,7 @@
             <!--begin::Menu Nav-->
             <ul class="menu-nav">
                 <li class="menu-item font-weight-bold" aria-haspopup="true">
-                    <a href="{{ url('/') }}" class="menu-link">
+                    <a href="{{ url('/dashboard') }}" class="menu-link">
                         <span class="svg-icon menu-icon">
                             <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/Layers.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -40,6 +40,7 @@
                     @include('main.main_subcunglaodong')
                     @include('main.main_subcaulaodong')
                     @include('main.main_subtinhhinhsudunglaodong')
+                    @include('main.main_subtracuu')
                     @include('main.main_subbaocao')
                     @include('main.main_subhethong')
                 {{-- @endif --}}

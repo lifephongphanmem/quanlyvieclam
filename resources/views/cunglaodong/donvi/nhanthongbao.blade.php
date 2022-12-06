@@ -2,13 +2,13 @@
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
 @stop
 
 @section('custom-script')
-    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
     </script>
+        <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
 
     <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
@@ -42,7 +42,7 @@
                 <div class="card-body">
                     <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th width="2%"> STT </th>
                                 <th width="2%">Năm thu thập</th>
                                 <th width="15%">Tiêu đề</th>

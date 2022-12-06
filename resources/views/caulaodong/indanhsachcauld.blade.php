@@ -1,13 +1,40 @@
 @extends('main_baocao')
-@section('custom-style')
-@stop
-@section('custom-script')
-@stop
 @section('content')
 
-    <p style="text-align: center;font-weight: bold;font-size: 20px; text-transform: uppercase;">
-        DANH SÁCH NHU CẦU LAO ĐỘNG
-    </p>
+<table id="data_header" class="header" width="96%" border="0" cellspacing="0" cellpadding="8"
+style="margin:0 auto 25px; text-align: center;">
+<tr>
+    <td style="text-align: left;width: 60%">
+
+    </td>
+    <td style="text-align: center;">
+
+    </td>
+</tr>
+<tr>
+    <td style="text-align: left;width: 60%">
+        <b>Đơn vị: {{isset($m_dv)?$m_dv->tendv:''}}</b>
+    </td>
+    <td style="text-align: center; font-style: italic">
+
+    </td>
+</tr>
+<tr>
+    <td style="text-align: left;width: 60%">
+        <b>Mã đơn vị SDNS: </b>
+    </td>
+
+    <td style="text-align: center; font-style: italic">
+
+    </td>
+</tr>
+
+<tr>
+    <td colspan="2" style="text-align: center; font-weight: bold; font-size: 20px;">
+        DANH SÁCH THÔNG TIN CẦU LAO ĐỘNG
+    </td>
+</tr>
+</table>
 
     <table cellspacing="0" cellpadding="0" border="1">
         <tr>

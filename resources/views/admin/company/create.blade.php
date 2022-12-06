@@ -1,35 +1,28 @@
 @extends('main')
 @section('custom-style')
-    <link href="{{url('assets/global/css/plugins.css')}}" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="{{url('assets/global/plugins/select2/select2.css')}}"/>
-    <link rel="stylesheet" type="text/css" href="{{url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css')}}"/>
-    {{-- <link rel="stylesheet" type="text/css" href="{{url('assets/global/plugins/select2/select2.css')}}"/> --}}
+    <link rel="stylesheet" type="text/css"
+        href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
 @stop
+
 @section('custom-script')
-    <script type="text/javascript" src="{{url('assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.js') }}"></script>
-    {{-- <script type="text/javascript" src="{{url('assets/global/plugins/select2/select2.min.js') }}"></script> --}}
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
+    </script>
+    <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
 
-    <script type="text/javascript" src="{{url('assets/admin/pages/scripts/form-wizard.js')}}"></script>
-
-    <script type="text/javascript" src="{{url('assets/global/plugins/select2/select2.min.js')}}"></script>
-    <script type="text/javascript" src="{{url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-    <script type="text/javascript" src="{{url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js')}}"></script>
-
-    <script src="{{url('assets/admin/pages/scripts/table-managed.js')}}"></script>
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
-            FormWizard.init();
-            $('.select2me').select2();
+            TableManaged3.init();
         });
     </script>
-    {{-- @include('includes.script.scripts') --}}
 @stop
 
 @section('content')
 <div class="row">
     <div class="col-md-12" style="background-color: #F3F6F9">
-        <div class="portlet box blue" id="form_wizard_1" >
-            <div class="portlet-title mb-5 mt-5">
+        <div class="card box blue" id="form_wizard_1" >
+            <div class="card-title mb-5 mt-5">
                 <div class="caption text-uppercase">
                     THÔNG TIN DOANH NGHIỆP
                 </div>
@@ -39,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="portlet-body form" id="form_wizard">
+            <div class="card-body form" id="form_wizard">
                 {{-- {!! Form::open(['url'=>'/nghiep_vu/ho_so/store','method'=>'post' , 'files'=>true, 'id' => 'create_hscb','enctype'=>'multipart/form-data']) !!} --}}
                 <form action="{{'/doanh_nghiep/store'}}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -69,7 +62,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label">Tình trạng hoạt động</label>
-                                    <select class="form-control input-sm m-bot5" name="public">
+                                    <select class="form-control input-sm m-bot5 select2basic" name="public">
                                         <option value='1' selected>Hoạt động</option>
                                         <option value='0'>Dừng</option>
                                     </select>
@@ -120,7 +113,7 @@
                                 <div class="form-group">
                                     <label class="control-label">Huyện/Thị xã/Thành phố</label>
                                     <?php $huyen=$dmhanhchinh->wherein('level',['Thành phố','Huyện','Thị xã'])?>
-                                    <select name="huyen" class="form-control select2me" id="">
+                                    <select name="huyen" class="form-control select2basic" id="">
                                     @foreach ($huyen as $h )
                                         <option value="{{$h->id}}">{{$h->name}}</option>
                                     @endforeach
@@ -131,7 +124,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label">Xã/Phường</label>
-                                    <select name="xa" class="form-control select2me" id="">
+                                    <select name="xa" class="form-control select2basic" id="">
                                     <?php $xa=$dmhanhchinh->wherein('level',['Phường','Xã','Thị trấn'])?>
                                     @foreach ($xa as $x )
                                     <option value="{{$x->id}}">{{$x->name}}</option>
@@ -142,7 +135,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label">Khu vực</label>
-                                    <select class="form-control input-sm m-bot5" name="khuvuc">
+                                    <select class="form-control input-sm m-bot5 select2basic" name="khuvuc">
                                         <option value='1' selected>Thành thị</option>
                                         <option value='0'>Nông thôn</option>
                                     </select>
@@ -162,7 +155,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label">Khu công nghiệp</label>
-                                    <select class="form-control input-sm m-bot5" name="khucn">
+                                    <select class="form-control input-sm m-bot5 select2basic" name="khucn">
                                         <option value="">-- Chọn khu công nghiệp ---</option>
                                         @foreach ($kcn as $cn )
                                             <option value="{{$cn->id}}">{{$cn->name}}</option>
@@ -175,7 +168,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label">Loại hình doanh nghiệp</label>
-                                    <select class="form-control input-sm m-bot5" name="loaihinh">
+                                    <select class="form-control input-sm m-bot5 select2basic" name="loaihinh">
                                         <option value="">-- Chọn loại hình doanh nghiệp ---</option>
                                         @foreach ($loaihinh as $dn )
                                             <option value="{{$dn->id}}">{{$dn->name}}</option>
@@ -187,7 +180,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="control-label">Ngành nghề</label>
-                                    <select class="form-control input-sm m-bot5" name="nganhnghe">
+                                    <select class="form-control input-sm m-bot5 select2basic" name="nganhnghe">
                                         <option value="">-- Chọn loại ngành nghề ---</option>
                                         @foreach ($nganhnghe as $dn )
                                             <option value="{{$dn->id}}">{{$dn->name}}</option>

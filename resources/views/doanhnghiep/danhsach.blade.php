@@ -2,13 +2,13 @@
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
 @stop
 
 @section('custom-script')
-    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
-
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
+    </script>
+    <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
 
     <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
@@ -38,10 +38,10 @@
                        
                     </div>
                     <div class="card-toolbar">
-                        <a href="{{ '/doanh_nghiep/in' }}" class="btn btn-sm btn-clean btn-icon mr-2"
+                        <a href="{{ '/doanh_nghiep/in' }}" class="btn btn-sm btn-success mr-2"
                         title="In danh sách" target="_blank"><i class="icon-lg la flaticon2-print text-dark"></i></a>
-                        <a href="{{ '/doanh_nghiep/them_moi' }}" class="btn btn-xs btn-icon btn-success mr-2"
-                            title="Thêm mới tài khoản"><i class="fa fa-plus"></i></a>
+                        <a href="{{ '/doanh_nghiep/them_moi' }}" class="btn btn-sm btn-success mr-2"
+                            title="Thêm mới tài khoản"><i class="fa fa-plus"></i>Thêm mới</a>
                     </div>
                 </div>
                 <div class="card-body">

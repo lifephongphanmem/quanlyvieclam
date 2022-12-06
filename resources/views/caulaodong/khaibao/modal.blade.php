@@ -1,7 +1,7 @@
 <!--create Modal-->
 <div class="modal fade" id="create_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <form id="frm_create" method="post">
+    <form id="frm_create" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
@@ -14,9 +14,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input id="id" name="id">
-                    <input type="text" id="mahs" name="mahs" value="{{ $mahs }}">
-                    <input type="text" id="matb" name="matb" value="{{ $matb }}">
+                    <input id="id" name="id" hidden>
+                    <input type="text" id="mahs" name="mahs" value="{{ $mahs }}" hidden>
+                    <input type="text" id="matb" name="matb" value="{{ $matb }}" hidden>
                     <div class="row">
                         <div class="col-xl-8">
                             <div class="form-group fv-plugins-icon-container">

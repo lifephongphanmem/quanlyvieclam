@@ -18,7 +18,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Vị trí công việc</label>
-                    <select class="form-control input-sm m-bot15 select2me" name="vitri">
+                    <select class="form-control input-sm m-bot15" name="vitri">
                         <option value='Nhà quản lý' {{isset($model)?($model->vitri=='Nhà quản lý'?'selected':''):''}}>Nhà quản lý</option>
                         <option value='Giám đốc điều hành'{{isset($model)?($model->vitri=='Giám đốc điều hành'?'selected':''):''}}>Giám đốc điều hành</option>
                         <option value='Chuyên gia'{{isset($model)?($model->vitri=='Chuyên gia'?'selected':''):''}}>Chuyên gia</option>
@@ -29,7 +29,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Nghề công việc</label>
-                    <select class="form-control input-sm m-bot15 select2me" name="nghecongviec">
+                    <select class="form-control input-sm m-bot15" name="nghecongviec">
                         @foreach ($dmnghecongviec as $cv)
                         <option value='{{$cv->id}}'>{{$cv->tendm}}</option>
                         @endforeach
@@ -60,7 +60,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Loại hình doanh nghiệp, tổ chức làm việc</label>
-                    <select class="form-control input-sm m-bot15 select2me" name="loaidn">
+                    <select class="form-control input-sm m-bot15" name="loaidn">
                        
                         <option value='Doanh nghiệp nhà nước'>Doanh nghiệp nhà nước</option>
                         <option value='Doanh nghiệp có vốn đầu tư nước ngoài'>Doanh nghiệp có vốn đầu tư nước ngoài</option>
