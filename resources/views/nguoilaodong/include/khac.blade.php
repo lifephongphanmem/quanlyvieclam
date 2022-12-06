@@ -1,4 +1,4 @@
-<div id="tab2" class="tab-pane ">
+{{-- <div id="tab2" class="tab-pane "> --}}
     <div class="form-body">
         <div class="row">
             <div class="col-md-3">
@@ -103,4 +103,4 @@
             </div>
         </div>
     </div>
-</div>
+{{-- </div> --}}

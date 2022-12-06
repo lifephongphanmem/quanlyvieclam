@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateNhucautuyendung extends Migration
+class UpdateTonghopdanhsachcungldCtTableV10 extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class UpdateNhucautuyendung extends Migration
      */
     public function up()
     {
-        Schema::table('nhucautuyendung', function (Blueprint $table) {
-            $table->string('matb')->nullable();
+        Schema::table('tonghopdanhsachcungld_ct', function (Blueprint $table) {
+            $table->string('nam',50)->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class UpdateNhucautuyendung extends Migration
      */
     public function down()
     {
-        Schema::table('nhucautuyendung', function (Blueprint $table) {
+        Schema::table('tonghopdanhsachcungld_ct', function (Blueprint $table) {
             //
         });
     }

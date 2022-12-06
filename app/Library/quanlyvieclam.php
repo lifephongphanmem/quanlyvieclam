@@ -35,3 +35,21 @@ function getParamsByNametype($paramtype)
   }
   return $cats;
 }
+
+function getGioiTinh()
+{
+    return array(
+        'NAM' => 'Nam',
+        'NU' => 'Nữ',
+        'KHAC' => 'Khác',
+    );
+}
+
+function setArrayAll($array, $noidung = 'Tất cả', $giatri = 'ALL')
+{
+    $a_kq = [$giatri => $noidung];
+    foreach ($array as $k => $v) {
+        $a_kq[(string)$k] = $v;
+    }
+    return $a_kq;
+}

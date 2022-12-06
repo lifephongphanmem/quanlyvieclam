@@ -2,13 +2,14 @@
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
+    {{-- <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" /> --}}
 @stop
 
 @section('custom-script')
-    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
     </script>
+    <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
 
     <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
@@ -45,8 +46,8 @@
                             <tr>
                                 <th width="2%"> STT </th>
                                 <th width="2%">Năm</th>
-                                <th width="10%" >Tiêu đề </th>
-                                <th width="15%" >Nội dung</th>
+                                <th width="10%">Tiêu đề </th>
+                                <th width="15%">Nội dung</th>
                                 <th width="5%">Hạn nộp</th>
                                 <th width="7%">Ngày nhận thông báo</th>
                                 {{-- <th width="5%">Ngày gửi</th> --}}
@@ -57,10 +58,12 @@
                             @foreach ($model as $key => $tb)
                                 <tr>
                                     <td>{{ ++$key }}</td>
-                                    <td name="nam">{{$tb->nam }}</td>
-                                    <td name="tieude">{{ $tb->tieude == 0?'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng':'Báo cáo tình hình sử dụng lao động hằng năm' }}</td>
+                                    <td name="nam">{{ $tb->nam }}</td>
+                                    <td name="tieude">
+                                        {{ $tb->tieude == 0 ? 'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng' : 'Báo cáo tình hình sử dụng lao động hằng năm' }}
+                                    </td>
                                     <td name="noidung"> {{ $tb->noidung }}</td>
-                                    <td> {{ $tb->hannop.'-'.$tb->nam }}</td>
+                                    <td> {{ $tb->hannop . '-' . $tb->nam }}</td>
                                     <td class="{{ $tb->ngaygui == 0 ? 'text-danger' : '' }}">
                                         {{ $tb->ngaygui == null ? 'Chưa gửi' : \Carbon\Carbon::parse($tb->ngaygui)->format('d/m/Y') }}
                                     </td>
@@ -168,7 +171,7 @@
             </div>
         </div>
     </form> --}}
-<!-- Model edit -->
+    <!-- Model edit -->
     <form method="POST" action="" accept-charset="UTF-8" id="frm_modify_edit">
         @csrf
         <div id="modify-modal-edit" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;"
@@ -204,12 +207,11 @@
                             <label class="control-label">Nội dung</label>
                             <textarea name="noidung" rows="5" class="form-control" id='noidung_edit'></textarea>
                         </div>
-                        
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
-                        <button type="submit" id="submit" name="submit" value="submit"
-                            class="btn btn-primary">Đồng
+                        <button type="submit" id="submit" name="submit" value="submit" class="btn btn-primary">Đồng
                             ý</button>
                     </div>
                 </div>
@@ -222,14 +224,14 @@
             $('#frm_modify').attr('action', url);
         }
 
-        function send(matb,nam) {
+        function send(matb, nam) {
             var url = '/tinhhinhsudungld/don_vi/store?matb=' + matb + '&nam=' + nam;
 
             $('#frm_modify_send').attr('action', url);
         }
 
-        function chinhsua(id){
-            var  url = '/tinhhinhsudungld/thongbao/edit/' + id;
+        function chinhsua(id) {
+            var url = '/tinhhinhsudungld/thongbao/edit/' + id;
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 url: url,
@@ -245,14 +247,14 @@
                     $('#nam_edit option[value=' + data.nam + ' ]').attr('selected', 'selected');
                     $('#tieude_edit option[value=' + data.tieude + ' ]').attr('selected', 'selected');
 
-                    var  url = '/tinhhinhsudungld/thongbao/update/' + id;
+                    var url = '/tinhhinhsudungld/thongbao/update/' + id;
                     $("#frm_modify_edit").attr("action", url);
                 },
                 error: function(message) {
                     toastr.error(message, 'Lỗi!');
                 }
             });
-            
+
         }
 
         function lydo(id) {

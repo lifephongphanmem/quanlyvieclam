@@ -30,7 +30,7 @@
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>
-                    <span class="menu-text font-weight-bold">Khai báo </span>
+                    <span class="menu-text font-weight-bold">Khai báo nhu cầu</span>
                 </a>
             </li>
             <li class="menu-item" aria-haspopup="true">
@@ -38,7 +38,7 @@
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>
-                    <span class="menu-text font-weight-bold">tổng hợp </span>
+                    <span class="menu-text font-weight-bold">Tổng hợp dữ liệu </span>
                 </a>
             </li>
             {{-- <li class="menu-item" aria-haspopup="true">

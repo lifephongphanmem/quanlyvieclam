@@ -116,11 +116,11 @@
                             <!--begin::Notifications-->
                             <div class="dropdown">
                                 <!--begin::Toggle-->
-                                <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px" title="Trợ giúp">
+                                {{-- <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px" title="Trợ giúp">
                                     <div class="btn btn-icon btn-hover-transparent-white btn-dropdown btn-lg mr-1 pulse pulse-primary w-md-auto">
                                         <span class="text-white font-weight-bold font-size-base d-none d-md-inline mr-1">Trợ giúp</span>
                                         <span class="svg-icon svg-icon-xl">
-                                            {{-- <img src="assets/media/svg/icons/Code/Compiling.svg" /> --}}
+                                            <img src="assets/media/svg/icons/Code/Compiling.svg" />
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Code/Compiling.svg-->
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -142,7 +142,7 @@
                                         </span>
                                         <span class="pulse-ring"></span>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <!--end::Toggle-->
 
@@ -600,6 +600,7 @@
     <!--begin::Page Vendors(used by this page)-->
     <script src="{{ url('assets/js/pages/widgets.js') }}"></script>
     <script src="{{ url('assets/js/pages/main.js') }}"></script>
+    <script src="{{url('assets/js/pages/select2.js')}}"></script>
     {{-- <script src="{{ url('assets/js/pages/bootstrap.js') }}"></script> --}}
     
     {{-- <script src="{{ url('assets/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script> --}}

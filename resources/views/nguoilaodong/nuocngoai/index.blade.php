@@ -50,14 +50,14 @@
                 <div class="card-body">
                     <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th width="2%"> STT </th>
                                 <th width="15%"> Họ và tên</th>
-                                <th width="5%"> Năm sinh</th>
+                                <th width="10%"> Năm sinh</th>
                                 <th width="13%">Quốc tịch</th>
                                 <th width="5%"> Giới tính</th>
                                 <th width="10%"> Số hộ chiếu</th>
-                                <th width="30%"> Địa chỉ</th>
+                                <th width="25%"> Địa chỉ</th>
                                 <th width="10%"> Vị trí</th>
                                 <th width="10%">Thao tác</th>
                             </tr>
@@ -67,9 +67,9 @@
                                 <tr>
                                     <td>{{ ++$key }}</td>
                                     <td> {{ $ld->hoten }}</td>
-                                    <td> {{ \Carbon\Carbon::parse($ld->ngaysinh)->format('d/m/Y') }}</td>
+                                    <td> {{ \Carbon\Carbon::parse($ld->ngaysinh)->format('d-m-Y') }}</td>
                                     <td> {{ $ld->nation }}</td>
-                                    <td> {{ $ld->gioitinh == 'nam' || $ld->gioitinh == 'Nam' ? 'Nam' : 'Nữ' }}</td>
+                                    <td class="text-center"> {{ $ld->gioitinh == 'nam' || $ld->gioitinh == 'Nam' ? 'Nam' : 'Nữ' }}</td>
                                     <td> {{ $ld->cmnd }}</td>
                                     <td> {{ $ld->address }} {{ $ld->xa }} {{ $ld->huyen }}
                                         {{ $ld->tinh }}</td>
