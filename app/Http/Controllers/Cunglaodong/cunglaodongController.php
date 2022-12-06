@@ -95,6 +95,7 @@ public function nhanthongbao()
         $m_ngld = nguoilaodong::where('madb', session('admin')['madv'])->get();
         foreach ($m_ngld as $val) {
             $data = [
+                'nam'=>$inputs['nam'],
                 'math' => $inputs['math'],
                 'ma_ngld' => $val->ma_nld,
                 'madb' => $val->madb,

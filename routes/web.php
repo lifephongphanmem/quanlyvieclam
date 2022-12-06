@@ -37,6 +37,7 @@ include('nguoilaodong.php');
 include('doanhnghiep.php');
 include('baocao.php');
 include('thongbao.php');
+include('tracuu.php');
 
 
 

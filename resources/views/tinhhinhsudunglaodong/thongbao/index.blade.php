@@ -33,7 +33,7 @@
             <div class="card card-custom">
                 <div class="card-header card-header-tabs-line">
                     <div class="card-title">
-                        <h3 class="card-label text-uppercase">Thông báo tình hình sử dụng lao động</h3>
+                        <h3 class="card-label text-uppercase">Danh sách thông báo</h3>
                     </div>
                     <div class="card-toolbar">
                         @if (chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'thaydoi'))
@@ -104,7 +104,7 @@
         @csrf
         <div id="modify-modal-send" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;"
             aria-hidden="true">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-xs">
                 <div class="modal-content">
                     <div class="modal-header modal-header-primary">
                         <h4 id="modal-header-primary-label" class="modal-title">Gửi thông báo</h4>
@@ -112,9 +112,9 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-horizontal">
-                            <div class="col-lg-8">
+                            <div class="col-lg-12">
                                 <label class="control-label">Chọn công ty</label>
-                                <select id="" class="form-control select2me" name="masodn[]" multiple=true>
+                                <select id="" class="form-control select2basic" name="masodn[]" multiple=true style="width: 100%">
                                     <option value="all" selected>Chọn tất cả</option>
                                     @foreach ($model_cty as $ct)
                                         <option value="{{ $ct->masodn }}">{{ $ct->name }}</option>

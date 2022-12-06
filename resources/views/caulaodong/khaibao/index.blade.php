@@ -1,4 +1,22 @@
 @extends('main')
+@section('custom-style')
+    <link rel="stylesheet" type="text/css"
+        href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
+@stop
+
+@section('custom-script')
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
+    </script>
+    <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
+
+        <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
+    <script>
+        jQuery(document).ready(function() {
+            TableManaged3.init();
+        });
+    </script>
+@stop
 @section('content')
     <div class="row">
         <div class="col-xl-12">
@@ -10,12 +28,11 @@
                         <h3 class="card-label text-uppercase">KHAI BÁO THÔNG TIN NHU CẦU TUYỂN DỤNG</h3>
                     </div>
                     <div class="card-toolbar">
-                        <a href="{{ 'khai_bao_nhu_cau/them_moi?matb=' . $matb}}" class="btn btn-xs btn-icon btn-success mr-2"
-                            title="Thêm mới"><i class="fa fa-plus"></i></a>
+                        <a href="{{ 'khai_bao_nhu_cau/them_moi?matb=' . $matb}}" class="btn btn-sm btn-success mr-2"
+                            title="Thêm mới"><i class="fa fa-plus"></i>Thêm mới</a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
                         <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                             <thead>
                                 <tr class="text-center">
@@ -105,7 +122,6 @@
                             class="fa fa-reply"></i>&nbsp;Quay lại</a>
                 </div>
 
-            </div>
             <!--end::Card-->
             <!--end::Example-->
         </div>
@@ -118,13 +134,16 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header modal-header-primary">
-                        <h4 id="modal-header-primary-label" class="modal-title">Đồng ý chuyển thông tin?</h4>
+                        <h4 id="modal-header-primary-label" class="modal-title">Đồng ý chuyển dữ liệu</h4>
                         <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
                     </div>
                     <div class="modal-footer">
                         <div class="col-xl-12">
-                            <input id="mahs" name="mahs">
-
+                            <input id="mahs" name="mahs" type="hidden">
+                            <div class="form-group">
+                                <label><b>Dữ liệu khi gửi đi sẽ không thể chỉnh sửa. Bạn hãy kiểm tra kỹ số liệu trước khi
+                                        gửi.</b></label>
+                            </div>
                             {{-- <div class="form-group fv-plugins-icon-container">
                                 <label><b>Doanh nghiệp nhận*</b></label>
                                 <select id="manguoinhan" name="manguoinhan[]" class="col-xl-12 select2me" multiple>

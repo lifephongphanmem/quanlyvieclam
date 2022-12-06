@@ -106,6 +106,8 @@ class HethongchungController extends Controller
 					}else{
 						$cty=Company::where('madv',$user->madv)->first();
 						$user->tendv=$cty->name;
+						$user->maxa=$cty->xa;
+						$user->mahuyen=$cty->huyen;
 						
 					}
 				} else {

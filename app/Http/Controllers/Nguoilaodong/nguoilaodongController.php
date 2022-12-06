@@ -757,7 +757,7 @@ class nguoilaodongController extends Controller
       $rm = new Report();
       $rm->report('import', $result, 'nguoilaodong', DB::getPdo()->lastInsertId(), $num_valid_ld, $note);
       return redirect('/nguoilaodong')
-        ->with('success', "Thêm thành công");
+        ->with('success', $note);
     } else {
       return redirect('nguoilaodong')
         ->with('error', 'Người lao động đã có trong danh sách');

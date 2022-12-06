@@ -18,8 +18,8 @@
                     @csrf
                     <div class="card-body">
                         <div class="row">
-                            <input id="matb" name="matb" value="{{$model->matb}}">
-                            <input id="mahs" name="mahs" value="{{$model->mahs}}">
+                            <input id="matb" name="matb" value="{{$model->matb}}" type="hidden">
+                            <input id="mahs" name="mahs" value="{{$model->mahs}}" type="hidden">
                             <div class="col-xl-12">
                                 <div class="form-group fv-plugins-icon-container">
                                     <label><b>Nội dung*</b></label>

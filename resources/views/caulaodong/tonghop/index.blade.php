@@ -30,12 +30,12 @@
                             <thead>
                                 <tr class="text-center">
                                     <th width="5%"> STT </th>
+                                    <th>Tên doanh nghiệp</th>
                                     <th>Nội dung</th>
                                     <th>Yêu cầu</th>
                                     <th>Người tạo</th>
                                     <th>Số điện thoại</th>
                                     <th>Email</th>
-                                    <th>Doanh nghiệp</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
@@ -45,6 +45,13 @@
                                 ?>
                                 <tr class="text-center">
                                     <td>{{ ++$i }} </td>
+                                    <td>
+                                        @foreach ($doanhnghiep as $dn)
+                                            @if ($item->madn == $dn->madv)
+                                                <span>{{ $dn->name }}</span>
+                                            @endif
+                                        @endforeach
+                                    </td>
                                     <td>{{ $item->noidung }}</td>
                                     <td>
                                         @if ($item->yeucau == 'tv')
@@ -60,14 +67,6 @@
                                     <td>{{ $item->ten }}</td>
                                     <td class="text-center">{{ $item->sdt }}</td>
                                     <td class="text-center">{{ $item->email }}</td>
-
-                                    <td>
-                                        @foreach ($doanhnghiep as $dn)
-                                            @if ($item->madn == $dn->user)
-                                                <span>{{ $dn->name }}</span>
-                                            @endif
-                                        @endforeach
-                                    </td>
                                     <td>
                                         <a title="xem chi tiết"
                                             href="{{ '/tuyen_dung/khai_bao_nhu_cau/xem?mahs=' . $item->mahs }}"
