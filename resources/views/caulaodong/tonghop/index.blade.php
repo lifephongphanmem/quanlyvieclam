@@ -20,7 +20,7 @@
                    
                     </div>
 
-            
+              
               
                 </a>
                 </div>
@@ -63,7 +63,7 @@
 
                                     <td>
                                         @foreach ($doanhnghiep as $dn)
-                                            @if ($item->madn == $dn->user)
+                                            @if ($item->madn == $dn->madv)
                                                 <span>{{ $dn->name }}</span>
                                             @endif
                                         @endforeach
