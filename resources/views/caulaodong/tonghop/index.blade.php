@@ -10,19 +10,12 @@
                         <h3 class="card-label text-uppercase">DANH SÁCH THÔNG TIN NHU CẦU TUYỂN DỤNG</h3>
                     </div>
                     <div class="card-toolbar">
-                        <a title="in danh sách"
+                        <a title="in danh sách" type="buttom" 
                         href="{{ '/tuyen_dung/indanhsachcauld?matb=' . $matb }}"
-                        class="btn btn-sm btn-clean btn-icon">
-                        <i class="icon-lg la flaticon2-print text-primary"></i>
-
-                        <a href="{{ 'khai_bao_nhu_cau/them_moi?matb=' . $matb }}" class="btn btn-xs btn-icon btn-success mr-2"
-                            title="Thêm mới"><i class="fa fa-plus"></i></a>
-                   
+                        class="btn btn-xs btn-icon mr-2" >
+                        <i class="icon-lg la flaticon2-print text-primary"></i></a>
                     </div>
 
-              
-              
-                </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -67,13 +60,6 @@
                                     <td>{{ $item->ten }}</td>
                                     <td class="text-center">{{ $item->sdt }}</td>
                                     <td class="text-center">{{ $item->email }}</td>
-                                    <td>
-                                        @foreach ($doanhnghiep as $dn)
-                                            @if ($item->madn == $dn->madv)
-                                                <span>{{ $dn->name }}</span>
-                                            @endif
-                                        @endforeach
-                                    </td>
 
                                     <td>
                                         <a title="xem chi tiết"
