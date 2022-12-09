@@ -11,7 +11,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Số hộ chiếu</label>
-                    <input type="text" name="cmnd" class="form-control" value="{{isset($model)?$model->sohc:''}}" required>
+                    <input type="text" name="cmnd" class="form-control" value="{{isset($model)?$model->cmnd:''}}" required>
                 </div>
             </div>
             <div class="col-md-3">

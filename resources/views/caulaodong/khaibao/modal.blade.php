@@ -18,20 +18,36 @@
                     <input type="text" id="mahs" name="mahs" value="{{ $mahs }}" hidden>
                     <input type="text" id="matb" name="matb" value="{{ $matb }}" hidden>
                     <div class="row">
-                        <div class="col-xl-8">
+                        <div class="col-xl-6">
                             <div class="form-group fv-plugins-icon-container">
                                 <label><b>Mã nghề cấp 2*</b></label>
-                                <select id="tencongviec" name="tencongviec" class="form-control">
+                                <select id="tencongviec" name="tencongviec" style="width: 100%"  class="form-control select2basic" multiple>
                                     @foreach ($dmmanghetrinhdo as $item)
                                         <option value="{{ $item->madmmntd }}">{{ $item->tenmntd }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="col-xl-4">
+                        <div class="col-xl-2">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Số lượng*</b></label>
+                                <label><b>Độ tuổi*</b></label>
+                                <select id="dotuoi" name="dotuoi" class="form-control">
+                                    <option value="all">Mọi độ tuổi</option>
+                                    <option value="duoi35">Dưới 35 tuổi</option>
+                                    <option value="tren35">Dưới 35 tuổi</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-2">
+                            <div class="form-group fv-plugins-icon-container">
+                                <label><b>Tổng số lượng tuyển*</b></label>
                                 <input type="text" id="soluong" name="soluong" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-xl-2">
+                            <div class="form-group fv-plugins-icon-container">
+                                <label><b>Số lượng nữ trong đó*</b></label>
+                                <input type="text" id="soluongnu" name="soluongnu" class="form-control">
                             </div>
                         </div>
                         <div class="col-xl-12">
@@ -42,28 +58,13 @@
                         </div>
                         <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Trình độ văn hóa*</b></label>
-                                <select id="tdvanhoa" name="tdvanhoa" class="form-control">
-                                    @foreach ($dmtrinhdogdpt as $item)
-                                        <option value="{{ $item->madmgdpt }}">{{ $item->tengdpt }} </option>
+                                <label><b>Vị trí việc làm*</b></label>
+                                <select id="vitrivl" name="vitrivl" class="form-control">
+                                    <option value="">--- chọn vị trí việc làm ----</option>
+                                    @foreach ($vitrivl as $item)
+                                        <option value="{{ $item->madmtgktct2 }}">{{ $item->tentgktct2 }}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-xl-4">
-                            <div class="form-group fv-plugins-icon-container">
-                                <label><b>Trình độ kỹ thuật*</b></label>
-                                <select id="tdkythuat" name="tdkythuat" class="form-control">
-                                    @foreach ($dmtrinhdogdpt as $item)
-                                        <option value="{{ $item->madmtdkt }}">{{ $item->tentdkt }} </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-xl-4">
-                            <div class="form-group fv-plugins-icon-container">
-                                <label><b>Chuyên ngành*</b></label>
-                                <input type="text" id="chuyennganh" name="chuyennganh" class="form-control">
                             </div>
                         </div>
                         <div class="col-xl-4">
@@ -76,6 +77,35 @@
                             <div class="form-group fv-plugins-icon-container">
                                 <label><b>Trình độ ngoại ngữ*</b></label>
                                 <input type="text" id="tdngoaingu" name="tdngoaingu" class="form-control">
+                            </div>
+                        </div>
+        
+                        <div class="col-xl-4">
+                            <div class="form-group fv-plugins-icon-container">
+                                <label><b>Trình độ văn hóa*</b></label>
+                                <select id="tdvanhoa" name="tdvanhoa" class="form-control">
+                                    <option value="">--- chọn trình độ văn hóa ----</option>
+                                    @foreach ($dmtrinhdogdpt as $item)
+                                        <option value="{{ $item->madmgdpt }}">{{ $item->tengdpt }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="form-group fv-plugins-icon-container">
+                                <label><b>Trình độ kỹ thuật*</b></label>
+                                <select id="tdkythuat" name="tdkythuat" class="form-control">
+                                    <option value="">--- chọn trình độ kỹ thuật ----</option>
+                                    @foreach ($dmtrinhdokythuat as $item)
+                                        <option value="{{ $item->madmtdkt }}">{{ $item->tentdkt }} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="form-group fv-plugins-icon-container">
+                                <label><b>Chuyên ngành*</b></label>
+                                <input type="text" id="chuyennganh" name="chuyennganh" class="form-control">
                             </div>
                         </div>
                         <div class="col-xl-4">
@@ -114,7 +144,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-xl-8">
+                        <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
                                 <label><b>Phúc lợi khác*</b></label>
                                 <textarea type="text" id="phucloikhac" name="phucloikhac" class="form-control"></textarea>
@@ -165,8 +195,10 @@
         $('#id').val(null);
         $('#tencongviec').val('{{$manghefirst->madmmntd}}');
         $('#soluong').val(null);
+        $('#soluongnu').val(null);
         $('#mota').val('');
-        $('#tdvanhoa').val('chua có');
+        $('#vitrivl').val('');
+        $('#tdvanhoa').val('');
         $('#tdkythuat').val('');
         $('#chuyennganh').val('');
         $('#tdtinhoc').val('');
@@ -180,7 +212,7 @@
     }
 
     function store() {
-
+        alert()
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             url: '/tuyen_dung/khai_bao_nhu_cau/store_ct',
@@ -191,7 +223,9 @@
                 mahs: $('#mahs').val(),
                 tencongviec: $('#tencongviec').val(),
                 soluong: $('#soluong').val(),
+                soluongnu: $('#soluongnu').val(),
                 mota: $('#mota').val(),
+                // vitrivl: $('#vitrivl').val('#vitrivl');
                 tdvanhoa: $('#tdvanhoa').val(),
                 tdkythuat: $('#tdkythuat').val(),
                 chuyennganh: $('#chuyennganh').val(),
@@ -263,7 +297,9 @@
                 $('#id').val(data.id);
                 $('#tencongviec').val(data.tencongviec);
                 $('#soluong').val(data.soluong);
+                $('#soluongnu').val(data.soluongnu);
                 $('#mota').val(data.mota);
+                // $('#vitrivl').val(data.vitrivl);
                 $('#tdvanhoa').val(data.tdvanhoa);
                 $('#tdkythuat').val(data.tdkythuat);
                 $('#chuyennganh').val(data.chuyennganh);

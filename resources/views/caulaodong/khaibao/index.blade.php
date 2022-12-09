@@ -33,10 +33,10 @@
 
                             <button class="btn btn-sm btn-success mr-2 ml-2" title="Nhận dữ liệu từ file Excel"
                             data-target="#modal-nhanexcel" data-toggle="modal">
-                            <i class="fas fa-file-import"></i>
+                            <i class="fas fa-file-import"></i> Nhận Excel
                         </button>
                         <a href="{{asset('excel/maunhucaulaodong.xlsx')}}" class="btn btn-sm btn-success mr-2 ml-2" title="Tải file Excel mẫu">                            
-                            <i class="fa fa-file-download"></i>
+                            <i class="fa fa-file-download"></i>Tải file mẫu
                     </a>
                     </div>
                 </div>
@@ -46,14 +46,17 @@
                                 <tr class="text-center">
                                     <th width="5%"> STT </th>
                                     <th>Nội dung</th>
-                                    <th>Yêu cầu</th>
+                                    <th>Tổng số lượng</th>
+                                    <th>Số lượng nữ</th>
+                                    {{-- <th>Yêu cầu</th>
                                     <th>Người tạo</th>
                                     <th>Số điện thoại</th>
-                                    <th>Email</th>
+                                    <th>Email</th> --}}
                                     <th>Trạng thái</th>
                                     <th width="15%">Thao tác</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 <?php 
                                   foreach ($model as $i => $item ){
@@ -61,7 +64,29 @@
                                 <tr>
                                     <td class="text-center">{{ ++$i }} </td>
                                     <td>{{ $item->noidung }}</td>
-                                    <td>
+                                    <td  class="text-center">
+                                        <?php 
+                                            $soluong = 0;
+                                            foreach ($modelct as  $ct) {
+                                                if ($item->mahs == $ct->mahs) {
+                                                    $soluong += $ct->soluong;
+                                                }
+                                            }    
+                                        ?>
+                                        {{$soluong}}
+                                    </td>
+                                    <td  class="text-center">
+                                        <?php 
+                                            $soluongnu = 0;
+                                            foreach ($modelct as  $ct) {
+                                                if ($item->mahs == $ct->mahs) {
+                                                    $soluongnu += $ct->soluongnu;
+                                                }
+                                            }    
+                                        ?>
+                                        {{$soluongnu}}
+                                    </td>
+                                    {{-- <td>
                                         @if ($item->yeucau == 'tv')
                                             <span>Tư vấn</span>
                                         @endif
@@ -74,7 +99,7 @@
                                     </td>
                                     <td>{{ $item->ten }}</td>
                                     <td class="text-center">{{ $item->sdt }}</td>
-                                    <td class="text-center">{{ $item->email }}</td>
+                                    <td class="text-center">{{ $item->email }}</td> --}}
                                     <td class="text-center">
                                         @if ($item->trangthai == 'cc')
                                             <span class="badge badge-warning">chưa chuyển</span>
@@ -101,7 +126,7 @@
                                             <button onclick="chuyen( '{{ $item->mahs }}')" title="Chuyển thông tin"
                                                 data-toggle="modal" data-target="#chuyen-modal"
                                                 class="btn btn-sm btn-clean btn-icon">
-                                                <i class="fa fa-check text-primary"></i>
+                                                <i class="fas fa-share-square text-success"></i>
                                             </button>
                                             <button title="Xóa" data-toggle="modal" data-target="#delete-modal-confirm"
                                                 type="button"

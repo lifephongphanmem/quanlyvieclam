@@ -17,7 +17,10 @@ class CreateNhucautuyendungct extends Migration
             $table->id();
             $table->string('mahs')->nullable();
             $table->string('tencongviec')->nullable();
+            $table->string('dotuoi')->nullable();
             $table->string('soluong')->nullable();
+            $table->string('soluong')->nullable();
+            $table->string('soluongnu')->nullable();
             $table->string('mota')->nullable();
             $table->string('tdvanhoa')->nullable();
             $table->string('tdkythuat')->nullable();

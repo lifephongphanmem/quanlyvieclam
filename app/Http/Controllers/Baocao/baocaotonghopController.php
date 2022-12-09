@@ -12,6 +12,11 @@ use App\Models\Cunglaodong\tonghopdanhsachcungld;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Cunglaodong\tonghopdanhsachcungld_ct;
+use App\Models\Danhmuc\dmmanghetrinhdo;
+use App\Models\Danhmuc\dmtinhtrangthamgiahdktct;
+use App\Models\Danhmuc\dmtinhtrangthamgiahdktct2;
+use App\Models\Danhmuc\dmtrinhdokythuat;
 use Illuminate\Support\Facades\Session;
 
 class baocaotonghopController extends Controller
@@ -108,6 +113,7 @@ class baocaotonghopController extends Controller
         return view('reports.baocaotonghop.cauld.tinhhinhsudungld')
             ->with('pageTitle', 'Tình hình sử dụng lao động');
     }
+
     public function dsttcungld()
     {
         return view('reports.baocaotonghop.cungld.dsttcungld')
@@ -126,14 +132,24 @@ class baocaotonghopController extends Controller
     public function thongtinthitruongld(Request $request)
     {
         $nam = $request->nam;
+
+        $tonghopdanhsachcungld_ct = tonghopdanhsachcungld_ct::all();
+
+
         $loaihinhkt = dmloaihinhhdkt::all();
         $company = Company::all();
         $nhucautuyendungct = nhucautuyendungct::all();
-        // $nhucautuyendung = nhucautuyendung::where('nam',$nam)->get();
+        $dmmanghetrinhdo = dmmanghetrinhdo::all();
+        $dmtrinhdokythuat = dmtrinhdokythuat::all();
+        $dmvithevieclam = dmtinhtrangthamgiahdktct2::where('manhom2','20221108050528')->get();
+        $tgthatnghiep= dmtinhtrangthamgiahdktct2::where('manhom2','20221123034628')->get();
+        $lydoktg= dmtinhtrangthamgiahdktct::where('manhom','20221108050508')->get();
+        $vitrivl= dmtinhtrangthamgiahdktct2::where('manhom2','20221108050559')->get();
         $nhucautuyendung = nhucautuyendung::join('nhucautuyendungct', 'nhucautuyendung.mahs' ,'=','nhucautuyendungct.mahs')
         ->select('nhucautuyendungct.*', 'nhucautuyendung.*')->get();
         // dd($nhucautuyendung);
-        return view('reports.baocaotonghop.cauld.thongtinthitruongld',compact('loaihinhkt','company','nhucautuyendung','nam'))
+        return view('reports.baocaotonghop.cauld.thongtinthitruongld',compact('loaihinhkt','company','nhucautuyendung',
+        'dmmanghetrinhdo','nam','tonghopdanhsachcungld_ct','dmtrinhdokythuat','dmvithevieclam','tgthatnghiep','lydoktg','vitrivl'))
         ->with('pageTitle', 'Báo cáo về thông tin thị trường lao động');
     }
 }

@@ -19,10 +19,13 @@ use App\Models\Nguoilaodong\nguoilaodong;
 use App\Http\Controllers\Controller;
 use App\Imports\CollectionImport;
 use App\Models\Danhmuc\danhmuchanhchinh;
+use App\Models\Nguoilaodong\tonghoplaodongnuocngoai;
+use App\Models\Nguoilaodong\tonghoplaodongnuocngoai_ct;
 use Illuminate\Http\Request;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Report;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
@@ -866,5 +869,75 @@ class nguoilaodongController extends Controller
       return redirect('nguoilaodong')
         ->with('error', 'Người lao động đã có trong danh sách');
     }
+  }
+
+  public function tonghop_nuocngoai(Request $request)
+  {
+    $model=tonghoplaodongnuocngoai::all();
+                                      
+    return view('nguoilaodong.nuocngoai.tonghop')
+            ->with('model',$model);
+  }
+
+  public function tonghop(Request $request)
+  {
+    $inputs=$request->all();
+    $madv=session('admin')->madv;
+    $math=getdate()[0];
+    $model=nguoilaodong::where('madb',$madv)->get();
+
+    $inputs['madv']=$madv;
+    $inputs['math']=$math;
+    foreach($model as $ct)
+    {
+      $data=[
+        'math'=>$math,
+        'madv'=>$madv,
+        'hoten'=>$ct->hoten,
+        'cmnd'=>$ct->cmnd,
+        'ngaycapcmnd'=>$ct->ngaycapsohc,
+        'giaypheplaodong'=>$ct->sogpld,
+        'ngaycapgiaypheplaodong'=>$ct->ngaycapsogpld,
+        'trinhdo'=>$ct->trinhdo,
+        'quoctich'=>$ct->nation,
+        'vitricongviec'=>$ct->vitri,
+        'ngaysinh'=>$ct->ngaysinh,
+        'nam'=>$inputs['nam'],
+        'gioitinh'=>$ct->gioitinh
+      ];
+      tonghoplaodongnuocngoai_ct::create($data);
+    }
+    tonghoplaodongnuocngoai::create($inputs);
+
+    return redirect('/nguoilaodong/nuoc_ngoai/tonghop')
+    ->with('success','Tổng hợp thành công');
+   
+
+  }
+
+  public function XoaTongHop($id)
+  {
+    $model=tonghoplaodongnuocngoai::findOrFail($id);
+
+    $model_ct=tonghoplaodongnuocngoai_ct::where('math',$model->math)->get();
+    foreach($model_ct as $ct)
+    {
+      $ct->delete();
+    }
+    $model->delete();
+
+    return redirect('/nguoilaodong/nuoc_ngoai/tonghop')
+            ->with('success','Xóa thành công');
+  }
+
+  public function InTongHop(Request $request)
+  {
+    $input=$request->all();
+    $model=tonghoplaodongnuocngoai_ct::where('math',$input['math'])->get();
+    $m_dv=User::where('madv',session('admin')->madv)->first();
+    return view('nguoilaodong.nuocngoai.intonghop')
+              ->with('model',$model)
+              ->with('m_dv',$m_dv)
+              ->with('pageTitle','Tổng hợp dữ liệu');
   }
 }

@@ -26,5 +26,10 @@ Route::prefix('nguoilaodong')->group(function () {
         Route::get('/delete/{id}', [nguoilaodongController::class, 'destroy_nuocngoai']);
         Route::get('/in', [nguoilaodongController::class, 'danhsach_nuocngoai']);
         Route::post('/nhanexcel', [nguoilaodongController::class, 'nhanExcelNuocngoai']);
+        Route::get('/tonghop',[nguoilaodongController::class,'tonghop_nuocngoai']);
+        Route::post('/tonghop',[nguoilaodongController::class,'tonghop']);
+
+        Route::get('/XoaTongHop/{id}',[nguoilaodongController::class,'XoaTongHop']);
+        Route::get('/InTongHop',[nguoilaodongController::class,'InTongHop']);
     });
 });
