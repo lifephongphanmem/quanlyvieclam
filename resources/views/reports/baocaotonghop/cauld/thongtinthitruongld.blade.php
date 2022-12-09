@@ -55,8 +55,9 @@
         </tr>
         <tr>
             <td  style="font-weight: bold;">1</td>
-            <td  style="font-weight: bold;">Số người từ 15 tuổi trở lên</td>
-            <td style="text-align: center;">Người</td><td></td><td></td>
+            <td  style="font-weight: bold;">Số người từ 15 tuổi trở lên</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam-1))}}</td>
+            <td style="text-align: center;"> {{count($tonghopdanhsachcungld_ct->where('nam',$nam))}} </td>
         </tr>
         <tr>
             <td>a</td>
@@ -73,15 +74,21 @@
             <td colspan="4">Chia theo giới tính</td>
         </tr>
         <tr>
-            <td></td><td>- Nam</td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>- Nam</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('gioitinh','Nam'))}} </td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('gioitinh','Nam'))}}</td>
         </tr>
         <tr>
-            <td></td><td>- Nữ</td> <td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>- Nữ</td> <td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('gioitinh','Nu'))}}</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('gioitinh','Nu'))}}</td>
         </tr>
         <tr>
             <td  style="font-weight: bold;">2</td>
             <td  style="font-weight: bold;">Số người có việc làm</td>
-            <td style="text-align: center;">Người</td><td></td><td></td>
+            <td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('thatnghiep',null))}}</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('thatnghiep',null))}}</td>
         </tr>
         <tr>
             <td>a</td>
@@ -97,50 +104,32 @@
             <td>b</td>
             <td colspan="4">Chia theo trình độ chuyên môn kỹ thật</td>
         </tr>
+        @foreach ($dmtrinhdokythuat as $kythuat)
         <tr>
-            <td></td><td>- Chưa qua đào tạo</td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>{{$kythuat->tentdkt}}</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('thatnghiep',null)->where('trinhdocmkt',$kythuat->madmtdkt))}}</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('thatnghiep',null)->where('trinhdocmkt',$kythuat->madmtdkt))}}</td>
         </tr>
-        <tr>
-            <td></td><td>- CNKT không bằng</td> <td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Chứng chỉ nghề dưới 3 tháng</td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Sơ cấp</td> <td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Trung cấp</td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Cao đẳng</td> <td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Đại học</td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Trên đại học</td> <td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
+        @endforeach
+       
         <tr>
             <td>c</td>
-            <td colspan="4">Chia theo việc làm</td>
+            <td colspan="4">Chia theo vị thế việc làm</td>
         </tr>
+        
+        @foreach ($dmvithevieclam as $vithe)
         <tr>
-            <td></td><td>Chủ cơ sở sản xuất kinh doanh</td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>{{$vithe->tentgktct2}}</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('thatnghiep',null)->where('vithevl',$vithe->madmtgktct2))}}</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('thatnghiep',null)->where('vithevl',$vithe->madmtgktct2))}}</td>
         </tr>
-        <tr>
-            <td></td><td>Tự làm</td> <td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>Lao động gia đình</td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>Làm công ăn lương</td> <td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
+        @endforeach
+       
         <tr>
             <td  style="font-weight: bold;">3</td>
-            <td  style="font-weight: bold;">Số người thất nghiệp</td>
-            <td style="text-align: center;">Người</td><td></td><td></td>
+            <td  style="font-weight: bold;">Số người thất nghiệp</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('thatnghiep','!=',null))}}</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('thatnghiep','!=',null))}}</td>
         </tr>
         <tr>
             <td>a</td>
@@ -156,63 +145,60 @@
             <td>b</td>
             <td colspan="4">Chia theo trình độ chuyên môn kỹ thật</td>
         </tr>
+        @foreach ($dmtrinhdokythuat as $kythuat)
         <tr>
-            <td></td><td>- Chưa qua đào tạo</td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>{{$kythuat->tentdkt}}</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('thatnghiep','!=',null)->where('trinhdocmkt',$kythuat->madmtdkt))}}</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('thatnghiep','!=',null)->where('trinhdocmkt',$kythuat->madmtdkt))}}</td>
         </tr>
+        @endforeach
+
         <tr>
-            <td></td><td>- CNKT không bằng</td> <td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Chứng chỉ nghề dưới 3 tháng</td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Sơ cấp</td> <td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Trung cấp</td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Cao đẳng</td> <td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Đại học</td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Trên đại học</td> <td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td>b</td>
+            <td>c</td>
             <td colspan="4">Chia theo thời gian thất nghiệp</td>
         </tr>
+
+        @foreach ($tgthatnghiep as $thatnghiep)
         <tr>
-            <td></td><td>- Dưới 3 tháng</td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>{{$thatnghiep->tentgktct2}}</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('thatnghiep','!=',null)->where('lydoktg',null)->where('trinhdocmkt',$thatnghiep->madmtgktct2))}}</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('thatnghiep','!=',null)->where('lydoktg',null)->where('trinhdocmkt',$thatnghiep->madmtgktct2))}}</td>
         </tr>
-        <tr>
-            <td></td><td>- Từ 3 tháng đến 1 năm</td> <td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Trên 1 năm</td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
+        @endforeach
         <tr>
             <td  style="font-weight: bold;">4</td>
-            <td  style="font-weight: bold;">Số người không tham gia hoạt động kinh tế</td>
-            <td style="text-align: center;">Người</td><td></td><td></td>
+            <td  style="font-weight: bold;">Số người không tham gia hoạt động kinh tế</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('lydoktg','!=',null))}}</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('lydoktg','!=',null))}}</td>
         </tr>
+        @foreach ($lydoktg as $i => $lydo)
         <tr>
-            <td> a </td><td> Đi học </td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td>
+                @if ($i == 0)
+                <p>a</p>
+                @endif
+                @if ($i == 1)
+                <p>b</p>
+                @endif
+                @if ($i == 2)
+                <p>c</p>
+                @endif
+                @if ($i == 3)
+                <p>d</p>
+                @endif
+                @if ($i == 4)
+                <p>e</p>
+                @endif
+                @if ($i == 5)
+                <p>g</p>
+                @endif
+            </td>
+            <td> {{$lydo->tentgktct}}</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('lydoktg',$lydo->madmtgktct))}}</td>
+            <td style="text-align: center;">{{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('lydoktg',$lydo->madmtgktct))}}</td>
         </tr>
-        <tr>
-            <td> b </td><td> Hưu trí </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td> c </td><td> Nội trợ </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td> d </td><td> Khuyết tật </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td> e </td><td> Khác </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
+        @endforeach
+        
         {{-- cầu --}}
         <tr>
             <td colspan="5" style="font-weight: bold; text-transform: uppercase;text-align: left">II. THÔNG TIN CẦU LAO ĐỘNG</td>
@@ -220,54 +206,74 @@
         <tr>
             <td  style="font-weight: bold;">1</td>
             <td  style="font-weight: bold;">Tổng số doanh nghiệp</td>
-            <td style="text-align: center;">DN</td><td></td><td></td>
+            <td style="text-align: center;">DN</td>
+            <td style="text-align: center;">{{count($nhucautuyendung->where('nam',$nam-1))}}</td>
+            <td style="text-align: center;">{{count($nhucautuyendung->where('nam',$nam))}}</td>
         </tr>
+        <?php 
+        $tongnhucau_kytruoc = 0;
+        $nhucau_kt = $nhucautuyendung->where('nam',$nam-1);
+        foreach ($nhucau_kt as  $item) {
+            $tongnhucau_kytruoc += $item->soluong; 
+        }
+        $tongnhucau_kybaocao = 0;
+        $nhucau_kbc = $nhucautuyendung->where('nam',$nam);
+        foreach ($nhucau_kbc as  $item) {
+            $tongnhucau_kybaocao += $item->soluong; 
+        }
+        ?>
         <tr>
             <td  style="font-weight: bold;">2</td>
             <td  style="font-weight: bold;">Tổng số lao dộng</td>
-            <td style="text-align: center;">Người</td><td></td><td></td>
+            <td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{$tongnhucau_kytruoc}}</td><td style="text-align: center;">{{$tongnhucau_kybaocao}}</td>
         </tr>
         <tr>
-            <td> a </td><td> Chia theo loại lao động </td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td> a </td><td colspan="4"> Chia theo loại lao động </td>
         </tr>
         <tr>
-            <td></td><td>- Lao động nữ</td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Lao động trên 35 tuổi</td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>- Lao động nữ</td><td style="text-align: center">Người</td>
+            <td style="text-align: center">{{count($nhucautuyendung->where('nam',$nam-1)->where('soluonnu','!=',null)->where('gioitinh','Nu'))}}</td>
+            <td style="text-align: center">{{count($nhucautuyendung->where('nam',$nam)->where('soluonnu','!=',null)->where('gioitinh','Nu'))}}</td>
         </tr>
 
         <tr>
-            <td></td><td>- Lao động tham gia BHXH bắt buộc</td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>- Lao động trên 35 tuổi</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{count($nhucautuyendung->where('nam',$nam-1)->where('dotuoi','duoi35'))}}</td>
+            <td style="text-align: center;">{{count($nhucautuyendung->where('nam',$nam)->where('dotuoi',['tren35','all']))}}</td>
+        </tr>
+
+        <tr>
+            <td></td><td>- Lao động tham gia BHXH bắt buộc</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center"></td>
+            <td style="text-align: center"></td>
         </tr>
         <tr>
-            <td> b </td><td> Chia theo vị trí việc làm </td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td> b </td><td colspan="4"> Chia theo vị trí việc làm </td>
         </tr>
+        @foreach ($vitrivl as $vitri)
         <tr>
-            <td></td><td>- Nhà quản lý</td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>{{$vitri->tentgktct2}}</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{count($nhucautuyendung->where('nam',$nam-1)->where('vitrivl',$vitri->madmtgktct2))}}</td>
+            <td style="text-align: center;">{{count($nhucautuyendung->where('nam',$nam)->where('vitrivl',$vitri->madmtgktct2))}}</td>
         </tr>
-        <tr>
-            <td></td><td>- Chuyên môn kỹ thuật bậc cao</td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Chuyên môn kỹ thuật bậc trung</td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>- Khác</td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
+        @endforeach
+    
+
         {{-- nhu cầu tuyển dụng --}}
         <tr>
             <td colspan="5" style="font-weight: bold; text-transform: uppercase;text-align: left">III. THÔNG TIN NHU CẦU TUYỂN DỤNG LAO ĐỘNG</td>
         </tr>
+
         <tr>
-            <td  style="font-weight: bold;">1</td>
-            <td  style="font-weight: bold;">Tổng số lượng tuyển</td>
-            <td style="text-align: center;">Người</td><td></td><td></td>
+            <td style="font-weight: bold;">1</td>
+            <td style="font-weight: bold;">Tổng số lượng tuyển</td>
+            <td style="text-align: center;">Người</td>
+            <td style="text-align: center;">{{$tongnhucau_kytruoc}}</td><td style="text-align: center;">{{$tongnhucau_kybaocao}}</td>
         </tr>
         <tr>
             <td  style="font-weight: bold;">2</td>
             <td colspan="5"  style="font-weight: bold;">Chia theo loại hình</td>
-            
         </tr>
     
         @foreach ($loaihinhkt as $i => $lh)
@@ -280,57 +286,60 @@
             $namtruoc = (string)$nam2;
             $nambaocao = (string)$nam;
 
-        foreach ($company as  $item) {
-
-            if ($item->loaihinh == $lh->madmlhkt) {
-                array_push($dsdoanhnghiep, $item);
-
+            foreach ($company as  $item) {
+                if ($item->loaihinh == $lh->madmlhkt) {
+                    array_push($dsdoanhnghiep, $item);
+                }
             }
-        }
-             
-            foreach ($nhucautuyendung as  $item) {
-                foreach ($dsdoanhnghiep as  $item2) {
-                    if ($item->madn == $item2->user) {
-                        $a = $item ;
-                        
-                         array_push($dsnhucau, $a);
-                        
+
+            if ($nhucautuyendung != null && $dsdoanhnghiep != null) {
+                foreach ($nhucautuyendung as  $item) {
+                    foreach ($dsdoanhnghiep as  $item2) {
+                        if ($item->madn == $item2->user) {
+                            $a = $item ;
+                            array_push($dsnhucau, $a);
+                        }
                     }
                 }
             }
+           
 
-           foreach ($dsnhucau as  $item) {
-                if ($item->nam == $namtruoc) {
-                    $kytruoc += $item->soluong; 
+            if ($dsnhucau != null) {
+                foreach ($dsnhucau as  $item) {
+                    if ($item->nam == $namtruoc) {
+                        $kytruoc += $item->soluong; 
+                    }
                 }
-           }
 
-           foreach ($dsnhucau as  $item) {
-                if ($item->nam == $nambaocao) {
-                    $kybaocao += $item->soluong; 
+                foreach ($dsnhucau as  $item) {
+                    if ($item->nam == $nambaocao) {
+                        $kybaocao += $item->soluong; 
                    
+                    }
                 }
-           }
+            }
         ?>
         <tr>
-            @if ($i == 0)
-            <td>a</td>
-            @endif
-            @if ($i == 1)
-            <td>b</td>
-            @endif
-            @if ($i == 2)
-            <td>c</td>
-            @endif
-            @if ($i == 3)
-            <td>d</td>
-            @endif
-            @if ($i == 4)
-            <td>e</td>
-            @endif
-            @if ($i == 5)
-            <td>g</td>
-            @endif
+            <td>
+                @if ($i == 0)
+                <p>a</p>
+                @endif
+                @if ($i == 1)
+                <p>b</p>
+                @endif
+                @if ($i == 2)
+                <p>c</p>
+                @endif
+                @if ($i == 3)
+                <p>d</p>
+                @endif
+                @if ($i == 4)
+                <p>e</p>
+                @endif
+                @if ($i == 5)
+                <p>g</p>
+                @endif
+            </td>
             <td> {{$lh->tenlhkt}} </td><td style="text-align: center;">Người</td>
             <td  style="text-align: center;">{{  $kytruoc }}</td><td  style="text-align: center;">{{$kybaocao }}</td>
         </tr>
@@ -341,124 +350,41 @@
             <td colspan="5"  style="font-weight: bold;">Chia theo mã nghề cấp 2</td>
            
         </tr>
+        @foreach ($dmmanghetrinhdo as $manghe)
+        <?php 
+            $dsnghecap2 = [];
+            $dskytruoc = [];
+            $dskybaocao = [];
+            $nghec2_kytruoc = 0;
+            $nghec2_kybaocao = 0;
 
-        <tr>
-            <td></td><td> Nhà quản lý của các cơ quan Tập đoàn, Tổng công ty và tương đương (chuyên trách) </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Nhà chuyên môn trong lĩnh vực khoa học và kỹ thuật </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>  Nhà chuyên môn về sức khỏe </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>    Nhà chuyên môn về giảng dạy </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>  Nhà chuyên môn về kinh doanh và quản lý </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
+            if ($nhucautuyendung != null) {
+                foreach ($nhucautuyendung as $item) {
+                    if ($item->tencongviec == $manghe->madmmntd) {
+                        array_push($dsnghecap2, $item);
+                    }
+                }
+            }
+            if ($dsnghecap2 != null) {
+                foreach ($dsnghecap2 as  $item) {
+                    if ($item->nam == $nam2) {
+                        $nghec2_kytruoc += $item->soluong;
+                    }
+                }
+                foreach ($dsnghecap2 as  $item) {
+                    if ($item->nam == $nam) {
+                        $nghec2_kybaocao += $item->soluong;
+                    }
+                }
+            }
 
+        ?>
         <tr>
-            <td></td><td>  Nhà chuyên môn trong lĩnh vực công nghệ thông tin và truyền thông </td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>{{$manghe->tenmntd}}</td><td style="text-align: center;">Người</td><td style="text-align: center;"> {{$nghec2_kytruoc}} </td>
+            <td style="text-align: center;"> {{$nghec2_kybaocao }} </td>
         </tr>
-        <tr>
-            <td></td><td> Nhà chuyên môn về luật pháp, văn hóa, xã hội </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>  Kỹ thuật viên khoa học và kỹ thuật </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-
-        <tr>
-            <td></td><td> Kỹ thuật viên sức khỏe </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Nhân viên về kinh doanh và quản lý  </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Nhân viên luật pháp, văn hóa, xã hội </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Kỹ thuật viên thông tin và truyền thông </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Giáo viên bậc trung </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Nhân viên tổng hợp và nhân viên làm các công việc bàn giấy </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Nhân viên dịch vụ khách hàng </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Nhân viên ghi chép số liệu và vật liệu </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Nhân viên hỗ trợ văn phòng khác </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Nhân viên dịch vụ cá nhân </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>  Nhân viên bán hàng </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Nhân viên chăm sóc cá nhân </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Nhân viên dịch vụ bảo vệ </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Lao động có kỹ năng trong nông nghiệp có sản phẩm chủ yếu để bán </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Lao động có kỹ năng trong lâm nghiệp, thủy sản và săn bắn có sản phẩm chủ yếu để bán  </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-
-        <tr>
-            <td></td><td> Lao động tự cung tự cấp trong nông nghiệp, lâm nghiệp và thủy sản </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Lao động xây dựng và lao động có liên quan đến nghề xây dựng (trừ thợ điện) </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Thợ luyện kim, cơ khí và thợ có liên quan </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Thợ thủ công và thợ liên quan đến in </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Thợ điện và thợ điện tử </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Thợ chế biến thực phẩm, gia công gỗ, may mặc, đồ thủ công và thợ có liên quan khác </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Thợ vận hành máy móc và thiết bị  </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>       
-        <tr>
-            <td></td><td> Thợ lắp ráp </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Lái xe và thợ vận hành thiết bị chuyển động </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Người quét dọn và giúp việc </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Lao động giản đơn trong nông nghiệp, lâm nghiệp và thủy sản </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Lao động trong ngành khai khoáng, xây dựng, công nghiệp chế biến, chế tạo và giao thông vận tải </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Người phụ giúp chuẩn bị thực phẩm </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td>Lao động trên đường phố và lao động có liên quan đến bán hàng  </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
-        <tr>
-            <td></td><td> Người thu dọn vật thải và lao động giản đơn khác </td><td style="text-align: center;">Người</td><td></td><td></td>
-        </tr>
+        @endforeach
+       
     </table>
 
     <table width="96%" cellspacing="0" height cellpadding="0" style="margin: 20px auto;text-align: center; height:200px">

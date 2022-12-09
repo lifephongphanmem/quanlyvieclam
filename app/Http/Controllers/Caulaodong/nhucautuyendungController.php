@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Danhmuc\dmtinhtrangthamgiahdktct2;
 use Illuminate\Support\Facades\Session;
 
 class nhucautuyendungController extends Controller
@@ -37,7 +38,10 @@ class nhucautuyendungController extends Controller
     {  
         $model = nhucautuyendung::where('matb', $request->matb)->where('madn',session('admin')['madv'])->get();
         $matb = $request->matb;
-        return view('Caulaodong.khaibao.index', compact('model', 'matb'));
+        $dmmanghetrinhdo = dmmanghetrinhdo::all();
+        $modelct = nhucautuyendungct::all();
+        // dd($dmmanghetrinhdo);
+        return view('Caulaodong.khaibao.index', compact('model','modelct', 'matb','dmmanghetrinhdo'));
     }
     
     public function create(Request $request)
@@ -47,11 +51,12 @@ class nhucautuyendungController extends Controller
         $matb = $request->matb;
         $mahs = date('YmdHis');
         $modelct = null;
+        $vitrivl= dmtinhtrangthamgiahdktct2::where('manhom2','20221108050559')->get();
         $dmtrinhdogdpt = dmtrinhdogdpt::all();
         $dmtrinhdokythuat = dmtrinhdokythuat::all();
         $dmmanghetrinhdo = dmmanghetrinhdo::where('trangthai','kh')->get();
         $manghefirst = dmmanghetrinhdo::select('madmmntd')->first();
-        return view('Caulaodong.khaibao.create', compact('matb', 'mahs', 'modelct', 'dmtrinhdokythuat', 'dmtrinhdogdpt','dmmanghetrinhdo','manghefirst'));
+        return view('Caulaodong.khaibao.create', compact('matb', 'mahs', 'modelct','vitrivl', 'dmtrinhdokythuat', 'dmtrinhdogdpt','dmmanghetrinhdo','manghefirst'));
     }
 
     public function store(Request $request)
@@ -67,6 +72,7 @@ class nhucautuyendungController extends Controller
 
     public function edit(Request $request)
     {
+        $vitrivl= dmtinhtrangthamgiahdktct2::where('manhom2','20221108050559')->get();
         $modelct = nhucautuyendungct::where('mahs', $request->mahs)->get();
         $dmtrinhdogdpt = dmtrinhdogdpt::all();
         $dmtrinhdokythuat = dmtrinhdokythuat::all();
@@ -75,7 +81,8 @@ class nhucautuyendungController extends Controller
         $matb = $model->matb;
         $mahs = $model->mahs;
         $manghefirst = dmmanghetrinhdo::select('madmmntd')->first();
-        return view('Caulaodong.khaibao.edit', compact('model','matb','modelct', 'dmtrinhdokythuat', 'dmtrinhdogdpt','mahs','dmmanghetrinhdo','manghefirst'));
+        return view('Caulaodong.khaibao.edit', compact('model','matb','modelct','vitrivl', 'dmtrinhdokythuat', 'dmtrinhdogdpt','mahs',
+        'dmmanghetrinhdo','manghefirst'));
     }
     public function update(Request $request)
     {
@@ -93,7 +100,7 @@ class nhucautuyendungController extends Controller
        $model->update(['trangthai'=> 'dc']);
         return redirect('tuyen_dung/khai_bao_nhu_cau?matb=' . $matb);
     }
-    
+
     public function show(Request $request)
     {
         $model = nhucautuyendung::where('mahs', $request->mahs)->first();
