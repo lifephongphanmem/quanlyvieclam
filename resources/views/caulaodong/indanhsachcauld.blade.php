@@ -51,14 +51,14 @@ style="margin:0 auto 25px; text-align: center;">
                     <td>
                         @foreach ($company as $com)
                             @if ($item->madn == $com->madv)
-                                <span>{{ $com->name }}</span>
+                                {{ $com->name }}
                             @endif
                         @endforeach
                     </td>
                     <td>
                         @foreach ($manghecap2 as $mnghe)
                             @if ($item->tencongviec == $mnghe->madmmntd)
-                                <span>{{ $mnghe->tenmntd }}</span>
+                                {{ $mnghe->tenmntd }}
                             @endif
                         @endforeach
                     </td>

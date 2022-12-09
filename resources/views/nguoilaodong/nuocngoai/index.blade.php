@@ -39,11 +39,17 @@
                     </div>
                     <div class="card-toolbar">
                         @if (chkPhanQuyen('laodongnguoinuocngoai', 'thaydoi'))
-                            <a href="{{ '/nguoilaodong/nuoc_ngoai/in' }}" class="btn btn-sm btn-clean btn-icon mr-2"
-                                title="In danh sách" target="_blank"><i
-                                    class="icon-lg la flaticon2-print text-dark"></i></a>
+
                             <a href="{{ '/nguoilaodong/nuoc_ngoai/create' }}" class="btn btn-sm btn-success mr-2"
                                 title="Thêm mới tài khoản"><i class="fa fa-plus"></i></a>
+                                <button class="btn btn-sm btn-success mr-2 ml-2" title="Nhận dữ liệu từ file Excel"
+                                data-target="#modal-nhanexcel" data-toggle="modal">
+                                <i class="fas fa-file-import"></i>
+                            </button>
+
+                                <a href="{{ '/nguoilaodong/nuoc_ngoai/in' }}" class="btn btn-sm btn-clean mr-2"
+                                title="In danh sách" target="_blank"><i
+                                    class="icon-xl la flaticon2-print text-dark"></i></a>
                         @endif
                     </div>
                 </div>
@@ -99,4 +105,29 @@
     </div>
     <!--end::Row-->
     @include('includes.delete')
+
+    <div id="modal-nhanexcel" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+        <form action="{{ '/nguoilaodong/nuoc_ngoai/nhanexcel' }}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+            @csrf
+            <div class="modal-dialog modal-content">
+                <div class="modal-header modal-header-primary">
+                    <h4 id="modal-header-primary-label" class="modal-title">Nhận danh sách người lao động từ file Excel</h4>
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <div class="col-lg-12">
+                            <input type="file" name="import_file" class="form-control">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Đồng ý</button>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection

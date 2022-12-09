@@ -65,7 +65,7 @@ class HethongchungController extends Controller
                 // $user->save();
                 return view('errors.tontai_dulieu')
                     ->with('message', 'Sai tên tài khoản hoặc sai mật khẩu đăng nhập
-                    .<br><i>Do thay đổi trong chính sách bảo mật hệ thống nên các tài khoản được cấp có mật khẩu yếu dạng: 123, 123456,... sẽ bị thay đổi lại</i>');
+                    .Do thay đổi trong chính sách bảo mật hệ thống nên các tài khoản được cấp có mật khẩu yếu dạng: 123, 123456,... sẽ bị thay đổi lại');
             }
         }
 
@@ -81,7 +81,7 @@ class HethongchungController extends Controller
 		
 					//dd($ttuser);
 					$user->madiaban = $m_donvi->madiaban;
-					$user->phanloaitk = $m_donvi->phanloaitk;
+					// $user->phanloaitk = $m_donvi->phanloaitk;
 					$user->tendv = $m_donvi->tendv;
 					$user->madvcq=$m_donvi->madvcq;
 					// $user->madvbc=$m_donvi->madvbc;
@@ -101,7 +101,7 @@ class HethongchungController extends Controller
 					// $m_diaban = dsdiaban::where('madiaban', $user->madiaban)->first();
 		
 					$user->tendiaban = $diaban->name;
-					$user->capdo = $diaban->capdo;
+					$user->capdodiaban = $diaban->capdo;
 					$user->phanquyen = json_decode($user->phanquyen, true);
 					}else{
 						$cty=Company::where('madv',$user->madv)->first();

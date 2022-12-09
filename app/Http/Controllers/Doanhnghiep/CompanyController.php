@@ -445,12 +445,19 @@ class CompanyController extends Controller
 				->with('pageTitle','Danh sách doanh nghiệp');
 	}
 
-	public function thongtin()
+	public function thongtin(Request $request)
 	{
 		if (!chkPhanQuyen('chitietdoanhnghiep', 'danhsach')) {
             return view('errors.noperm')->with('machucnang', 'chitietdoanhnghiep');
         }
-		$model=Company::where('masodn',session('admin')['madv'])->first();
+		$inputs=$request->all();
+		if(session('admin')->capdo == 'SSA'){
+			$m_doanhnghiep=Company::all();
+		}else{
+			$m_doanhnghiep=Company::where('masodn',session('admin')['madv'])->get();
+		}
+		$inputs['madv']=$inputs['madv'] ?? $inputs['madv']=$m_doanhnghiep->first()->masodn;
+		$model=Company::where('masodn',$inputs['madv'])->first();
 		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
 		$ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
 		$cfield = $this->getParamsByNametype("Ngành nghề doanh nghiệp");// lấy ngành nghề doanh nghiệp
@@ -476,9 +483,11 @@ class CompanyController extends Controller
 
 		return view('doanhnghiep.thongtin')
 					->with('model',$model)
+					->with('m_doanhnghiep',$m_doanhnghiep)
 					->with('dmhanhchinh',$dmhanhchinh)
 					->with('kcn',$kcn)
 					->with('loaihinh',$ctype)
+					->with('inputs',$inputs)
 					->with('nganhnghe',$cfield);
 
 	}

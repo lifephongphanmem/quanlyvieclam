@@ -17,11 +17,13 @@ use App\Models\Danhmuc\dmtrinhdokythuat;
 use App\Models\Danhmuc\nghecongviec;
 use App\Models\Nguoilaodong\nguoilaodong;
 use App\Http\Controllers\Controller;
+use App\Imports\CollectionImport;
+use App\Models\Danhmuc\danhmuchanhchinh;
 use Illuminate\Http\Request;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
-use stdClass;
 use App\Models\Report;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class nguoilaodongController extends Controller
@@ -46,8 +48,15 @@ class nguoilaodongController extends Controller
       return view('errors.noperm')->with('machucnang', 'laodongtrongnuoc');
     }
     // $model=nguoilaodong::paginate(20); 
-    $model = nguoilaodong::where('madb', session('admin')['madv'])
-      ->OrderBy('id', 'DESC')->get();
+    if (session('admin')->phanloaitk == 1) {
+      //Tài khoản hành chính nhà nước
+      $model = nguoilaodong::where('madb', session('admin')->madv)->get();
+    } else {
+      //Tài khoản doanh nghiệp
+      $model = nguoilaodong::where('company', session('admin')['madv'])->OrderBy('id', 'DESC')->get();
+    }
+
+
     $a_chucvu = array_column(dmchucvu::all()->toarray(), 'tencv', 'id');
     return view('nguoilaodong.index')
       ->with('model', $model)
@@ -97,12 +106,6 @@ class nguoilaodongController extends Controller
     $countries_list = $this->getCountries();
     // get params
     $dmhc = $this->getdanhmuc();
-    // $list_cmkt = $this->getParamsByNametype('Trình độ CMKT');
-    // $list_tdgd = $this->getParamsByNametype('Trình độ học vấn');
-    // $list_nghe = $this->getParamsByNametype('Nghề nghiệp người lao động');
-    // $list_vithe = $this->getParamsByNametype('Vị thế việc làm');
-    // $list_linhvuc = $this->getParamsByNametype('Lĩnh vực đào tạo');
-    // $list_hdld = $this->getParamsByNametype('Loại hợp đồng lao động');
     $list_cmkt = dmtrinhdokythuat::all();
     $list_tdgd = dmtrinhdogdpt::all();
     $list_nghe = $this->getParamsByNametype('Nghề nghiệp người lao động');
@@ -110,7 +113,7 @@ class nguoilaodongController extends Controller
     $list_hdld = dmloaihieuluchdld::all();
     $doituong_ut = dmdoituonguutien::all();
     $chucvu = dmchucvu::all();
-    $congty = Company::all();
+    $congty = Company::where('madv', '!=', null)->get();
 
     $list_tinhtrangvl = dmtinhtrangthamgiahdkt::all();
     $list_tinhtrangvl1 = dmtinhtrangthamgiahdktct::all();
@@ -155,11 +158,17 @@ class nguoilaodongController extends Controller
         }
       }
     }
+
+    $a_huyen = array_column(danhmuchanhchinh::where('capdo', 'H')->get()->toarray(), 'name', 'id');
+    $a_xa = array_column(danhmuchanhchinh::where('capdo', 'X')->get()->toarray(), 'name', 'id');
+
     // dd($a_lydo_khongthamgia_hdkt);
     // return view ('pages.employer.new')
     return view('nguoilaodong.create')
       ->with('countries_list', $countries_list)
       ->with('dmhc', $dmhc)
+      ->with('a_huyen', $a_huyen)
+      ->with('a_xa', $a_xa)
       ->with('chucvu', $chucvu)
       ->with('congty', $congty)
       ->with('a_vithevl', $a_vithevl)
@@ -187,7 +196,26 @@ class nguoilaodongController extends Controller
       return view('errors.noperm')->with('machucnang', 'laodongtrongnuoc');
     }
     $inputs = $request->all();
-    $inputs['madb'] = session('admin')['madv'];
+    //Lấy dữ liệu để add vào 2 trường madb và company
+
+    if (session('admin')->phanloaitk == 1) //Tài khoản hành chính nhà nước
+    {
+      $inputs['madb'] = session('admin')->madv;
+    } else {
+      $inputs['company'] = session('admin')->madv;
+      $donvi = dmdonvi::where('madiaban', $inputs['xa'])->first();
+      $inputs['madb'] = $donvi->madv;
+    }
+
+    //Lấy tên xã và huyện dựa trên inputs xã và huyện
+    $a_diaban = danhmuchanhchinh::all();
+    $a_xa = array_column($a_diaban->where('capdo', 'X')->toarray(), 'name', 'id');
+    // $a_huyen=array_column($a_diaban->where('capdo','H')->toarray(),'name','id');
+    isset($inputs['xa']) ? $tenxa = $a_xa[$inputs['xa']] : $tenxa = '';
+    isset($inputs['xa']) ? $tenhuyen = $this->getHuyen($inputs['xa']) : $tenhuyen = '';
+    $inputs['thuongtru'] = $inputs['address'] . '-' . $tenxa . '-' . $tenhuyen . '- Quảng Bình';
+
+
     $inputs['ma_nld'] = getdate()[0];
     $model = nguoilaodong::where('cmnd', $inputs['cmnd'])->first();
     if ($model != null) {
@@ -195,6 +223,7 @@ class nguoilaodongController extends Controller
         ->with('message', 'Người lao động đã có trong danh sách')
         ->with('furl', '/nguoilaodong');
     }
+
     nguoilaodong::create($inputs);
     return redirect('/nguoilaodong')
       ->with('success', 'Thêm mới thành công');
@@ -208,8 +237,8 @@ class nguoilaodongController extends Controller
     $inputs = $request->all();
     $inputs['ma_nld'] = getdate()[0];
     $inputs['sohc'] = $inputs['cmnd'];
-    $inputs['madb']=session('admin')->madv;
-    $model = nguoilaodong::where('sohc', $inputs['sohc'])->first();
+    $inputs['madb'] = session('admin')->madv;
+    $model = nguoilaodong::where('cmnd', $inputs['cmnd'])->first();
     if ($model != null) {
       return view('errors.tontai_dulieu')
         ->with('message', 'Người lao động đã có trong danh sách')
@@ -285,10 +314,15 @@ class nguoilaodongController extends Controller
         }
       }
     }
+
+    $a_huyen = array_column(danhmuchanhchinh::where('capdo', 'H')->get()->toarray(), 'name', 'id');
+    $a_xa = array_column(danhmuchanhchinh::where('capdo', 'X')->get()->toarray(), 'name', 'id');
     return view('nguoilaodong.edit')
       ->with('countries_list', $countries_list)
       ->with('dmhc', $dmhc)
       ->with('chucvu', $chucvu)
+      ->with('a_huyen', $a_huyen)
+      ->with('a_xa', $a_xa)
       ->with('doituong_ut', $doituong_ut)
       ->with('congty', $congty)
       ->with('list_cmkt', $list_cmkt)
@@ -337,6 +371,14 @@ class nguoilaodongController extends Controller
     }
     $inputs = $request->all();
     $model = nguoilaodong::findOrFail($id);
+
+    //Lấy tên xã và huyện dựa trên inputs xã và huyện
+    $a_diaban = danhmuchanhchinh::all();
+    $a_xa = array_column($a_diaban->where('capdo', 'X')->toarray(), 'name', 'id');
+    // $a_huyen=array_column($a_diaban->where('capdo','H')->toarray(),'name','id');
+    isset($inputs['xa']) ? $tenxa = $a_xa[$inputs['xa']] : $tenxa = '';
+    isset($inputs['xa']) ? $tenhuyen = $this->getHuyen($inputs['xa']) : $tenhuyen = '';
+    $inputs['thuongtru'] = $inputs['address'] . '-' . $tenxa . '-' . $tenhuyen . '- Quảng Bình';
     $model->update($inputs);
     return redirect('/nguoilaodong')
       ->with('success', 'Cập nhật thành công');
@@ -351,7 +393,7 @@ class nguoilaodongController extends Controller
     $inputs['sohc'] = $inputs['cmnd'];
     $model = nguoilaodong::findOrFail($id);
     $model->update($inputs);
-    return redirect('/nguoilaoding/nuoc_ngoai')
+    return redirect('/nguoilaodong/nuoc_ngoai')
       ->with('success', 'Cập nhật thành công');
   }
 
@@ -385,7 +427,7 @@ class nguoilaodongController extends Controller
 
   public function danhsach_nuocngoai()
   {
-    $model = nguoilaodong::wherenotin('nation', ['VN', 'Việt Nam'])->get();
+    $model = nguoilaodong::where('madb',session('admin')->madv)->get();
     $m_dv = dmdonvi::where('madv', session('admin')['madv'])->first();
     return view('reports.laodongnuocngoai.danhsach')
       ->with('model', $model)
@@ -679,73 +721,53 @@ class nguoilaodongController extends Controller
   public function importFile(Request $request)
   {
     $file = $request->file('import_file');
-    $dataOject = new stdClass();
+    $dataOject = new CollectionImport(true);
     $theArray = Excel::toArray($dataOject, $file);
     $arr = $theArray[0];
+    //Tìm mã đơn vị dựa trên mã xã khi công ty insert người lao động
+    $a_donvi = array_column(dmdonvi::all()->toarray(), 'madv', 'madiaban');
+
     $lds = array();
-    $nfield = 34;
+    $nfield = 19;
+
     for ($i = 1; $i < count($arr); $i++) {
 
       $data = array();
+      $dulieu = array();
       for ($j = 0; $j < $nfield; $j++) {
 
         $data[$arr[0][$j]] = $arr[$i][$j];
       }
+
       // check data
-      if (!$data['hoten']) {
+      if (!$data['Họ Tên']) {
         break;
       };
-      $data['cmnd'] = str_replace('\'', '', $data['cmnd']);
+      $dulieu['cmnd'] = str_replace('\'', '', $data['cmnd']);
 
-      if (!$this->checkCmndExits($data['cmnd'])) {
-        $data['company'] = session('admin')['madv'];
-        $data['ma_nld'] = getdate()[0];
-        $unix_date = ($data['ngaysinh'] - 25569) * 86400;
-
-        $data['ngaysinh'] = date('Y-m-d', $unix_date);
-
-        if (!$data['state']) {
-          $data['state'] = 1;
+      if (!$this->checkCmndExits($dulieu['cmnd'])) {
+        if (session('admin')->phanloaitk == 1) {
+          $dulieu['company'] = $data['macongty'];
+          $dulieu['madb'] = session('admin')->madv;
+          $dulieu['xa'] = session('admin')->madiaban;
+        } else {
+          $dulieu['company'] = session('admin')->madv;
+          $dulieu['xa'] = $data['maxa'];
+          $dulieu['madb'] = $a_donvi[$data['maxa']];
         }
 
-        if ($data['bdbhxh']) {
-
-          $unix_date = ($data['bdbhxh'] - 25569) * 86400;
-
-          $data['bdbhxh'] = date('Y-m-d', $unix_date);
-        }
-        if ($data['bdhopdong']) {
-
-          $unix_date = ($data['bdhopdong'] - 25569) * 86400;
-
-          $data['bdhopdong'] = date('Y-m-d', $unix_date);
-        }
-
-        if ($data['bddochai']) {
-
-          $unix_date = ($data['bddochai'] - 25569) * 86400;
-
-          $data['bddochai'] = date('Y-m-d', $unix_date);
-        }
-        if ($data['ktdochai']) {
-
-          $unix_date = ($data['ktdochai'] - 25569) * 86400;
-
-          $data['ktdochai'] = date('Y-m-d', $unix_date);
-        }
-        if ($data['kthopdong']) {
-
-          $unix_date = ($data['kthopdong'] - 25569) * 86400;
-
-          $data['kthopdong'] = date('Y-m-d', $unix_date);
-        }
-        if ($data['ktbhxh']) {
-
-          $unix_date = ($data['ktbhxh'] - 25569) * 86400;
-
-          $data['ktbhxh'] = date('Y-m-d', $unix_date);
-        }
-        $lds[] =  $data;
+        $dulieu['chuyenmondaotao'] = $data['madaotao'];
+        $dulieu['tinhtrangvl'] = $data['matinhtrangvl'];
+        $dulieu['trinhdocmkt'] = $data['matrinhdokythuat'];
+        $dulieu['trinhdogiaoduc'] = $data['magiaoduc'];
+        // $data['ma_nld'] = date('YmdHis');
+        $dulieu['ngaysinh'] = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($data['Ngày sinh'])->format('Y-m-d');
+        $dulieu['hoten'] = $data['Họ Tên'];
+        $dulieu['gioitinh'] = $data['Giới Tính'];
+        $dulieu['phone'] = str_replace('\'', '', $data['Điện thoại']);
+        $dulieu['dantoc'] = $data['Dân tộc'];
+        $dulieu['thuongtru'] = $data['Thường Trú'];
+        $lds[] =  $dulieu;
       }
     }
     $num_valid_ld = count($lds);
@@ -768,12 +790,81 @@ class nguoilaodongController extends Controller
   public function checkCmndExits($cmnd)
   {
 
-    $result = DB::table('nguoilaodong')->select('id')->where('cmnd', $cmnd)->whereNotIn('state', [3])->get()->first();
+    $result = DB::table('nguoilaodong')->select('id')->where('cmnd', $cmnd)->get()->first();
     if ($result) {
       return $result->id;
     } else {
 
       return 0;
+    }
+  }
+
+
+  // public function getHuyen($maxa)
+  // {
+  //   $xa = danhmuchanhchinh::findOrFail($maxa);
+  //   $huyen = danhmuchanhchinh::where('maquocgia', $xa->parent)->first();
+  //   $tenhuyen = $huyen->name;
+  //   return $tenhuyen;
+  // }
+
+  public function nhanExcelNuocngoai(Request $request)
+  {
+    $file = $request->file('import_file');
+    $dataOject = new CollectionImport(true);
+    $theArray = Excel::toArray($dataOject, $file);
+    $arr = $theArray[0];
+    //Tìm mã đơn vị dựa trên mã xã khi công ty insert người lao động
+    $lds = array();
+    $nfield = 11;
+
+    for ($i = 1; $i < count($arr); $i++) {
+
+      $data = array();
+      $dulieu = array();
+      for ($j = 0; $j < $nfield; $j++) {
+
+        $data[$arr[0][$j]] = $arr[$i][$j];
+      }
+      // check data
+      if (!$data['Họ Tên']) {
+        break;
+      };
+
+      $dulieu['cmnd'] = str_replace('\'', '', $data['Số hộ chiếu']);
+
+      if (!$this->checkCmndExits($dulieu['cmnd'])) {
+          $dulieu['company'] = $data['Công ty, tổ chức'];
+          $dulieu['madb'] = session('admin')->madv;
+
+
+        $dulieu['ngaycapsohc'] = $data['Ngày cấp hộ chiếu'];
+        $dulieu['ngaycapsogpld'] =$data['Ngày cấp giấy phép lao động'];
+        $dulieu['nation'] = $data['Quốc tịch'];
+        $dulieu['vitri'] = $data['Vị trí công việc'];
+        $dulieu['ngaysinh'] =$data['Ngày sinh'];
+        $dulieu['hoten'] = $data['Họ Tên'];
+        $dulieu['gioitinh'] = $data['Giới tính'];
+        $dulieu['sogpld'] = $data['Số giấy phép lao động'];
+        $dulieu['trinhdo'] = $data['Trình độ'];
+
+        $lds[] =  $dulieu;
+      }
+    }
+    // dd($lds);
+    $num_valid_ld = count($lds);
+    if ($num_valid_ld) {
+      $result = DB::table('nguoilaodong')->insert($lds);
+      // $result=nguoilaodong::create($lds);
+      $note = "Đã lưu thành công " . $num_valid_ld . " lao động.";
+      // add to log system`
+      $rm = new Report();
+      $rm->report('import', $result, 'nguoilaodong', DB::getPdo()->lastInsertId(), $num_valid_ld, $note);
+      return redirect('/nguoilaodong/nuoc_ngoai')
+        ->with('success', $note);
+    } else {
+      return redirect('nguoilaodong')
+        ->with('error', 'Người lao động đã có trong danh sách');
     }
   }
 }

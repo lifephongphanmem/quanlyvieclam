@@ -13,7 +13,7 @@
         </tr>
         <tr>
             <td style="text-align: left;width: 60%">
-                <b>Đơn vị: {{$m_dv->tendv}}</b>
+                <b>Đơn vị: {{isset($m_dv)?$m_dv->tendv:''}}</b>
             </td>
             <td style="text-align: center; font-style: italic">
 

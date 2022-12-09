@@ -30,6 +30,14 @@
                     <div class="card-toolbar">
                         <a href="{{ 'khai_bao_nhu_cau/them_moi?matb=' . $matb}}" class="btn btn-sm btn-success mr-2"
                             title="Thêm mới"><i class="fa fa-plus"></i>Thêm mới</a>
+
+                            <button class="btn btn-sm btn-success mr-2 ml-2" title="Nhận dữ liệu từ file Excel"
+                            data-target="#modal-nhanexcel" data-toggle="modal">
+                            <i class="fas fa-file-import"></i>
+                        </button>
+                        <a href="{{asset('excel/maunhucaulaodong.xlsx')}}" class="btn btn-sm btn-success mr-2 ml-2" title="Tải file Excel mẫu">                            
+                            <i class="fa fa-file-download"></i>
+                    </a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -181,6 +189,34 @@
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-primary">ok</button>
                     </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="modal-nhanexcel" tabindex="-1" role="dialog" aria-hidden="true" class="modal fade">
+        <form action="{{ '/tuyen_dung/nhanExcel' }}" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+            @csrf
+            <div class="modal-dialog modal-content">
+                <div class="modal-header modal-header-primary">
+                    <h4 id="modal-header-primary-label" class="modal-title">Nhận danh sách nhu cầu lao động từ file Excel</h4>
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <div class="col-lg-12">
+                            <input type="file" name="import_file" class="form-control">
+                            <input type="text" name="matb" value="{{$matb}}" class="form-control" hidden>
+                            {{-- <input type="text" name="mahs" value="{{$mahs}}" class="form-control" hidden> --}}
+                            {{-- <input type="text" name="nam" value="{{$nam}}" class="form-control" hidden> --}}
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Hủy thao tác</button>
+                    <button type="submit" name="submit" value="submit" class="btn btn-primary">Đồng ý</button>
                 </div>
             </div>
         </form>

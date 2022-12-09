@@ -14,6 +14,9 @@
         jQuery(document).ready(function() {
             // TableManaged3.init();
         });
+        $('#madv').change(function() {
+                window.location.href = "/doanh_nghiep/thongtin?madv="+$('#madv').val();
+            });
     </script>
 @stop
 @section('content')
@@ -36,6 +39,24 @@
                     <div class="card-toolbar">
                         <a href="{{ '/doanh_nghiep/cap_nhat/'.$model->id.'?edit=1' }}" class="btn btn-sm btn-success mr-2"
                             title="Thêm mới tài khoản">Chỉnh sửa</a>
+                    </div>
+                </div>
+
+                <div class="float-left mr-5 mt-5" style="width:40%;margin-left:140px">
+                    <div class="mt-2 float-left">
+                        <div class="form-group">
+                            <label class="control-label">Doanh nghiệp</label>
+                        </div>
+                    </div>
+                    <div class="float-left ml-2" style="width:60%">
+                        <div class="form-group">
+                            <select name="madv" id="madv" class="form-control select2basic">
+                                @foreach ($m_doanhnghiep as $ct )
+                                    <option value="{{$ct->masodn}}"  {{ $ct->masodn == $inputs['madv'] ? 'selected' : '' }}>{{$ct->name}}</option>
+                                @endforeach
+                            </select>
+
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">

@@ -25,5 +25,6 @@ Route::prefix('nguoilaodong')->group(function () {
         Route::post('/update/{id}', [nguoilaodongController::class, 'update_nuocngoai']);
         Route::get('/delete/{id}', [nguoilaodongController::class, 'destroy_nuocngoai']);
         Route::get('/in', [nguoilaodongController::class, 'danhsach_nuocngoai']);
+        Route::post('/nhanexcel', [nguoilaodongController::class, 'nhanExcelNuocngoai']);
     });
 });

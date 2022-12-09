@@ -66,7 +66,8 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Chuyên môn đào tạo</label>
-                    <select class="form-control input-sm m-bot5 select2basic" name="chuyenmondaotao">
+                    <select class="form-control input-sm m-bot5 select2basic
+                    " name="chuyenmondaotao">
                         @foreach ($dmchuyenmon as $cm )
                         <option value='{{$cm->id}}'{{isset($model)?($model->chuyenmondaotao==$cm->id?'selected':''):''}}>{{$cm->tendm}}</option>
                         @endforeach
