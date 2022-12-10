@@ -39,13 +39,48 @@
                     </li>
                 @endif
                 @if (chkPhanQuyen('laodongnguoinuocngoai', 'phanquyen'))
-                    <li class="menu-item" aria-haspopup="true">
+                    {{-- <li class="menu-item" aria-haspopup="true">
                         <a href="{{ url('/nguoilaodong/nuoc_ngoai') }}" class="menu-link">
                             <i class="menu-bullet menu-bullet-dot">
                                 <span></span>
                             </i>
                             <span class="menu-text">Người lao động nước ngoài</span>
                         </a>
+                    </li> --}}
+                    <li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
+                        <a href="javascript:;" class="menu-link menu-toggle">
+                            <i class="menu-bullet menu-bullet-dot">
+                                <span></span>
+                            </i>
+                            <span class="menu-text font-weight-bold">Người lao động nước ngoài</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="menu-submenu menu-submenu-classic menu-submenu-right">
+                            <ul class="menu-subnav">
+                                {{-- @if (chkPhanQuyen('diaban', 'phanquyen')) --}}
+                                <li class="menu-item" aria-haspopup="true">
+                                    <a href="{{ url('/nguoilaodong/nuoc_ngoai') }}" class="menu-link">
+        
+                                        <i class="menu-bullet menu-bullet-dot">
+                                            <span></span>
+                                        </i>
+                                        <span class="menu-text font-weight-bold">Danh sách</span>
+                                    </a>
+                                </li>
+                                {{-- @endif --}}
+                                {{-- @if (chkPhanQuyen('donvi', 'phanquyen')) --}}
+                                <li class="menu-item" aria-haspopup="true">
+                                    <a href="{{ url('nguoilaodong/nuoc_ngoai/tonghop') }}" class="menu-link">
+                                        <i class="menu-bullet menu-bullet-dot">
+                                            <span></span>
+                                        </i>
+                                        <span class="menu-text font-weight-bold">Tổng hợp</span>
+                                    </a>
+                                </li>
+                                {{-- @endif --}}
+
+                            </ul>
+                        </div>
                     </li>
                 @endif
 

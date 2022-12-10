@@ -5,14 +5,14 @@
                 <div class="form-group">
                     <label class="control-label">Họ tên <span class="require">*</span></label>
                     {{-- {!!Form::text('tencanbo', null, array('id' => 'tencanbo','class' => 'form-control', 'required'=>'required'))!!} --}}
-                    <input type="text" name="hoten" class="form-control" value="{{isset($model)?$model->hoten:''}}" required>
+                    <input type="text" name="hoten" class="form-control" placeholder="Nhập đầy đủ Họ và Tên" value="{{isset($model)?$model->hoten:''}}" required>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Số CMND/CCCD (*)</label>
-                    <input type="text" name="cmnd" class="form-control" value="{{isset($model)?$model->cmnd:''}}" required>
+                    <input type="text" name="cmnd" class="form-control" placeholder="CMND/CCCD" value="{{isset($model)?$model->cmnd:''}}" required>
                 </div>
             </div>
 
@@ -39,7 +39,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Dân tộc</label>
-                    <input type="text" name="dantoc" class="form-control" value="{{isset($model)?$model->dantoc:''}}">
+                    <input type="text" name="dantoc" placeholder="Tên dân tộc" class="form-control" value="{{isset($model)?$model->dantoc:''}}">
                 </div>
             </div>
             <div class="col-md-3">
@@ -68,7 +68,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Số điện thoại</label>
-                    <input type="text" name="phone" class="form-control" value="{{isset($model)?$model->phone:''}}">
+                    <input type="text" name="phone" placeholder="Số điện thoại" class="form-control" value="{{isset($model)?$model->phone:''}}">
                 </div>
             </div>
         </div>
@@ -77,12 +77,22 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Công ty</label>
+                    @if (session('admin')->phanloaitk == 1)
                     <select class="form-control input-sm m-bot15 select2basic" name="company">
                         <option value=''>-- Chọn công ty --</option>
                         @foreach ($congty as $ct )
-                            <option value="{{$ct->masodn}}" {{isset($model)?($ct->masodn == $model->company?'selected':''):''}}>{{$ct->name}}</option>
+                            <option value="{{$ct->madv}}" {{isset($model)?($ct->madv == $model->company?'selected':''):''}}>{{$ct->name}}</option>
                         @endforeach
                     </select>
+                    @else
+                    <select class="form-control input-sm m-bot15 select2basic" name="company" disabled>
+                        <option value=''>-- Chọn công ty --</option>
+                        @foreach ($congty as $ct )
+                            <option value="{{$ct->madv}}" {{isset($model)?($ct->madv == $model->company?'selected':''):''}}>{{$ct->name}}</option>
+                        @endforeach
+                    </select>
+                    @endif
+
                 </div>
             </div>
             <div class="col-md-3">
@@ -161,7 +171,7 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label">Công việc hiện tại</label>
-                        <input type="text" name='cvhientai' class="form-control">
+                        <input type="text" name='cvhientai' placeholder="Nhập công việc chính" class="form-control">
                 </div>
             </div>
             <div class="col-md-3">
@@ -178,7 +188,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">Người thất nghiệp</label>
                     <select class="form-control input-sm m-bot15 select2basic" name="thatnghiep" id='thatnghiep'>
@@ -189,7 +199,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">Thời gian thất nghiệp</label>
                     <select class="form-control input-sm m-bot15 select2basic" name="thoigianthatnghiep" id='thoigianthatnghiep'>
@@ -200,7 +210,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">Lý do không tham gia HĐKT</label>
                     <select class="form-control input-sm m-bot15 select2basic" name="lydoktg" >
@@ -213,18 +223,28 @@
             </div>
         </div>
         <div class="row" >
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
-                    <label class="control-label">Nơi đăng ký thường trú</label>
-                    <textarea name="thuongtru" id="thuongtru" cols="" rows="3" class="form-control">{{isset($model)?$model->thuongtru:''}}</textarea>
+                    <label class="control-label">Xã</label>
+                    {!! Form::select('xa', setArrayAll($a_xa, '-- Chọn xã --', ''), isset($model)?$model->xa:null, [
+                        'class' => 'form-control select2basic',
+                    ]) !!}
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
-                    <label class="control-label">Nơi ở hiện tại</label>
-                    <textarea name="tamtru" id="tamtru" cols="" rows="3" class="form-control">{{isset($model)?$model->tamtru:''}}</textarea>
+                    <label class="control-label">Địa chỉ thường trú</label>
+                        {{-- <textarea name="'thuongtru" rows="10" class="form-control">{{isset($model)?$model->thuongtru:''}}</textarea> --}}
+                        {!! Form::text('address', isset($model)?$model->address:null, ['class' => 'form-control','placeholder'=>'Tổ dân phố/ Thôn/ Xóm']) !!}
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Địa chỉ tạm trú</label>
+                    {!! Form::text('tamtru', isset($model)?$model->tamtru:null, ['class' => 'form-control','placeholder'=>'Thôn - Xã - Huyện']) !!}
+                </div>
+            </div>
+
 
         </div>
     </div>
