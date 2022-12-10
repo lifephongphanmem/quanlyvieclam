@@ -7,7 +7,7 @@ use App\Models\Danhmuc\dmloaihinhhdkt;
 use App\Models\Nguoilaodong\nguoilaodong;
 use App\Models\Caulaodong\nhucautuyendung;
 use App\Models\Caulaodong\nhucautuyendungct;
-use App\Models\Thongbao\thongbao;
+use App\Models\Thongbao\Thongbao;
 use App\Models\Cunglaodong\tonghopdanhsachcungld;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

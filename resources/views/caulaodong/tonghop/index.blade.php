@@ -1,4 +1,22 @@
 @extends('main')
+@section('custom-style')
+    <link rel="stylesheet" type="text/css"
+        href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
+@stop
+
+@section('custom-script')
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
+    </script>
+    <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
+
+        <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
+    <script>
+        jQuery(document).ready(function() {
+            TableManaged3.init();
+        });
+    </script>
+@stop
 @section('content')
     <div class="row">
         <div class="col-xl-12">
@@ -18,7 +36,6 @@
 
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
                         <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                             <thead>
                                 <tr class="text-center">
@@ -76,13 +93,12 @@
                                 <?php } ?>
                             </tbody>
                         </table>
-                    </div>
+                        <div style="text-align: center">
+                            <a href="{{ '/tuyen_dung/thong_tin_tong_hop/dot_thu_thap' }}" class="btn btn-danger"><i
+                                    class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                        </div>
+                </div>
 
-                </div>
-                <div style="text-align: center">
-                    <a href="{{ '/tuyen_dung/thong_tin_tong_hop/dot_thu_thap' }}" class="btn btn-danger"><i
-                            class="fa fa-reply"></i>&nbsp;Quay lại</a>
-                </div>
             </div>
             <!--end::Card-->
             <!--end::Example-->
