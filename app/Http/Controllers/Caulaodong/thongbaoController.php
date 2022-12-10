@@ -159,7 +159,7 @@ class thongbaoController extends Controller
         // dd($model);
         $company =Company::all();
         $manghecap2 = dmmanghetrinhdo::all();
-        return view('Caulaodong.indanhsachcauld',compact('model','company','manghecap2'))
+        return view('caulaodong.indanhsachcauld',compact('model','company','manghecap2'))
         ->with('pageTitle', 'danh sách cầu lao động');
     }
 
