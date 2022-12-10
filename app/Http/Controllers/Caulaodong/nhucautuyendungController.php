@@ -45,7 +45,7 @@ class nhucautuyendungController extends Controller
         $dmmanghetrinhdo = dmmanghetrinhdo::all();
         $modelct = nhucautuyendungct::all();
         // dd($dmmanghetrinhdo);
-        return view('Caulaodong.khaibao.index', compact('model','modelct', 'matb','dmmanghetrinhdo'));
+        return view('caulaodong.khaibao.index', compact('model','modelct', 'matb','dmmanghetrinhdo'));
     }
     
     public function create(Request $request)
@@ -60,7 +60,7 @@ class nhucautuyendungController extends Controller
         $dmtrinhdokythuat = dmtrinhdokythuat::all();
         $dmmanghetrinhdo = dmmanghetrinhdo::where('trangthai','kh')->get();
         $manghefirst = dmmanghetrinhdo::select('madmmntd')->first();
-        return view('Caulaodong.khaibao.create', compact('matb', 'mahs', 'modelct','vitrivl', 'dmtrinhdokythuat', 'dmtrinhdogdpt','dmmanghetrinhdo','manghefirst'));
+        return view('caulaodong.khaibao.create', compact('matb', 'mahs', 'modelct','vitrivl', 'dmtrinhdokythuat', 'dmtrinhdogdpt','dmmanghetrinhdo','manghefirst'));
     }
 
     public function store(Request $request)
@@ -85,7 +85,7 @@ class nhucautuyendungController extends Controller
         $matb = $model->matb;
         $mahs = $model->mahs;
         $manghefirst = dmmanghetrinhdo::select('madmmntd')->first();
-        return view('Caulaodong.khaibao.edit', compact('model','matb','modelct','vitrivl', 'dmtrinhdokythuat', 'dmtrinhdogdpt','mahs',
+        return view('caulaodong.khaibao.edit', compact('model','matb','modelct','vitrivl', 'dmtrinhdokythuat', 'dmtrinhdogdpt','mahs',
         'dmmanghetrinhdo','manghefirst'));
     }
     public function update(Request $request)
@@ -111,7 +111,7 @@ class nhucautuyendungController extends Controller
         $matb = $model->matb;
         $modelct = nhucautuyendungct::where('mahs', $request->mahs)->get();
         $dmmanghetrinhdo = dmmanghetrinhdo::where('trangthai','kh')->get();
-        return view('Caulaodong.khaibao.show', compact('model','matb','modelct','dmmanghetrinhdo'));
+        return view('caulaodong.khaibao.show', compact('model','matb','modelct','dmmanghetrinhdo'));
     }
 
     public function delete($id)
@@ -128,7 +128,7 @@ class nhucautuyendungController extends Controller
         $model = nhucautuyendung::where('matb', $request->matb)->where('trangthai','dc')->get();
         $matb = $request->matb;
         $doanhnghiep = Company::all();
-        return view('Caulaodong.tonghop.index', compact('model', 'matb','doanhnghiep'));
+        return view('caulaodong.tonghop.index', compact('model', 'matb','doanhnghiep'));
     }
 
     public function tralai(Request $request)

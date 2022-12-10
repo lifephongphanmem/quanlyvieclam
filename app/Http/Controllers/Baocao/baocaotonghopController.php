@@ -44,7 +44,7 @@ class baocaotonghopController extends Controller
    
         $tonghopcungld = tonghopdanhsachcungld::all();
         $company = Company::all();
-        $thongbaocungld = thongbao::all();
+        $thongbaocungld = Thongbao::all();
         return view('reports.baocaotonghop.index', compact('nguoidung', 'tonghopcungld', 'company','thongbaocungld'));
     }
 
