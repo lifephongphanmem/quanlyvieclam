@@ -40,6 +40,7 @@
                     @include('main.main_subcunglaodong')
                     @include('main.main_subcaulaodong')
                     @include('main.main_subtinhhinhsudunglaodong')
+                    @include('main.main_subdubao')
                     @include('main.main_subtracuu')
                     @include('main.main_subbaocao')
                     @include('main.main_subhethong')
