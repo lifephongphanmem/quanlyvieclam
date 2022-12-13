@@ -21,6 +21,8 @@ class CreateThongbao extends Migration
             $table->string('noidung')->nullable();
             $table->string('thoidiem')->nullable();
             $table->string('trangthai')->nullable();
+            $table->string('filequyetdinh')->nullable();
+            $table->string('filekhac')->nullable();
             $table->timestamps();
         });
     }

@@ -20,8 +20,9 @@
                     <div class="row">
                         <div class="col-xl-6">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Mã nghề cấp 2*</b></label>
-                                <select id="tencongviec" name="tencongviec" style="width: 100%"  class="form-control select2basic" multiple>
+                                <label><b>Mã nghề cấp 2</b></label>
+                                <select id="tencongviec" name="tencongviec" style="width: 100%"  class="form-control select2basic" >
+                                    <option value="">------ Chọn Mã nghề cấp 2 ------</option>
                                     @foreach ($dmmanghetrinhdo as $item)
                                         <option value="{{ $item->madmmntd }}">{{ $item->tenmntd }}</option>
                                     @endforeach
@@ -30,7 +31,7 @@
                         </div>
                         <div class="col-xl-2">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Độ tuổi*</b></label>
+                                <label><b>Độ tuổi</b></label>
                                 <select id="dotuoi" name="dotuoi" class="form-control">
                                     <option value="all">Mọi độ tuổi</option>
                                     <option value="duoi35">Dưới 35 tuổi</option>
@@ -58,7 +59,7 @@
                         </div>
                         <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Vị trí việc làm*</b></label>
+                                <label><b>Vị trí việc làm</b></label>
                                 <select id="vitrivl" name="vitrivl" class="form-control">
                                     <option value="">--- chọn vị trí việc làm ----</option>
                                     @foreach ($vitrivl as $item)
@@ -82,7 +83,7 @@
         
                         <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Trình độ văn hóa*</b></label>
+                                <label><b>Trình độ văn hóa</b></label>
                                 <select id="tdvanhoa" name="tdvanhoa" class="form-control">
                                     <option value="">--- chọn trình độ văn hóa ----</option>
                                     @foreach ($dmtrinhdogdpt as $item)
@@ -93,7 +94,7 @@
                         </div>
                         <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Trình độ kỹ thuật*</b></label>
+                                <label><b>Trình độ kỹ thuật</b></label>
                                 <select id="tdkythuat" name="tdkythuat" class="form-control">
                                     <option value="">--- chọn trình độ kỹ thuật ----</option>
                                     @foreach ($dmtrinhdokythuat as $item)
@@ -134,7 +135,7 @@
                         </div>
                         <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Hỗ trợ ăn*</b></label>
+                                <label><b>Hỗ trợ ăn</b></label>
                                 <select id="hotroan" name="hotroan" class="form-control">
                                     <option value="0"> không </option>
                                     <option value="1"> 1 bữa </option>
@@ -191,7 +192,7 @@
 <script>
 
     function setcreate() {
-        console.log(1);
+      
         $('#id').val(null);
         $('#tencongviec').val('{{$manghefirst->madmmntd}}');
         $('#soluong').val(null);
@@ -212,7 +213,7 @@
     }
 
     function store() {
-        alert()
+       
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             url: '/tuyen_dung/khai_bao_nhu_cau/store_ct',

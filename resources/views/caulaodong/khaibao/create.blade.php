@@ -58,7 +58,7 @@
                             </div>
                             <div class="col-xl-6">
                                 <div class="form-group fv-plugins-icon-container">
-                                    <label><b>Yêu cầu*</b></label>
+                                    <label><b>Yêu cầu</b></label>
                                     <select id="yeucau" name="yeucau" class="form-control">
                                         <option value="tv">Tư vấn</option>
                                         <option value="gtvl">Giới thiệu việc làm</option>
