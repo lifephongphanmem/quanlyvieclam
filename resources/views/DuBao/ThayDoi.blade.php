@@ -1,23 +1,21 @@
-@extends('HeThong.main')
-
+@extends('main')
 @section('custom-style')
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/css/pages/dataTables.bootstrap.css') }}" />
-    {{-- <link rel="stylesheet" type="text/css" href="{{ url('assets/css/pages/select2.css') }}" /> --}}
+    <link rel="stylesheet" type="text/css"
+        href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
 @stop
 
-@section('custom-script-footer')
-    <!-- BEGIN PAGE LEVEL PLUGINS -->
-    <script src="/assets/js/pages/select2.js"></script>
-    <script src="/assets/js/pages/jquery.dataTables.min.js"></script>
-    <script src="/assets/js/pages/dataTables.bootstrap.js"></script>
-    <script src="/assets/js/pages/table-lifesc.js"></script>
-    <!-- END PAGE LEVEL PLUGINS -->
+@section('custom-script')
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
+    </script>
+    <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
+
+    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
             TableManaged3.init();
             TableManaged4.init();
             TableManaged5.init();
-            TableManagedclass.init();
         });
     </script>
 @stop
@@ -38,39 +36,21 @@
 
         {!! Form::model($model, [
             'method' => 'POST',
-            'url' => $inputs['url'] . 'Sua',
+            'url' => $inputs['url'] . 'thaydoi',
             'class' => 'form',
             'id' => 'frm_ThayDoi',
             'files' => true,
             'enctype' => 'multipart/form-data',
         ]) !!}
         {{ Form::hidden('madv', null, ['id' => 'madv']) }}
+        {{ Form::hidden('madubao', null, ['id' => 'madubao']) }}
         <div class="card-body">
             <h4 class="text-dark font-weight-bold mb-5">Thông tin chung</h4>
             <div class="form-group row">
-                <div class="col-lg-6">
-                    <label>Tên đơn vị</label>
-                    {!! Form::text('tendonvi', null, ['class' => 'form-control', 'readonly' => 'true']) !!}
-                </div>
 
                 <div class="col-lg-3">
-                    <label>Số tờ trình</label>
-                    {!! Form::text('sototrinh', null, ['class' => 'form-control']) !!}
-                </div>
-                <div class="col-lg-3">
-                    <label>Ngày tháng trình<span class="require">*</span></label>
-                    {!! Form::input('date', 'ngayhoso', null, ['class' => 'form-control', 'required']) !!}
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-lg-6">
-                    <label>Chức vụ người ký tờ trình</label>
-                    {!! Form::text('chucvunguoiky', null, ['class' => 'form-control']) !!}
-                </div>
-                <div class="col-lg-6">
-                    <label>Họ tên người ký tờ trình</label>
-                    {!! Form::text('nguoikytotrinh', null, ['class' => 'form-control']) !!}
+                    <label>Ngày tháng tạo<span class="require">*</span></label>
+                    {!! Form::input('date', 'thoigian', null, ['class' => 'form-control', 'required']) !!}
                 </div>
             </div>
 
@@ -79,8 +59,8 @@
                     <label>Mô tả hồ sơ</label>
                     {!! Form::textarea('noidung', null, ['class' => 'form-control', 'rows' => 2]) !!}
                 </div>
-            </div>          
-            
+            </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-custom">
@@ -108,46 +88,38 @@
                                             <span class="nav-icon">
                                                 <i class="far fa-user"></i>
                                             </span>
-                                            <span class="nav-text">Thông tin khác</span>
+                                            <span class="nav-text">Nguồn thông tin khác</span>
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="card-toolbar">
-            
+
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="tab-content">
-                                <div class="tab-pane fade active show" id="kt_cung" role="tabpanel" aria-labelledby="kt_cung">
+                                <div class="tab-pane fade active show" id="kt_cung" role="tabpanel"
+                                    aria-labelledby="kt_cung">
                                     <div class="form-group row">
                                         <div class="col-lg-12 text-right">
                                             <div class="btn-group" role="group">
-                                                <button type="button" onclick="setTapThe()" data-target="#modal-create-tapthe"
-                                                    data-toggle="modal" class="btn btn-light-dark btn-icon btn-sm">
-                                                    <i class="fa fa-plus"></i></button>
-                                                <button onclick="setNhanExcel('{{ $model->mahosotdkt }}')"
-                                                    title="Nhận từ file Excel" data-target="#modal-nhanexcel" data-toggle="modal"
-                                                    type="button" class="btn btn-info btn-icon btn-sm"><i
-                                                        class="fas fa-file-import"></i></button>
-                                                <a target="_blank" title="Tải file mẫu" href="/data/download/MauTDKT.xlsx"
-                                                    class="btn btn-primary btn-icon btn-sm"><i class="fa flaticon-download"></i>
-                                                </a>
+                                                <button type="button" onclick="setThem('CUNG')" data-target="#modal-them"
+                                                    data-toggle="modal" class="btn btn-light-dark btn-sm">
+                                                    <i class="fa fa-plus"></i> Thêm</button>
                                             </div>
                                         </div>
                                     </div>
-            
-                                    <div class="row" id="dskhenthuongtapthe">
+
+                                    <div class="row" id="dscung">
                                         <div class="col-md-12">
                                             <table id="sample_4" class="table table-striped table-bordered table-hover">
                                                 <thead>
                                                     <tr class="text-center">
                                                         <th width="5%">STT</th>
-                                                        <th>Tên tập thể</th>
-                                                        <th>Phân loại<br>đối tượng</th>
-                                                        <th>Danh hiệu thi đua/<br>Hình thức khen thưởng </th>
-                                                        <th>Loại hình khen thưởng</th>
-                                                        <th width="10%">Thao tác</th>
+                                                        <th>Vị trí làm việc</th>
+                                                        <th>Số lượng</th>
+                                                        <th width="15%">Thao tác</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -155,34 +127,23 @@
                                                     @foreach ($model_cung as $key => $tt)
                                                         <tr class="odd gradeX">
                                                             <td class="text-center">{{ $i++ }}</td>
-                                                            <td>{{ $tt->tentapthe }}</td>
-                                                            <td>{{ $a_tapthe[$tt->maphanloaitapthe] ?? '' }}</td>
-                                                            <td class="text-center">
-                                                                {{ $a_dhkt_tapthe[$tt->madanhhieukhenthuong] ?? '' }}
-                                                            </td>
-                                                            <td class="text-center">
-                                                                {{ $a_loaihinhkt[$model->maloaihinhkt] ?? '' }}
-                                                            </td>
-            
+                                                            <td>{{ $tt->tentgktct2 }}</td>
+                                                            <td>{{ $tt->soluong }}</td>
                                                             <td class="text-center">
                                                                 <button title="Sửa thông tin" type="button"
-                                                                    onclick="getTapThe('{{ $tt->id }}')"
+                                                                    onclick="setThongTin('{{ $tt->id }}','{{ $tt->madmtgktct2 }}','{{ $tt->tentgktct2 }}','{{ $tt->soluong }}','CUNG')"
                                                                     class="btn btn-sm btn-clean btn-icon"
-                                                                    data-target="#modal-create-tapthe" data-toggle="modal">
+                                                                    data-target="#modal-thongtin" data-toggle="modal">
                                                                     <i class="icon-lg la fa-edit text-primary"></i>
                                                                 </button>
                                                                 <button title="Xóa" type="button"
                                                                     onclick="delKhenThuong('{{ $tt->id }}',  '{{ $inputs['url'] . 'XoaTapThe' }}', 'TAPTHE')"
                                                                     class="btn btn-sm btn-clean btn-icon"
-                                                                    data-target="#modal-delete-khenthuong" data-toggle="modal">
+                                                                    data-target="#modal-delete-khenthuong"
+                                                                    data-toggle="modal">
                                                                     <i class="icon-lg la fa-trash text-danger"></i>
                                                                 </button>
-                                                                {{-- <button title="Tiêu chuẩn" type="button"
-                                                                    onclick="getTieuChuan('{{ $tt->id }}','TAPTHE','{{ $tt->tentapthe }}')"
-                                                                    class="btn btn-sm btn-clean btn-icon"
-                                                                    data-target="#modal-tieuchuan" data-toggle="modal">
-                                                                    <i class="icon-lg la fa-list text-dark"></i>
-                                                                </button> --}}
+
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -191,71 +152,53 @@
                                         </div>
                                     </div>
                                 </div>
-            
+
                                 <div class="tab-pane fade" id="kt_cau" role="tabpanel" aria-labelledby="kt_cau">
                                     <div class="form-group row">
                                         <div class="col-lg-12 text-right">
                                             <div class="btn-group" role="group">
                                                 <button type="button" onclick="setHoGiaDinh()"
-                                                    data-target="#modal-create-hogiadinh" data-toggle="modal"
+                                                    data-target="#modal-thongtin" data-toggle="modal"
                                                     class="btn btn-light-dark btn-icon btn-sm">
-                                                    <i class="fa fa-plus"></i></button>
-                                                <button title="Nhận từ file Excel" data-target="#modal-nhanexcel"
-                                                    data-toggle="modal" type="button" class="btn btn-info btn-icon btn-sm"><i
-                                                        class="fas fa-file-import"></i></button>
-                                                <a target="_blank" title="Tải file mẫu" href="/data/download/MauTDKT.xlsx"
-                                                    class="btn btn-primary btn-icon btn-sm"><i class="fa flaticon-download"></i>
-                                                </a>
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
-            
-                                    <div class="row" id="dskhenthuonghogiadinh">
+
+                                    <div class="row" id="dscau">
                                         <div class="col-md-12">
                                             <table id="sample_5" class="table table-striped table-bordered table-hover">
                                                 <thead>
                                                     <tr class="text-center">
                                                         <th width="5%">STT</th>
-                                                        <th>Tên hộ gia đình</th>
-                                                        {{-- <th>Phân loại<br>đối tượng</th> --}}
-                                                        <th>Danh hiệu thi đua/<br>Hình thức khen thưởng </th>
-                                                        <th>Loại hình khen thưởng</th>
-                                                        <th width="10%">Thao tác</th>
+                                                        <th>Vị trí làm việc</th>
+                                                        <th>Số lượng</th>
+                                                        <th width="15%">Thao tác</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php $i = 1; ?>
-                                                    @foreach ($model_hogiadinh as $key => $tt)
+                                                    @foreach ($model_cau as $key => $tt)
                                                         <tr class="odd gradeX">
                                                             <td class="text-center">{{ $i++ }}</td>
-                                                            <td>{{ $tt->tentapthe }}</td>
-                                                            {{-- <td>{{ $a_hogiadinh[$tt->maphanloaitapthe] ?? '' }}</td> --}}
-                                                            <td class="text-center">
-                                                                {{ $a_dhkt_hogiadinh[$tt->madanhhieukhenthuong] ?? '' }}
-                                                            </td>
-                                                            <td class="text-center">
-                                                                {{ $a_loaihinhkt[$model->maloaihinhkt] ?? '' }}
-                                                            </td>
-            
+                                                            <td>{{ $tt->tentgktct2 }}</td>
+                                                            <td>{{ $tt->soluong }}</td>
                                                             <td class="text-center">
                                                                 <button title="Sửa thông tin" type="button"
-                                                                    onclick="getHoGiaDinh('{{ $tt->id }}')"
+                                                                    onclick="setThongTin('{{ $tt->id }}','{{ $tt->madmtgktct2 }}','{{ $tt->tentgktct2 }}','{{ $tt->soluong }}','CAU')"
                                                                     class="btn btn-sm btn-clean btn-icon"
-                                                                    data-target="#modal-create-hogiadinh" data-toggle="modal">
+                                                                    data-target="#modal-thongtin" data-toggle="modal">
                                                                     <i class="icon-lg la fa-edit text-primary"></i>
                                                                 </button>
                                                                 <button title="Xóa" type="button"
-                                                                    onclick="delKhenThuong('{{ $tt->id }}',  '{{ $inputs['url'] . 'XoaHoGiaDinh' }}', 'HOGIADINH')"
+                                                                    onclick="delKhenThuong('{{ $tt->id }}',  '{{ $inputs['url'] . 'XoaTapThe' }}', 'TAPTHE')"
                                                                     class="btn btn-sm btn-clean btn-icon"
-                                                                    data-target="#modal-delete-khenthuong" data-toggle="modal">
+                                                                    data-target="#modal-delete-khenthuong"
+                                                                    data-toggle="modal">
                                                                     <i class="icon-lg la fa-trash text-danger"></i>
                                                                 </button>
-                                                                {{-- <button title="Tiêu chuẩn" type="button"
-                                                                    onclick="getTieuChuan('{{ $tt->id }}','TAPTHE','{{ $tt->tentapthe }}')"
-                                                                    class="btn btn-sm btn-clean btn-icon"
-                                                                    data-target="#modal-tieuchuan" data-toggle="modal">
-                                                                    <i class="icon-lg la fa-list text-dark"></i>
-                                                                </button> --}}
+
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -264,80 +207,53 @@
                                         </div>
                                     </div>
                                 </div>
-            
+
                                 <div class="tab-pane fade" id="kt_khac" role="tabpanel" aria-labelledby="kt_khac">
                                     <div class="form-group row">
                                         <div class="col-lg-12 text-right">
                                             <div class="btn-group" role="group">
-                                                <button title="Thêm đối tượng" type="button" data-target="#modal-create"
-                                                    data-toggle="modal" class="btn btn-light-dark btn-icon btn-sm"
-                                                    onclick="setCaNhan()">
-                                                    <i class="fa fa-plus"></i></button>
-            
-                                                <button title="Nhận từ file Excel" data-target="#modal-nhanexcel"
-                                                    data-toggle="modal" type="button" class="btn btn-info btn-icon btn-sm"><i
-                                                        class="fas fa-file-import"></i></button>
-            
-                                                <a target="_blank" title="Tải file mẫu" href="/data/download/MauTDKT.xlsx"
-                                                    class="btn btn-primary btn-icon btn-sm"><i class="fa flaticon-download"></i>
-                                                </a>
+                                                <button title="Thêm đối tượng" type="button"
+                                                    data-target="#modal-thongtin" data-toggle="modal"
+                                                    class="btn btn-light-dark btn-icon btn-sm" onclick="setCaNhan()">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
-            
-                                    <div class="row" id="dskhenthuongcanhan">
+
+                                    <div class="row" id="dskhac">
                                         <div class="col-md-12">
                                             <table id="sample_3" class="table table-striped table-bordered table-hover">
                                                 <thead>
                                                     <tr class="text-center">
-                                                        <th width="2%">STT</th>
-                                                        <th>Tên đối tượng</th>
-                                                        {{-- <th width="8%">Ngày sinh</th> --}}
-                                                        <th width="5%">Giới</br>tính</th>
-                                                        <th width="15%">Phân loại cán bộ</th>
-                                                        <th>Thông tin công tác</th>
-                                                        <th>Hình thức khen thưởng /<br>Danh hiệu thi đua</th>
-                                                        <th>Loại hình khen thưởng</th>
-                                                        <th width="10%">Thao tác</th>
+                                                        <th width="5%">STT</th>
+                                                        <th>Vị trí làm việc</th>
+                                                        <th>Số lượng</th>
+                                                        <th width="15%">Thao tác</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <?php $i = 1; ?>
-                                                    @foreach ($model_canhan as $key => $tt)
+                                                    @foreach ($model_khac as $key => $tt)
                                                         <tr class="odd gradeX">
                                                             <td class="text-center">{{ $i++ }}</td>
-                                                            <td>{{ $tt->tendoituong }}</td>
-                                                            {{-- <td class="text-center">{{ getDayVn($tt->ngaysinh) }}</td> --}}
-                                                            <td>{{ $tt->gioitinh }}</td>
-                                                            <td>{{ $a_canhan[$tt->maphanloaicanbo] ?? '' }}</td>
-                                                            <td class="text-center">
-                                                                {{ $tt->chucvu . ',' . $tt->tenphongban . ',' . $tt->tencoquan }}
-                                                            </td>
-                                                            <td class="text-center">
-                                                                {{ $a_dhkt_canhan[$tt->madanhhieukhenthuong] ?? '' }}
-                                                            </td>
-                                                            <td class="text-center">
-                                                                {{ $a_loaihinhkt[$model->maloaihinhkt] ?? '' }}
-                                                            </td>
+                                                            <td>{{ $tt->tentgktct2 }}</td>
+                                                            <td>{{ $tt->soluong }}</td>
                                                             <td class="text-center">
                                                                 <button title="Sửa thông tin" type="button"
-                                                                    onclick="getCaNhan('{{ $tt->id }}')"
+                                                                    onclick="setThongTin('{{ $tt->id }}','{{ $tt->madmtgktct2 }}','{{ $tt->tentgktct2 }}','{{ $tt->soluong }}','KHAC')"
                                                                     class="btn btn-sm btn-clean btn-icon"
-                                                                    data-target="#modal-create" data-toggle="modal">
+                                                                    data-target="#modal-thongtin" data-toggle="modal">
                                                                     <i class="icon-lg la fa-edit text-primary"></i>
                                                                 </button>
+
                                                                 <button title="Xóa" type="button"
-                                                                    onclick="delKhenThuong('{{ $tt->id }}',  '{{ $inputs['url'] . 'XoaCaNhan' }}', 'CANHAN')"
+                                                                    onclick="delKhenThuong('{{ $tt->id }}',  '{{ $inputs['url'] . 'XoaTapThe' }}', 'TAPTHE')"
                                                                     class="btn btn-sm btn-clean btn-icon"
-                                                                    data-target="#modal-delete-khenthuong" data-toggle="modal">
+                                                                    data-target="#modal-delete-khenthuong"
+                                                                    data-toggle="modal">
                                                                     <i class="icon-lg la fa-trash text-danger"></i>
                                                                 </button>
-                                                                {{-- <button title="Tiêu chuẩn" type="button"
-                                                                    onclick="getTieuChuan('{{ $tt->id }}','CANHAN','{{ $tt->tendoituong }}')"
-                                                                    class="btn btn-sm btn-clean btn-icon"
-                                                                    data-target="#modal-tieuchuan" data-toggle="modal">
-                                                                    <i class="icon-lg la fa-list text-dark"></i>
-                                                                </button> --}}
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -346,20 +262,20 @@
                                         </div>
                                     </div>
                                 </div>
-            
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            
+
         </div>
         <div class="card-footer">
             <div class="row text-center">
                 <div class="col-lg-12">
-                    <a href="{{ url($inputs['url_hs'] . 'ThongTin?madonvi=' . $model->madonvi) }}"
-                        class="btn btn-danger mr-5"><i class="fa fa-reply"></i>&nbsp;Quay lại</a>
+                    <a href="{{ url($inputs['url'] . 'danhsach?madv=' . $model->madv) }}" class="btn btn-danger mr-5"><i
+                            class="fa fa-reply"></i>&nbsp;Quay lại</a>
                     <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>Hoàn thành</button>
 
                 </div>
@@ -368,6 +284,99 @@
         {!! Form::close() !!}
     </div>
     <!--end::Card-->
-   
+
+    {{-- tập thể --}}
+    {!! Form::open([
+        'url' => '',
+        'id' => 'frm_ThongTin',
+        'class' => 'form',
+        'files' => true,
+        'enctype' => 'multipart/form-data',
+    ]) !!}
+    <input type="hidden" name="madubao" value="{{ $model->madubao }}" />
+    <input type="hidden" name="madmtgktct2" />
+    <input type="hidden" name="id" />
+    <div class="modal fade bs-modal-lg" id="modal-thongtin" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Thông tin dự báo nhu cầu lao động</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <label class="form-control-label">Vị trí việc làm</label>
+                            {!! Form::text('tentgktct2', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-9">
+                            <label>Phân loại</label>
+                            {!! Form::select('phanloai', ['CUNG' => 'Cung', 'CAU' => 'Cầu', 'KHAC' => 'Khác'], null, [
+                                'class' => 'form-control',
+                            ]) !!}
+                        </div>
+
+                        <div class="col-md-3">
+                            <label>Số lượng</label>
+                            {!! Form::text('soluong', null, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Thoát</button>
+                    <button type="button" class="btn btn-primary" onclick="LuuTapThe()">Cập nhật</button>
+                    {{-- <button type="submit" class="btn btn-primary">Hoàn thành</button> --}}
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+    {!! Form::close() !!}
+
+    <script>
+        function setThongTin(id, madmtgktct2, tentgktct2, soluong, phanloai) {
+            $('#frm_ThongTin').find("[name='id']").val(id);
+            $('#frm_ThongTin').find("[name='madmtgktct2']").val(madmtgktct2);
+            $('#frm_ThongTin').find("[name='tentgktct2']").val(tentgktct2);
+            $('#frm_ThongTin').find("[name='soluong']").val(soluong);
+            $('#frm_ThongTin').find("[name='phanloai']").val(phanloai).trigger('change');
+        }
+
+        function LuuTapThe() {
+            var formData = new FormData($('#frm_ThongTin')[0]);
+
+            $.ajax({
+                url: "{{ $inputs['url'] }}" + "themchitiet",
+                method: "POST",
+                cache: false,
+                dataType: false,
+                processData: false,
+                contentType: false,
+                data: formData,
+                success: function(data) {
+                    console.log(data);
+                    if (data.status == 'success') {
+                        if (data.phanloai == 'CUNG') {
+                            $('#dscung').replaceWith(data.message);
+                            TableManaged4.init();
+                        }
+                        if (data.phanloai == 'CAU') {
+                            $('#dscau').replaceWith(data.message);
+                            TableManaged5.init();
+                        }
+                        if (data.phanloai == 'KHAC') {
+                            $('#dskhac').replaceWith(data.message);
+                            TableManaged3.init();
+                        }
+                    }
+                }
+            })
+            $('#modal-create-tapthe').modal("hide");
+        }
+    </script>
 
 @stop

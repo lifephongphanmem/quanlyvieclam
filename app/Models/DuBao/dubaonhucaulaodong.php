@@ -16,6 +16,6 @@ class dubaonhucaulaodong extends Model
         'nam',
         'noidung',
         'ghichu',
-        'madonvi',
+        'madv',
     ];
 }
