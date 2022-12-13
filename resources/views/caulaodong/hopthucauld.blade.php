@@ -41,7 +41,7 @@
                                     <th>Nội dung</th>
                                     <td>Thời điểm gửi</td>
                                     <td>Người gửi</td>
-                                
+                                    <td>Nhận file đính kèm</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,6 +60,15 @@
                                             @endif
                                         @endforeach
 
+                                    </td>
+                                    <td>
+                                        @if ($item->filequyetdinh != null)
+                                        <a href="/upload/cauld.{{$item->filequyetdinh}}" class="btn btn-primary">Quyết định</a>
+                                        @endif
+                                        @if ($item->filekhac != null)
+                                        <a href="{{'/upload/cauld/'.$item->filekhac}}" class="btn btn-primary">File khác</a>
+                                        @endif
+                                            
                                     </td>
                                 </tr>
                                 <?php } ?>

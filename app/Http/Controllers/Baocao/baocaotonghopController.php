@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Cunglaodong\tonghopdanhsachcungld_ct;
+use App\Models\Danhmuc\danhmuchanhchinh;
+use App\Models\Danhmuc\dmdonvi;
 use App\Models\Danhmuc\dmmanghetrinhdo;
 use App\Models\Danhmuc\dmtinhtrangthamgiahdktct;
 use App\Models\Danhmuc\dmtinhtrangthamgiahdktct2;
@@ -38,14 +40,18 @@ class baocaotonghopController extends Controller
 
     // người sử dụng lao động
     public function index()
-    {
+    { 
         $madv = session('admin')['madv'];
         $nguoidung = Company::where('madv',$madv)->first();
    
         $tonghopcungld = tonghopdanhsachcungld::all();
         $company = Company::all();
-        $thongbaocungld = Thongbao::all();
-        return view('reports.baocaotonghop.index', compact('nguoidung', 'tonghopcungld', 'company','thongbaocungld'));
+
+        $thongbaocungld = thongbao::all();
+        $danhmuchanhchinh = danhmuchanhchinh::where('capdo','T')->first();
+        $dmdonvi = dmdonvi::where('madiaban','!=',$danhmuchanhchinh->id)->get();
+        return view('reports.baocaotonghop.index', compact('nguoidung', 'tonghopcungld', 'company','thongbaocungld','dmdonvi'));
+
     }
 
 
@@ -124,18 +130,74 @@ class baocaotonghopController extends Controller
         return view('reports.baocaotonghop.cauld.nhucautuyendungld')
             ->with('pageTitle', 'Thông tin nhu cầu tuyển dụng lao động');
     }
-    public function cungldcapxahuyen()
+    public function cungldcapxahuyen(Request $request)
     {
-        return view('reports.baocaotonghop.cungld.cungldcapxahuyen')
+        $nam = $request->nam;
+        $thanhthi = [];
+        $nongthon = [];
+
+        $mathanhthi = [];
+        $manongthon = [];
+
+        $danhmuchanhchinh = danhmuchanhchinh::where('capdo','X')->get();
+        foreach ($danhmuchanhchinh as $item){
+            if($item->level == 'Xã'){
+                array_push($nongthon, $item->id);
+            }
+            if ($item->level == 'Phường'|| $item->level == 'Thị trấn') {
+                array_push($thanhthi, $item->id);
+            }
+        }
+
+        $dmdonvi_tt = dmdonvi::where('madiaban',$thanhthi)->get();
+        $dmdonvi_nt = dmdonvi::where('madiaban',$nongthon)->get();
+        $dmtrinhdokythuat = dmtrinhdokythuat::all();
+        $dmvithevieclam = dmtinhtrangthamgiahdktct2::where('manhom2','20221108050528')->get();
+        $tgthatnghiep= dmtinhtrangthamgiahdktct2::where('manhom2','20221123034628')->get();
+        $lydoktg= dmtinhtrangthamgiahdktct::where('manhom','20221108050508')->get();
+        foreach ($dmdonvi_tt as $item){
+            array_push( $mathanhthi,$item->madv);
+        }
+        foreach ($dmdonvi_nt as $item){
+            array_push( $manongthon,$item->madv);
+        }
+        $cungld = tonghopdanhsachcungld_ct::where('madb',$request->madv)->get();
+        $cung_tt = tonghopdanhsachcungld_ct::where('madb',$request->madv)->where('madb',$mathanhthi)->get();
+        $cung_nt = tonghopdanhsachcungld_ct::where('madb',$request->madv)->where('madb',$mathanhthi)->get();
+
+        return view('reports.baocaotonghop.cungld.cungldcapxahuyen',compact('nam','cungld','cung_tt','cung_nt','dmtrinhdokythuat','dmvithevieclam','tgthatnghiep','lydoktg'))
             ->with('pageTitle', 'Báo cáo tổng hợp về thông tin về cung lao động dành cho cấp xã và cấp huyện');
     }
     public function thongtinthitruongld(Request $request)
     {
         $nam = $request->nam;
+        $thanhthi = [];
+        $nongthon = [];
+
+        $mathanhthi = [];
+        $manongthon = [];
+
+        $danhmuchanhchinh = danhmuchanhchinh::where('capdo','X')->get();
+        foreach ($danhmuchanhchinh as $item){
+            if($item->level == 'Xã'){
+                array_push($nongthon, $item->id);
+            }
+            if ($item->level == 'Phường'|| $item->level == 'Thị trấn') {
+                array_push($thanhthi, $item->id);
+            }
+        }
+
+        $dmdonvi_tt = dmdonvi::where('madiaban',$thanhthi)->get();
+        $dmdonvi_nt = dmdonvi::where('madiaban',$nongthon)->get();
+       
+        foreach ($dmdonvi_tt as $item){
+            array_push( $mathanhthi,$item->madv);
+        }
+        foreach ($dmdonvi_nt as $item){
+            array_push( $manongthon,$item->madv);
+        }
 
         $tonghopdanhsachcungld_ct = tonghopdanhsachcungld_ct::all();
-
-
         $loaihinhkt = dmloaihinhhdkt::all();
         $company = Company::all();
         $nhucautuyendungct = nhucautuyendungct::all();
@@ -149,7 +211,7 @@ class baocaotonghopController extends Controller
         ->select('nhucautuyendungct.*', 'nhucautuyendung.*')->get();
         // dd($nhucautuyendung);
         return view('reports.baocaotonghop.cauld.thongtinthitruongld',compact('loaihinhkt','company','nhucautuyendung',
-        'dmmanghetrinhdo','nam','tonghopdanhsachcungld_ct','dmtrinhdokythuat','dmvithevieclam','tgthatnghiep','lydoktg','vitrivl'))
+        'dmmanghetrinhdo','nam','tonghopdanhsachcungld_ct','dmtrinhdokythuat','dmvithevieclam','tgthatnghiep','lydoktg','vitrivl','mathanhthi','manongthon'))
         ->with('pageTitle', 'Báo cáo về thông tin thị trường lao động');
     }
 }
