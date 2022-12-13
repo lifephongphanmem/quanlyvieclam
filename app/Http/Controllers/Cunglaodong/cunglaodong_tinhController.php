@@ -136,6 +136,7 @@ class cunglaodong_tinhController extends Controller
                 $th->madvbc_tinh=null;
             }
         }
+        // dd($model);
         $doituong_ut = dmdoituonguutien::all();
         $gdpt = dmtrinhdogdpt::all();
         $cmkt = dmtrinhdokythuat::all();
@@ -143,7 +144,7 @@ class cunglaodong_tinhController extends Controller
         $tttghdkt1 = dmtinhtrangthamgiahdktct::all();
         $tttghdkt2 = dmtinhtrangthamgiahdktct2::all();
         $a_chuyennganh = array_column(dmchuyenmondaotao::all()->toarray(), 'tendm', 'id');
-        return view('cunglaodong.export.tinh.tonghop')
+        return view('cunglaodong.export.tinh.intonghop')
             ->with('model', $model)
             ->with('m_dv', $m_dv)
             ->with('model_dv', $model_dv)

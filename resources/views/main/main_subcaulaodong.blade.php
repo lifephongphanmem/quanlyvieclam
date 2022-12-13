@@ -4,6 +4,7 @@
     <h4 class="menu-text">QUẢN LÝ CẦU LAO ĐỘNG</h4>
     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li> --}}
+@if (chkPhanQuyen('caulaodong', 'phanquyen'))
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
     <a href="javascript:;" class="menu-link menu-toggle">
         <span class="svg-icon menu-icon">
@@ -25,6 +26,7 @@
     <div class="menu-submenu">
         <i class="menu-arrow"></i>
         <ul class="menu-subnav">
+            @if (chkPhanQuyen('khaibaonhucau', 'phanquyen'))
             <li class="menu-item" aria-haspopup="true">
                 <a href="{{ url('/tuyen_dung/khai_bao_nhu_cau/dot_thu_thap') }}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
@@ -33,6 +35,8 @@
                     <span class="menu-text font-weight-bold">Khai báo nhu cầu</span>
                 </a>
             </li>
+            @endif
+            @if (chkPhanQuyen('tonghopdulieucaulaodong', 'phanquyen'))
             <li class="menu-item" aria-haspopup="true">
                 <a href="{{ url('/tuyen_dung/thong_tin_tong_hop/dot_thu_thap') }}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
@@ -41,6 +45,7 @@
                     <span class="menu-text font-weight-bold">Tổng hợp dữ liệu </span>
                 </a>
             </li>
+            @endif
             {{-- <li class="menu-item" aria-haspopup="true">
                 <a href="{{url('/employer-ba')}}" class="menu-link">
                     <a href="{{url('/admessages')}}" class="menu-link">
@@ -63,3 +68,4 @@
         </ul>
     </div>
 </li>
+@endif

@@ -1,8 +1,8 @@
 @if (chkPhanQuyen('dubaonhucaulaodong', 'phanquyen'))
-    <li class="menu-section">
+    {{-- <li class="menu-section">
         <h4 class="menu-text">DỰ BÁO NHU CẦU LAO ĐỘNG</h4>
         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-    </li>
+    </li> --}}
     <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
         <a href="javascript:;" class="menu-link menu-toggle">
             <span class="svg-icon menu-icon">
