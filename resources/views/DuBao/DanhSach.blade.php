@@ -65,9 +65,12 @@
                                     <td> {{ getNgayThang($ld->thoigian) }}</td>
                                     <td> {{ $ld->noidung }}</td>
                                     <td>
+                                        <a title="In tổng hợp" href="{{ url($inputs['url'] . 'indubao?madubao=' . $ld->madubao) }}" class="btn btn-sm btn-clean btn-icon" target="_blank">
+                                            <i class="icon-lg la flaticon2-print text-primary"></i>
+                                        </a>
                                         @if (chkPhanQuyen('dsdubao', 'thaydoi'))
                                             <a title="Sửa thông tin"
-                                                href="{{ url($inputs['url'] . '/thaydoi?madubao=' . $ld->madubao) }}"
+                                                href="{{ url($inputs['url'] . 'thaydoi?madubao=' . $ld->madubao) }}"
                                                 class="btn btn-sm btn-clean btn-icon">
                                                 <i class="icon-lg la flaticon-edit-1 text-primary"></i>
                                             </a>

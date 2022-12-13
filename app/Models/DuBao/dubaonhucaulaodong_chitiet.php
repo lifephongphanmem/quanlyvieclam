@@ -21,7 +21,9 @@ class dubaonhucaulaodong_chitiet extends Model
         'tendv',
         //Thông tin nguồn điều tra khác
         'tennguon',
-        //
+        //Vị trí việc làm
+        'madmtgktct2',
+        'tentgktct2',
         'soluong',
         'ghichu',
     ];

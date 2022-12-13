@@ -64,10 +64,14 @@
             <td colspan="4">Chia theo khu vực</td>
         </tr>
         <tr>
-            <td></td><td>- Thành thị</td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>- Thành thị</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;"> {{count($tonghopdanhsachcungld_ct->where('nam',$nam -1 )->where('madb',$mathanhthi))}} </td>
+            <td style="text-align: center;"> {{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('madb',$mathanhthi))}} </td>
         </tr>
         <tr>
-            <td></td><td>- Nông thôn</td> <td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>- Nông thôn</td> <td style="text-align: center;">Người</td>
+            <td style="text-align: center;"> {{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('madb',$manongthon))}} </td>
+            <td style="text-align: center;"> {{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('madb',$manongthon))}} </td>
         </tr>
         <tr>
             <td>b</td>
@@ -95,10 +99,14 @@
             <td colspan="4">Chia theo Khu vực</td>
         </tr>
         <tr>
-            <td></td><td>- Thành thị</td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>- Thành thị</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;"> {{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('thatnghiep',null)->where('madb',$mathanhthi))}} </td>
+            <td style="text-align: center;"> {{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('thatnghiep',null)->where('madb',$mathanhthi))}} </td>
         </tr>
         <tr>
-            <td></td><td>- Nông thôn</td> <td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>- Nông thôn</td> <td style="text-align: center;">Người</td>
+            <td style="text-align: center;"> {{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('thatnghiep',null)->where('madb',$manongthon))}} </td>
+            <td style="text-align: center;"> {{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('thatnghiep',null)->where('madb',$manongthon))}} </td>
         </tr>
         <tr>
             <td>b</td>
@@ -136,10 +144,15 @@
             <td colspan="4">Chia theo Khu vực</td>
         </tr>
         <tr>
-            <td></td><td>- Thành thị</td><td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>- Thành thị</td><td style="text-align: center;">Người</td>
+            <td style="text-align: center;"> {{count($tonghopdanhsachcungld_ct->where('nam',$nam-1)->where('thatnghiep','!=',null)->where('madb',$mathanhthi))}} </td>
+            <td style="text-align: center;"> {{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('thatnghiep','!=',null)->where('madb',$mathanhthi))}} </td>
+
         </tr>
         <tr>
-            <td></td><td>- Nông thôn</td> <td style="text-align: center;">Người</td><td></td><td></td>
+            <td></td><td>- Nông thôn</td> <td style="text-align: center;">Người</td>
+            <td style="text-align: center;"> {{count($tonghopdanhsachcungld_ct->where('nam',$nam)->where('thatnghiep',null)->where('madb',$manongthon))}} </td>
+
         </tr>
         <tr>
             <td>b</td>

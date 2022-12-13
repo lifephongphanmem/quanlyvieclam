@@ -9,7 +9,9 @@ Route::prefix('dubaonhucaulaodong')->group(function () {
     Route::get('danhsach', [dubaonhucaulaodongController::class, 'index']);
     Route::get('them', [dubaonhucaulaodongController::class, 'them']);
     Route::get('thaydoi', [dubaonhucaulaodongController::class, 'thaydoi']);
-    Route::post('thaydoi', [dubaonhucaulaodongController::class, 'thaydoi']);
+    Route::post('thaydoi', [dubaonhucaulaodongController::class, 'luudubao']);
+    Route::post('themchitiet', [dubaonhucaulaodongController::class, 'themchitiet']);
+    Route::get('indubao', [dubaonhucaulaodongController::class, 'indubao']);
     
     Route::post('/store', [thongbaotinhhinhsudungldController::class, 'store']);
     Route::post('/update/{id}', [thongbaotinhhinhsudungldController::class, 'update']);
