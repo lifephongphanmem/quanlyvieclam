@@ -1,9 +1,9 @@
 
 
-<li class="menu-section">
+{{-- <li class="menu-section">
     <h4 class="menu-text">QUẢN LÝ CẦU LAO ĐỘNG</h4>
     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-</li>
+</li> --}}
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
     <a href="javascript:;" class="menu-link menu-toggle">
         <span class="svg-icon menu-icon">
@@ -19,7 +19,7 @@
                 </g>
             </svg>
         </span>
-        <span class="menu-text font-weight-bold">Quản lý thông tin</span>
+        <span class="menu-text font-weight-bold">Quản lý thông tin cầu lao động</span>
         <i class="menu-arrow"></i>
     </a>
     <div class="menu-submenu">

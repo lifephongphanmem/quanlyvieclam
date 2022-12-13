@@ -22,6 +22,7 @@ class nguoilaodong extends Model
         'tinh',
         'huyen',
         'xa',
+        'thon',
         'address',
         'sobaohiem',
         'trinhdogiaoduc',

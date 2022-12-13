@@ -11,6 +11,6 @@ class dmdonvi extends Model
 
     protected $table = 'dmdonvi';
     protected $fillable = [
-        'madv', 'maxa', 'mahuyen','matinh','tendv','diachi','phanloaitaikhoan','caphanhchinh','tendvhienthi','madvcq','diadanh','chucvuky','nguoiky','ttlienhe','madiaban'
+        'madv', 'maxa', 'mahuyen','matinh','tendv','diachi','phanloaitaikhoan','caphanhchinh','tendvhienthi','madvcq','diadanh','chucvuky','nguoiky','ttlienhe','madiaban','email'
     ];
 }

@@ -8,6 +8,9 @@ use App\Models\Cunglaodong\thongbaocungld;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendMail;
+use App\Models\Danhmuc\dmdonvi;
+use App\Models\Thongbao\Thongbao_donvi;
 use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -37,8 +40,11 @@ class messageCotroller extends Controller
         $model=thongbaocungld::orderBy('nam')->get();
         // $model_cty=User::where('phanloaitk',2)->get();
         $nam=date('Y');
+        $modeldv=dmdonvi::all();
+        $a_dv=array_column($modeldv->toarray(),'tendv','madv');
         return view('cunglaodong.thongbaothuthap.index')
                 ->with('model',$model)
+                ->with('a_dv',$a_dv)
                 ->with('nam',$nam);
     }
 
@@ -155,39 +161,74 @@ class messageCotroller extends Controller
             return view('errors.noperm')->with('machucnang', 'thongbaocunglaodong');
         }
         $inputs=$request->all();
-        $tb_ct=thongbao_congty::where('thongbao_id',$id)->get();
+        // dd($inputs);
+        $m_thongbao=thongbaocungld::findOrFail($id);
+        //gửi kèm file
+        if(isset($inputs['filequyetdinh']))
+        {
+            $file=$inputs['filequyetdinh'];
+            $name = time() . $file->getClientOriginalName();
+            $file->move('uploads/cunglaodong/', $name);
+            $inputs['filequyetdinh']='uploads/cunglaodong/'.$name;
+        }
+
+        if(isset($inputs['filekhac']))
+        {
+            $file=$inputs['filekhac'];
+            $name = time() . $file->getClientOriginalName();
+            $file->move('uploads/cunglaodong/', $name);
+            $inputs['filekhac']='uploads/cunglaodong/'.$name;
+        }
+
+        $tb_ct=Thongbao_donvi::where('matb',$m_thongbao->matb)->get();
         if(count($tb_ct)>0){
             return view('errors.tontai_dulieu')
                     ->with('message', 'Thông báo đã được gửi')
                     ->with('furl','/cungld/thongbao');
         }
-        // if($inputs['user_id'][0] == 'all'){
+        if($inputs['madv'][0] == 'ALL'){
             $model=User::join('dmdonvi','dmdonvi.madv','users.madv')
             ->join('danhmuchanhchinh','danhmuchanhchinh.id','dmdonvi.madiaban')
             ->where('danhmuchanhchinh.level','<>','Tỉnh')->where('users.phanloaitk',1)->get();
+            $modeldvs=dmdonvi::all();
             foreach($model as $ct){
                 $data=[
-                    'thongbao_id'=>$id,
-                    'user_id'=>$ct->id
+                    'matb'=>$m_thongbao->matb,
+                    'user_id'=>$ct->madv
                 ];
-                thongbao_congty::create($data);
+                Thongbao_donvi::create($data);
             }
-        // }else{
-        //     foreach ($inputs['user_id'] as $val){
-        //             $data=[
-        //                 'thongbao_id'=>$id,
-        //                 'user_id'=>$val
-        //             ];
-        //             thongbao_congty::create($data);
-        //        }
-        // }
+        }else{
+            $modeldvs=dmdonvi::wherein('madv',$inputs['madv'])->get();
+            foreach ($inputs['madv'] as $val){
+                    $data=[
+                        'matb'=>$m_thongbao->matb,
+                        'madv'=>$val
+                    ];
+                    Thongbao_donvi::create($data);
+               }
+        }
 
         $time=Carbon::now();
         // $thongbao=thongbaocungld::where('id',$id);
         $thongbao=thongbaocungld::findOrFail($id);
         if($thongbao != null){
-            $thongbao->update(['ngaygui'=>$time->toDateString()]);
+            $thongbao->update(['ngaygui'=>$time->toDateString(),'filequyetdinh'=>$inputs['filequyetdinh']??'','filekhac'=>$inputs['filekhac']??'']);
         }
+
+        //Gửi email
+        $m_thongbao=thongbaocungld::findOrFail($id);
+        $contenthc='Thông báo thu thập thông tin cung lao động';
+        $filehc=[$m_thongbao->filequyetdinh,$m_thongbao->filekhac];
+        if(isset($inputs['guiemail'])){
+            foreach($modeldvs as $modeldv){
+                $run=new SendMail($modeldv,$contenthc,$filehc);
+                $run->handle();
+            }
+        }
+
+ 
+
         return redirect('/cungld/thongbao')->with('success','Thành công');
 
     }

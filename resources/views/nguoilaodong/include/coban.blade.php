@@ -179,9 +179,9 @@
                     <label class="control-label">Vị trí việc làm</label>
                     {{-- <select class="form-control input-sm m-bot15 select2me" name="nghenghiep"> --}}
                     <select class="form-control input-sm m-bot15 select2basic" name="nghenghiep">
-                        <option value=''>-- Chọn nghề nghiệp --</option>
-                        @foreach ($list_nghe as $lv )
-                            <option value="{{$lv->id}}" {{isset($model)?($lv->id == $model->nghenghiep?'selected':''):''}}>{{$lv->name}}</option>
+                        <option value=''>-- Chọn vi trí việc làm --</option>
+                        @foreach ($list_vitri as $lv )
+                            <option value="{{$lv->madmtgktct2}}" {{isset($model)?($lv->madmtgktct2 == $model->nghenghiep?'selected':''):''}}>{{$lv->tentgktct2}}</option>
                         @endforeach
                     </select>
                 </div>

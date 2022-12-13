@@ -21,6 +21,8 @@ class tonghopdanhsachcungld extends Model
         'mathh',
         'matht',
         'madvbc',
-        'madvcq'
+        'madvcq',
+        'tungay',
+        'denngay'
     ];
 }

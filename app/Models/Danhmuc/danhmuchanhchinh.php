@@ -10,7 +10,7 @@ class danhmuchanhchinh extends Model
     use HasFactory;
     protected $table = 'danhmuchanhchinh';
     protected $fillable = [
-        'public', 'kv', 'name','description','level','parent','maquocgia','madvql'
+        'public', 'kv', 'name','description','level','parent','maquocgia','madvql','capdo'
     ];
 }
 
