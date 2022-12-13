@@ -51,26 +51,26 @@
                             <input id="mahs" name="mahs" value="{{ $mahs }}" hidden>
                             <div class="col-xl-12">
                                 <div class="form-group fv-plugins-icon-container">
-                                    <label><b>Nội dung*</b></label>
+                                    <label><b>Nội dung</b></label>
                                     <textarea type="text" id="noidung" rows="2" name="noidung" class="form-control"></textarea>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="form-group fv-plugins-icon-container">
-                                    <label><b>Người tạo*</b></label>
+                                    <label><b>Người tạo</b></label>
                                     <input type="text" id="ten" name="ten" class="form-control" />
 
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="form-group fv-plugins-icon-container">
-                                    <label><b>Số điện thoại*</b></label>
+                                    <label><b>Số điện thoại</b></label>
                                     <input type="text" id="sdt" name="sdt" class="form-control" />
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="form-group fv-plugins-icon-container">
-                                    <label><b>Email*</b></label>
+                                    <label><b>Email</b></label>
                                     <input type="text" id="email" name="email" class="form-control" />
                                 </div>
                             </div>
