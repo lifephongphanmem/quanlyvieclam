@@ -31,13 +31,13 @@
                         <div class="row">
                             <div class="col-xl-6">
                                 <div class="form-group fv-plugins-icon-container">
-                                    <label><b>Tiêu đề*</b></label>
+                                    <label><b>Tiêu đề</b></label>
                                     <input type="text" id="matttd" name="matttd" class="form-control" value="{{ $model->matttd }}">
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="form-group fv-plugins-icon-container">
-                                    <label><b>Nội dung*</b></label>
+                                    <label><b>Nội dung</b></label>
                                     <textarea type="text" id="noidung" rows="2" name="noidung" class="form-control">{{ $model->noidung }}</textarea>
                                 </div>
                             </div>

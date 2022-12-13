@@ -114,7 +114,7 @@
                     <div class="modal-body">
                         <input id="matb" name="matb" type="hidden">
                         <div class="form-group">
-                            <label class="control-label"><b>Doanh nghiệp nhận*</b></label>
+                            <label class="control-label"><b>Doanh nghiệp nhận`</b></label>
                             <select id="manguoinhan" name="manguoinhan[]" style="width: 100%"
                                 class="form-control select2basic" multiple>
                                 <option value="all" selected>chọn tất cả</option>

@@ -192,9 +192,10 @@
 <script>
 
     function setcreate() {
-      
+
         $('#id').val(null);
-        $('#tencongviec').val('{{$manghefirst->madmmntd}}');
+        $('#tencongviec').val('').trigger('change');
+        $('#dotuoi').val('all');
         $('#soluong').val(null);
         $('#soluongnu').val(null);
         $('#mota').val('');
@@ -208,12 +209,12 @@
         $('#kinhnghiem').val('');
         $('#noilamviec').val('');
         $('#luong').val('');
-        $('#hotroan').val('0');
+        $('#hotroan').val('');
         $('#phucloikhac').val('');
     }
 
     function store() {
-       
+       alert($('#tencongviec').val());
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             url: '/tuyen_dung/khai_bao_nhu_cau/store_ct',
@@ -223,10 +224,11 @@
                 id: $('#id').val(),
                 mahs: $('#mahs').val(),
                 tencongviec: $('#tencongviec').val(),
+                dotuoi: $('#dotuoi').val(),
                 soluong: $('#soluong').val(),
                 soluongnu: $('#soluongnu').val(),
                 mota: $('#mota').val(),
-                // vitrivl: $('#vitrivl').val('#vitrivl');
+                vitrivl: $('#vitrivl').val(),
                 tdvanhoa: $('#tdvanhoa').val(),
                 tdkythuat: $('#tdkythuat').val(),
                 chuyennganh: $('#chuyennganh').val(),
@@ -242,7 +244,6 @@
 
             dataType: 'JSON',
             success: function(result) {
-
                 if (result.status == 'success') {
 
                     $('#getdata').replaceWith(result.message);
@@ -296,13 +297,14 @@
                 console.log(data);
 
                 $('#id').val(data.id);
-                $('#tencongviec').val(data.tencongviec);
+                $('#tencongviec').val(data.tencongviec).trigger('change');
+                $('#dotuoi').val(data.dotuoi).trigger('change');
                 $('#soluong').val(data.soluong);
                 $('#soluongnu').val(data.soluongnu);
                 $('#mota').val(data.mota);
-                // $('#vitrivl').val(data.vitrivl);
-                $('#tdvanhoa').val(data.tdvanhoa);
-                $('#tdkythuat').val(data.tdkythuat);
+                $('#vitrivl').val(data.vitrivl).trigger('change');
+                $('#tdvanhoa').val(data.tdvanhoa).trigger('change');
+                $('#tdkythuat').val(data.tdkythuat).trigger('change');
                 $('#chuyennganh').val(data.chuyennganh);
                 $('#tdtinhoc').val(data.tdtinhoc);
                 $('#tdngoaingu').val(data.tdngoaingu);
@@ -310,7 +312,7 @@
                 $('#kinhnghiem').val(data.kinhnghiem);
                 $('#noilamviec').val(data.noilamviec);
                 $('#luong').val(data.luong);
-                $('#hotroan').val(data.hotroan);
+                $('#hotroan').val(data.hotroan).trigger('change');
                 $('#phucloikhac').val(data.phucloikhac);
             },
         });
