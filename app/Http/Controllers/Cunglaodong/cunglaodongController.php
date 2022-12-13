@@ -17,6 +17,10 @@ use App\Models\Cunglaodong\tonghopdanhsachcungld;
 use App\Models\Cunglaodong\tonghopdanhsachcungld_ct;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Company;
+use App\Models\Danhmuc\danhmuchanhchinh;
+use App\Models\Danhmuc\dmchucvu;
+use App\Models\Danhmuc\dmloaihieuluchdld;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
@@ -85,7 +89,8 @@ public function nhanthongbao()
         }
         $inputs['math'] = getdate()[0];
         $thongbao = thongbaocungld::where('nam', $inputs['nam'])->first();
-        $inputs['matb']=$thongbao->matb;
+        if(isset($thongbao)){
+            $inputs['matb']=$thongbao->matb;
         $inputs['noidung'] = 'Tổng hợp danh sách theo thông báo: "' . $thongbao->tieude . '"';
         $inputs['trangthai'] = 'CHUAGUI';
         $inputs['madvbc'] = session('admin')['madvbc'];
@@ -138,10 +143,17 @@ public function nhanthongbao()
                 'thatnghiep' => $val->thatnghiep,
                 'thoigianthatnghiep' => $val->thoigianthatnghiep,
                 'lydoktg' => $val->lydoktg,
-                'tinhtrangvl' => $val->tinhtrangvl
+                'tinhtrangvl' => $val->tinhtrangvl,
+                'thong'=>$val->thon
             ];
             tonghopdanhsachcungld_ct::create($data);
         }
+        }else{
+            return view('errors.tontai_dulieu')
+                    ->with('furl','/cungld/danh_sach/don_vi')
+                    ->with('message','Chưa có đợt thu thập cho năm '.$inputs['nam']);
+        }
+        
 
         return redirect('/cungld/danh_sach/don_vi');
     }
@@ -152,13 +164,21 @@ public function nhanthongbao()
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
         if (!chkPhanQuyen('tonghopcunglaodongxa', 'danhsach')) {
             return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongxa');
         }
+        $inputs=$request->all();
+
         $m_dv=dmdonvi::where('madv',session('admin')['madv'])->first();
         $model = tonghopdanhsachcungld_ct::where('math', $id)->get();
+        if($inputs['tinhtrangvl'] != null)
+        {
+            // dd(1);
+            $model=$model->where('tinhtrangvl',$inputs['tinhtrangvl']);
+        }
+        // dd($model);
         $doituong_ut=dmdoituonguutien::all();
         $gdpt=dmtrinhdogdpt::all();
         $cmkt=dmtrinhdokythuat::all();
@@ -238,5 +258,141 @@ public function nhanthongbao()
         $model = tonghopdanhsachcungld::findOrFail($id);
 
         return response()->json($model);
+    }
+
+    public function tonghop(Request $request)
+    {
+        $inputs=$request->all();
+        $model=tonghopdanhsachcungld_ct::where('math',$inputs['math'])->get();
+        
+        $a_trinhdogdpt=array_column(dmtrinhdogdpt::all()->toarray(),'tengdpt','madmgdpt');
+        $a_trinhdocmkt=array_column(dmtrinhdokythuat::all()->toarray(),'tentdkt','madmtdkt');
+        $a_tinhtrangvl=array_column(dmtinhtrangthamgiahdkt::all()->toarray(),'tentgkt','madmtgkt');
+        $a_doituonguutien=array_column(dmdoituonguutien::all()->toarray(),'tendoituong','madmdt');
+
+        return view('cunglaodong.donvi.tonghop')
+                    ->with('model',$model)
+                    ->with('math',$inputs['math'])
+                    ->with('a_trinhdogdpt',$a_trinhdogdpt)
+                    ->with('a_trinhdocmkt',$a_trinhdocmkt)
+                    ->with('a_doituonguutien',$a_doituonguutien)
+                    ->with('a_tinhtrangvl',$a_tinhtrangvl);
+    }
+
+    public function SuaDanhSach($id)
+    {
+        $model_ds=tonghopdanhsachcungld_ct::findOrFail($id);
+        $countries_list = getCountries();
+        // get params
+        $dmhc =danhmuchanhchinh::all();
+        $list_cmkt = dmtrinhdokythuat::all();
+        $list_tdgd = dmtrinhdogdpt::all();
+        // $list_nghe = $this->getParamsByNametype('Nghề nghiệp người lao động');
+        $list_vitri= dmtinhtrangthamgiahdktct2::where('manhom2','20221108050559')->get();
+        $list_linhvuc = dmchuyenmondaotao::all();
+        $list_hdld = dmloaihieuluchdld::all();
+        $doituong_ut = dmdoituonguutien::all();
+        $chucvu = dmchucvu::all();
+        $congty = Company::all();
+    
+        $list_tinhtrangvl = dmtinhtrangthamgiahdkt::all();
+        $list_tinhtrangvl1 = dmtinhtrangthamgiahdktct::all();
+        $list_tinhtrangvl2 = dmtinhtrangthamgiahdktct2::all();
+    
+    
+        $a_vithevl = array();
+        $a_thoigianthatnghiep = array();
+        $a_nguoithatnghiep = array();
+        $a_lydo_khongthamgia_hdkt = array();
+        foreach ($list_tinhtrangvl1 as $item) {
+          $model = $list_tinhtrangvl2->where('manhom2', $item->madmtgktct);
+          if (count($model) > 0) {
+            foreach ($model as $key => $ct) {
+              if ($item->tentgktct == 'Vị thế việc làm') {
+                $a_vithevl[$key]['madm'] = $ct->madmtgktct2;
+                $a_vithevl[$key]['tendm'] = $ct->tentgktct2;
+              }
+              if ($item->tentgktct == 'Thời gian thất nghiệp') {
+                $a_thoigianthatnghiep[$key]['madm'] = $ct->madmtgktct2;
+                $a_thoigianthatnghiep[$key]['tendm'] = $ct->tentgktct2;
+              }
+            }
+          }
+        }
+    
+        foreach ($list_tinhtrangvl as $val) {
+          $m = $list_tinhtrangvl1->where('manhom', $val->madmtgkt);
+          if (count($m)) {
+            foreach ($m as $k => $ct) {
+              if ($val->tentgkt == 'Người thất nghiệp' && $ct->tentgktct != 'Thời gian thất nghiệp') {
+                $a_nguoithatnghiep[$k]['madm'] = $ct->madmtgktct;
+                $a_nguoithatnghiep[$k]['tendm'] = $ct->tentgktct;
+              }
+    
+              if ($val->tentgkt == 'Không tham gia hoạt động kinh tế') {
+                $a_lydo_khongthamgia_hdkt[$k]['madm'] = $ct->madmtgktct;
+                $a_lydo_khongthamgia_hdkt[$k]['tendm'] = $ct->tentgktct;
+              }
+            }
+          }
+        }
+    
+        $a_huyen = array_column(danhmuchanhchinh::where('capdo', 'H')->get()->toarray(), 'name', 'id');
+        $a_xa = array_column(danhmuchanhchinh::where('capdo', 'X')->get()->toarray(), 'name', 'id');
+        return view('nguoilaodong.suadanhsach')
+                ->with('model',$model_ds)
+                ->with('countries_list', $countries_list)
+                ->with('dmhc', $dmhc)
+                ->with('chucvu', $chucvu)
+                ->with('a_huyen', $a_huyen)
+                ->with('a_xa', $a_xa)
+                ->with('doituong_ut', $doituong_ut)
+                ->with('congty', $congty)
+                ->with('list_cmkt', $list_cmkt)
+                ->with('list_tdgd', $list_tdgd)
+                ->with('list_vitri', $list_vitri)
+                ->with('a_vithevl', $a_vithevl)
+                ->with('a_thoigianthatnghiep', $a_thoigianthatnghiep)
+                ->with('a_nguoithatnghiep', $a_nguoithatnghiep)
+                ->with('a_lydo_khongthamgia_hdkt', $a_lydo_khongthamgia_hdkt)
+                ->with('list_tinhtrangvl', $list_tinhtrangvl)
+                ->with('list_linhvuc', $list_linhvuc)
+                ->with('list_hdld', $list_hdld);
+                // ->with('model', $model_ld);
+    }
+
+    public function CapNhatDanhSach(Request $request,$id)
+    {
+        $inputs=$request->all();
+        $model=tonghopdanhsachcungld_ct::findOrFail($id);
+        $a_diaban = danhmuchanhchinh::all();
+        $a_xa = array_column($a_diaban->where('capdo', 'X')->toarray(), 'name', 'id');
+        isset($inputs['xa']) ? $tenxa = $a_xa[$inputs['xa']] : $tenxa = '';
+        isset($inputs['xa']) ? $tenhuyen = $this->getHuyen($inputs['xa']) : $tenhuyen = '';
+        if(isset($inputs['address'])){
+          $inputs['thuongtru'] = $inputs['address'] . '-' . $tenxa . '-' . $tenhuyen . '- Quảng Bình';
+        }
+        
+        $model->update($inputs);
+
+        return redirect('/cungld/danh_sach/don_vi/tonghop?math='.$model->math)
+                ->with('success','Cập nhật thành công');
+    }
+
+    public function getHuyen($maxa)
+    {
+      $xa = danhmuchanhchinh::findOrFail($maxa);
+      $huyen = danhmuchanhchinh::where('maquocgia', $xa->parent)->first();
+      $tenhuyen = $huyen->name;
+      return $tenhuyen;
+    }
+
+    public function XoaDanhSachCT($id)
+    {
+        $model=tonghopdanhsachcungld_ct::findOrFail($id);
+        $model->delete();
+
+        return redirect('/cungld/danh_sach/don_vi/tonghop?math='.$model->math)
+                    ->with('success','Xóa thành công');
     }
 }

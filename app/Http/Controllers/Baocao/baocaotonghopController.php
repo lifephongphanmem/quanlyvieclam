@@ -7,7 +7,7 @@ use App\Models\Danhmuc\dmloaihinhhdkt;
 use App\Models\Nguoilaodong\nguoilaodong;
 use App\Models\Caulaodong\nhucautuyendung;
 use App\Models\Caulaodong\nhucautuyendungct;
-use App\Models\Thongbao\thongbao;
+use App\Models\Thongbao\Thongbao;
 use App\Models\Cunglaodong\tonghopdanhsachcungld;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,10 +46,12 @@ class baocaotonghopController extends Controller
    
         $tonghopcungld = tonghopdanhsachcungld::all();
         $company = Company::all();
+
         $thongbaocungld = thongbao::all();
         $danhmuchanhchinh = danhmuchanhchinh::where('capdo','T')->first();
         $dmdonvi = dmdonvi::where('madiaban','!=',$danhmuchanhchinh->id)->get();
         return view('reports.baocaotonghop.index', compact('nguoidung', 'tonghopcungld', 'company','thongbaocungld','dmdonvi'));
+
     }
 
 

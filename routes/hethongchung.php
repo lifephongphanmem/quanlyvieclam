@@ -5,6 +5,7 @@ use App\Http\Controllers\Danhmuc\DmdonviController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Hethong\ChucnangController;
 use App\Http\Controllers\Danhmuc\danhmuchanhchinhController;
+use App\Http\Controllers\Danhmuc\dmthonxomController;
 use App\Http\Controllers\Hethong\dsnhomtaikhoanController;
 use App\Http\Controllers\Hethong\HethongchungController;
 
@@ -77,4 +78,10 @@ Route::prefix('nhomchucnang')->group(function(){
     Route::post('/PhanQuyen',[dsnhomtaikhoanController::class,'LuuPhanQuyen']);
 
     Route::get('/danhsach_donvi',[dsnhomtaikhoanController::class,'DanhSachDonVi']);
+});
+
+Route::prefix('dmthonxom')->group(function(){
+    Route::get('/danhsach',[dmthonxomController::class,'index']);
+    Route::post('/store',[dmthonxomController::class,'store']);
+    Route::get('/delete/{id}',[dmthonxomController::class,'destroy']);
 });

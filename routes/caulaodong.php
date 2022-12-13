@@ -19,6 +19,7 @@ Route::prefix('tuyen_dung')->group(function () {
     Route::get('/delete/{id}', [thongbaoController::class, 'delete']);
     Route::post('/chuyen', [thongbaoController::class, 'chuyen']);
     Route::get('/indanhsachcauld', [thongbaoController::class, 'indanhsachcauld']);
+    Route::post('/nhanExcel',[nhucautuyendungController::class,'nhanExcel']);
     // khai bao
     Route::prefix('/khai_bao_nhu_cau')->group(function () {
         Route::get('dot_thu_thap', [thongbaoController::class, 'khaibao']);

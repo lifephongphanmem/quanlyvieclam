@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Danhmuc\dmdonvi;
+
 function chkPhanQuyen($machucnang = null, $tenphanquyen = null)
 {
     //return true;
@@ -52,4 +54,32 @@ function setArrayAll($array, $noidung = 'Tất cả', $giatri = 'ALL')
         $a_kq[(string)$k] = $v;
     }
     return $a_kq;
+}
+
+function getDonVi($sadmin, $chucnang = null, $tenquyen = null)
+{
+    if (in_array($sadmin, ['SSA', 'ssa','ADMIN'])) {
+        $m_donvi = dmdonvi::all();
+    } else {
+        $m_donvi = dmdonvi::where('madv', session('admin')->madv)->get();
+    }
+
+    // if ($chucnang != null) {
+    //     $a_tk = App\Model\DanhMuc\dstaikhoan::wherein('madonvi', array_column($m_donvi->toarray(), 'madonvi'))->get('tendangnhap');
+    //     $a_tk_pq = App\Model\DanhMuc\dstaikhoan_phanquyen::where('machucnang', $chucnang)->where('phanquyen', '1')
+    //         ->wherein('tendangnhap', $a_tk)->get('tendangnhap');
+    //     $m_donvi = App\Model\View\viewdiabandonvi::wherein('madonvi', function ($qr) use ($a_tk_pq) {
+    //         $qr->select('madonvi')->from('dstaikhoan')->wherein('tendangnhap', $a_tk_pq)->distinct();
+    //     })->get();
+    // }
+    return $m_donvi;
+}
+
+function getNgayThang($date)
+{
+    if ($date != null || $date != '')
+        $newday = date('d/m/Y', strtotime($date));
+    else
+        $newday = '';
+    return $newday;
 }

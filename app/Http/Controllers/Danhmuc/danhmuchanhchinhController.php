@@ -28,7 +28,7 @@ class danhmuchanhchinhController extends Controller
         if (!chkPhanQuyen('diaban', 'danhsach')) {
             return view('errors.noperm')->with('machucnang', 'chucnang');
         }
-        $model=danhmuchanhchinh::all();
+        $model=danhmuchanhchinh::where('capdo','!=','Th')->get();
         // dd(getdate()[0]);
         return view('HeThong.manage.diaban.index')
                 ->with('model',$model);
@@ -56,6 +56,14 @@ class danhmuchanhchinhController extends Controller
             return view('errors.noperm')->with('machucnang', 'chucnang');
         }
         $inputs=$request->all();
+        if(in_array($inputs['level'],['Huyện','Thành phố','Thị xã']))
+        {
+            $inputs['capdo']='H';
+        }else if(in_array($inputs['level'],['Xã','Phường','Thị trấn'])){
+            $inputs['capdo']='X';
+        }else{
+            $inputs['capdo']='T';
+        }
         $inputs['madb']=getdate()[0];
             danhmuchanhchinh::create($inputs);
             return redirect('/dia_ban');

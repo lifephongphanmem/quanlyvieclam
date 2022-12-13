@@ -53,5 +53,10 @@ class tonghopdanhsachcungld_ct extends Model
         'thoigianthatnghiep',
         'lydoktg',
         'tinhtrangvl',//0: có việc làm, 1: Thất nghiệp, 2: Không tham gia, 4: Chọn tình trạng
+        'thon',
+        'xa',
+        'address',
+        'tungay',
+        'denngay'
     ];
 }

@@ -1,9 +1,9 @@
 
 @if (chkPhanQuyen('quantrihethong', 'phanquyen'))
-<li class="menu-section">
+{{-- <li class="menu-section">
     <h4 class="menu-text">HỆ THỐNG</h4>
     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-</li>
+</li> --}}
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
     <a href="javascript:;" class="menu-link menu-toggle">
         <span class="svg-icon menu-icon">
@@ -184,6 +184,15 @@
                             </a>
                         </li>
                         @endif
+
+                        <li class="menu-item" aria-haspopup="true">
+                            <a href="{{ url('/dmthonxom/danhsach') }}" class="menu-link">
+                                <i class="menu-bullet menu-bullet-dot">
+                                    <span></span>
+                                </i>
+                                <span class="menu-text font-weight-bold">Thôn xóm</span>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>

@@ -2,14 +2,15 @@
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
 @stop
 
 @section('custom-script')
-    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
+    </script>
+    <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
 
-    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
+        <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
             TableManaged3.init();
@@ -44,7 +45,7 @@
                     <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                         <thead>
                             <tr class="text-center">
-                                <th colspan="4">STT</th>
+                                <th colspan="3">STT</th>
                                 <th rowspan="2">Mã địa bàn</th>
                                 <th rowspan="2">Tên địa bàn</th>
                                 {{-- <th rowspan="2">Đơn vị quản lý địa bàn</th> --}}
@@ -55,7 +56,7 @@
                                 <th width=3%>T</th>
                                 <th width=3%>H</th>
                                 <th width=3%>X</th>
-                                <th width=3%>Th</th>
+                                {{-- <th width=3%>Th</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -70,7 +71,7 @@
     </div>
     <!--end::Row-->
 
-    @include('includes.delete');
+    @include('includes.delete')
 
     <form method="POST" action="" accept-charset="UTF-8" id="frm_modify">
         @csrf
@@ -227,11 +228,11 @@
                                     echo '<td></td>';
                                 }
 
-                                if($item->level== 'Thôn'){
-                                    echo '<td class="text-center">'.$y++.'</td>';
-                                }else {
-                                    echo '<td></td>';
-                                }
+                                // if($item->level== 'Thôn'){
+                                //     echo '<td class="text-center">'.$y++.'</td>';
+                                // }else {
+                                //     echo '<td></td>';
+                                // }
                                 echo '<td>'.$item->maquocgia.'</td>';
                                echo '<td>'.$item->name.'</td>';
                             //    $tendvql=App\Models\dmdonvi::where('madv',$item->madvql)->first();
@@ -271,7 +272,7 @@
 
                            //đệ quy để lấy danh sách con
                            menudiaban($model,$item->maquocgia,$char.'---');
-            };
+            }
         }            
     }
      ?> 

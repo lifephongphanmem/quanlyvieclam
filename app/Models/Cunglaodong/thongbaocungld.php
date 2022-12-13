@@ -14,6 +14,10 @@ class thongbaocungld extends Model
         'tieude',
         'noidung',
         'ngaygui',
-        'matb'
+        'matb',
+        'filequyetdinh',
+        'filekhac',
+        'tungay',
+        'denngay'
     ];
 }

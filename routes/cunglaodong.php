@@ -27,9 +27,10 @@ Route::prefix('cungld')->group(function () {
             Route::post('/store', [cunglaodongController::class, 'store']);
             Route::post('/update/{id}', [cunglaodongController::class, 'update']);
             Route::get('/delete/{id}', [cunglaodongController::class, 'destroy']);
-            Route::get('/chi_tiet/{id}', [cunglaodongController::class, 'show']);
+            Route::post('/chi_tiet/{id}', [cunglaodongController::class, 'show']);
             Route::post('/send/{id}', [cunglaodongController::class, 'senddata']);
             Route::get('/lydo/{id}', [cunglaodongController::class, 'lydo']);
+            Route::get('/tonghop', [cunglaodongController::class, 'tonghop']);
         });
         Route::prefix('huyen')->group(function () {
             Route::get('/', [cunglaodong_huyenController::class, 'index']);

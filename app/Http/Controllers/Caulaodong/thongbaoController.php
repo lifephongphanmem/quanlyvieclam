@@ -23,7 +23,7 @@ class thongbaoController extends Controller
     {
         $this->middleware(function ($request, $next) {
             if (!Session::has('admin')) {
-                return redirect('/home');
+                return redirect('/');
             };
             return $next($request);
         });
@@ -56,7 +56,7 @@ class thongbaoController extends Controller
         $company = Company::all();
         $user = User::all();
 
-        return view('Caulaodong.hopthucauld', compact('model', 'company', 'user'));
+        return view('caulaodong.hopthucauld', compact('model', 'company', 'user'));
     }
     public function thongbaodagui()
     {
@@ -65,7 +65,7 @@ class thongbaoController extends Controller
         $company = Company::all();
         $user = User::all();
 
-        return view('Caulaodong.thongbaodagui', compact('model', 'company', 'user'));
+        return view('caulaodong.thongbaodagui', compact('model', 'company', 'user'));
     }
     public function khaibao()
     {
@@ -73,7 +73,7 @@ class thongbaoController extends Controller
         $company = Company::all();
         $user = User::all();
 
-        return view('Caulaodong.khaibao.thongbao.dsthuthap', compact('model', 'company', 'user'));
+        return view('caulaodong.khaibao.thongbao.dsthuthap', compact('model', 'company', 'user'));
     }
     public function tonghop()
     {
@@ -81,14 +81,14 @@ class thongbaoController extends Controller
         $company = Company::all();
         $user = User::all();
 
-        return view('Caulaodong.tonghop.thongbao.dsthuthap', compact('model', 'company', 'user'));
+        return view('caulaodong.tonghop.thongbao.dsthuthap', compact('model', 'company', 'user'));
     }
 
     public function create()
     {
 
         $nguoigui = session('admin')['name'];
-        return view('Caulaodong.create', compact('nguoigui'));
+        return view('caulaodong.create', compact('nguoigui'));
     }
 
     public function store(Request $request)
@@ -107,7 +107,7 @@ class thongbaoController extends Controller
     {
         $model = thongbao::where('matb', $request->matb)->first();
         $user = User::all();
-        return view('Caulaodong.edit', compact('user', 'model'));
+        return view('caulaodong.edit', compact('user', 'model'));
     }
 
     public function update(Request $request)
@@ -190,7 +190,9 @@ class thongbaoController extends Controller
         // dd($model);
         $company = Company::all();
         $manghecap2 = dmmanghetrinhdo::all();
-        return view('Caulaodong.indanhsachcauld', compact('model', 'company', 'manghecap2'))
-            ->with('pageTitle', 'danh sách cầu lao động');
+
+        return view('caulaodong.indanhsachcauld',compact('model','company','manghecap2'))
+        ->with('pageTitle', 'danh sách cầu lao động');
+
     }
 }

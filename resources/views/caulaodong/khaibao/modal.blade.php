@@ -35,7 +35,7 @@
                                 <select id="dotuoi" name="dotuoi" class="form-control">
                                     <option value="all">Mọi độ tuổi</option>
                                     <option value="duoi35">Dưới 35 tuổi</option>
-                                    <option value="tren35">Dưới 35 tuổi</option>
+                                    <option value="tren35">Trên 35 tuổi</option>
                                 </select>
                             </div>
                         </div>
