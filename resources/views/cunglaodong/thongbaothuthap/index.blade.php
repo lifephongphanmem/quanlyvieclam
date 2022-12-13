@@ -2,11 +2,9 @@
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
-    {{-- <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" /> --}}
 @stop
 
 @section('custom-script')
-    {{-- <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script> --}}
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
     </script>
     <script type="text/javascript"
@@ -16,7 +14,6 @@
     <script>
         jQuery(document).ready(function() {
             TableManaged3.init();
-            // $('.select2me').select2();
         });
     </script>
 @stop
@@ -175,7 +172,7 @@
                                 <div class="col-lg-8">
                                     <label class="control-label">Tiêu đề<span class="require">*</span></label>
                                     <input class="form-control" required="required" name="tieude" type="text"
-                                        id="tieude">
+                                        id="tieude" >
                                 </div>
                             </div>
 
@@ -199,7 +196,7 @@
     </form>
 
     <!-- modal gửi thông báo -->
-    <form method="POST" action="" accept-charset="UTF-8" id="frm_modify_th">
+    <form method="POST" action="" accept-charset="UTF-8" id="frm_modify_th" enctype="multipart/form-data">
         @csrf
         <div id="modify-modal-th" tabindex="-1" class="modal fade kt_select2_modal" style="display: none;"
             aria-hidden="true">
@@ -210,9 +207,37 @@
                         <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label><b>Thông báo khi gửi đi sẽ không thể chỉnh sửa. Bạn hãy kiểm tra kỹ số liệu trước khi
-                                    gửi.</b></label>
+                        <div class="form-horizontal">
+                            <div class=" form-group">
+                                <div class="col-lg-12">
+                                    <label class="control-label">Đơn vị gửi</label>
+                                    {{-- {!! Form::select('madv[]',setArrayAll($a_dv, 'Tất cả', '') , null, ['id' => 'nam', 'class' => 'form-control select2basic', 'multiple'=>true]) !!} --}}
+                                    <select name="madv[]" class="form-control select2basic" style="width: 100%;" multiple='multiple'>
+                                        <option value="ALL" selected>Tất cả</option>
+                                        @foreach ($a_dv as $key=>$ct )
+                                            <option value="{{$key}}">{{$ct}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <label class="control-label">File quyết định</label>
+                                    <input type="file" class="form-control" name="filequyetdinh" style="width:79%;border:none">
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <label class="control-label">File khác</label>
+                                    <input type="file" class="form-control" name="filekhac" style="width:79%;border:none">
+                                </div>
+                            </div>
+                            <div class="form-group" style="line-height: 13px;margin-left:10px">
+                                <input type="checkbox" name='guimail' checked class="mr-5 float-left">
+                                <p class="float-left">Gửi email</p>
+                            </div>
+
                         </div>
                     </div>
                     <div class="modal-footer">

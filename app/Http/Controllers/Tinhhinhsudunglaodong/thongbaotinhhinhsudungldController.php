@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\Tinhhinhsudunglaodong\thongbaotinhhinhsudungld;
 use App\Models\Tinhhinhsudunglaodong\thongbaotinhhinhsudungld_doanhnghiep;
 use App\Http\Controllers\Controller;
+use App\Jobs\SenMailDoanhNghiep;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -32,20 +33,20 @@ class thongbaotinhhinhsudungldController extends Controller
         if (!chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'danhsach')) {
             return view('errors.noperm')->with('machucnang', 'thongbaotinhhinhsudunglaodong');
         }
-        $model=thongbaotinhhinhsudungld::all();
-        $model_cty=User::where('phanloaitk',2)->get();
-        $congty=Company::all();
-        foreach($model_cty as $cty){
-            $c_ty=$congty->where('user',$cty->id)->first();
-            if(isset($c_ty)){
-                $cty->masodn=$c_ty->masodn;
-            }else{
-                $cty->masodn='';
+        $model = thongbaotinhhinhsudungld::all();
+        $model_cty = User::where('phanloaitk', 2)->get();
+        $congty = Company::all();
+        foreach ($model_cty as $cty) {
+            $c_ty = $congty->where('user', $cty->id)->first();
+            if (isset($c_ty)) {
+                $cty->masodn = $c_ty->masodn;
+            } else {
+                $cty->masodn = '';
             }
         }
         return view('tinhhinhsudunglaodong.thongbao.index')
-                ->with('model',$model)
-                ->with('model_cty',$model_cty);
+            ->with('model', $model)
+            ->with('model_cty', $model_cty);
     }
 
 
@@ -60,13 +61,13 @@ class thongbaotinhhinhsudungldController extends Controller
         if (!chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'thaydoi')) {
             return view('errors.noperm')->with('machucnang', 'thongbaotinhhinhsudunglaodong');
         }
-        $inputs=$request->all();
-        $inputs['matb']=getdate()[0];
-        $inputs['tieude'] ==0?$inputs['hannop']='05-06':$inputs['hannop']='05-12';
+        $inputs = $request->all();
+        $inputs['matb'] = getdate()[0];
+        $inputs['tieude'] == 0 ? $inputs['hannop'] = '05-06' : $inputs['hannop'] = '05-12';
         // $inputs['tieude']==0?$inputs['tieude']='Báo cáo tình hình sử dụng lao động định kỳ 6 tháng':$inputs['tieude']='Báo cáo tình hình sử dụng lao động hằng năm';
         thongbaotinhhinhsudungld::create($inputs);
         return redirect('/tinhhinhsudungld/thongbao')
-                ->with('success','Thêm mới thành công');
+            ->with('success', 'Thêm mới thành công');
     }
 
 
@@ -81,7 +82,7 @@ class thongbaotinhhinhsudungldController extends Controller
         if (!chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'thaydoi')) {
             return view('errors.noperm')->with('machucnang', 'thongbaotinhhinhsudunglaodong');
         }
-        $model=thongbaotinhhinhsudungld::findOrFail($id);
+        $model = thongbaotinhhinhsudungld::findOrFail($id);
 
         return response()->json($model);
     }
@@ -94,17 +95,16 @@ class thongbaotinhhinhsudungldController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {   
+    {
         if (!chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'thaydoi')) {
             return view('errors.noperm')->with('machucnang', 'thongbaotinhhinhsudunglaodong');
         }
-        $inputs=$request->all();
-        $inputs['tieude'] ==0?$inputs['hannop']='05-06':$inputs['hannop']='05-12';
-        $model=thongbaotinhhinhsudungld::findOrFail($id);
+        $inputs = $request->all();
+        $inputs['tieude'] == 0 ? $inputs['hannop'] = '05-06' : $inputs['hannop'] = '05-12';
+        $model = thongbaotinhhinhsudungld::findOrFail($id);
         $model->update($inputs);
         return redirect('/tinhhinhsudungld/thongbao')
-                    ->with('success','Cập nhật thành công');
-
+            ->with('success', 'Cập nhật thành công');
     }
 
     /**
@@ -118,56 +118,84 @@ class thongbaotinhhinhsudungldController extends Controller
         if (!chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'thaydoi')) {
             return view('errors.noperm')->with('machucnang', 'thongbaotinhhinhsudunglaodong');
         }
-        $model=thongbaotinhhinhsudungld::findOrFail($id);
-        $model_ct=thongbaotinhhinhsudungld_doanhnghiep::where('matb',$model->matb)->get();
-        if(isset($model_ct)){
-            foreach($model_ct as $ct){
+        $model = thongbaotinhhinhsudungld::findOrFail($id);
+        $model_ct = thongbaotinhhinhsudungld_doanhnghiep::where('matb', $model->matb)->get();
+        if (isset($model_ct)) {
+            foreach ($model_ct as $ct) {
                 $ct->delete();
             }
         }
         $model->delete();
 
         return redirect('/tinhhinhsudungld/thongbao')
-                    ->with('success','Xóa thành công');
+            ->with('success', 'Xóa thành công');
     }
-    public function sendData(Request $request,$id){
+    public function sendData(Request $request, $id)
+    {
         if (!chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'hoanthanh')) {
             return view('errors.noperm')->with('machucnang', 'thongbaotinhhinhsudunglaodong');
         }
-        $inputs=$request->all();
-        $thongbao=thongbaotinhhinhsudungld::findOrFail($id);
-        $tb_ct=thongbaotinhhinhsudungld_doanhnghiep::where('matb',$thongbao->matb)->get();
-        if(count($tb_ct)>0){
+        $inputs = $request->all();
+// dd($inputs);
+        $thongbao = thongbaotinhhinhsudungld::findOrFail($id);
+        $tb_ct = thongbaotinhhinhsudungld_doanhnghiep::where('matb', $thongbao->matb)->get();
+        if (count($tb_ct) > 0) {
             return view('errors.tontai_dulieu')
-                    ->with('message', 'Thông báo đã được gửi')
-                    ->with('furl','/cungld/thongbao');
+                ->with('message', 'Thông báo đã được gửi')
+                ->with('furl', '/cungld/thongbao');
+        }
+        //Gửi kèm file
+        if (isset($inputs['filequyetdinh'])) {
+            $file = $inputs['filequyetdinh'];
+            $name = time() . $file->getClientOriginalName();
+            $file->move('uploads/tinhhinhsudunglaodong/', $name);
+            $inputs['filequyetdinh'] = 'uploads/tinhhinhsudunglaodong/' . $name;
         }
 
-        if($inputs['masodn'][0] == 'all')
-        {
-            $model=User::where('phanloaitk',2)->get();
-            foreach($model as $ct){
-                $c_ty=Company::select('masodn')->where('user',$ct->id)->first();
-                $data=[
-                    'matb'=>$thongbao->matb,
-                    'masodn'=>isset($c_ty)?$c_ty->masodn:''
+        if (isset($inputs['filekhac'])) {
+            $file = $inputs['filekhac'];
+            $name = time() . $file->getClientOriginalName();
+            $file->move('uploads/tinhhinhsudunglaodong/', $name);
+            $inputs['filekhac'] = 'uploads/tinhhinhsudunglaodong/' . $name;
+        }
+
+        if ($inputs['madv'][0] == 'all') {
+            $modeldvs = Company::all();
+            $model = User::where('phanloaitk', 2)->get();
+            foreach ($model as $ct) {
+                $c_ty = Company::select('madv')->where('user', $ct->id)->first();
+                $data = [
+                    'matb' => $thongbao->matb,
+                    'masodn' => isset($c_ty) ? $c_ty->madv : ''
                 ];
                 thongbaotinhhinhsudungld_doanhnghiep::create($data);
             }
-        }else{
-            foreach($inputs['masodn'] as $item){
-                $data=[
-                    'matb'=>$thongbao->matb,
-                    'masodn'=>$item
+        } else {
+            $modeldvs = Company::wherein('madv', $inputs['madv'])->get();
+            foreach ($inputs['madv'] as $item) {
+                $data = [
+                    'matb' => $thongbao->matb,
+                    'masodn' => $item
                 ];
                 thongbaotinhhinhsudungld_doanhnghiep::create($data);
             }
         }
 
-        $time=Carbon::now();
-        $thongbao->update(['ngaygui'=>$time->toDateString()]);
+        $time = Carbon::now();
+        $thongbao->update(['ngaygui' => $time->toDateString(), 'filequyetdinh' => $inputs['filequyetdinh'] ?? '', 'filekhac' => $inputs['filekhac'] ?? '']);
+
+        //Gửi email
+        $m_thongbao = thongbaotinhhinhsudungld::findOrFail($id);
+        $contentdn = 'Thông báo thu thập thông tin tình hình sử dụng lao động';
+        $filedn = [$m_thongbao->filequyetdinh, $m_thongbao->filekhac];
+        if(isset($inputs['guimail'])){
+            foreach ($modeldvs as $modeldn) {
+             $run=new SenMailDoanhNghiep($modeldn, $contentdn, $filedn);
+                $run->handle();
+            }
+        }
 
         return redirect('/tinhhinhsudungld/thongbao')
-                ->with('success','Gửi thành công');
+            ->with('success', 'Gửi thành công');
     }
 }

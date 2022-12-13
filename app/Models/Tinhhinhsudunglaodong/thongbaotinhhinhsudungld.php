@@ -17,6 +17,8 @@ class thongbaotinhhinhsudungld extends Model
         'hannop',
         'trangthai',
         'ngaygui',
-        'nguoigui'
+        'nguoigui',
+        'filequyetdinh',
+        'filekhac'
     ];
 }

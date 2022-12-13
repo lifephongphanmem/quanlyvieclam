@@ -62,14 +62,21 @@
                         <?php $m_tt = $tttghdkt1->where('manhom', $tt->madmtgkt);
                         $a_m_tt = array_column($m_tt->toarray(), 'madmtgktct');
                         $m_ct = $tttghdkt2->wherein('manhom2', $a_m_tt);
+                        // dd($tt);
                         ?>
                         @if (count($m_ct) > 0)
+                        <?php $col=0; $num=0 ?>
                             @foreach ($m_tt as $val)
                                 <?php $m_ttct = $tttghdkt2->where('manhom2', $val->madmtgktct); ?>
+                               
                                 @if (count($m_ttct) > 0)
-                                    <th colspan="{{ count($m_tt) + count($m_ttct) - 1 }}">{{ $tt->tentgkt }}</th>
+                                <?php $col=$col + count($m_ttct);
+                                $num++
+                                ?>
+                                   
                                 @endif
                             @endforeach
+                            <th colspan="{{ count($m_tt) + $col -$num }}">{{ $tt->tentgkt }}</th>
                         @else
                             <th colspan="{{ count($m_tt) }}">{{ $tt->tentgkt }}</th>
                         @endif
@@ -113,6 +120,7 @@
                         <?php $m_tt1 = $tttghdkt1->where('manhom', $tt->madmtgkt); ?>
                         @foreach ($m_tt1 as $val)
                             <?php $m_ttct1 = $m_ttct = $tttghdkt2->where('manhom2', $val->madmtgktct); ?>
+                            
                             @if (count($m_ttct1) > 0)
                                 <th colspan="{{ count($m_ttct1) }}">{{ $val->tentgktct }}</th>
                             @else

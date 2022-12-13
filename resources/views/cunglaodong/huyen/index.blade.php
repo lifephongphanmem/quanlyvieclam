@@ -2,17 +2,15 @@
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
 @stop
 
 @section('custom-script')
-    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
     </script>
-    {{-- <script type="text/javascript"
-        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script> --}}
+    <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
 
-    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
+        <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
             TableManaged3.init();
@@ -65,7 +63,7 @@
                                                 class="btn btn-sm btn-clean btn-icon" target="_blank">
                                                 <i class="icon-lg la flaticon2-print text-primary"></i>
                                             </a>
-                                            <a title="Tổng hợp danh sách"
+                                            <a title="Xem chi tiết"
                                                 href="{{ '/cungld/danh_sach/huyen/tong_hop?matb=' . $th->matb }}"
                                                 class="btn btn-sm btn-clean btn-icon">
                                                 <i class="icon-lg la la-clipboard-list text-success icon-2x"></i>

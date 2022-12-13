@@ -111,7 +111,8 @@ class nguoilaodongController extends Controller
     $dmhc = $this->getdanhmuc();
     $list_cmkt = dmtrinhdokythuat::all();
     $list_tdgd = dmtrinhdogdpt::all();
-    $list_nghe = $this->getParamsByNametype('Nghề nghiệp người lao động');
+    // $list_nghe = $this->getParamsByNametype('Nghề nghiệp người lao động');
+    $list_vitri= dmtinhtrangthamgiahdktct2::where('manhom2','20221108050559')->get();
     $list_linhvuc = dmchuyenmondaotao::all();
     $list_hdld = dmloaihieuluchdld::all();
     $doituong_ut = dmdoituonguutien::all();
@@ -182,7 +183,7 @@ class nguoilaodongController extends Controller
       ->with('doituong_ut', $doituong_ut)
       ->with('list_cmkt', $list_cmkt)
       ->with('list_tdgd', $list_tdgd)
-      ->with('list_nghe', $list_nghe)
+      ->with('list_vitri', $list_vitri)
       ->with('list_linhvuc', $list_linhvuc)
       ->with('list_hdld', $list_hdld);
   }
@@ -268,7 +269,8 @@ class nguoilaodongController extends Controller
     $dmhc = $this->getdanhmuc();
     $list_cmkt = dmtrinhdokythuat::all();
     $list_tdgd = dmtrinhdogdpt::all();
-    $list_nghe = $this->getParamsByNametype('Nghề nghiệp người lao động');
+    // $list_nghe = $this->getParamsByNametype('Nghề nghiệp người lao động');
+    $list_vitri= dmtinhtrangthamgiahdktct2::where('manhom2','20221108050559')->get();
     $list_linhvuc = dmchuyenmondaotao::all();
     $list_hdld = dmloaihieuluchdld::all();
     $doituong_ut = dmdoituonguutien::all();
@@ -330,7 +332,7 @@ class nguoilaodongController extends Controller
       ->with('congty', $congty)
       ->with('list_cmkt', $list_cmkt)
       ->with('list_tdgd', $list_tdgd)
-      ->with('list_nghe', $list_nghe)
+      ->with('list_vitri', $list_vitri)
       ->with('a_vithevl', $a_vithevl)
       ->with('a_thoigianthatnghiep', $a_thoigianthatnghiep)
       ->with('a_nguoithatnghiep', $a_nguoithatnghiep)
@@ -395,6 +397,14 @@ class nguoilaodongController extends Controller
     $inputs = $request->all();
     $inputs['sohc'] = $inputs['cmnd'];
     $model = nguoilaodong::findOrFail($id);
+    $a_diaban = danhmuchanhchinh::all();
+    $a_xa = array_column($a_diaban->where('capdo', 'X')->toarray(), 'name', 'id');
+    isset($inputs['xa']) ? $tenxa = $a_xa[$inputs['xa']] : $tenxa = '';
+    isset($inputs['xa']) ? $tenhuyen = $this->getHuyen($inputs['xa']) : $tenhuyen = '';
+    if(isset($inputs['address'])){
+      $inputs['thuongtru'] = $inputs['address'] . '-' . $tenxa . '-' . $tenhuyen . '- Quảng Bình';
+    }
+    
     $model->update($inputs);
     return redirect('/nguoilaodong/nuoc_ngoai')
       ->with('success', 'Cập nhật thành công');
@@ -447,7 +457,7 @@ class nguoilaodongController extends Controller
   public function getdanhmuc()
   {
 
-    $dm = DB::table('danhmuchanhchinh')->where('public', '1')->get();
+    $dm = danhmuchanhchinh::all();
     return $dm;
   }
 
@@ -803,13 +813,13 @@ class nguoilaodongController extends Controller
   }
 
 
-  // public function getHuyen($maxa)
-  // {
-  //   $xa = danhmuchanhchinh::findOrFail($maxa);
-  //   $huyen = danhmuchanhchinh::where('maquocgia', $xa->parent)->first();
-  //   $tenhuyen = $huyen->name;
-  //   return $tenhuyen;
-  // }
+  public function getHuyen($maxa)
+  {
+    $xa = danhmuchanhchinh::findOrFail($maxa);
+    $huyen = danhmuchanhchinh::where('maquocgia', $xa->parent)->first();
+    $tenhuyen = $huyen->name;
+    return $tenhuyen;
+  }
 
   public function nhanExcelNuocngoai(Request $request)
   {
