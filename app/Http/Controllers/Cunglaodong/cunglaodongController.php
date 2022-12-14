@@ -65,6 +65,7 @@ public function nhanthongbao()
                             ->select('thongbaocungld.*')
                             ->where('thongbao_donvi.madv',session('admin')->madv)
                             ->get();
+                            // dd($model);
     return view('cunglaodong.donvi.nhanthongbao')
             ->with('model',$model);
 }

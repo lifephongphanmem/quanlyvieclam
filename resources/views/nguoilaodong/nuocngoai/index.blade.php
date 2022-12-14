@@ -120,6 +120,11 @@
                             <input type="file" name="import_file" class="form-control">
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12">
+                            <p class="float-left mr-3">Tải file excel mẫu </p><a href="{{asset('excel/maunhapnguoilaodongnuocngoai.xlsx')}}">tại đây</a>
+                        </div>
+                    </div>
 
 
                 </div>

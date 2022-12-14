@@ -51,7 +51,7 @@
                                 <th width="5%">Hạn nộp</th>
                                 <th width="7%">Ngày nhận thông báo</th>
                                 {{-- <th width="5%">Ngày gửi</th> --}}
-                                {{-- <th width="10%">Thao tác</th> --}}
+                                <th width="10%">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -68,8 +68,8 @@
                                         {{ $tb->ngaygui == null ? 'Chưa gửi' : \Carbon\Carbon::parse($tb->ngaygui)->format('d/m/Y') }}
                                     </td>
                                     {{-- <td></td> --}}
-                                    {{-- <td>
-                                        <button type="button" onclick="chinhsua({{$tb->id}})" title="Sửa thông tin" href="" class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal-edit" data-toggle="modal">
+                                    <td>
+                                        {{-- <button type="button" onclick="chinhsua({{$tb->id}})" title="Sửa thông tin" href="" class="btn btn-sm btn-clean btn-icon" data-target="#modify-modal-edit" data-toggle="modal">
                                             <i class="icon-lg la flaticon-edit-1 text-primary"></i>
                                         </button>
                                         @if ($tb->ngaygui == null)
@@ -84,8 +84,16 @@
                                             onclick="cfDel('{{ '/tinhhinhsudungld/thongbao/delete/' . $tb->id }}')"
                                             class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm"
                                             data-toggle="modal">
-                                            <i class="icon-lg flaticon-delete text-danger"></i></button>
-                                    </td> --}}
+                                            <i class="icon-lg flaticon-delete text-danger"></i></button> --}}
+                                            @if ($tb->filequyetdinh != '')
+                                            <a href="{{ asset($tb->filequyetdinh) }}" class="btn btn-xs btn-icon btn-success mr-2 ml-2"
+                                                title="Tải file quyết định"><i class="fa fa-file-download"></i></a>
+                                        @endif
+                                        @if ($tb->khac != '')
+                                            <a href="{{asset($tb->khac) }}" class="btn btn-xs btn-icon btn-success mr-2 ml-2"
+                                                title="Tải file khác"><i class="fa fa-file-download"></i></a>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

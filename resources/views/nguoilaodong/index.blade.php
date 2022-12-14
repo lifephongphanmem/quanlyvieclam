@@ -43,9 +43,9 @@
                                 data-target="#modal-nhanexcel" data-toggle="modal">
                                 <i class="fas fa-file-import">Nhận Excel</i>
                             </button>
-                            <a href="{{asset('excel/maunhapnguoilaodong.xlsx')}}" class="btn btn-xs btn-success mr-2 ml-2" title="Nhận dữ liệu từ file Excel">                            
+                            {{-- <a href="{{asset('excel/maunhapnguoilaodong.xlsx')}}" class="btn btn-xs btn-success mr-2 ml-2" title="Nhận dữ liệu từ file Excel">                            
                                 <i class="fa fa-file-download"></i> Tải File Excel mẫu</i>
-                        </a>
+                        </a> --}}
                         @endif
                     </div>
                 </div>
@@ -113,7 +113,11 @@
                             <input type="file" name="import_file" class="form-control">
                         </div>
                     </div>
-
+                    <div class="form-group row">
+                        <div class="col-lg-12">
+                            <p class="float-left mr-3">Tải file excel mẫu </p><a href="{{asset('excel/maunhapnguoilaodong.xlsx')}}">tại đây</a>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="modal-footer">
