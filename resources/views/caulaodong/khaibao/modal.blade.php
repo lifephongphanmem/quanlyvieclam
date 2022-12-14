@@ -41,19 +41,19 @@
                         </div>
                         <div class="col-xl-2">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Tổng số lượng tuyển*</b></label>
+                                <label><b>Tổng số lượng tuyển</b></label>
                                 <input type="text" id="soluong" name="soluong" class="form-control">
                             </div>
                         </div>
                         <div class="col-xl-2">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Số lượng nữ trong đó*</b></label>
+                                <label><b>Số lượng nữ trong đó</b></label>
                                 <input type="text" id="soluongnu" name="soluongnu" class="form-control">
                             </div>
                         </div>
                         <div class="col-xl-12">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Mô tả*</b></label>
+                                <label><b>Mô tả</b></label>
                                 <textarea type="text" id="mota" name="mota" class="form-control"></textarea>
                             </div>
                         </div>
@@ -70,13 +70,13 @@
                         </div>
                         <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Trình độ tin học*</b></label>
+                                <label><b>Trình độ tin học</b></label>
                                 <input type="text" id="tdtinhoc" name="tdtinhoc" class="form-control">
                             </div>
                         </div>
                         <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Trình độ ngoại ngữ*</b></label>
+                                <label><b>Trình độ ngoại ngữ</b></label>
                                 <input type="text" id="tdngoaingu" name="tdngoaingu" class="form-control">
                             </div>
                         </div>
@@ -105,31 +105,31 @@
                         </div>
                         <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Chuyên ngành*</b></label>
+                                <label><b>Chuyên ngành</b></label>
                                 <input type="text" id="chuyennganh" name="chuyennganh" class="form-control">
                             </div>
                         </div>
                         <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Kỹ năng mềm*</b></label>
+                                <label><b>Kỹ năng mềm</b></label>
                                 <input type="text" id="kynangmem" name="kynangmem" class="form-control">
                             </div>
                         </div>
                         <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Kinh nghiệm*</b></label>
+                                <label><b>Kinh nghiệm</b></label>
                                 <input type="text" id="kinhnghiem" name="kinhnghiem" class="form-control">
                             </div>
                         </div>
                         <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Nơi làm việc*</b></label>
+                                <label><b>Nơi làm việc</b></label>
                                 <input type="text" id="noilamviec" name="noilamviec" class="form-control">
                             </div>
                         </div>
                         <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Mức lương*</b></label>
+                                <label><b>Mức lương</b></label>
                                 <input type="text" id="luong" name="luong" class="form-control">
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                         </div>
                         <div class="col-xl-4">
                             <div class="form-group fv-plugins-icon-container">
-                                <label><b>Phúc lợi khác*</b></label>
+                                <label><b>Phúc lợi khác</b></label>
                                 <textarea type="text" id="phucloikhac" name="phucloikhac" class="form-control"></textarea>
                             </div>
                         </div>
@@ -192,9 +192,10 @@
 <script>
 
     function setcreate() {
-      
+
         $('#id').val(null);
-        $('#tencongviec').val('{{$manghefirst->madmmntd}}');
+        $('#tencongviec').val('').trigger('change');
+        $('#dotuoi').val('all');
         $('#soluong').val(null);
         $('#soluongnu').val(null);
         $('#mota').val('');
@@ -208,12 +209,12 @@
         $('#kinhnghiem').val('');
         $('#noilamviec').val('');
         $('#luong').val('');
-        $('#hotroan').val('0');
+        $('#hotroan').val('');
         $('#phucloikhac').val('');
     }
 
     function store() {
-       
+       alert($('#tencongviec').val());
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             url: '/tuyen_dung/khai_bao_nhu_cau/store_ct',
@@ -223,10 +224,11 @@
                 id: $('#id').val(),
                 mahs: $('#mahs').val(),
                 tencongviec: $('#tencongviec').val(),
+                dotuoi: $('#dotuoi').val(),
                 soluong: $('#soluong').val(),
                 soluongnu: $('#soluongnu').val(),
                 mota: $('#mota').val(),
-                // vitrivl: $('#vitrivl').val('#vitrivl');
+                vitrivl: $('#vitrivl').val(),
                 tdvanhoa: $('#tdvanhoa').val(),
                 tdkythuat: $('#tdkythuat').val(),
                 chuyennganh: $('#chuyennganh').val(),
@@ -242,7 +244,6 @@
 
             dataType: 'JSON',
             success: function(result) {
-
                 if (result.status == 'success') {
 
                     $('#getdata').replaceWith(result.message);
@@ -296,13 +297,14 @@
                 console.log(data);
 
                 $('#id').val(data.id);
-                $('#tencongviec').val(data.tencongviec);
+                $('#tencongviec').val(data.tencongviec).trigger('change');
+                $('#dotuoi').val(data.dotuoi).trigger('change');
                 $('#soluong').val(data.soluong);
                 $('#soluongnu').val(data.soluongnu);
                 $('#mota').val(data.mota);
-                // $('#vitrivl').val(data.vitrivl);
-                $('#tdvanhoa').val(data.tdvanhoa);
-                $('#tdkythuat').val(data.tdkythuat);
+                $('#vitrivl').val(data.vitrivl).trigger('change');
+                $('#tdvanhoa').val(data.tdvanhoa).trigger('change');
+                $('#tdkythuat').val(data.tdkythuat).trigger('change');
                 $('#chuyennganh').val(data.chuyennganh);
                 $('#tdtinhoc').val(data.tdtinhoc);
                 $('#tdngoaingu').val(data.tdngoaingu);
@@ -310,7 +312,7 @@
                 $('#kinhnghiem').val(data.kinhnghiem);
                 $('#noilamviec').val(data.noilamviec);
                 $('#luong').val(data.luong);
-                $('#hotroan').val(data.hotroan);
+                $('#hotroan').val(data.hotroan).trigger('change');
                 $('#phucloikhac').val(data.phucloikhac);
             },
         });
