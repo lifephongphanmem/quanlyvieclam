@@ -214,7 +214,6 @@
     }
 
     function store() {
-       alert($('#tencongviec').val());
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             url: '/tuyen_dung/khai_bao_nhu_cau/store_ct',
