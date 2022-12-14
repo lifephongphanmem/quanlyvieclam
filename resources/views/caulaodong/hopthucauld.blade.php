@@ -63,10 +63,10 @@
                                     </td>
                                     <td>
                                         @if ($item->filequyetdinh != null)
-                                        <a href="/upload/cauld.{{$item->filequyetdinh}}" class="btn btn-primary">Quyết định</a>
+                                        <a href="{{asset($item->filequyetdinh)}}" class="btn btn-primary">Quyết định</a>
                                         @endif
                                         @if ($item->filekhac != null)
-                                        <a href="{{'/upload/cauld/'.$item->filekhac}}" class="btn btn-primary">File khác</a>
+                                        <a href="{{asset($item->filekhac)}}" class="btn btn-primary">File khác</a>
                                         @endif
                                             
                                     </td>

@@ -129,20 +129,22 @@ class thongbaoController extends Controller
         if ($request->has('filequyetdinh')) {
             $a = $request->filequyetdinh;
             $filequyetdinh = time() . $a->getClientOriginalName();
-            $a->move('uploads/cauld', $filequyetdinh);
+            $a->move('uploads/cauld/', $filequyetdinh);
+            $input['filequyetdinh']='uploads/cauld/'.$filequyetdinh;
         } else {
-            $filequyetdinh = null;
+            $input['filequyetdinh'] = null;
         }
 
         if ($request->has('filekhac')) {
             $a = $request->filekhac;
             $filekhac = time() . $a->getClientOriginalName();
-            $a->move('uploads/cauld', $filekhac);
+            $a->move('uploads/cauld/', $filekhac);
+            $input['filekhac']='uploads/cauld/'.$filekhac;
         } else {
-            $filekhac = null;
+            $input['filekhac'] = null;
         }
 
-        thongbao::where('matb', $request->matb)->update(['filequyetdinh'=> $filequyetdinh, 'filekhac' => $filekhac]);
+        thongbao::where('matb', $request->matb)->update(['filequyetdinh'=>  $input['filequyetdinh'], 'filekhac' =>  $input['filekhac']]);
 
         foreach ($input['manguoinhan'] as $item) {
             if ($item == 'all') {
@@ -163,7 +165,8 @@ class thongbaoController extends Controller
 
         //gửi mail
         if($input['manguoinhan'][0] == 'all'){
-            $modeldvs=Company::all();
+            // $modeldvs=Company::all(); //tắt để demo
+            $modeldvs=Company::OrderBy('id','desc')->limit(3)->get(); //để tạm để demo
         }else{
             $modeldvs=Company::wherein('madv',$input['manguoinhan'])->get();
         }
