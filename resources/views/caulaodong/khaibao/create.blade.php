@@ -89,7 +89,7 @@
 
                 </form>
 
-                @include('Caulaodong.khaibao.detail')
+                @include('caulaodong.khaibao.detail')
 
                 <div class="card-footer">
                     <div class="col-lg-12" style="text-align: center">
