@@ -146,7 +146,7 @@
                         <div class="col-xl-12">
                             <div class="form-group fv-plugins-icon-container">
                                 <label><b>Đơn vị*</b></label>
-                                <select class="col-md-12 select2me" id="id" name="id">
+                                <select class="col-md-12 select2basic" id="id" name="id">
                                     @foreach ($company as $com)
                                         <option value="{{ $com->madv }}"
                                             {{ $nguoidung == $com->madv ? 'selected' : '' }}>{{ $com->name }}
@@ -158,7 +158,7 @@
                         <div class="col-xl-12">
                             <div class="form-group fv-plugins-icon-container">
                                 <label><b>Tổng hợp*</b></label>
-                                <select id="madb" name="madb" class="col-xl-12 select2me">
+                                <select id="madb" name="madb" class="col-xl-12 select2basic">
                                     @foreach ($tonghopcungld as $item)
                                         <option value="{{ $item->madv }}">{{ $item->noidung }}</option>
                                     @endforeach
@@ -192,7 +192,7 @@
                         <div class="col-xl-12">
                             <div class="form-group fv-plugins-icon-container">
                                 <label><b>Tổng hợp*</b></label>
-                                <select id="madb" name="madb" class="col-xl-12 select2me">
+                                <select id="madb" name="madb" class="col-xl-12 select2basic">
                                     @foreach ($tonghopcungld as $item)
                                         <option value="{{ $item->madv }}">{{ $item->noidung }}</option>
                                     @endforeach
@@ -247,6 +247,6 @@
 
 
     {{-- @include('reports.baocaotonghop.modal') --}}
-  
+
 
 @endsection
