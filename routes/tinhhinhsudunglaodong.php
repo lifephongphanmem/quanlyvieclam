@@ -24,6 +24,7 @@ Route::prefix('tinhhinhsudungld')->group(function () {
         Route::get('/delete/{id}', [tinhhinhsudungldController::class, 'destroy']);
         Route::post('/send/{id}', [tinhhinhsudungldController::class, 'sendData']);
         Route::get('/lydo/{id}', [tinhhinhsudungldController::class, 'lydo']);
+        Route::get('/intonghop',[tinhhinhsudungldController::class,'intonghop']);
         Route::get('/tonghop',[tinhhinhsudungldController::class,'tonghop']);
     });
     Route::prefix('tinh')->group(function () {

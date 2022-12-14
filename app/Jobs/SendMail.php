@@ -39,7 +39,8 @@ class SendMail implements ShouldQueue
     {
         $emailht = new MailHanhChinh($this->contenthc,$this->modeldv,$this->filehc);
         if(isset($this->modeldv)){
-            Mail::to($this->modeldv->email)->queue($emailht);
+            // Mail::to($this->modeldv->email)->queue($emailht);
+            Mail::to($this->modeldv->email)->send($emailht);
         }
         
                

@@ -89,6 +89,7 @@
                                                 data-toggle="modal">
                                                 <i class="icon-lg flaticon-delete text-danger"></i></button>
                                         @endif
+
                                     </td>
                                 </tr>
                             @endforeach

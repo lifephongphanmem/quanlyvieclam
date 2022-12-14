@@ -2,13 +2,13 @@
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
 @stop
 
 @section('custom-script')
-    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
-    <script src="{{ url('assets/js/pages/select2.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
+</script>
+<script type="text/javascript"
+    src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
 
     <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
@@ -68,7 +68,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-bordered table-hover" id="sample_3">
+                <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                     <thead>
                         <tr class="text-center">
                             <th rowspan="2" width="10%">STT</th>

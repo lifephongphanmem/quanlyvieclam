@@ -40,7 +40,7 @@ Route::prefix('cungld')->group(function () {
             Route::get('/lydo', [cunglaodong_huyenController::class, 'lydo']);
 
             Route::get('/in', [cunglaodong_huyenController::class, 'indanhsach']);
-            Route::get('/intonghop', [cunglaodong_huyenController::class, 'intonghop']);
+            Route::post('/intonghop', [cunglaodong_huyenController::class, 'intonghop']);
         });
 
         Route::prefix('tinh')->group(function () {
@@ -49,7 +49,7 @@ Route::prefix('cungld')->group(function () {
             Route::post('/tralai', [cunglaodong_tinhController::class, 'tralai']);
 
             Route::get('/intonghop', [cunglaodong_tinhController::class, 'intonghop']);
-            Route::get('/intonghop_tinh', [cunglaodong_tinhController::class, 'intonghop_tinh']);
+            Route::post('/intonghop_tinh', [cunglaodong_tinhController::class, 'intonghop_tinh']);
         });
     });
 });

@@ -61,10 +61,11 @@ public function nhanthongbao()
         return view('errors.noperm')->with('machucnang', 'nhanthongbaocunglaodong');
     }
     $user=User::where('madv',session('admin')['madv'])->first();
-    $model=thongbaocungld::join('thongbao_congty','thongbao_congty.thongbao_id','thongbaocungld.id')
+    $model=thongbaocungld::join('thongbao_donvi','thongbao_donvi.matb','thongbaocungld.matb')
                             ->select('thongbaocungld.*')
-                            ->where('thongbao_congty.user_id',$user->id)
+                            ->where('thongbao_donvi.madv',session('admin')->madv)
                             ->get();
+                            // dd($model);
     return view('cunglaodong.donvi.nhanthongbao')
             ->with('model',$model);
 }

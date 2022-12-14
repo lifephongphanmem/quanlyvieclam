@@ -40,7 +40,7 @@
                             <i class="menu-bullet menu-bullet-dot">
                                 <span></span>
                             </i>
-                            <span class="menu-text">Tổng hợp dữ liệu cung lao động</span>
+                            <span class="menu-text">Tổng hợp dữ liệu </span>
                         </a>
                     </li>
                 @endif
@@ -51,7 +51,7 @@
                             <i class="menu-bullet menu-bullet-dot">
                                 <span></span>
                             </i>
-                            <span class="menu-text">Tổng hợp dữ liệu cung lao động</span>
+                            <span class="menu-text">Tổng hợp dữ liệu </span>
                         </a>
                     </li>
                 @endif
@@ -61,7 +61,7 @@
                             <i class="menu-bullet menu-bullet-dot">
                                 <span></span>
                             </i>
-                            <span class="menu-text">Tổng hợp dữ liệu cung lao động </span>
+                            <span class="menu-text">Tổng hợp dữ liệu  </span>
                         </a>
                     </li>
                 @endif

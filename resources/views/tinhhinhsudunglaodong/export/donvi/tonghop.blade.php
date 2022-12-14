@@ -90,7 +90,7 @@
                         <td>{{$ct->ngaysinh}}</td>
                         <td>{{$ct->gioitinh}}</td>
                         <td>{{$ct->cmnd}}</td>
-                        <td>{{$a_chucvu[$ct->chucvu]}}</td>
+                        <td>{{$ct->chucvu != null?$a_chucvu[$ct->chucvu]:''}}</td>
                         @foreach ($a_vitri as $key=>$val )
                             <td>{{$key==$ct->vitrivl?'X':''}}</td>
                         @endforeach
@@ -103,15 +103,15 @@
                         <td>{{$ct->pcbosung}}</td>
                         <td>{{$ct->bddochai}}</td>
                         <td>{{$ct->ktdochai}}</td>
-                        <td>{{$a_loaihdld[$ct->loaihdld] == 'Không xác định thời hạn'?$ct->bdhdld:''}}</td>
-                        @if ($a_loaihdld[$ct->loaihdld] == 'Xác định thời hạn')
+                        <td>{{$ct->loaihdld != null ?($a_loaihdld[$ct->loaihdld] == 'Không xác định thời hạn'?$ct->bdhdld:''):''}}</td>
+                        @if ($ct->loaihdld != null && $a_loaihdld[$ct->loaihdld] == 'Xác định thời hạn')
                         <td>{{$ct->bdhdld}}</td>
                         <td>{{$ct->bdhdld}}</td>
                         @else
                         <td></td>
                         <td></td>
                         @endif
-                        @if ($a_loaihdld[$ct->loaihdld] == 'Xác định thời hạn' && $a_loaihdld[$ct->loaihdld] == 'Không xác định thời hạn')
+                        @if ($ct->loaihdld != null &&$a_loaihdld[$ct->loaihdld] == 'Xác định thời hạn' && $a_loaihdld[$ct->loaihdld] == 'Không xác định thời hạn')
                         <td>{{$ct->bdhdld}}</td>
                         <td>{{$ct->bdhdld}}</td>
                         @else
@@ -120,6 +120,7 @@
                         @endif
                         <td>{{$ct->bdbhxh}}</td>
                         <td>{{$ct->ktbhxh}}</td>
+                        <td></td>
                     </tr>
                 @endforeach
         </tbody>

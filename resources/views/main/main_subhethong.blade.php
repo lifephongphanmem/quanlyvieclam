@@ -184,7 +184,7 @@
                             </a>
                         </li>
                         @endif
-
+                        @if (chkPhanQuyen('dmthonxom', 'phanquyen'))
                         <li class="menu-item" aria-haspopup="true">
                             <a href="{{ url('/dmthonxom/danhsach') }}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
@@ -193,7 +193,7 @@
                                 <span class="menu-text font-weight-bold">Thôn xóm</span>
                             </a>
                         </li>
-
+                        @endif
                     </ul>
                 </div>
             @endif

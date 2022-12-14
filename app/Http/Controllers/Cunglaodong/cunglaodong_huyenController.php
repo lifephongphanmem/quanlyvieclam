@@ -44,6 +44,7 @@ class cunglaodong_huyenController extends Controller
             return view('errors.noperm')->with('machucnang', 'tonghopcunglaodonghuyen');
         }
         $model = thongbaocungld::all();
+        // dd($model);
         $model_huyen = tonghopcungld_huyen::where('madvbc', session('admin')['madvbc'])->get();
         $m_th = tonghop_huyen::where('madvbc', session('admin')['madvbc'])->get();
         foreach ($model as $tb) {
@@ -56,8 +57,10 @@ class cunglaodong_huyenController extends Controller
                 $tb->mathh = null;
             }
         }
+        $a_donvi=array_column(dmdonvi::all()->toarray(),'tendv','madv');
         return view('cunglaodong.huyen.index')
             ->with('model', $model)
+            ->with('a_donvi', $a_donvi)
             ->with('model_huyen', $model_huyen);
     }
     public function tonghop(Request $request)
@@ -177,7 +180,7 @@ class cunglaodong_huyenController extends Controller
             ->where('tonghopdanhsachcungld.matb', $inputs['matb'])
             ->where('tonghopdanhsachcungld.madvbc', session('admin')['madv'])
             ->get();
-        // dd($model);
+        
         $m_dv = dmdonvi::where('madv', session('admin')['madv'])->first();
         // $model_dv = dmdonvi::where('madvbc', session('admin')['madvbc'])
         //     ->where('phanloaitaikhoan', 'SD')

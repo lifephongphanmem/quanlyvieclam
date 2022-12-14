@@ -2,15 +2,15 @@
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
 @stop
 
 @section('custom-script')
-    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
+    </script>
+    <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
 
-
-    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
+        <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
             TableManaged3.init();
@@ -118,7 +118,13 @@
                     <div class="form-group row">
                         <div class="col-md-12">
                             <label class="control-label">Tên nhóm chức năng<span class="require">*</span></label>
-                            {!! Form::select('manhomchucnang', $a_nhomtk, null, ['class' => 'form-control select2_modal', 'required'=>'true']) !!}
+                            {{-- {!! Form::select('manhomchucnang', $a_nhomtk, null, ['class' => 'form-control select2basic', 'required'=>'true','width'=>'100%']) !!} --}}
+                            <select name="manhomchucnang" id="" class="form-control select2basic" required style="width:100%">
+                                <option value="">Tất cả</option>
+                                @foreach ($a_nhomtk as $key=>$val )
+                                    <option value="{{$key}}">{{$val}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
