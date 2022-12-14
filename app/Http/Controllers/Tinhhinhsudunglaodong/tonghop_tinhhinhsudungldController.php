@@ -81,8 +81,8 @@ class tonghop_tinhhinhsudungldController extends Controller
         }
         $inputs=$request->all();
         $tieude=array(
-            '0'=>'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng',
-            '1'=>'Báo cáo tình hình sử dụng lao động hằng năm'
+            '0'=>'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng đầu năm',
+            '1'=>'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng cuối năm'
         );
         $tonghop=tinhhinhsudunglaodong::where('nam',$inputs['nam'])->where('tieude',$inputs['tieude'])->get();
         $doanhnghiep=User::join('company','company.user','users.id')

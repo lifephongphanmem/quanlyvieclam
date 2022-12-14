@@ -309,8 +309,10 @@ class UserController extends Controller
 		$inputs['id'] = $request->id;
 		$model = dmdonvi::findOrFail($inputs['id']);
 		$model_dvbc=User::where('tonghop',1)->get();
+		$a_nhomchucnang=array_column(dsnhomtaikhoan::all()->toarray(),'tennhomchucnang','manhomchucnang');
 		return view('HeThong.manage.taikhoan.create')
 			->with('model', $model)
+			->with('a_nhomchucnang', $a_nhomchucnang)
 			->with('model_dvbc', $model_dvbc);
 	}
 

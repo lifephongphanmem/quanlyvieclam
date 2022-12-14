@@ -62,7 +62,7 @@
                             @foreach ($model as $key => $tb)
                                 <tr>
                                     <td>{{ ++$key }}</td>
-                                    <td>{{ $tb['tieude'] == 0 ? 'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng' : 'Báo cáo tình hình sử dụng lao động hằng năm' }}
+                                    <td>{{ $tb['tieude'] == 0 ? 'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng đầu năm' : 'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng cuối năm' }}
                                     </td>
                                     <td>{{ $tb['sodv'] . '/' . $sldv }}</td>
                                     {{-- <td> {{ $tb->hannop.'-'.$tb->nam }}</td> --}}
@@ -141,8 +141,8 @@
                             <div class="col-lg-8">
                                 <label class="control-label">Tiêu đề</label>
                                 <select id="tieude" class="form-control select2me" name="tieude">
-                                    <option value="0">Báo cáo tình hình sử dụng lao động định kỳ 6 tháng</option>
-                                    <option value="1">Báo cáo tình hình sử dụng lao động hằng năm</option>
+                                    <option value="0">Báo cáo tình hình sử dụng lao động định kỳ 6 tháng đầu năm</option>
+                                    <option value="1">Báo cáo tình hình sử dụng lao động định kỳ 6 tháng cuối năm</option>
                                 </select>
                             </div>
                             <div class="col-lg-4">

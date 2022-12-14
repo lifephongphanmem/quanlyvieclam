@@ -46,6 +46,7 @@ class tinhhinhsudungldController extends Controller
             ->select('thongbaotinhhinhsudungld.*')
             ->where('thongbaotinhhinhsudungld_doanhnghiep.masodn', session('admin')['madv'])
             ->get();
+            // dd($model);
         return view('tinhhinhsudunglaodong.donvi.index')
             ->with('model', $model);
     }
@@ -146,10 +147,12 @@ class tinhhinhsudungldController extends Controller
         if (!chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'danhsach')) {
             return view('errors.noperm')->with('machucnang', 'tonghopdulieutinhhinhsudunglaodongdonvi');
         }
+        // dd(session('admin'));
         $model = tinhhinhsudunglaodong::join('thongbaotinhhinhsudungld', 'thongbaotinhhinhsudungld.matb', 'tinhhinhsudunglaodong.matb')
             ->select('tinhhinhsudunglaodong.*', 'thongbaotinhhinhsudungld.tieude', 'thongbaotinhhinhsudungld.hannop', 'thongbaotinhhinhsudungld.ngaygui AS ngaynhan')
-            ->where('madv', session('admin')['madv'])
+            ->where('tinhhinhsudunglaodong.madv', session('admin')['madv'])
             ->get();
+            // dd($model);
         return view('tinhhinhsudunglaodong.donvi.tonghop')
             ->with('model', $model)
             ->with('capdo', 'X');
