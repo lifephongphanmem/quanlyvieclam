@@ -225,17 +225,17 @@
         <div class="row" >
             <div class="col-md-4">
                 <div class="form-group">
-                    <label class="control-label">Xã</label>
-                    {!! Form::select('xa', setArrayAll($a_xa, '-- Chọn xã --', ''), isset($model)?$model->xa:null, [
-                        'class' => 'form-control select2basic',
-                    ]) !!}
+                    <label class="control-label">Thôn</label>
+                        {{-- <textarea name="'thuongtru" rows="10" class="form-control">{{isset($model)?$model->thuongtru:''}}</textarea> --}}
+                        {!! Form::text('address', isset($model)?$model->address:null, ['class' => 'form-control','placeholder'=>'Tổ dân phố/ Thôn/ Xóm']) !!}
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label class="control-label">Địa chỉ thường trú</label>
-                        {{-- <textarea name="'thuongtru" rows="10" class="form-control">{{isset($model)?$model->thuongtru:''}}</textarea> --}}
-                        {!! Form::text('address', isset($model)?$model->address:null, ['class' => 'form-control','placeholder'=>'Tổ dân phố/ Thôn/ Xóm']) !!}
+                    <label class="control-label">Xã</label>
+                    {!! Form::select('xa', setArrayAll($a_xa, '-- Chọn xã --', ''), isset($model)?$model->xa:null, [
+                        'class' => 'form-control select2basic',
+                    ]) !!}
                 </div>
             </div>
             <div class="col-md-4">

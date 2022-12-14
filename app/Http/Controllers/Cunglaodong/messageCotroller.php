@@ -73,6 +73,12 @@ class messageCotroller extends Controller
             return view('errors.noperm')->with('machucnang', 'thongbaocunglaodong');
         }
         $inputs=$request->all();
+        $thongbao=thongbaocungld::where('nam',$inputs['nam'])->first();
+        if(isset($thongbao)){
+            return view('errors.tontai_dulieu')
+                        ->with('message','Thông báo thu thập cung lao động năm '.$inputs['nam'].' đã có')
+                        ->with('furl','cungld/thongbao');
+        }
         $inputs['matb']=getdate()[0];
         thongbaocungld::create($inputs);
         return redirect('/cungld/thongbao')

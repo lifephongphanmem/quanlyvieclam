@@ -2,14 +2,15 @@
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
 @stop
 
 @section('custom-script')
-    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
     </script>
-    <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
+    <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
+
+        <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
             TableManaged3.init();
@@ -59,7 +60,7 @@
                                             <p class="text-danger">Đơn vị chưa gửi dữ liệu</p>
                                         @else
                                             <a title="In danh sách"
-                                                href="{{ '/cungld/danh_sach/huyen/in?matb=' . $dv->matb . '&math=' . $dv->math . '&madv=' . $dv->madv }}"
+                                                href="{{ '/cungld/danh_sach/huyen/in?matb=' . $dv->matb . '&math=' . $dv->math . '&madv=' . $dv->madv.'&nam='.$dv->nam }}"
                                                 class="btn btn-sm btn-clean btn-icon" target="_blank">
                                                 <i class="icon-lg la flaticon2-print text-dark"></i>
                                             </a>

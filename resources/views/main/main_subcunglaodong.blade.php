@@ -3,6 +3,8 @@
         <h4 class="menu-text">QUẢN LÝ CUNG LAO ĐỘNG</h4>
         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
     </li> --}}
+    @if (session('admin')->capdo == 'T')
+
     <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
         <a href="javascript:;" class="menu-link menu-toggle">
             <span class="svg-icon menu-icon">
@@ -34,7 +36,7 @@
                     <span class="menu-text">Thông báo thu thập thông tin</span>
                 </a>
             </li> --}}
-                @if (chkPhanQuyen('tonghopcunglaodongxa', 'phanquyen'))
+                {{-- @if (chkPhanQuyen('tonghopcunglaodongxa', 'phanquyen'))
                     <li class="menu-item" aria-haspopup="true">
                         <a href="{{ '/cungld/danh_sach/don_vi' }}" class="menu-link">
                             <i class="menu-bullet menu-bullet-dot">
@@ -43,9 +45,9 @@
                             <span class="menu-text">Tổng hợp dữ liệu </span>
                         </a>
                     </li>
-                @endif
+                @endif --}}
 
-                @if (chkPhanQuyen('tonghopcunglaodonghuyen', 'phanquyen'))
+                {{-- @if (chkPhanQuyen('tonghopcunglaodonghuyen', 'phanquyen'))
                     <li class="menu-item" aria-haspopup="true">
                         <a href="{{ '/cungld/danh_sach/huyen' }}" class="menu-link">
                             <i class="menu-bullet menu-bullet-dot">
@@ -54,7 +56,7 @@
                             <span class="menu-text">Tổng hợp dữ liệu </span>
                         </a>
                     </li>
-                @endif
+                @endif --}}
                 @if (chkPhanQuyen('tonghopcunglaodongtinh', 'phanquyen'))
                     <li class="menu-item" aria-haspopup="true">
                         <a href="{{ '/cungld/danh_sach/tinh' }}" class="menu-link">
@@ -69,4 +71,6 @@
             </ul>
         </div>
     </li>
+            
+    @endif
 @endif

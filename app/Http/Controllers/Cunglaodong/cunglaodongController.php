@@ -47,6 +47,7 @@ class cunglaodongController extends Controller
         if (!chkPhanQuyen('tonghopcunglaodongxa', 'danhsach')) {
             return view('errors.noperm')->with('machucnang', 'tonghopcunglaodongxa');
         }
+        
         $model = tonghopdanhsachcungld::where('madv', session('admin')['madv'])->get();
         $model_cungld = thongbaocungld::all();
         return view('cunglaodong.donvi.index')
@@ -86,7 +87,7 @@ public function nhanthongbao()
         if(isset($model)){
             return view('errors.tontai_dulieu')
                     ->with('furl','/cungld/danh_sach/don_vi')
-                    ->with('message','Đã tạo tổng hợp');
+                    ->with('message','Đã tạo tổng hợp cho năm '.$inputs['nam']);
         }
         $inputs['math'] = getdate()[0];
         $thongbao = thongbaocungld::where('nam', $inputs['nam'])->first();

@@ -48,7 +48,7 @@ class tracuuCaulaodongController extends Controller
         $model = nhucautuyendung::join('nhucautuyendungct', 'nhucautuyendungct.mahs', 'nhucautuyendung.mahs')
             ->select('nhucautuyendungct.*', 'nhucautuyendung.madn');
         if ($inputs['nam'] != 'ALL') {
-            $model = $model->where('nam',$inputs['nam']);
+            $model = $model->where('nhucautuyendung.nam',$inputs['nam']);
         }
 
         if ($inputs['madv'] != 'ALL' && $inputs['madv'] != null) {

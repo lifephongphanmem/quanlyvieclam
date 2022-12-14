@@ -61,7 +61,7 @@
                                     <td>{{ ++$key }}</td>
                                     <td name="nam">{{ $tb->nam }}</td>
                                     <td name="tieude">
-                                        {{ $tb->tieude == 0 ? 'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng' : 'Báo cáo tình hình sử dụng lao động hằng năm' }}
+                                        {{ $tb->tieude == 0 ? 'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng đầu năm' : 'Báo cáo tình hình sử dụng lao động định kỳ 6 tháng cuối năm' }}
                                     </td>
                                     {{-- <td name="noidung"> {{ $tb->noidung }}</td> --}}
                                     <td> {{ $tb->hannop . '-' . $tb->nam }}</td>
@@ -161,8 +161,8 @@
                             <div class="col-lg-8">
                                 <label class="control-label">Tiêu đề</label>
                                 <select id="tieude" class="form-control select2me" name="tieude">
-                                    <option value="0">Báo cáo tình hình sử dụng lao động định kỳ 6 tháng</option>
-                                    <option value="1">Báo cáo tình hình sử dụng lao động hằng năm</option>
+                                    <option value="0">Báo cáo tình hình sử dụng lao động định kỳ 6 tháng đầu năm</option>
+                                    <option value="1">Báo cáo tình hình sử dụng lao động định kỳ 6 tháng cuối năm</option>
                                 </select>
                             </div>
                             <div class="col-lg-4">
@@ -208,8 +208,8 @@
                             <div class="col-lg-8">
                                 <label class="control-label">Tiêu đề</label>
                                 <select id="tieude_edit" class="form-control" name="tieude">
-                                    <option value="0">Báo cáo tình hình sử dụng lao động định kỳ 6 tháng</option>
-                                    <option value="1">Báo cáo tình hình sử dụng lao động hằng năm</option>
+                                    <option value="0">Báo cáo tình hình sử dụng lao động định kỳ 6 tháng đầu năm</option>
+                                    <option value="1">Báo cáo tình hình sử dụng lao động định kỳ 6 tháng cuối năm</option>
                                 </select>
                             </div>
                             <div class="col-lg-4">
