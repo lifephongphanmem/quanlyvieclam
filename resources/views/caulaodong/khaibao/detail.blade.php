@@ -73,4 +73,4 @@
         <!--end::Example-->
     </div>
 </div>
-@include('Caulaodong.khaibao.modal')
+@include('caulaodong.khaibao.modal')
