@@ -2,11 +2,9 @@
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
 @stop
 
 @section('custom-script')
-    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
     </script>
     <script type="text/javascript"
@@ -16,7 +14,6 @@
     <script>
         jQuery(document).ready(function() {
             TableManaged3.init();
-            $('.select2me').select2();
         });
     </script>
 @stop
@@ -85,7 +82,7 @@
                                     <td class="{{ getTextStatus($tb->trangthai) }}">{{ getStatus()[$tb->trangthai] }}</td>
                                     <td>
                                         @if (chkPhanQuyen('tonghopdulieutinhhinhsudungld', 'danhsach'))
-                                            <a title="In" href="{{'/tinhhinhsudungld/don_vi/tonghop?matb='.$tb->matb.'&madv='.$tb->madv.'&nam='.$tb->nam.'&capdo=T'}}" class="btn btn-sm btn-clean btn-icon"
+                                            <a title="In" href="{{'/tinhhinhsudungld/don_vi/intonghop?matb='.$tb->matb.'&madv='.$tb->madv.'&nam='.$tb->nam.'&capdo=T'}}" class="btn btn-sm btn-clean btn-icon"
                                                 target="_blank">
                                                 <i class="icon-lg la flaticon2-print text-dark"></i>
                                             </a>

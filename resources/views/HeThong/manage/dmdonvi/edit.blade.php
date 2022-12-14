@@ -44,7 +44,11 @@
                 <div class="col-lg-4">
                     <label>Tên đơn vị hiển thị báo cáo</label>
                     <input class="form-control"  name="tendvhienthi" value="{{$model->tendvhienthi}}" type="text">
-                </div>                
+                </div> 
+                <div class="col-lg-4">
+                    <label>Email</label>
+                    <input class="form-control" name="email"  value="{{$model->email}}" type="text">
+                </div>               
             </div>
 
             <div class="form-group row">

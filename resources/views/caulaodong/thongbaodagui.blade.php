@@ -125,15 +125,19 @@
                         </div>
                         <div class="form-group">
                             <div class="col-lg-6">
-                                <label class="control-label">File quyết định<span class="require">*</span></label>
+                                <label class="control-label">File quyết định</label>
                                 <input autofocus="" id="filequyetdinh" name="filequyetdinh" type="file">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-6">
-                                <label class="control-label">File khác<span class="require">*</span></label>
+                                <label class="control-label">File khác</label>
                                 <input autofocus="" id="filekhac" name="filekhac" type="file">
                             </div>
+                        </div>
+                        <div class="form-group" style="line-height: 13px;margin-left:10px">
+                            <input type="checkbox" name='guimail' checked class="mr-5 float-left">
+                            <p class="float-left">Gửi email</p>
                         </div>
                     </div>
                     <div class="modal-footer">

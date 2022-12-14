@@ -20,7 +20,7 @@ class CreateDubaonhucaulaodongTable extends Migration
             $table->string('nam')->nullable();
             $table->string('noidung')->nullable();
             $table->string('ghichu')->nullable();
-            $table->string('madonvi', 50)->nullable();
+            $table->string('madv', 50)->nullable();
             $table->timestamps();
         });
     }

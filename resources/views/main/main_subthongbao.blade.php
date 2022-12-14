@@ -4,6 +4,7 @@
     <h4 class="menu-text">QUẢN LÝ THÔNG BÁO</h4>
     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 </li> --}}
+@if (chkPhanQuyen('thongbao', 'phanquyen'))
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
     <a href="javascript:;" class="menu-link menu-toggle">
         <span class="svg-icon menu-icon">
@@ -35,7 +36,7 @@
                 </a>
             </li>
             @endif
-            {{-- @if (chkPhanQuyen('qlthongbao', 'phanquyen')) --}}
+            @if (chkPhanQuyen('thongbaocaulaodong', 'phanquyen'))
             <li class="menu-item" aria-haspopup="true">
                 <a  href="{{ url('/tuyen_dung/damh_sach_thong_bao') }}"  class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
@@ -44,7 +45,7 @@
                     <span class="menu-text">Cầu lao động</span>
                 </a>
             </li>
-            {{-- @endif --}}
+            @endif
             @if (chkPhanQuyen('thongbaotinhhinhsudunglaodong', 'phanquyen'))
             <li class="menu-item" aria-haspopup="true">
                 <a href="{{ url('/tinhhinhsudungld/thongbao') }}" class="menu-link">
@@ -68,6 +69,8 @@
         </ul>
     </div>
 </li>
+@endif
+@if (chkPhanQuyen('hopthu', 'phanquyen'))
 <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
     <a href="javascript:;" class="menu-link menu-toggle">
         <span class="svg-icon menu-icon">
@@ -102,7 +105,7 @@
                 </a>
             </li>
             @endif
-            {{-- @if (session('admin')['level'] == 'Tỉnh') --}}
+            @if (chkPhanQuyen('nhanthongbaocaulaodong', 'phanquyen'))
             <li class="menu-item" aria-haspopup="true">
                 <a href="{{ '/tuyen_dung/hopthucauld' }}" class="menu-link">
                     <i class="menu-bullet menu-bullet-dot">
@@ -111,6 +114,7 @@
                     <span class="menu-text">Cầu lao động</span>
                 </a>
             </li>
+            @endif
             @if (chkPhanQuyen('nhanthongbaotinhhinhsudungld', 'phanquyen'))
             <li class="menu-item" aria-haspopup="true">
                 <a href="{{ url('/tinhhinhsudungld/don_vi/thongbao') }}" class="menu-link">
@@ -133,4 +137,5 @@
         </ul>
     </div>
 </li>
+@endif
 @endif

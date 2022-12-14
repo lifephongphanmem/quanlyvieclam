@@ -58,7 +58,7 @@ class nguoilaodongController extends Controller
       //Tài khoản doanh nghiệp
       $model = nguoilaodong::where('company', session('admin')['madv'])->OrderBy('id', 'DESC')->get();
     }
-
+// dd($model);
 
     $a_chucvu = array_column(dmchucvu::all()->toarray(), 'tencv', 'id');
     return view('nguoilaodong.index')

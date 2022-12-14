@@ -2,20 +2,18 @@
 @section('custom-style')
     <link rel="stylesheet" type="text/css"
         href="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ url('assets/global/plugins/select2/select2.css') }}" />
 @stop
 
 @section('custom-script')
-    <script type="text/javascript" src="{{ url('assets/global/plugins/select2/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ url('assets/global/plugins/datatables/media/js/jquery.dataTables.min.js') }}">
     </script>
-
+    <script type="text/javascript"
+        src="{{ url('assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js') }}"></script>
 
     <script src="{{ url('assets/admin/pages/scripts/table-lifesc.js') }}"></script>
     <script>
         jQuery(document).ready(function() {
             TableManaged3.init();
-            $('.select2me').select2();
         });
     </script>
 @stop
@@ -75,9 +73,12 @@
                                     </td>
                                     <td>
                                         @if (chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'danhsach'))
-                                            <a title="In" href="{{'/tinhhinhsudungld/don_vi/tonghop?matb='.$tb->matb.'&madv='.$tb->madv.'&nam='.$tb->nam.'&capdo='.$capdo}}" class="btn btn-sm btn-clean btn-icon"
+                                            {{-- <a title="In" href="{{'/tinhhinhsudungld/don_vi/intonghop?matb='.$tb->matb.'&madv='.$tb->madv.'&nam='.$tb->nam.'&capdo='.$capdo}}" class="btn btn-sm btn-clean btn-icon"
                                                 target="_blank">
                                                 <i class="icon-lg la flaticon2-print text-dark"></i>
+                                            </a> --}}
+                                            <a title="Tổng hợp danh sách" href="{{'/tinhhinhsudungld/don_vi/tonghop?matb='.$tb->matb.'&madv='.$tb->madv.'&nam='.$tb->nam.'&capdo='.$capdo}}" class="btn btn-sm btn-clean btn-icon">
+                                                <i class="icon-lg la la-clipboard-list text-success icon-2x"></i>
                                             </a>
                                         @endif
                                         @if ($tb->trangthai == 'TRALAI')

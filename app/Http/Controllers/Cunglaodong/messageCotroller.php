@@ -220,10 +220,13 @@ class messageCotroller extends Controller
         $m_thongbao=thongbaocungld::findOrFail($id);
         $contenthc='Thông báo thu thập thông tin cung lao động';
         $filehc=[$m_thongbao->filequyetdinh,$m_thongbao->filekhac];
-        if(isset($inputs['guiemail'])){
+        if(isset($inputs['guimail'])){
             foreach($modeldvs as $modeldv){
-                $run=new SendMail($modeldv,$contenthc,$filehc);
-                $run->handle();
+                if($modeldv->email != null){
+                    $run=new SendMail($modeldv,$contenthc,$filehc);
+                    $run->handle();
+                }
+
             }
         }
 

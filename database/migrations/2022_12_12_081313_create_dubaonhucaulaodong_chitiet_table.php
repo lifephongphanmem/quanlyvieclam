@@ -25,7 +25,9 @@ class CreateDubaonhucaulaodongChitietTable extends Migration
             $table->string('tendv')->nullable();  
             //Thông tin nguồn điều tra khác
             $table->string('tennguon')->nullable();  
-            //
+            //Vị trí việc làm (lấy theo bảng dmtinhtrangthamgiahdktct2)
+            $table->string('madmtgktct2')->nullable();
+            $table->string('tentgktct2')->nullable();
             $table->double('soluong')->default(0);
             $table->string('ghichu')->nullable();
             $table->timestamps();

@@ -160,7 +160,8 @@ class thongbaotinhhinhsudungldController extends Controller
         }
 
         if ($inputs['madv'][0] == 'all') {
-            $modeldvs = Company::all();
+            // $modeldvs = Company::all();//Tắt để demo
+            $modeldvs=Company::OrderBy('id','desc')->limit(3)->get();//tạm để demo, sau fix queue
             $model = User::where('phanloaitk', 2)->get();
             foreach ($model as $ct) {
                 $c_ty = Company::select('madv')->where('user', $ct->id)->first();

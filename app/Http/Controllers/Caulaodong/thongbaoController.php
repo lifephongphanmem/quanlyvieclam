@@ -11,6 +11,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Jobs\SenMailDoanhNghiep;
 use App\Models\Caulaodong\nhucautuyendung;
 use App\Models\Caulaodong\nhucautuyendungct;
 use App\Models\Danhmuc\dmmanghetrinhdo;
@@ -128,7 +129,7 @@ class thongbaoController extends Controller
         if ($request->has('filequyetdinh')) {
             $a = $request->filequyetdinh;
             $filequyetdinh = time() . $a->getClientOriginalName();
-            $a->move('upload/cauld', $filequyetdinh);
+            $a->move('uploads/cauld', $filequyetdinh);
         } else {
             $filequyetdinh = null;
         }
@@ -136,7 +137,7 @@ class thongbaoController extends Controller
         if ($request->has('filekhac')) {
             $a = $request->filekhac;
             $filekhac = time() . $a->getClientOriginalName();
-            $a->move('upload/cauld', $filekhac);
+            $a->move('uploads/cauld', $filekhac);
         } else {
             $filekhac = null;
         }
@@ -159,6 +160,26 @@ class thongbaoController extends Controller
         }
 
         thongbao::where('matb', $input['matb'])->update(['trangthai' => 'dg', 'thoidiem' => date('d/m/Y')]);
+
+        //gửi mail
+        if($input['manguoinhan'][0] == 'all'){
+            $modeldvs=Company::all();
+        }else{
+            $modeldvs=Company::wherein('madv',$input['manguoinhan'])->get();
+        }
+        $m_thongbao=thongbao::where('matb',$input['matb'])->first();
+        $contentdn='Thông báo thu thập thông tin cầu  lao động';
+        $filedn=[$m_thongbao->filequyetdinh,$m_thongbao->filekhac];
+        if(isset($input['guimail'])){
+            foreach($modeldvs as $modeldn){
+                if($modeldn->madv != null){
+                    $run=new SenMailDoanhNghiep($modeldn,$contentdn,$filedn);
+                    $run->handle();
+                }
+
+            }
+        }
+
         return redirect('/tuyen_dung/damh_sach_thong_bao')->with('success', 'Thông báo đã được gửi');
     }
 
