@@ -1,40 +1,42 @@
 @extends('main_baocao')
 
 @section('content')
-    <table id="data_header" class="header" width="96%" border="0" cellspacing="0" cellpadding="8"
-        style="margin:0 auto 25px; text-align: center;">
-        <tr>
-            <td style="text-align: left;width: 60%">
+<table id="data_header" class="header" width="96%" border="0" cellspacing="0" cellpadding="8"
+style="margin:0 auto 25px; text-align: center;">
+<tr>
+    <td style="text-align: left;width: 60%">
+        <b>Tỉnh Quảng Bình</b>
+    </td>
+    <td style="text-align: center;">
 
-            </td>
-            <td style="text-align: center;">
+    </td>
+</tr>
+<tr>
+    <td style="text-align: left;width: 60%">
+        {{-- <b>Đơn vị: {{isset($m_dv)?$m_dv->tendv:''}}</b> --}}
+        <b>Quận, huyện, thị xã ................</b>
+    </td>
+    <td style="text-align: right; font-style: italic">
+        <b>Mẫu số 01b</b>
+    </td>
+</tr>
+<tr>
+    <td style="text-align: left;width: 60%">
+        {{-- <b>Mã đơn vị SDNS: </b> --}}
+        <b>Xã, phường, thị trấn ..................</b>
+    </td>
 
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: left;width: 60%">
-                <b>Đơn vị: {{isset($m_dv)?$m_dv->tendv:''}}</b>
-            </td>
-            <td style="text-align: center; font-style: italic">
+    <td style="text-align: center; font-style: italic">
 
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: left;width: 60%">
-                <b>Mã đơn vị SDNS: </b>
-            </td>
+    </td>
+</tr>
 
-            <td style="text-align: center; font-style: italic">
-
-            </td>
-        </tr>
-
-        <tr>
-            <td colspan="2" style="text-align: center; font-weight: bold; font-size: 20px;">
-                DANH SÁCH THÔNG TIN CUNG LAO ĐỘNG
-            </td>
-        </tr>
-    </table>
+<tr>
+    <td colspan="2" style="text-align: center; font-weight: bold; font-size: 20px;">
+        DANH SÁCH THÔNG TIN CUNG LAO ĐỘNG NĂM {{$nam}}
+    </td>
+</tr>
+</table>
 
     <table id="data_body" class="money" cellspacing="0" cellpadding="0" border="1"
         style="margin: 20px auto; border-collapse: collapse;font:normal 11px Times, serif;">
@@ -64,12 +66,18 @@
                         $m_ct = $tttghdkt2->wherein('manhom2', $a_m_tt);
                         ?>
                         @if (count($m_ct) > 0)
+                        <?php $col=0; $num=0 ?>
                             @foreach ($m_tt as $val)
                                 <?php $m_ttct = $tttghdkt2->where('manhom2', $val->madmtgktct); ?>
+                               
                                 @if (count($m_ttct) > 0)
-                                    <th colspan="{{ count($m_tt) + count($m_ttct) - 1 }}">{{ $tt->tentgkt }}</th>
+                                <?php $col=$col + count($m_ttct);
+                                $num++
+                                ?>
+                                   
                                 @endif
                             @endforeach
+                            <th colspan="{{ count($m_tt) + $col -$num }}">{{ $tt->tentgkt }}</th>
                         @else
                             <th colspan="{{ count($m_tt) }}">{{ $tt->tentgkt }}</th>
                         @endif

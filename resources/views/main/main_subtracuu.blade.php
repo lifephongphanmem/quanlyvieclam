@@ -1,8 +1,5 @@
-{{-- @if (chkPhanQuyen('nguoilaodong', 'phanquyen')) --}}
-    {{-- <li class="menu-section">
-        <h4 class="menu-text">TRA CỨU, TÌM KIẾM</h4>
-        <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
-    </li> --}}
+
+    @if (chkPhanQuyen('tracuu', 'phanquyen'))
     <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
         <a href="javascript:;" class="menu-link menu-toggle">
             <span class="svg-icon menu-icon">
@@ -24,21 +21,17 @@
         <div class="menu-submenu">
             <i class="menu-arrow"></i>
             <ul class="menu-subnav">
-                {{-- @if (chkPhanQuyen('laodongtrongnuoc', 'phanquyen')) --}}
+                @if (chkPhanQuyen('tracuucunglaodong', 'phanquyen'))
                     <li class="menu-item" aria-haspopup="true">
-
-                        {{-- <a href="{{ url('/employer-ba') }}" class="menu-link"> --}}
-
                         <a href="{{ url('/TimKiem/CungLaoDong/ThongTin') }}" class="menu-link">
-
                             <i class="menu-bullet menu-bullet-dot">
                                 <span></span>
                             </i>
                             <span class="menu-text">Cung lao động</span>
                         </a>
                     </li>
-                {{-- @endif --}}
-                {{-- @if (chkPhanQuyen('laodongnguoinuocngoai', 'phanquyen')) --}}
+                @endif
+                @if (chkPhanQuyen('tracuucaulaodong', 'phanquyen'))
                     <li class="menu-item" aria-haspopup="true">
                         <a href="{{ url('/TimKiem/CauLaoDong/ThongTin') }}" class="menu-link">
                             <i class="menu-bullet menu-bullet-dot">
@@ -47,8 +40,8 @@
                             <span class="menu-text">Nhu cầu lao động</span>
                         </a>
                     </li>
-                {{-- @endif --}}
-
+                @endif
+                @if (chkPhanQuyen('tracuutinhhinhsudunglaodong', 'phanquyen'))
                 <li class="menu-item" aria-haspopup="true">
                     <a href="{{ url('/TimKiem/TinhHinhSuDungLaoDong/ThongTin') }}" class="menu-link">
                         <i class="menu-bullet menu-bullet-dot">
@@ -57,7 +50,8 @@
                         <span class="menu-text">Tình hình sử dụng lao động</span>
                     </a>
                 </li>
-
+                @endif
+                @if (chkPhanQuyen('tracuunguoilaodongnuocngoai', 'phanquyen'))
                 <li class="menu-item" aria-haspopup="true">
                     <a href="{{ url('/TimKiem/LaoDongNuocNgoai/ThongTin') }}" class="menu-link">
                         <i class="menu-bullet menu-bullet-dot">
@@ -66,9 +60,9 @@
                         <span class="menu-text">Người lao động nước ngoài</span>
                     </a>
                 </li>
-
+                @endif
 
             </ul>
         </div>
     </li>
-{{-- @endif --}}
+@endif

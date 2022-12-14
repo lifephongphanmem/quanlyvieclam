@@ -43,24 +43,28 @@
                 <div class="card-body">
                     <table id="sample_3" class="table table-striped table-bordered table-hover dataTable no-footer">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th width="2%"> STT </th>
                                 <th width="2%"> Năm thu thập </th>
                                 <th width="15%">Nội dung</th>
+                                <th width="5%">Thời gian gửi</th>
+                                <th width="5%">Trạng thái</th>
                                 <th width="10%">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($model as $key => $th)
-                                <tr>
+                                <tr class="text-center">
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $th->nam }}</td>
-                                    <td> {{ $th->tieude }}</td>
+                                    <td class="text-left"> {{ $th->tieude }}</td>
+                                    <td>{{isset($th->ngaygui)?$th->ngaygui:'Dữ liệu chờ gửi'}}</td>
+                                    <td>{{$th->trangthai != null?getStatus()[$th->trangthai]:''}}</td>
                                     <td>
                                         @if (chkPhanQuyen('tonghopcunglaodonghuyen', 'danhsach'))
                                             <a title="In tổng hợp"
                                                 {{-- href="{{ '/cungld/danh_sach/huyen/intonghop?matb=' . $th->matb }}" --}}
-                                                onclick="intonghop('{{$th->matb}}')" data-target="#modify-modal-in" data-toggle="modal"
+                                                onclick="intonghop('{{$th->matb}}',{{$th->nam}})" data-target="#modify-modal-in" data-toggle="modal"
                                                 class="btn btn-sm btn-clean btn-icon" >
                                                 <i class="icon-lg la flaticon2-print text-primary"></i>
                                             </a>
@@ -195,9 +199,9 @@
             $('#frm_modify').attr('action', url);
         }
 
-        function intonghop(matb)
+        function intonghop(matb,nam)
         {
-            var url='/cungld/danh_sach/huyen/intonghop?matb='+matb;
+            var url='/cungld/danh_sach/huyen/intonghop?matb='+matb+'&nam='+nam;
             $('#frm_modify_in').attr('action', url);
         }
 

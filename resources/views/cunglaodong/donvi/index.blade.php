@@ -46,8 +46,10 @@
                         <thead>
                             <tr class="text-center">
                                 <th width="2%"> STT </th>
-                                <th width="2%"> Năm thu thập </th>
+                                <th width="3%"> Năm thu thập </th>
                                 <th width="15%">Nội dung</th>
+                                <th width="5%">Thời gian gửi</th>
+                                <th width="5%">Trạng thái</th>
                                 <th width="10%">Thao tác</th>
                             </tr>
                         </thead>
@@ -57,6 +59,8 @@
                                     <td>{{ ++$key }}</td>
                                     <td>{{ $th->nam }}</td>
                                     <td class="text-left"> {{ $th->noidung }}</td>
+                                    <td >{{isset($th->ngaygui)?$th->ngaygui:'Dữ liệu chờ gửi'}}</td>
+                                    <td>{{isset($th->trangthai)?getStatus()[$th->trangthai]:''}}</td>
                                     <td>
                                         {{-- <a title="Sửa thông tin" href="" class="btn btn-sm btn-clean btn-icon">
                                             <i class="icon-lg la flaticon-edit-1 text-primary"></i>
@@ -103,11 +107,13 @@
                                             @endif
                                         @endif
                                         @if (chkPhanQuyen('tonghopcunglaodongxa', 'thaydoi'))
+                                        @if ($th->trangthai == 'CHUAGUI')
                                             <button title="Xóa thông tin" type="button"
                                                 onclick="cfDel('{{ '/cungld/danh_sach/don_vi/delete/' . $th->id }}')"
                                                 class="btn btn-sm btn-clean btn-icon" data-target="#delete-modal-confirm"
                                                 data-toggle="modal">
                                                 <i class="icon-lg flaticon-delete text-danger"></i></button>
+                                        @endif
                                         @endif
                                     </td>
                                 </tr>

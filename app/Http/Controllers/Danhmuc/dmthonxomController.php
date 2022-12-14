@@ -17,7 +17,8 @@ class dmthonxomController extends Controller
     {
         $model=danhmuchanhchinh::where('capdo','Th')->get();
         $a_xa=array_column(danhmuchanhchinh::where('capdo','X')->get()->toarray(),'name','maquocgia');
-
+        // $a_xa=array_column(danhmuchanhchinh::where('capdo','X')->get()->toarray(),'name','maquocgia');
+// dd($a_xa);
         return view('danhmuc.dmthonxom.index')
                 ->with('model',$model)
                 ->with('a_xa',$a_xa);

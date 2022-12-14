@@ -3,6 +3,7 @@
         <h4 class="menu-text">QUẢN LÝ TÌNH HÌNH SỬ DỤNG LAO ĐỘNG</h4>
         <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
     </li> --}}
+    @if(session('admin')->phanloaitk == 1)
     <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
         <a href="javascript:;" class="menu-link menu-toggle">
             <span class="svg-icon menu-icon">
@@ -24,7 +25,7 @@
         <div class="menu-submenu">
             <i class="menu-arrow"></i>
             <ul class="menu-subnav">
-                @if (chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'phanquyen'))
+                {{-- @if (chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'phanquyen'))
                     <li class="menu-item" aria-haspopup="true">
                         <a href="{{ url('/tinhhinhsudungld/don_vi/danhsach') }}" class="menu-link">
                             <i class="menu-bullet menu-bullet-dot">
@@ -33,7 +34,7 @@
                             <span class="menu-text font-weight-bold">Tổng hợp dữ liệu đơn vị</span>
                         </a>
                     </li>
-                @endif
+                @endif --}}
                 @if (chkPhanQuyen('tonghopdulieutinhhinhsudungld', 'phanquyen'))
                     <li class="menu-item" aria-haspopup="true">
                         <a href="{{ url('/tinhhinhsudungld/tinh/tonghop?nam=' . date('Y')) }}" class="menu-link">
@@ -55,6 +56,7 @@
                 @endif
             </ul>
         </div>
+        @endif
         {{-- <li class="menu-item" aria-haspopup="true">
     <a href="{{ url('/doanhnghiep/nguoilaodong') }}" class="menu-link">
         <i class="menu-bullet menu-bullet-dot">

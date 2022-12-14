@@ -249,7 +249,7 @@
                             </a>
                         </li>
                         @endif
-
+                        @if (chkPhanQuyen('nhomtaikhoan', 'phanquyen'))
                         <li class="menu-item" aria-haspopup="true">
                             <a href="{{ url('/nhomchucnang/danhsach') }}" class="menu-link">
                                 <i class="menu-bullet menu-bullet-dot">
@@ -258,6 +258,7 @@
                                 <span class="menu-text font-weight-bold">Nhóm chức năng</span>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </li>

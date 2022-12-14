@@ -49,6 +49,7 @@
                                 <th style="width:5%">STT</th>
                                 <th style="width:10%">Mã đơn vị</th>
                                 <th >Tên đơn vị</th>
+                                <th>Xã/Phường/Thị trấn</th>
                                 <th style="width:15%">Thao tác</th>
 
                             </tr>
@@ -59,6 +60,7 @@
                                 <td class="text-center">{{ ++$key }}</td>
                                 <td name='tendanhmuc'>{{ $dv->maquocgia }}</td>
                                 <td name='tenxom'>{{ $dv->name }}</td>
+                                <td>{{$dv->parent != null?$a_xa[$dv->parent]:''}}</td>
                                     <td class="text-center">
                                         {{-- @if (chkPhanQuyen('chucvu', 'thaydoi')) --}}
                                         <button onclick="edit(this,'{{ $dv->maquocgia }}','{{$dv->parent}}')"

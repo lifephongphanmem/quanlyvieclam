@@ -87,10 +87,12 @@ class cunglaodong_huyenController extends Controller
                 $dv->noidung = $m_th->noidung;
                 $dv->matb = $m_th->matb;
                 $dv->math = $m_th->math;
+                $dv->nam = $m_th->nam;
             } else {
                 $dv->noidung = '';
                 $dv->matb = '';
                 $dv->math = '';
+                $dv->nam = '';
             }
 
             $model_h = $model_huyen->where('madv', $dv->madv)->first();
@@ -143,6 +145,7 @@ class cunglaodong_huyenController extends Controller
             return view('errors.noperm')->with('machucnang', 'tonghopcunglaodonghuyen');
         }
         $inputs = $request->all();
+        // dd($inputs);
         $model = tonghopdanhsachcungld::join('tonghopdanhsachcungld_ct', 'tonghopdanhsachcungld_ct.math', 'tonghopdanhsachcungld.math')
             ->select('tonghopdanhsachcungld_ct.*')
             ->where('tonghopdanhsachcungld.matb', $inputs['matb'])
@@ -166,6 +169,7 @@ class cunglaodong_huyenController extends Controller
             ->with('tttghdkt', $tttghdkt)
             ->with('tttghdkt1', $tttghdkt1)
             ->with('tttghdkt2', $tttghdkt2)
+            ->with('nam', $inputs['nam'])
             ->with('pageTitle', 'Danh sách cung lao động');
     }
 
@@ -175,6 +179,7 @@ class cunglaodong_huyenController extends Controller
             return view('errors.noperm')->with('machucnang', 'tonghopcunglaodonghuyen');
         }
         $inputs = $request->all();
+        // dd($inputs);
         $model = tonghopdanhsachcungld::join('tonghopdanhsachcungld_ct', 'tonghopdanhsachcungld_ct.math', 'tonghopdanhsachcungld.math')
             ->select('tonghopdanhsachcungld_ct.*', 'tonghopdanhsachcungld.madv','tonghopdanhsachcungld.madvbc')
             ->where('tonghopdanhsachcungld.matb', $inputs['matb'])
@@ -206,6 +211,7 @@ class cunglaodong_huyenController extends Controller
             ->with('tttghdkt', $tttghdkt)
             ->with('tttghdkt1', $tttghdkt1)
             ->with('tttghdkt2', $tttghdkt2)
+            ->with('nam', $inputs['nam'])
             ->with('pageTitle', 'Thông tin cung lao động');
     }
 

@@ -30,7 +30,8 @@ class DmdonviController extends Controller
         if (!chkPhanQuyen('donvi', 'danhsach')) {
             return view('errors.noperm')->with('machucnang', 'donvi');
         }
-        $model_diaban=danhmuchanhchinh::all();
+        $model_diaban=danhmuchanhchinh::where('capdo','!=','Th')->get();
+        // dd($model_diaban);
         return view('HeThong.manage.dmdonvi.index')
                 ->with('model_diaban',$model_diaban);
     }

@@ -38,6 +38,47 @@
                         </a>
                     </li>
                 @endif
+                @if (chkPhanQuyen('tonghopcunglaodongxa', 'phanquyen'))
+                <li class="menu-item" aria-haspopup="true">
+                    <a href="{{ '/cungld/danh_sach/don_vi' }}" class="menu-link">
+                        <i class="menu-bullet menu-bullet-dot">
+                            <span></span>
+                        </i>
+                        <span class="menu-text">Tổng hợp cung lao động</span>
+                    </a>
+                </li>
+            @endif
+
+            @if (chkPhanQuyen('tonghopcunglaodonghuyen', 'phanquyen'))
+            <li class="menu-item" aria-haspopup="true">
+                <a href="{{ '/cungld/danh_sach/huyen' }}" class="menu-link">
+                    <i class="menu-bullet menu-bullet-dot">
+                        <span></span>
+                    </i>
+                    <span class="menu-text">Tổng hợp cung lao động </span>
+                </a>
+            </li>
+        @endif
+        {{-- @if (chkPhanQuyen('tonghopcunglaodongtinh', 'phanquyen'))
+            <li class="menu-item" aria-haspopup="true">
+                <a href="{{ '/cungld/danh_sach/tinh' }}" class="menu-link">
+                    <i class="menu-bullet menu-bullet-dot">
+                        <span></span>
+                    </i>
+                    <span class="menu-text">Tổng hợp cung lao động  </span>
+                </a>
+            </li>
+        @endif --}}
+        @if (chkPhanQuyen('tonghopdulieutinhhinhsudunglaodongdonvi', 'phanquyen'))
+        <li class="menu-item" aria-haspopup="true">
+            <a href="{{ url('/tinhhinhsudungld/don_vi/danhsach') }}" class="menu-link">
+                <i class="menu-bullet menu-bullet-dot">
+                    <span></span>
+                </i>
+                <span class="menu-text font-weight-bold">Tổng hợp tình hình sử dụng lao động</span>
+            </a>
+        </li>
+    @endif
                 @if (chkPhanQuyen('laodongnguoinuocngoai', 'phanquyen'))
                     {{-- <li class="menu-item" aria-haspopup="true">
                         <a href="{{ url('/nguoilaodong/nuoc_ngoai') }}" class="menu-link">

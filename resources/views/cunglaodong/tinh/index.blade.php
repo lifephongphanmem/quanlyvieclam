@@ -60,7 +60,7 @@
                                             </a> --}}
                                             <a title="In tổng hợp"
                                             {{-- href="{{ '/cungld/danh_sach/huyen/intonghop?matb=' . $th->matb }}" --}}
-                                            onclick="intonghop('{{$th->matb}}')" data-target="#modify-modal-in" data-toggle="modal"
+                                            onclick="intonghop('{{$th->matb}}','{{$th->nam}}')" data-target="#modify-modal-in" data-toggle="modal"
                                             class="btn btn-sm btn-clean btn-icon">
                                             <i class="icon-lg la flaticon2-print text-primary"></i>
                                         </a>
@@ -126,10 +126,10 @@
                                 <label class="control-label">Đơn vị</label>
                                 {{-- {!! Form::select('tinhtrangvl', setArray($a_tinhtrangvl,'Tất cả',null), ['id' => 'tinhtrangvl', 'class' => 'form-control select2basic']) !!} --}}
                                 <select name="madv" id="" class="form-control select2basic" style="width:100%">
-                                    <option value="">Tất cả</option>
-                                    {{-- @foreach ($a_donvi as $key=>$ct )
+                                    <option value="ALL">Tất cả</option>
+                                    @foreach ($a_donvi as $key=>$ct )
                                         <option value="{{$key}}">{{$ct}}</option>
-                                    @endforeach --}}
+                                    @endforeach
                                 </select>
                                 <input type="hidden" name='math' id='math'>
                             </div>
@@ -206,9 +206,9 @@
             $('#frm_modify_th').attr('action', url);
         }
 
-        function intonghop(matb)
+        function intonghop(matb,nam)
         {
-            var url='/cungld/danh_sach/tinh/intonghop_tinh?matb='+matb;
+            var url='/cungld/danh_sach/tinh/intonghop_tinh?matb='+matb+'&nam='+nam;
             $('#frm_modify_in').attr('action', url);
         }
 
