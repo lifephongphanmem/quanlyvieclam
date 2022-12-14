@@ -75,7 +75,7 @@
                             </div>
                             <div class="form-group ">
                                 <div class="col-lg-12">
-                                    <label class="control-label">Nội dung*</label>
+                                    <label class="control-label">Nội dung</label>
                                    <textarea name="noidung" id="" cols="" rows="5" class="form-control" ></textarea>
                                 </div>                
                             </div>

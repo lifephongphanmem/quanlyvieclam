@@ -197,7 +197,7 @@ class thongbaoController extends Controller
         //         File::Delete('upload/cauld/' . ($model->filekhac));
         //     }
         // }
-       
+
         thongbaoct::where('matb', $model->matb)->delete();
         $model->delete();
         return redirect('/tuyen_dung/damh_sach_thong_bao')->with('success', 'Thông báo đã được xóa');
