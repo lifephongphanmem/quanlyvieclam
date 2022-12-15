@@ -53,7 +53,13 @@ class nguoilaodongController extends Controller
     // $model=nguoilaodong::paginate(20); 
     if (session('admin')->phanloaitk == 1) {
       //Tài khoản hành chính nhà nước
-      $model = nguoilaodong::where('madb', session('admin')->madv)->get();
+      if(session('admin')->capdo == 'H'){
+        $a_dv=array_column(User::where('madvbc',session('admin')->madv)->get()->toarray(),'madv');
+        $model = nguoilaodong::wherein('madb', $a_dv)->get();
+      }else{
+        $model = nguoilaodong::where('madb', session('admin')->madv)->get();
+      }
+
     } else {
       //Tài khoản doanh nghiệp
       $model = nguoilaodong::where('company', session('admin')['madv'])->OrderBy('id', 'DESC')->get();

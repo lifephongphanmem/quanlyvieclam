@@ -13,15 +13,15 @@
         </tr>
         <tr>
             <td style="text-align: left;width: 60%">
-                <b>Đơn vị: {{ isset($m_dv) ? $m_dv->name : '' }}</b>
+                {{-- <b>Đơn vị: {{ isset($m_dv) ? $m_dv->name : '' }}</b> --}}
             </td>
-            <td style="text-align: center; font-style: italic">
-
+            <td style="text-align: right; font-style: italic">
+                <b>Mẫu số 01/PLI</b>
             </td>
         </tr>
         <tr>
             <td style="text-align: left;width: 60%">
-                <b>Mã đơn vị SDNS: </b>
+                {{-- <b>Mã đơn vị SDNS: </b> --}}
             </td>
 
             <td style="text-align: center; font-style: italic">
@@ -34,9 +34,29 @@
                 BÁO CÁO</br>TÌNH HÌNH SỬ DỤNG LAO ĐỘNG
             </td>
         </tr>
+        <tr>
+            <td colspan="2" style="text-align: center; font-size: 12px; font-style: italic">
+                Ngày.....tháng....năm....
+            </td>
+        </tr>
     </table>
+<div id=data_body style="font-size:12px;">
+    <p style="text-align: left;font-weight: bold;font-size:14px">1. Thông tin chung về doanh nghiệp, cơ
+        quan, tổ chức:</p>
+        <p style="margin-left: 110px;">Tên doanh nghiệp, cơ quan tổ chức: <span style="font-weight:normal !important;text-transform:none;">{{isset($m_dv)?$m_dv->name:''}}</span>
+        <p style="margin-left: 110px;">Địa chỉ:<span style="font-weight:normal !important; text-transform:none;">{{isset($m_dv)?$m_dv->address:''}}</span></p>
+        <p style="margin-left: 110px;">Điện thoại: <span style="font-weight:normal !important;text-transform:none;">{{isset($m_dv)?$m_dv->phone:''}}</span></p>
+        <p style="margin-left: 110px;">Fax: <span style="font-weight:normal !important;text-transform:none;">{{isset($m_dv)?$m_dv->fax:''}}</span></p>
+        <p style="margin-left: 110px;">Email: <span style="font-weight:normal !important;text-transform:none;">{{isset($m_dv)?$m_dv->email:''}}</span></p>
+        <p style="margin-left: 110px;">Mã số đăng ký doanh nghiệp: <span style="font-weight:normal !important;text-transform:none;">{{isset($m_dv)?$m_dv->dkkd:''}}</span></p>
+        <p style="margin-left: 110px;">Lĩnh vực hoạt động: <span style="font-weight:normal !important;text-transform:none;">{{isset($m_dv)?$m_dv->nganhnghe:''}}</span></p>
+        <p style="margin-left: 110px;">Ngành, nghề kinh doanh chính: <span style="font-weight:normal !important;text-transform:none;">{{isset($m_dv)?$m_dv->nganhnghe:''}}</span></p>
 
-    <table id="data_body" class="money" cellspacing="0" cellpadding="0" border="1"
+        <p style="text-align: left;font-weight: bold;font-size:14px">2.Thông tin tình hình sử dụng lao động của đơn vị</p>
+</div>
+
+
+    <table id="data_body1" class="money" cellspacing="0" cellpadding="0" border="1"
         style="margin: 20px auto; border-collapse: collapse;font:normal 11px Times, serif;">
         <thead>
             <tr style="padding-left: 2px;padding-right: 2px">
@@ -82,47 +102,50 @@
 
         </thead>
         <tbody>
-                @foreach ($model as $key=>$ct )
-                    <tr class="text-center">
-                        <td>{{++$key}}</td>
-                        <td>{{$ct->hoten}}</td>
-                        <td>{{$ct->sobhxh}}</td>
-                        <td>{{$ct->ngaysinh}}</td>
-                        <td>{{$ct->gioitinh}}</td>
-                        <td>{{$ct->cmnd}}</td>
-                        <td>{{$ct->chucvu != null?$a_chucvu[$ct->chucvu]:''}}</td>
-                        @foreach ($a_vitri as $key=>$val )
-                            <td>{{$key==$ct->vitrivl?'X':''}}</td>
-                        @endforeach
-                        <td>{{in_array($ct->vitrivl,$a_vitrikhac)?'X':''}}</td>
-                        <td></td>
-                        <td>{{$ct->pcchucvu}}</td>
-                        <td>{{$ct->pcthamnien}}</td>
-                        <td>{{$ct->pcthamniennghe}}</td>
-                        <td>{{$ct->pcluong}}</td>
-                        <td>{{$ct->pcbosung}}</td>
-                        <td>{{$ct->bddochai}}</td>
-                        <td>{{$ct->ktdochai}}</td>
-                        <td>{{$ct->loaihdld != null ?($a_loaihdld[$ct->loaihdld] == 'Không xác định thời hạn'?$ct->bdhdld:''):''}}</td>
-                        @if ($ct->loaihdld != null && $a_loaihdld[$ct->loaihdld] == 'Xác định thời hạn')
-                        <td>{{$ct->bdhdld}}</td>
-                        <td>{{$ct->bdhdld}}</td>
-                        @else
-                        <td></td>
-                        <td></td>
-                        @endif
-                        @if ($ct->loaihdld != null &&$a_loaihdld[$ct->loaihdld] == 'Xác định thời hạn' && $a_loaihdld[$ct->loaihdld] == 'Không xác định thời hạn')
-                        <td>{{$ct->bdhdld}}</td>
-                        <td>{{$ct->bdhdld}}</td>
-                        @else
+            @foreach ($model as $key => $ct)
+                <tr class="text-center">
+                    <td>{{ ++$key }}</td>
+                    <td>{{ $ct->hoten }}</td>
+                    <td>{{ $ct->sobhxh }}</td>
+                    <td>{{ $ct->ngaysinh }}</td>
+                    <td>{{ $ct->gioitinh }}</td>
+                    <td>{{ $ct->cmnd }}</td>
+                    <td>{{ $ct->chucvu != null ? $a_chucvu[$ct->chucvu] : '' }}</td>
+                    @foreach ($a_vitri as $key => $val)
+                        <td>{{ $key == $ct->vitrivl ? 'X' : '' }}</td>
+                    @endforeach
+                    <td>{{ in_array($ct->vitrivl, $a_vitrikhac) ? 'X' : '' }}</td>
+                    <td></td>
+                    <td>{{ $ct->pcchucvu }}</td>
+                    <td>{{ $ct->pcthamnien }}</td>
+                    <td>{{ $ct->pcthamniennghe }}</td>
+                    <td>{{ $ct->pcluong }}</td>
+                    <td>{{ $ct->pcbosung }}</td>
+                    <td>{{ $ct->bddochai }}</td>
+                    <td>{{ $ct->ktdochai }}</td>
+                    <td>{{ $ct->loaihdld != null ? ($a_loaihdld[$ct->loaihdld] == 'Không xác định thời hạn' ? $ct->bdhdld : '') : '' }}
+                    </td>
+                    @if ($ct->loaihdld != null && $a_loaihdld[$ct->loaihdld] == 'Xác định thời hạn')
+                        <td>{{ $ct->bdhdld }}</td>
+                        <td>{{ $ct->bdhdld }}</td>
+                    @else
                         <td></td>
                         <td></td>
-                        @endif
-                        <td>{{$ct->bdbhxh}}</td>
-                        <td>{{$ct->ktbhxh}}</td>
+                    @endif
+                    @if ($ct->loaihdld != null &&
+                        $a_loaihdld[$ct->loaihdld] == 'Xác định thời hạn' &&
+                        $a_loaihdld[$ct->loaihdld] == 'Không xác định thời hạn')
+                        <td>{{ $ct->bdhdld }}</td>
+                        <td>{{ $ct->bdhdld }}</td>
+                    @else
                         <td></td>
-                    </tr>
-                @endforeach
+                        <td></td>
+                    @endif
+                    <td>{{ $ct->bdbhxh }}</td>
+                    <td>{{ $ct->ktbhxh }}</td>
+                    <td></td>
+                </tr>
+            @endforeach
         </tbody>
 
     </table>
