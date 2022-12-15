@@ -47,16 +47,16 @@
                                         <a href="#" data-target="#thitruongld-modal" data-toggle="modal">Mẫu số
                                             04. Báo cáo về thông tin thị trường lao động</a>
                                     </li>
-                                    <hr>
+                                    {{-- <hr>
                                     <li>
                                         <a href="{{ 'bao_cao_tong_hop/thong_tin_cung_lao_dong' }}" target="_blank">Mẫu số
                                             01a. Thông tin về cung lao động</a>
-                                    </li>
+                                    </li> --}}
                                     <li>
                                         <a href="{{ 'bao_cao_tong_hop/ds_thong_tin_cung_ld' }}" target="_blank">Mẫu số
                                             01b. Tổng hợp danh sách thông tin về cung lao động (A3)</a>
                                     </li>
-                                    <li>
+                                    {{-- <li>
                                         <a href="{{ 'bao_cao_tong_hop/thong_tin_nhu_cau_tuyen_dung' }}" target="_blank">Mẫu
                                             số 02.
                                             Thông tin nhu cầu tuyển dụng lao động của người sử dụng lao động</a>
@@ -70,7 +70,7 @@
                                         <a href="{{ 'bao_cao_tong_hop/tinh_hinh_su_dung_lao_dong' }}" target="_blank">Mẫu
                                             số
                                             03a/PLI. Báo cáo tình hình sử dụng lao động (do người sử dụng lao động lập)</a>
-                                    </li>
+                                    </li> --}}
 
                                 </ol>
 
@@ -100,7 +100,7 @@
                         <div class="col-xl-12">
                             <div class="form-group fv-plugins-icon-container">
                                 <label style="font-weight:bold; color:blue">Đơn vị</label>
-                                <select class="form-control" id="madv" name="madv">
+                                <select class="form-control select2basic" id="madv" name="madv">
                                     @foreach ($dmdonvi as $item)
                                     <option value="{{$item->madv}}">{{$item->tendv}}</option>
                                     @endforeach
@@ -110,7 +110,7 @@
                         <div class="col-xl-12">
                             <div class="form-group fv-plugins-icon-container">
                                 <label style="font-weight:bold; color:blue">Năm</label>
-                                <select class="form-control" id="nam" name="nam">
+                                <select class="form-control select2basic" id="nam" name="nam">
                                     <?php $nam_start = date('Y') - 5;
                                     $nam_stop = date('Y'); ?>
                                     @for ($i = $nam_start; $i <= $nam_stop; $i++)
@@ -225,7 +225,7 @@
                         <div class="col-xl-12">
                             <div class="form-group fv-plugins-icon-container">
                                 <label style="font-weight:bold; color:blue">Năm</label>
-                                <select class="form-control" id="nam" name="nam">
+                                <select class="form-control select2basic" id="nam" name="nam">
                                     <?php $nam_start = date('Y') - 5;
                                     $nam_stop = date('Y'); ?>
                                     @for ($i = $nam_start; $i <= $nam_stop; $i++)

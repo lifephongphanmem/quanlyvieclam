@@ -19,7 +19,7 @@
                 </g>
             </svg>
         </span>
-        <span class="menu-text font-weight-bold">Báo cáo, thống kê</span>
+        <span class="menu-text font-weight-bold">Báo cáo, văn bản</span>
         <i class="menu-arrow"></i>
 
     </a>
@@ -31,7 +31,15 @@
                     <i class="menu-bullet menu-bullet-dot">
                         <span></span>
                     </i>
-                    <span class="menu-text">Báo cáo tổng hợp</span>
+                    <span class="menu-text">Báo cáo</span>
+                </a>
+            </li>
+            <li class="menu-item" aria-haspopup="true">
+                <a href="{{ url('/vanban/danhsach') }}" class="menu-link">
+                    <i class="menu-bullet menu-bullet-dot">
+                        <span></span>
+                    </i>
+                    <span class="menu-text">Văn bản</span>
                 </a>
             </li>
             {{-- <li class="menu-item" aria-haspopup="true">

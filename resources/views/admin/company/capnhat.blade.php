@@ -169,7 +169,7 @@
                                     <select class="form-control input-sm m-bot5 select2basic" name="loaihinh">
                                         <option value="">-- Chọn loại hình doanh nghiệp ---</option>
                                         @foreach ($loaihinh as $dn )
-                                            <option value="{{$dn->id}}" {{$model->loaihinh==$dn->id?'selected':''}}>{{$dn->name}}</option>
+                                            <option value="{{$dn->madmlhkt}}" {{$model->loaihinh==$dn->madmlhkt?'selected':''}}>{{$dn->tenlhkt}}</option>
                                         @endforeach
 
                                     </select>

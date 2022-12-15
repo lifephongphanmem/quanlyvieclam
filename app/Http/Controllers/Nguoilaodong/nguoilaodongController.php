@@ -56,7 +56,10 @@ class nguoilaodongController extends Controller
       if(session('admin')->capdo == 'H'){
         $a_dv=array_column(User::where('madvbc',session('admin')->madv)->get()->toarray(),'madv');
         $model = nguoilaodong::wherein('madb', $a_dv)->get();
-      }else{
+      }else if(session('admin')->capdo == 'T'){
+        $model=nguoilaodong::all();
+      }
+      else{
         $model = nguoilaodong::where('madb', session('admin')->madv)->get();
       }
 

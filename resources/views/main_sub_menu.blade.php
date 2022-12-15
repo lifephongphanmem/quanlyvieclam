@@ -37,8 +37,9 @@
                     @include('main.main_subthongbao')
                     @include('main.main_subnguoilaodong')
                     @include('main.main_subcunglaodong')
-                    @include('main.main_subtinhhinhsudunglaodong')
                     @include('main.main_subcaulaodong')
+                    @include('main.main_subtinhhinhsudunglaodong')
+
                     @include('main.main_subdubao')
                     @include('main.main_subdoanhnghiep')
                     @include('main.main_subtracuu')
