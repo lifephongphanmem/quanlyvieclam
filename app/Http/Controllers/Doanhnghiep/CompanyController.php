@@ -320,7 +320,7 @@ class CompanyController extends Controller
 		$model=Company::findOrFail($id);
 		$dmhanhchinh=danhmuchanhchinh::all();
 		$kcn = $this->getParamsByNametype("Khu công nghiệp");// lấy danh mục khu công nghiệp
-		$ctype = $this->getParamsByNametype("Loại hình doanh nghiệp");// lấy loại hình doanh nghiệp
+		$ctype = dmloaihinhhdkt::all();
 		$cfield = $this->getParamsByNametype("Ngành nghề doanh nghiệp");// lấy ngành nghề doanh nghiệp
 		if(isset($inputs)){
 			$inputs=$inputs;

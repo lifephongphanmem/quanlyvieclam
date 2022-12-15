@@ -53,6 +53,9 @@ class baocaotonghopController extends Controller
         return view('reports.baocaotonghop.index', compact('nguoidung', 'tonghopcungld', 'company','thongbaocungld','dmdonvi'));
 
     }
+    public function vanban(){
+        return view('reports.baocaotonghop.vanban');
+    }
 
 
     public function doanhnghiep(Request $request)

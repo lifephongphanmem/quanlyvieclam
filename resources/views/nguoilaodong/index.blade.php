@@ -72,7 +72,7 @@
                                     <td> {{ $ld->gioitinh == 'nam' || $ld->gioitinh == 'Nam' ? 'Nam' : 'Nữ' }}</td>
                                     <td> {{ $ld->cmnd }}</td>
                                     <td> {{ $ld->thuongtru }}</td>
-                                    <td> {{ isset($ld->chucvu) ? $a_chucvu[$ld->chucvu] : '' }}</td>
+                                    <td> {{ isset($ld->chucvu) ? (isset($a_chucvu[$ld->chucvu])?$a_chucvu[$ld->chucvu]: $ld->chucvu):'' }}</td>
                                     <td>
                                         @if (chkPhanQuyen('laodongtrongnuoc', 'thaydoi'))
                                             <a title="Sửa thông tin" href="{{ '/nguoilaodong/edit/' . $ld->id }}"
